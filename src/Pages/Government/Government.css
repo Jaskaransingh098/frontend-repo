@@ -1,0 +1,464 @@
+.gov-section {
+    background: linear-gradient(to bottom,
+            var(--deep-black),
+            var(--charcoal),
+            var(--shadow-blue),
+            var(--midnight));
+    margin: 0;
+    padding: 0;
+    height: 540vh;
+}
+
+.definition-section {
+    position: relative;
+    min-height: 110vh;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    padding: 0;
+    gap: 3rem;
+    color: #fff;
+
+}
+
+.definition-image {
+    flex: 1;
+    background-image: url("/government-pics/Blue Gradient Illustration National Startup Day Instagram Post.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+    margin-left: 0;
+    padding-left: 0;
+    border-radius: 1.5rem;
+    overflow: hidden;
+
+}
+
+.definition-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0) 65%, var(--charcoal) 110%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0) 80%, var(--charcoal) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.definition-texts {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    padding-top: 16rem;
+
+}
+
+.definition-texts h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.definition-texts p,
+.definition-texts ol {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #dddddd;
+}
+
+.definition-texts ol {
+    list-style: decimal inside;
+    padding-left: 1rem;
+}
+
+.initiative-summary {
+    width: 80%;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    box-shadow: 0 0 40px rgba(0, 191, 255, 0.1);
+    backdrop-filter: blur(6px);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.initiative-summary h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #00cfff;
+}
+
+.initiative-summary ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+}
+
+.initiative-summary li {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    line-height: 2;
+}
+
+.check-icon {
+    color: #00e6e6;
+    margin-right: 0.75rem;
+    font-size: 1.2rem;
+}
+
+.highlighted-stat {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #dddddd;
+    margin-top: 1rem;
+    font-weight: 500;
+    text-align: right;
+}
+
+.triangle-steps-vertical {
+    width: 80%;
+    margin: 4rem auto;
+    text-align: center;
+    color: #ffffff;
+}
+
+.triangle-steps-vertical h2 {
+    font-size: 2rem;
+    color: #00cfff;
+    margin-bottom: 0.5rem;
+}
+
+.triangle-steps-vertical .subtitle {
+    font-size: 1.1rem;
+    color: #cccccc;
+    margin-bottom: 3rem;
+}
+
+.steps-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.triangle-step {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.75rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.1);
+    width: 100%;
+    max-width: 600px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+.triangle-step:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 191, 255, 0.25);
+}
+
+.step-badge {
+    width: 40px;
+    height: 40px;
+    background: #00cfff;
+    color: #000;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-right: 1.5rem;
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+}
+
+.step-content {
+    flex: 1;
+    text-align: left;
+}
+
+.step-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+    color: #00e6e6;
+}
+
+.step-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #dddddd;
+}
+
+.step-content a {
+    color: #00cfff;
+    text-decoration: underline;
+}
+
+.step-content a:hover {
+    color: #00ffff;
+}
+
+.triangle-down {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 50%;
+    bottom: -15px;
+    transform: translateX(-50%);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid rgba(255, 255, 255, 0.08);
+}
+
+.eligibility-section {
+    width: 80%;
+    margin: 4rem auto;
+    color: #ffffff;
+    text-align: left;
+    position: relative;
+}
+
+.eligibility-content {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.eligibility-text {
+    flex: 1 1 50%;
+    min-width: 300px;
+    padding-top: 100px;
+}
+
+.eligibility-image {
+    flex: 1 1 50%;
+    min-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eligibility-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+
+    /* Fade from bottom */
+    mask-image: linear-gradient(to top, transparent 0%, black 40%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 40%);
+}
+
+/* Headings and text styles */
+.eligibility-section h2 {
+    font-size: 2rem;
+    color: #00cfff;
+    /* padding-top: 80px; */
+    margin-bottom: 1rem;
+}
+
+.eligibility-intro {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #dddddd;
+}
+
+/* Timeline styling */
+.eligibility-timeline {
+    list-style: none;
+    padding-left: 0;
+    border-left: 3px solid rgba(0, 191, 255, 0.4);
+    margin: 0;
+    position: relative;
+}
+
+.eligibility-timeline li {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.eligibility-timeline .dot {
+    position: absolute;
+    left: -10px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    background-color: #00cfff;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(0, 191, 255, 0.6);
+}
+
+.eligibility-timeline p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: #dddddd;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.eligibility-timeline p:hover {
+    color: #ffffff;
+}
+
+
+.schemes-section {
+    width: 80%;
+    margin: 7rem auto;
+    text-align: center;
+    color: #ffffff;
+}
+
+.schemes-section h2 {
+    font-size: 2rem;
+    color: #00cfff;
+    margin-bottom: 0.5rem;
+}
+
+.schemes-section .subtitle {
+    font-size: 1.1rem;
+    color: #cccccc;
+    margin-bottom: 3rem;
+}
+
+.schemes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.scheme-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.scheme-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 191, 255, 0.25);
+}
+
+.scheme-card.small {
+    min-height: 180px;
+}
+
+.scheme-card.medium {
+    min-height: 220px;
+}
+
+.scheme-card.large {
+    min-height: 220px;
+}
+
+.scheme-card.last-card {
+    grid-column: span 2;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.scheme-icon {
+    font-size: 2rem;
+    color: #00e6e6;
+    margin-bottom: 1rem;
+}
+
+.scheme-card h3 {
+    font-size: 1.2rem;
+    color: #00e6e6;
+    margin-bottom: 0.5rem;
+}
+
+.scheme-card p {
+    font-size: 0.95rem;
+    color: #dddddd;
+    line-height: 1.5;
+}
+
+.gov-button-container {
+    text-align: center;
+    margin: 4rem auto;
+    padding: 2rem;
+    backdrop-filter: blur(6px);
+    width: 80%;
+    max-width: 800px;
+}
+
+.gov-button-container h2 {
+    font-size: 2rem;
+    color: #00cfff;
+    margin-bottom: 1rem;
+}
+
+.gov-button-subtitle {
+    font-size: 1.1rem;
+    color: #dddddd;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.gov-button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.gov-button {
+    color: #ffffff;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gov-button.primary {
+    background: linear-gradient(45deg, #00cfff, #00a3cc);
+    box-shadow: 0 4px 12px rgba(0, 191, 255, 0.4);
+}
+
+.gov-button.primary:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 191, 255, 0.6);
+}
+
+.gov-button.secondary {
+    background: transparent;
+    border: 2px solid #00cfff;
+    color: #00cfff;
+}
+
+.gov-button.secondary:hover {
+    transform: translateY(-4px) scale(1.05);
+    background: rgba(0, 191, 255, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 191, 255, 0.4);
+}

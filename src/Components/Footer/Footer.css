@@ -1,0 +1,157 @@
+.footer {
+    /* background-color: transparent; */
+    /* background: linear-gradient(to bottom,
+            var(--deep-black),
+            var(--charcoal),
+            var(--shadow-blue),
+            var(--midnight)); */
+    border-top: 1px solid white;
+    background: transparent;
+    color: white;
+    /* Teal background as per the image */
+    padding: 40px 20px;
+    width: 100%;
+    color: #FFF;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Footer Links (Left) */
+.footer-links {
+    flex: 1;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #FFF;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #FFF;
+}
+
+/* Newsletter (Center) */
+.footer-newsletter {
+    flex: 1;
+    text-align: center;
+}
+
+.footer-newsletter h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+.newsletter-input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 250px;
+    font-size: 0.9rem;
+    color: #333;
+    background-color: #FFF;
+    /* Ensure the input field is visible */
+    display: block;
+    /* Ensure the input is visible */
+    outline: none;
+    /* Remove default outline */
+    box-shadow: none;
+    /* Remove any default shadow */
+}
+
+.newsletter-button {
+    padding: 10px 20px;
+    background-color: #0A5C66;
+    /* Darker teal for the button */
+    border: none;
+    border-radius: 5px;
+    color: #FFF;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.footer-newsletter button:hover {
+    background-color: #084A52;
+}
+
+/* Social Icons and Scroll to Top (Right) */
+.footer-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.scroll-to-top {
+    background-color: transparent;
+    border: none;
+    color: #FFF;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+    /* Add some space between the arrow and icons */
+}
+
+.scroll-to-top:hover {
+    color: #E0E0E0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 50px;
+}
+
+.social-icons a {
+    text-decoration: none;
+}
+
+.social-icons .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #0A5C66;
+    /* Darker teal for the icons */
+    border-radius: 50%;
+    color: #FFF;
+    font-size: 1rem;
+}
+
+.social-icons .icon:hover {
+    background-color: #084A52;
+}
+

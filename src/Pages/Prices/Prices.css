@@ -1,0 +1,123 @@
+.pricing-container{
+    background: linear-gradient(to bottom,
+            var(--deep-black),
+            var(--charcoal),
+            var(--shadow-blue),
+            var(--midnight));
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.pricing-title{
+    margin-top: 4.5rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.pricing-subtitle{
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 3rem;
+}
+.pricing-cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+.pricing-card{
+    background-color: #1b2437;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    width: 300px;
+    /* box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); */
+    box-shadow: 0 0 0 transparent;
+    transition: transform 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+    position: relative;
+    /* overflow: hidden; */
+    border: 2px solid transparent;
+}
+.price{
+    font-size: 2rem;
+    margin: 1rem 0;
+}
+.price span{
+    font-size: 1rem;
+    color: #a1a1aa;
+}
+
+.pricing-card h2{
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+.pricing-card h3{
+    font-size: 1.5rem;
+    color: #8b5cf6;
+    margin-bottom: 1.5rem;
+}
+.card-features{
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-bottom: 2rem 0;
+}
+.card-features li{
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.icon{
+    font-size: 0.5rem;
+    background: transparent;
+}
+.cta-button{
+    background: linear-gradient(to right, #4f46e5, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    margin-top: 150px;
+    font-size: 1.2rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.3s, transform 0.15s ease;
+    overflow: hidden;
+}
+.button-text{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.3s ease;
+}
+.cta-button:hover .button-text{
+    transform: scale(1.1);
+}
+.cta-button:hover{
+    background: linear-gradient(to right, #6366f1, #a78bfa);
+}
+.cta-button:active{
+    transform: scale(0.9);
+}
+.essential-card:hover{
+    transform: translateY(-12px);
+    background: linear-gradient(135deg, #1c1c2d, #263f2d);
+    box-shadow: 0 12px 30px rgba(74, 222, 128, 0.4);
+    border: 2px solid #4ade80;
+}
+.growth-card:hover{
+    transform: translateY(-12px);
+    background: linear-gradient(135deg, #1c1c2d, #3c2f74);
+    box-shadow: 0 12px 30px rgba(139, 92, 246, 0.5);
+    border: 2px solid #8b5cf6;
+}
+.enterprise-card:hover{
+    transform: translateY(-12px);
+    background: linear-gradient(135deg, #1c1c2d, #263f2d);
+    box-shadow: 0 12px 30px rgba(96, 165, 250, 0.5);
+    border: 2px solid #60a5fa;
+}

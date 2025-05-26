@@ -1,0 +1,16 @@
+.success-page {
+    text-align: center;
+    padding-top: 200px;
+    background: linear-gradient(to bottom,
+            var(--deep-black),
+            var(--charcoal),
+            var(--shadow-blue),
+            var(--midnight));
+}
+
+.success-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
