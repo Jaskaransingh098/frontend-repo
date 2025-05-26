@@ -301,7 +301,7 @@ function Body() {
           transition={{ duration: 1 }}
         >
           <video nocontrols autoPlay loop muted className="body-video">
-            <source src="/public/Body-pics/Video1.mp4" type="video/mp4" />
+            <source src="/Body-pics/Video1.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </motion.div>
