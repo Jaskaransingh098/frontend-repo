@@ -21,7 +21,7 @@
 }
 
 section {
-    height: 520vh;
+    height: auto;
     width: 100%;
     padding-top: 50px;
     background: linear-gradient(to bottom,
@@ -299,7 +299,7 @@ section {
 
 html {
     /* background: linear-gradient(to bottom, transparent, #000000); */
-    height: auto;
+    height: 100%;
     background: #333;
 }
 
