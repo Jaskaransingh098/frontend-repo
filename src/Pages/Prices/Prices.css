@@ -88,6 +88,12 @@
     transition: background 0.3s, transform 0.15s ease;
     overflow: hidden;
 }
+.essential{
+    margin-top: 225px;
+}
+.enterprise{
+    margin-top: 175px;
+}
 .button-text{
     display: inline-flex;
     align-items: center;

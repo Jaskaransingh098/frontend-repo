@@ -97,7 +97,7 @@ function Prices() {
               <CheckCircle className="icon" /> Basic expert consultations
             </li>
           </ul>
-          <motion.button className="cta-button" onClick={() => handleGetStarted(150, "Essential")} variants={buttonVariants} initial="hidden" animate="visible">
+          <motion.button className="cta-button essential" onClick={() => handleGetStarted(150, "Essential")} variants={buttonVariants} initial="hidden" animate="visible">
             <span className="button-text">
               Get Started <ArrowRightCircle size={18} />
             </span>
@@ -157,7 +157,7 @@ function Prices() {
               Priority Funding Network Access
             </li>
           </ul>
-          <motion.button className="cta-button" onClick={() => handleGetStarted(500, "Enterprise")} variants={buttonVariants} initial="hidden" animate="visible">
+          <motion.button className="cta-button enterprise" onClick={() => handleGetStarted(500, "Enterprise")} variants={buttonVariants} initial="hidden" animate="visible">
             <span className="button-text">
               Get Started <ArrowRightCircle size={18} />
             </span>
