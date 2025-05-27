@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import {toast} from 'react-toastify';
+import { toast } from "react-toastify";
+import { createPost } from "../../api";
 import "./Post.css";
 
 function Post() {
@@ -44,28 +45,8 @@ function Post() {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/post",
-        {
-          topic: formData.topic,
-          description: formData.description,
-          stage: formData.stage,
-          market: formData.market,
-          goals: formData.goals,
-          fullName: formData.fullName,
-          email: formData.email,
-          role: formData.role,
-          startupName: formData.startupName,
-          industry: formData.industry,
-          website: formData.website,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      toast.success(response.data.msg || "Idea submitted successfully!");
+      await createPost(formData);
+      toast.success("Idea submitted successfully!");
       setFormData({
         topic: "",
         description: "",
@@ -81,7 +62,7 @@ function Post() {
       });
       setStep(1);
     } catch (error) {
-      toast.error(error.response?.data?.msg || "Failed to submit idea.");
+      toast.error(error.message || "Failed to submit idea.");
     }
   };
   const renderProgress = () => (
@@ -102,9 +83,15 @@ function Post() {
 
   return (
     <div className="post-wrapper">
-      <video autoPlay muted loop className="background-video"
-        src="/Form-video/Black and White Simple Corporate Business Company Video.mp4" type="video/mp4">
-          Your browser dows not support HTMl5 video
+      <video
+        autoPlay
+        muted
+        loop
+        className="background-video"
+        src="/Form-video/Black and White Simple Corporate Business Company Video.mp4"
+        type="video/mp4"
+      >
+        Your browser dows not support HTMl5 video
       </video>
       <div className="video-overlay"></div>
       <div className="form-container">
