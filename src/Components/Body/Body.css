@@ -23,7 +23,7 @@
 section {
     height: auto;
     width: 100%;
-    padding-top: 50px;
+    /* padding-top: 50px; */
     background: linear-gradient(to bottom,
             var(--deep-black),
             var(--charcoal),
