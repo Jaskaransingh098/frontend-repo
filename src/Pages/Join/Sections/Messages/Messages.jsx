@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import ReactModal from "react-modal";
 import "./Messages.css";
 
-const socket = io("http://localhost:5000"); // adjust if using a different port
+const socket = io("https://backend-repo-f2m0.onrender.com"); // adjust if using a different port
 
 function Messages() {
   const [users, setUsers] = useState([]);
