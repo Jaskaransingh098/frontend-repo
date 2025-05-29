@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { jwtDecode }from "jwt-decode";
+import {jwtDecode }from "jwt-decode";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "./Post.css";
@@ -46,6 +46,7 @@ function Post() {
 
     try {
       const decoded = jwtDecode(token); // decode the JWT token
+      const username = decoded.username;
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/post`,
         {
@@ -60,6 +61,7 @@ function Post() {
           startupName: formData.startupName,
           industry: formData.industry,
           website: formData.website,
+          username,
         },
         {
           headers: {
@@ -83,7 +85,6 @@ function Post() {
       });
       setStep(1);
     } catch (error) {
-      console.error("Submission error:", error);
       toast.error(error.response?.data?.msg || "Failed to submit idea.");
     }
   };

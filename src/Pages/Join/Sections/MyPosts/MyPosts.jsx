@@ -53,11 +53,6 @@ export default function MyPosts() {
           );
 
           setMyIdeas(filteredIdeas);
-          const initialComments = {};
-          filteredIdeas.forEach((idea, idx) => {
-            initialComments[idx] = idea.comment || [];
-          });
-          setComments(initialComments);
         } catch (error) {
           console.error("Failed to fetch ideas", error);
         }
@@ -74,38 +69,11 @@ export default function MyPosts() {
       [index]: !prev[index],
     }));
   };
-  // const toggleLike = (index) => {
-  //   setLikedPosts((prev) => ({
-  //     ...prev,
-  //     [index]: !prev[index],
-  //   }));
-  // };
-  const toggleLike = async (index) => {
-    try {
-      const post = myIdeas[index];
-      const token = localStorage.getItem("token");
-      const liked = !likedPosts[index];
-
-      // Calculate new likes count:
-      const newLikesCount = liked
-        ? (post.likes || 0) + 1
-        : (post.likes || 0) - 1;
-
-      await axios.put(
-        `${import.meta.env.VITE_API_URL}/post/${post._id}/likes`,
-        { likes: newLikesCount },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      // Update local states:
-      setLikedPosts((prev) => ({ ...prev, [index]: liked }));
-
-      const updatedIdeas = [...myIdeas];
-      updatedIdeas[index] = { ...post, likes: newLikesCount };
-      setMyIdeas(updatedIdeas);
-    } catch (error) {
-      console.error("Failed to update likes", error);
-    }
+  const toggleLike = (index) => {
+    setLikedPosts((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
   };
   const toggleExistingComments = (index) => {
     setShowExistingComments((prev) => ({
@@ -125,87 +93,43 @@ export default function MyPosts() {
       [index]: value,
     }));
   };
-  const postComment = async (index) => {
+  const postComment = (index) => {
     const commentText = newComment[index];
     if (!commentText) return;
 
-    try {
-      const token = localStorage.getItem("token");
-      const postId = myIdeas[index]._id;
+    const token = localStorage.getItem("token");
+    const decoded = jwtDecode(token);
+    const username = decoded.username;
 
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
-        { text: commentText },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+    const newEntry = { username, text: commentText };
 
-      const newEntry = response.data.comment;
+    setComments((prev) => ({
+      ...prev,
+      [index]: [...(prev[index] || []), newEntry],
+    }));
+    setNewComments((prev) => ({
+      ...prev,
+      [index]: "",
+    }));
+    setShowAddCommentBox((prev) => ({
+      ...prev,
+      [index]: false,
+    }));
 
-      setComments((prev) => ({
-        ...prev,
-        [index]: [...(prev[index] || []), newEntry],
-      }));
-      setNewComments((prev) => ({
+    console.log(`Comment added for post ${index}`);
+
+    setCommentFeedback((prev) => ({
+      ...prev,
+      [index]: "Comment added!",
+    }));
+
+    setTimeout(() => {
+      setCommentFeedback((prev) => ({
         ...prev,
         [index]: "",
       }));
-      setShowAddCommentBox((prev) => ({
-        ...prev,
-        [index]: false,
-      }));
-
-      setCommentFeedback((prev) => ({
-        ...prev,
-        [index]: "Comment added!",
-      }));
-
-      setTimeout(() => {
-        setCommentFeedback((prev) => ({
-          ...prev,
-          [index]: "",
-        }));
-      }, 2000);
-    } catch (error) {
-      console.error("Failed to post comment", error);
-    }
+    }, 2000);
   };
-  // const postComment = (index) => {
-  //   const commentText = newComment[index];
-  //   if (!commentText) return;
-
-  //   const token = localStorage.getItem("token");
-  //   const decoded = jwtDecode(token);
-  //   const username = decoded.username;
-
-  //   const newEntry = { username, text: commentText };
-
-  //   setComments((prev) => ({
-  //     ...prev,
-  //     [index]: [...(prev[index] || []), newEntry],
-  //   }));
-  //   setNewComments((prev) => ({
-  //     ...prev,
-  //     [index]: "",
-  //   }));
-  //   setShowAddCommentBox((prev) => ({
-  //     ...prev,
-  //     [index]: false,
-  //   }));
-
-  //   console.log(`Comment added for post ${index}`);
-
-  //   setCommentFeedback((prev) => ({
-  //     ...prev,
-  //     [index]: "Comment added!",
-  //   }));
-
-  //   setTimeout(() => {
-  //     setCommentFeedback((prev) => ({
-  //       ...prev,
-  //       [index]: "",
-  //     }));
-  //   }, 2000);
-  // };
 
   //enable edit and store current
   const enableEdit = (index) => {
