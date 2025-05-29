@@ -61,7 +61,6 @@ function Post() {
           startupName: formData.startupName,
           industry: formData.industry,
           website: formData.website,
-          username,
         },
         {
           headers: {
