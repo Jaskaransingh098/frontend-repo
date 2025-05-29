@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import jwtDecode from "jwt-decode";
 import axios from "axios";
-import {toast} from 'react-toastify';
+import { toast } from "react-toastify";
 import "./Post.css";
 
 function Post() {
@@ -44,6 +45,8 @@ function Post() {
     }
 
     try {
+      const decoded = jwtDecode(token); // decode the JWT token
+      const username = decoded.username;
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/post`,
         {
@@ -58,6 +61,7 @@ function Post() {
           startupName: formData.startupName,
           industry: formData.industry,
           website: formData.website,
+          username,
         },
         {
           headers: {
@@ -102,9 +106,15 @@ function Post() {
 
   return (
     <div className="post-wrapper">
-      <video autoPlay muted loop className="background-video"
-        src="/Form-video/Black and White Simple Corporate Business Company Video.mp4" type="video/mp4">
-          Your browser dows not support HTMl5 video
+      <video
+        autoPlay
+        muted
+        loop
+        className="background-video"
+        src="/Form-video/Black and White Simple Corporate Business Company Video.mp4"
+        type="video/mp4"
+      >
+        Your browser dows not support HTMl5 video
       </video>
       <div className="video-overlay"></div>
       <div className="form-container">
