@@ -69,50 +69,11 @@ export default function MyPosts() {
       [index]: !prev[index],
     }));
   };
-  const toggleLike = async (index) => {
-    try {
-      const idea = myIdeas[index];
-      const token = localStorage.getItem("token");
-
-      // Call backend API to toggle like
-      const res = await axios.put(
-        `${import.meta.env.VITE_API_URL}/post/${idea._id}/like`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      // Update frontend state with updated like count and whether current user liked
-      const updatedLikesCount = res.data.likes;
-      const username = jwtDecode(token).username;
-      const userLiked = idea.likes.includes(username);
-
-      // Update local state
-      setMyIdeas((prev) => {
-        const updated = [...prev];
-        if (userLiked) {
-          // remove user from likes
-          updated[index].likes = updated[index].likes.filter(
-            (u) => u !== username
-          );
-        } else {
-          // add user to likes
-          updated[index].likes.push(username);
-        }
-        return updated;
-      });
-
-      setLikedPosts((prev) => ({
-        ...prev,
-        [index]: !prev[index],
-      }));
-    } catch (error) {
-      console.error("Failed to toggle like", error);
-    }
-    //   setLikedPosts((prev) => ({
-    //     ...prev,
-    //     [index]: !prev[index],
-    //   }));
-    // };
+  const toggleLike = (index) => {
+    setLikedPosts((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
   };
   const toggleExistingComments = (index) => {
     setShowExistingComments((prev) => ({
@@ -132,103 +93,43 @@ export default function MyPosts() {
       [index]: value,
     }));
   };
-  const postComment = async (index) => {
+  const postComment = (index) => {
     const commentText = newComment[index];
     if (!commentText) return;
 
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        alert("You need to be logged in to comment.");
-        return;
-      }
+    const token = localStorage.getItem("token");
+    const decoded = jwtDecode(token);
+    const username = decoded.username;
 
-      const decoded = jwtDecode(token);
-      const username = decoded.username;
+    const newEntry = { username, text: commentText };
 
-      // Get the post ID from your ideas array by index
-      const postId = myIdeas[index]._id;
+    setComments((prev) => ({
+      ...prev,
+      [index]: [...(prev[index] || []), newEntry],
+    }));
+    setNewComments((prev) => ({
+      ...prev,
+      [index]: "",
+    }));
+    setShowAddCommentBox((prev) => ({
+      ...prev,
+      [index]: false,
+    }));
 
-      // Send comment to backend API
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
-        { text: commentText },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+    console.log(`Comment added for post ${index}`);
 
-      // If successful, update local comments state to show instantly
-      const newEntry = { username, text: commentText };
+    setCommentFeedback((prev) => ({
+      ...prev,
+      [index]: "Comment added!",
+    }));
 
-      setComments((prev) => ({
-        ...prev,
-        [index]: [...(prev[index] || []), newEntry],
-      }));
-
-      setNewComments((prev) => ({
+    setTimeout(() => {
+      setCommentFeedback((prev) => ({
         ...prev,
         [index]: "",
       }));
-
-      setShowAddCommentBox((prev) => ({
-        ...prev,
-        [index]: false,
-      }));
-
-      setCommentFeedback((prev) => ({
-        ...prev,
-        [index]: "Comment added!",
-      }));
-
-      setTimeout(() => {
-        setCommentFeedback((prev) => ({
-          ...prev,
-          [index]: "",
-        }));
-      }, 2000);
-    } catch (error) {
-      console.error("Failed to post comment:", error);
-      alert("Failed to post comment. Please try again.");
-    }
+    }, 2000);
   };
-  // const postComment = (index) => {
-  //   const commentText = newComment[index];
-  //   if (!commentText) return;
-
-  //   const token = localStorage.getItem("token");
-  //   const decoded = jwtDecode(token);
-  //   const username = decoded.username;
-
-  //   const newEntry = { username, text: commentText };
-
-  //   setComments((prev) => ({
-  //     ...prev,
-  //     [index]: [...(prev[index] || []), newEntry],
-  //   }));
-  //   setNewComments((prev) => ({
-  //     ...prev,
-  //     [index]: "",
-  //   }));
-  //   setShowAddCommentBox((prev) => ({
-  //     ...prev,
-  //     [index]: false,
-  //   }));
-
-  //   console.log(`Comment added for post ${index}`);
-
-  //   setCommentFeedback((prev) => ({
-  //     ...prev,
-  //     [index]: "Comment added!",
-  //   }));
-
-  //   setTimeout(() => {
-  //     setCommentFeedback((prev) => ({
-  //       ...prev,
-  //       [index]: "",
-  //     }));
-  //   }, 2000);
-  // };
 
   //enable edit and store current
   const enableEdit = (index) => {
