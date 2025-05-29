@@ -43,7 +43,9 @@ export default function MyPosts() {
 
       const fetchIdeas = async () => {
         try {
-          const response = await axios.get(`${import.meta.env.VITE_API_URL}/post`);
+          const response = await axios.get(
+            `${import.meta.env.VITE_API_URL}/post`
+          );
           const ideas = response.data.ideas;
 
           const filteredIdeas = ideas.filter(
@@ -144,7 +146,7 @@ export default function MyPosts() {
   };
 
   const deletePost = async (index) => {
-    const id = myIdeas[index].id;
+    const id = myIdeas[index]._id;
 
     try {
       const token = localStorage.getItem("token");
@@ -159,6 +161,7 @@ export default function MyPosts() {
       setMyIdeas(updatedIdeas);
     } catch (error) {
       console.log("Delete failed", error);
+      console.log("Deleting post with id:", id);
     }
   };
   const handleEditChange = (index, field, value) => {
@@ -169,7 +172,7 @@ export default function MyPosts() {
   };
 
   const saveEdit = async (index) => {
-    const id = myIdeas[index].id;
+    const id = myIdeas[index]._id;
     const updatedDescription = editedContent[index]?.description || "";
 
     const updated = {
@@ -195,6 +198,7 @@ export default function MyPosts() {
       }));
     } catch (error) {
       console.log("Failed to save edit", error);
+      console.log("Editing post with id:", id);
     }
   };
 
