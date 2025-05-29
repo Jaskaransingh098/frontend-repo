@@ -48,6 +48,7 @@ function Prices() {
 
       if(data.url){
         localStorage.setItem("pendingPlan", planName);
+        console.log("Stripe session URL:", data.url);
         window.location.href = data.url;
       } else{
         toast.error("Error inititating payment.")
