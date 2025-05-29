@@ -45,7 +45,7 @@ function Post() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/post",
+        `${import.meta.env.VITE_API_URL}/post`,
         {
           topic: formData.topic,
           description: formData.description,

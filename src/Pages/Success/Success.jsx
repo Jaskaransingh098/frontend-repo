@@ -16,7 +16,7 @@ function Success() {
         }
 
         const response = await axios.post(
-          "http://localhost:5000/api/payment-success",
+          `${import.meta.env.VITE_API_URL}/payment-success`,
           {},
           {
             headers: {

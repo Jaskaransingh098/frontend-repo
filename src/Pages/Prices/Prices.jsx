@@ -35,7 +35,7 @@ function Prices() {
     }
 
     try{
-      const response = await fetch("/api/create-payment-session", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/create-payment-session`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

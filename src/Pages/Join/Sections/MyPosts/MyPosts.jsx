@@ -43,7 +43,7 @@ export default function MyPosts() {
 
       const fetchIdeas = async () => {
         try {
-          const response = await axios.get("http://localhost:5000/api/post");
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/post`);
           const ideas = response.data.ideas;
 
           const filteredIdeas = ideas.filter(
@@ -148,7 +148,7 @@ export default function MyPosts() {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/post/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/post/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -177,7 +177,7 @@ export default function MyPosts() {
     };
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:5000/api/post/${id}`, updated, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/post/${id}`, updated, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

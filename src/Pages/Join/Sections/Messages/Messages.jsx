@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import ReactModal from "react-modal";
 import "./Messages.css";
 
-const socket = io("http://localhost:5000"); // adjust if using a different port
+const socket = io(import.meta.env.VITE_API_URL); // adjust if using a different port
 
 function Messages() {
   const [users, setUsers] = useState([]);
@@ -21,7 +21,7 @@ function Messages() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("/api/users");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/users`);
         setUsers(res.data.filter((user) => user !== currentUser));
       } catch (err) {
         console.log("Error fetching users:", err);
@@ -36,7 +36,9 @@ function Messages() {
       if (selectedUser) {
         try {
           const res = await axios.get(
-            `/api/messages/${currentUser}/${selectedUser}`
+            `${
+              import.meta.env.VITE_API_URL
+            }/messages/${currentUser}/${selectedUser}`
           );
           setMessages(res.data);
         } catch (err) {
@@ -69,7 +71,7 @@ function Messages() {
       };
 
       try {
-        const res = await axios.post("/api/messages", msgData);
+        const res = await axios.post(`${import.meta.env.VITE_API_URL}/messages`, msgData);
         // setMessages((prev) => [...prev, res.data]);
         socket.emit("newMessage", res.data); // Emit real-time
         setNewMessage("");

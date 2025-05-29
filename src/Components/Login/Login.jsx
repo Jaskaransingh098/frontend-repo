@@ -26,7 +26,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
         username: loginUsername,
         password: loginPassword,
       });
@@ -59,7 +59,7 @@ function Login() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/signup", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, {
         username: signupUsername,
         email: signupEmail,
         password: signupPassword,
