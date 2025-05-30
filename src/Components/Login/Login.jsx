@@ -26,10 +26,13 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
-        username: loginUsername,
-        password: loginPassword,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/login`,
+        {
+          username: loginUsername,
+          password: loginPassword,
+        }
+      );
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("username", loginUsername);
       const payload = JSON.parse(atob(res.data.token.split(".")[1]));
@@ -59,12 +62,15 @@ function Login() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, {
-        username: signupUsername,
-        email: signupEmail,
-        password: signupPassword,
-        isPro: false,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/signup`,
+        {
+          username: signupUsername,
+          email: signupEmail,
+          password: signupPassword,
+          isPro: false,
+        }
+      );
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("username", signupUsername);
       navigate("/", {
@@ -166,7 +172,7 @@ function Login() {
               />
             </div>
             <input type="submit" className="btn" value="Sign up" />
-            <p className="social-text">Or Sign up with social platforms</p>
+            {/* <p className="social-text">Or Sign up with social platforms</p>
             <div className="social-media">
               <a href="#" className="social-icon">
                 <i className="fab fa-facebook-f"></i>
@@ -180,7 +186,7 @@ function Login() {
               <a href="#" className="social-icon">
                 <i className="fab fa-linkedin-in"></i>
               </a>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
@@ -190,8 +196,12 @@ function Login() {
           <div className="content1">
             <h3>New here ?</h3>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+              Welcome to our platform! If you're looking for a place to grow,
+              connect, and achieve your goals, you've come to the right spot.
+              Signing up gives you access to a personalized experience, powerful
+              tools, and a community that's here to support you every step of
+              the way. Don’t miss out on the opportunity to be part of something
+              amazing.
             </p>
             <button className="btn transparent" onClick={handleSignUpClick}>
               Sign up
@@ -207,8 +217,11 @@ function Login() {
           <div className="content1">
             <h3>One of us ?</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
+              Great to see you again! Log in to your account to continue
+              exploring, collaborating, and creating. Whether you're here to
+              manage your profile, discover new features, or connect with
+              others, everything you need is just a click away. Let’s pick up
+              right where you left off.
             </p>
             <button className="btn transparent" onClick={handleSignInClick}>
               Sign in
