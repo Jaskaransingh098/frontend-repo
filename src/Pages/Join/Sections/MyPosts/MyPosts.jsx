@@ -459,10 +459,18 @@ export default function MyPosts() {
               </div>
             </div>
             <div className="post-actions">
-              <button className="icon-btn" aria-label="Edit">
+              <button
+                className="icon-btn"
+                aria-label="Edit"
+                onClick={() => enableEdit(index)}
+              >
                 <FaEdit />
               </button>
-              <button className="icon-btn" aria-label="Delete">
+              <button
+                className="icon-btn"
+                aria-label="Delete"
+                onClick={() => deletePost(index)}
+              >
                 <FaTrash />
               </button>
             </div>
