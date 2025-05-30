@@ -203,244 +203,354 @@ export default function MyPosts() {
   };
 
   return (
-    <motion.div
-      className="Myposts-page"
-      ref={ref1}
-      initial={{ opacity: 0, y: 50 }}
-      animate={intView1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.8 }}
-    >
-      {/* <ToastContainer position="top-right" autoClose={2000} /> */}
+    // <motion.div
+    //   className="Myposts-page"
+    //   ref={ref1}
+    //   initial={{ opacity: 0, y: 50 }}
+    //   animate={intView1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+    //   transition={{ duration: 0.8 }}
+    // >
 
-      {myIdeas.length === 0 ? (
-        <div className="no-posts">
-          <p>You haven’t posted any ideas yet. Get started!</p>
-          <img src="/assets/empty-state.svg" alt="No posts" />
+    //   {myIdeas.length === 0 ? (
+    //     <div className="no-posts">
+    //       <p>You haven’t posted any ideas yet. Get started!</p>
+    //       <img src="/assets/empty-state.svg" alt="No posts" />
+    //     </div>
+    //   ) : (
+    //     myIdeas.map((idea, index) => {
+    //       const isExpanded = expandedIndexes[index];
+    //       const isEditing = editMode[index];
+
+    //       return (
+    //         <motion.div
+    //           key={index}
+    //           className="explore-container"
+    //           initial={{ opacity: 0, y: 30 }}
+    //           animate={{ opacity: 1, y: 0 }}
+    //           exit={{ opacity: 0, y: -20 }}
+    //           transition={{ duration: 0.5 }}
+    //         >
+    //           <div className="Myposts-nav">
+    //             <div className="nav-header">
+    //               <div className="user-info">
+    //                 <img
+    //                   src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+    //                   alt="Profile"
+    //                   className="profile-pic"
+    //                 />
+    //                 <span className="username-text">{idea.username}</span>
+    //               </div>
+    //               <h1>{new Date(idea.createdAt).toLocaleString()}</h1>
+    //             </div>
+    //           </div>
+
+    //           <div className="Myposts-body">
+    //             {isEditing ? (
+    //               <motion.div
+    //                 className="edit-fields"
+    //                 initial={{ opacity: 0 }}
+    //                 animate={{ opacity: 1 }}
+    //               >
+    //                 <textarea
+    //                   value={editedContent[index]?.description || ""}
+    //                   onChange={(e) =>
+    //                     handleEditChange(index, "description", e.target.value)
+    //                   }
+    //                 />
+    //                 <div className="edit-actions">
+    //                   <button onClick={() => saveEdit(index)}>Save</button>
+    //                   <button
+    //                     className="cancel-btn"
+    //                     onClick={() =>
+    //                       setEditMode((prev) => ({ ...prev, [index]: false }))
+    //                     }
+    //                   >
+    //                     Cancel
+    //                   </button>
+    //                 </div>
+    //               </motion.div>
+    //             ) : (
+    //               <div className="body-text">
+    //                 {isExpanded ? (
+    //                   <ul className="post-details">
+    //                     <li>
+    //                       <strong>Full Name:</strong> {idea.fullName}
+    //                     </li>
+    //                     <li>
+    //                       <strong>Email:</strong> {idea.email}
+    //                     </li>
+    //                     <li>
+    //                       <strong>Startup Name:</strong> {idea.startupName}
+    //                     </li>
+    //                     <li>
+    //                       <strong>Topic:</strong> {idea.topic}
+    //                     </li>
+    //                     <li>
+    //                       <strong>Description:</strong> {idea.description}
+    //                     </li>
+    //                     <li>
+    //                       <strong>Industry:</strong> {idea.industry}
+    //                     </li>
+    //                     <li>
+    //                       <strong>Role:</strong> {idea.role}
+    //                     </li>
+    //                     <li>
+    //                       <strong>Stage:</strong> {idea.stage}
+    //                     </li>
+    //                     <li>
+    //                       <strong>Goals:</strong> {idea.goals}
+    //                     </li>
+    //                     <li>
+    //                       <strong>Market:</strong> {idea.market}
+    //                     </li>
+    //                     <li>
+    //                       <strong>Website:</strong> {idea.website}
+    //                     </li>
+    //                     <li>
+    //                       <button
+    //                         onClick={() => toggleReadMore(index)}
+    //                         className="readmore-btn"
+    //                       >
+    //                         Read less
+    //                       </button>
+    //                     </li>
+    //                   </ul>
+    //                 ) : (
+    //                   <div>
+    //                     <p>
+    //                       <strong>Topic:</strong> {idea.topic}
+    //                     </p>
+    //                     <p>
+    //                       <strong>Startup:</strong> {idea.startupName}
+    //                     </p>
+    //                     <p>
+    //                       <strong>Description:</strong>{" "}
+    //                       {idea.description.length > 150
+    //                         ? idea.description.slice(0, 150) + "..."
+    //                         : idea.description}
+    //                     </p>
+    //                     <button
+    //                       onClick={() => toggleReadMore(index)}
+    //                       className="readmore-btn"
+    //                     >
+    //                       Read more
+    //                     </button>
+    //                   </div>
+    //                 )}
+    //               </div>
+    //             )}
+    //           </div>
+
+    //           <div className="like-comment">
+    //             <div className="like-section">
+    //               <motion.button
+    //                 onClick={() => toggleLike(index)}
+    //                 whileTap={{ scale: 1.2 }}
+    //               >
+    //                 {likedPosts[index] ? (
+    //                   <FaHeart color="red" size={24} />
+    //                 ) : (
+    //                   <FaRegHeart size={24} />
+    //                 )}
+    //               </motion.button>
+    //               <span>{likedPosts[index] ? 1 : 0} Likes</span>
+
+    //               <button onClick={() => toggleExistingComments(index)}>
+    //                 <BsChatDots size={24} />
+    //               </button>
+    //             </div>
+
+    //             <div className="action-buttons">
+    //               <button onClick={() => enableEdit(index)}>
+    //                 <FaEdit size={20} />
+    //               </button>
+    //               <button onClick={() => deletePost(index)}>
+    //                 <FaTrash size={20} />
+    //               </button>
+    //             </div>
+
+    //             <AnimatePresence>
+    //               {showExistingComments[index] && comments[index] && (
+    //                 <motion.div
+    //                   className="existing-comments"
+    //                   initial={{ opacity: 0 }}
+    //                   animate={{ opacity: 1 }}
+    //                   exit={{ opacity: 0 }}
+    //                 >
+    //                   {comments[index].map((cmt, i) => (
+    //                     <div key={i} className="comment-entry">
+    //                       <FaUserCircle size={24} className="comment-icon" />
+    //                       <div className="comment-content">
+    //                         <span className="comment-username">
+    //                           {cmt.username + " -"}
+    //                         </span>
+    //                         <p className="comment-text">{cmt.text}</p>
+    //                       </div>
+    //                     </div>
+    //                   ))}
+    //                 </motion.div>
+    //               )}
+    //             </AnimatePresence>
+
+    //             <div className="comment-section">
+    //               <button onClick={() => toggleAddCommentBox(index)}>
+    //                 <BsChatDots size={24} />
+    //               </button>
+
+    //               <AnimatePresence>
+    //                 {showAddCommentBox[index] && (
+    //                   <motion.div
+    //                     className="comment-input"
+    //                     initial={{ opacity: 0, y: 10 }}
+    //                     animate={{ opacity: 1, y: 0 }}
+    //                     exit={{ opacity: 0, y: -10 }}
+    //                     transition={{ duration: 0.3 }}
+    //                   >
+    //                     <textarea
+    //                       placeholder="Write a comment..."
+    //                       value={newComment[index] || ""}
+    //                       onChange={(e) =>
+    //                         handleCommentChange(index, e.target.value)
+    //                       }
+    //                     />
+    //                     <button
+    //                       onClick={() => postComment(index)}
+    //                       disabled={!newComment[index]}
+    //                     >
+    //                       <FiSend size={20} />
+    //                     </button>
+    //                   </motion.div>
+    //                 )}
+    //               </AnimatePresence>
+
+    //               {commentFeedback[index] && (
+    //                 <motion.div
+    //                   className="comment-feedback"
+    //                   initial={{ opacity: 0 }}
+    //                   animate={{ opacity: 1 }}
+    //                   exit={{ opacity: 0 }}
+    //                 >
+    //                   {commentFeedback[index]}
+    //                 </motion.div>
+    //               )}
+    //             </div>
+    //           </div>
+    //         </motion.div>
+    //       );
+    //     })
+    //   )}
+    // </motion.div>
+    <div className="myposts-page">
+      {myIdeas.map((idea, index) => (
+        <div className="post-card" key={index}>
+          <div className="post-header">
+            <div className="user-profile">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                alt="profile pic"
+                className="profile-pic"
+              />
+              <div>
+                <h3 className="username">{idea.fullName}</h3>
+                <p className="role">{idea.role}</p>
+                <p className="timestamp">
+                  {new Date(idea.createdAt).toLocaleString()}
+                </p>
+              </div>
+            </div>
+            <div className="post-actions">
+              <button className="icon-btn" aria-label="Edit">
+                <FaEdit />
+              </button>
+              <button className="icon-btn" aria-label="Delete">
+                <FaTrash />
+              </button>
+            </div>
+          </div>
+
+          <div className="post-content">
+            <div className="post-meta-grid">
+              <div>
+                <strong>Topic:</strong> {idea.topic}
+              </div>
+              <div>
+                <strong>Startup name:</strong> {idea.startupName}
+              </div>
+              <div>
+                <strong>Industry:</strong> {idea.industry}
+              </div>
+              <div>
+                <strong>Website:</strong> {idea.website}
+              </div>
+            </div>
+
+            <div className="post-meta-grid">
+              <div>
+                <strong>Stage:</strong> {idea.stage}
+              </div>
+              <div>
+                <strong>Goals:</strong> {idea.goals}
+              </div>
+              <div>
+                <strong>Market:</strong> {idea.market}
+              </div>
+              <div>
+                <strong>Email:</strong> {idea.email}
+              </div>
+            </div>
+
+            <div className="description-box">
+              <div className="description-header">
+                <span className="desc-icon">
+                  <i className="fa fa-align-left"></i>
+                </span>
+                <span className="desc-label">Description:</span>
+              </div>
+              <p className="description-text">
+                {expandedIndexes[index]
+                  ? idea.description
+                  : idea.description.length > 200
+                  ? idea.description.slice(0, 200) + "..."
+                  : idea.description}
+              </p>
+              {idea.description.length > 200 && (
+                <button
+                  className="readmore-btn"
+                  onClick={() => toggleReadMore(index)}
+                >
+                  {expandedIndexes[index] ? "Read less" : "Read more"}
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="post-footer">
+            <div className="likes-comments">
+              <button className="icon-btn" onClick={() => toggleLike(index)}>
+                {likedPosts[index] ? <FaHeart color="red" /> : <FaRegHeart />}
+              </button>
+              <span>{likedPosts[index] ? 1 : 0} Likes</span>
+              <button className="icon-btn">
+                <BsChatDots />
+              </button>
+            </div>
+
+            <div className="comment-box">
+              <textarea
+                placeholder="Write a comment..."
+                value={newComment[index] || ""}
+                onChange={(e) => handleCommentChange(index, e.target.value)}
+              />
+              <button className="send-btn" onClick={() => postComment(index)}>
+                <FiSend />
+              </button>
+            </div>
+            {commentFeedback[index] && (
+              <div className="comment-feedback">{commentFeedback[index]}</div>
+            )}
+          </div>
         </div>
-      ) : (
-        myIdeas.map((idea, index) => {
-          const isExpanded = expandedIndexes[index];
-          const isEditing = editMode[index];
-
-          return (
-            <motion.div
-              key={index}
-              className="explore-container"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="Myposts-nav">
-                <div className="nav-header">
-                  <div className="user-info">
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                      alt="Profile"
-                      className="profile-pic"
-                    />
-                    <span className="username-text">{idea.username}</span>
-                  </div>
-                  <h1>{new Date(idea.createdAt).toLocaleString()}</h1>
-                </div>
-              </div>
-
-              <div className="Myposts-body">
-                {isEditing ? (
-                  <motion.div
-                    className="edit-fields"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                  >
-                    <textarea
-                      value={editedContent[index]?.description || ""}
-                      onChange={(e) =>
-                        handleEditChange(index, "description", e.target.value)
-                      }
-                    />
-                    <div className="edit-actions">
-                      <button onClick={() => saveEdit(index)}>Save</button>
-                      <button
-                        className="cancel-btn"
-                        onClick={() =>
-                          setEditMode((prev) => ({ ...prev, [index]: false }))
-                        }
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <div className="body-text">
-                    {isExpanded ? (
-                      <ul className="post-details">
-                        <li>
-                          <strong>Full Name:</strong> {idea.fullName}
-                        </li>
-                        <li>
-                          <strong>Email:</strong> {idea.email}
-                        </li>
-                        <li>
-                          <strong>Startup Name:</strong> {idea.startupName}
-                        </li>
-                        <li>
-                          <strong>Topic:</strong> {idea.topic}
-                        </li>
-                        <li>
-                          <strong>Description:</strong> {idea.description}
-                        </li>
-                        <li>
-                          <strong>Industry:</strong> {idea.industry}
-                        </li>
-                        <li>
-                          <strong>Role:</strong> {idea.role}
-                        </li>
-                        <li>
-                          <strong>Stage:</strong> {idea.stage}
-                        </li>
-                        <li>
-                          <strong>Goals:</strong> {idea.goals}
-                        </li>
-                        <li>
-                          <strong>Market:</strong> {idea.market}
-                        </li>
-                        <li>
-                          <strong>Website:</strong> {idea.website}
-                        </li>
-                        <li>
-                          <button
-                            onClick={() => toggleReadMore(index)}
-                            className="readmore-btn"
-                          >
-                            Read less
-                          </button>
-                        </li>
-                      </ul>
-                    ) : (
-                      <div>
-                        <p>
-                          <strong>Topic:</strong> {idea.topic}
-                        </p>
-                        <p>
-                          <strong>Startup:</strong> {idea.startupName}
-                        </p>
-                        <p>
-                          <strong>Description:</strong>{" "}
-                          {idea.description.length > 150
-                            ? idea.description.slice(0, 150) + "..."
-                            : idea.description}
-                        </p>
-                        <button
-                          onClick={() => toggleReadMore(index)}
-                          className="readmore-btn"
-                        >
-                          Read more
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              <div className="like-comment">
-                <div className="like-section">
-                  <motion.button
-                    onClick={() => toggleLike(index)}
-                    whileTap={{ scale: 1.2 }}
-                  >
-                    {likedPosts[index] ? (
-                      <FaHeart color="red" size={24} />
-                    ) : (
-                      <FaRegHeart size={24} />
-                    )}
-                  </motion.button>
-                  <span>{likedPosts[index] ? 1 : 0} Likes</span>
-
-                  <button onClick={() => toggleExistingComments(index)}>
-                    <BsChatDots size={24} />
-                  </button>
-                </div>
-
-                <div className="action-buttons">
-                  <button onClick={() => enableEdit(index)}>
-                    <FaEdit size={20} />
-                  </button>
-                  <button onClick={() => deletePost(index)}>
-                    <FaTrash size={20} />
-                  </button>
-                </div>
-
-                <AnimatePresence>
-                  {showExistingComments[index] && comments[index] && (
-                    <motion.div
-                      className="existing-comments"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    >
-                      {comments[index].map((cmt, i) => (
-                        <div key={i} className="comment-entry">
-                          <FaUserCircle size={24} className="comment-icon" />
-                          <div className="comment-content">
-                            <span className="comment-username">
-                              {cmt.username + " -"}
-                            </span>
-                            <p className="comment-text">{cmt.text}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                <div className="comment-section">
-                  <button onClick={() => toggleAddCommentBox(index)}>
-                    <BsChatDots size={24} />
-                  </button>
-
-                  <AnimatePresence>
-                    {showAddCommentBox[index] && (
-                      <motion.div
-                        className="comment-input"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <textarea
-                          placeholder="Write a comment..."
-                          value={newComment[index] || ""}
-                          onChange={(e) =>
-                            handleCommentChange(index, e.target.value)
-                          }
-                        />
-                        <button
-                          onClick={() => postComment(index)}
-                          disabled={!newComment[index]}
-                        >
-                          <FiSend size={20} />
-                        </button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  {commentFeedback[index] && (
-                    <motion.div
-                      className="comment-feedback"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    >
-                      {commentFeedback[index]}
-                    </motion.div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          );
-        })
-      )}
-    </motion.div>
+      ))}
+    </div>
   );
-  // );
 }
