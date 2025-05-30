@@ -366,7 +366,7 @@
     color: #ddd;
     line-height: 1.6;
     margin-bottom: 0.8rem;
-    transition: max-height 0.4s ease;
+    /* transition: max-height 0.4s ease; */
 }
 
 .description-box strong {

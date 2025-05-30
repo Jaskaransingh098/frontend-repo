@@ -553,12 +553,11 @@ export default function MyPosts() {
               ) : (
                 <>
                   <p className="description-text">
-                    {expandedIndexes[index]
-                      ? idea.description
-                      : idea.description.length > 200
+                    {idea.description.length > 200 && !expandedIndexes[index]
                       ? idea.description.slice(0, 200) + "..."
                       : idea.description}
                   </p>
+
                   {idea.description.length > 200 && (
                     <button
                       className="readmore-btn"
