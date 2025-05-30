@@ -514,7 +514,7 @@ export default function MyPosts() {
                 </span>
                 <span className="desc-label">Description:</span>
               </div>
-              <p className="description-text">
+              {/* <p className="description-text">
                 {expandedIndexes[index]
                   ? idea.description
                   : idea.description.length > 200
@@ -528,6 +528,46 @@ export default function MyPosts() {
                 >
                   {expandedIndexes[index] ? "Read less" : "Read more"}
                 </button>
+              )} */}
+              {editMode[index] ? (
+                <>
+                  <textarea
+                    className="edit-fields"
+                    value={editedContent[index]?.description || ""}
+                    onChange={(e) =>
+                      handleEditChange(index, "description", e.target.value)
+                    }
+                  />
+                  <div className="edit-actions">
+                    <button onClick={() => saveEdit(index)}>Save</button>
+                    <button
+                      className="cancel-btn"
+                      onClick={() =>
+                        setEditMode((prev) => ({ ...prev, [index]: false }))
+                      }
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="description-text">
+                    {expandedIndexes[index]
+                      ? idea.description
+                      : idea.description.length > 200
+                      ? idea.description.slice(0, 200) + "..."
+                      : idea.description}
+                  </p>
+                  {idea.description.length > 200 && (
+                    <button
+                      className="readmore-btn"
+                      onClick={() => toggleReadMore(index)}
+                    >
+                      {expandedIndexes[index] ? "Read less" : "Read more"}
+                    </button>
+                  )}
+                </>
               )}
             </div>
           </div>
