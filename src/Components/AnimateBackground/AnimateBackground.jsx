@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import "./AnimatedBackground.css";
+import "./AnimateBackground.css";
 
 const AnimatedBackground = () => {
   const parallaxRef = useRef(null);
