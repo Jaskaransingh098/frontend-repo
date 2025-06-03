@@ -15,6 +15,7 @@ import Join from "./Pages/Join/Join";
 import Prices from "./Pages/Prices/Prices";
 import Success from "./Pages/Success/Success";
 import Government from "./Pages/Government/Government";
+import AnimatedBackground from "./Components/AnimateBackground/AnimateBackground";
 
 
 function AppContent() {
@@ -70,6 +71,7 @@ function AppContent() {
 function App() {
   return (
     <Router>
+      <AnimatedBackground/>
       <AppContent />
     </Router>
   );

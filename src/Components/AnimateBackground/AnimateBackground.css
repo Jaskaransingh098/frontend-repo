@@ -1,0 +1,67 @@
+.ab-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background: #0f0f1a;
+    overflow: hidden;
+}
+
+.ab-parallax {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: transform 0.1s ease-out;
+}
+
+.ab-sphere {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.4;
+    animation: float 12s ease-in-out infinite alternate;
+}
+
+.ab-sphere1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #ff6ec4, #7873f5);
+    top: 10%;
+    left: 15%;
+}
+
+.ab-sphere2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #42e695, #3bb2b8);
+    bottom: 10%;
+    right: 15%;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(20px);
+    }
+}
+
+.ab-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+.ab-noise-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://grainy-gradients.vercel.app/noise.png');
+    opacity: 0.03;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
