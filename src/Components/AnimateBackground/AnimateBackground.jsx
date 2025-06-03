@@ -53,7 +53,7 @@ const AnimateBackground = () => {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-          ctx.shadowColor = "#ffffff";
+          ctx.shadowColor = "#219ebc";
           ctx.shadowBlur = 10;
           ctx.fill();
         }
