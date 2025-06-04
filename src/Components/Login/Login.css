@@ -6,9 +6,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    
+
 
 }
+
 :root {
     --deep-black: #000000;
     /* Pure black */
@@ -25,7 +26,7 @@
 body,
 input {
     font-family: 'Montserrat', sans-serif;
-    
+
 }
 
 .container {
@@ -186,7 +187,7 @@ form.sign-in-form {
     left: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    
+
 }
 
 .container:before {
@@ -434,5 +435,25 @@ form.sign-in-form {
     .container.sign-up-mode:before {
         bottom: 28%;
         left: 50%;
+    }
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }

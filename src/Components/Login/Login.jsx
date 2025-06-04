@@ -8,7 +8,7 @@ function Login() {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const [signupUsername, setSignupUsername] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
@@ -25,6 +25,7 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/login`,
@@ -56,11 +57,14 @@ function Login() {
           borderRadius: "10px",
         },
       });
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/signup`,
@@ -95,6 +99,8 @@ function Login() {
           borderRadius: "10px",
         },
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -123,7 +129,9 @@ function Login() {
                 onChange={(e) => setLoginPassword(e.target.value)}
               />
             </div>
-            <input type="submit" value="Login" className="btn solid" />
+            <button type="submit" className="btn solid" disabled={loading}>
+              {loading ? <div className="spinner"></div> : "Login"}
+            </button>
             <p className="social-text">Or Sign in with social platforms</p>
             <div className="social-media">
               <a href="#" className="social-icon">
@@ -171,7 +179,9 @@ function Login() {
                 onChange={(e) => setSignupPassword(e.target.value)}
               />
             </div>
-            <input type="submit" className="btn" value="Sign up" />
+            <button type="submit" className="btn" disabled={loading}>
+              {loading ? <div className="spinner"></div> : "Sign up"}
+            </button>
             <p className="social-text">Or Sign up with social platforms</p>
             <div className="social-media">
               <a href="#" className="social-icon">
