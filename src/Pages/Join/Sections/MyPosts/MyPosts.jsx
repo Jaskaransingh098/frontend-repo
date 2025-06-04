@@ -27,34 +27,73 @@ export default function MyPosts() {
   const [editMode, setEditMode] = useState({});
   const [editedContent, setEditedContent] = useState({});
   //current user idea fetching
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     alert("Please log in to see your posts.");
+  //     return;
+  //   }
+  //   try {
+  //     const decoded = jwtDecode(token);
+  //     const currentUsername = decoded.username;
+  //     console.log("Decoded username:", currentUsername); // ← For debugging
+  //     const fetchIdeas = async () => {
+  //       try {
+  //         const response = await axios.get(
+  //           `${import.meta.env.VITE_API_URL}/post`
+  //         );
+  //         const ideas = response.data.ideas;
+  //         const filteredIdeas = ideas.filter(
+  //           (idea) => idea.username === currentUsername
+  //         );
+  //         setMyIdeas(filteredIdeas);
+  //       } catch (error) {
+  //         console.error("Failed to fetch ideas", error);
+  //       }
+  //     };
+  //     fetchIdeas();
+  //   } catch (err) {
+  //     console.error("Error decoding token", err);
+  //   }
+  // }, []);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Please log in to see your posts.");
       return;
     }
-    try {
-      const decoded = jwtDecode(token);
-      const currentUsername = decoded.username;
-      console.log("Decoded username:", currentUsername); // ← For debugging
-      const fetchIdeas = async () => {
-        try {
-          const response = await axios.get(
-            `${import.meta.env.VITE_API_URL}/post`
-          );
-          const ideas = response.data.ideas;
-          const filteredIdeas = ideas.filter(
-            (idea) => idea.username === currentUsername
-          );
-          setMyIdeas(filteredIdeas);
-        } catch (error) {
-          console.error("Failed to fetch ideas", error);
-        }
-      };
-      fetchIdeas();
-    } catch (err) {
-      console.error("Error decoding token", err);
-    }
+
+    const fetchPostDetails = async () => {
+      try {
+        const decoded = jwtDecode(token);
+        const currentUsername = decoded.username;
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/post`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const ideas = response.data.ideas;
+        const filteredIdeas = ideas.filter(
+          (idea) => idea.username === currentUsername
+        );
+        setMyIdeas(filteredIdeas);
+
+        // comment: store backend likes/comments in local state
+        const likesMap = {};
+        const commentsMap = {};
+        filteredIdeas.forEach((idea, idx) => {
+          likesMap[idx] = idea.likes?.length || 0;
+          commentsMap[idx] = idea.comments || [];
+        });
+        setLikedPosts(likesMap);
+        setComments(commentsMap);
+      } catch (error) {
+        console.error("Failed to fetch ideas", error);
+      }
+    };
+
+    fetchPostDetails();
   }, []);
   const toggleReadMore = (index) => {
     setExpandedIndexes((prev) => ({
@@ -62,11 +101,32 @@ export default function MyPosts() {
       [index]: !prev[index],
     }));
   };
-  const toggleLike = (index) => {
-    setLikedPosts((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
+  // const toggleLike = (index) => {
+  //   setLikedPosts((prev) => ({
+  //     ...prev,
+  //     [index]: !prev[index],
+  //   }));
+  // };
+  const toggleLike = async (index) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const postId = myIdeas[index]._id;
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/post/${postId}/like`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setLikedPosts((prev) => ({
+        ...prev,
+        [index]: response.data.likes.length,
+      }));
+    } catch (err) {
+      console.error("Like failed", err);
+    }
   };
   const toggleExistingComments = (index) => {
     setShowExistingComments((prev) => ({
@@ -86,36 +146,77 @@ export default function MyPosts() {
       [index]: value,
     }));
   };
-  const postComment = (index) => {
+  // const postComment = (index) => {
+  //   const commentText = newComment[index];
+  //   if (!commentText) return;
+  //   const token = localStorage.getItem("token");
+  //   const decoded = jwtDecode(token);
+  //   const username = decoded.username;
+  //   const newEntry = { username, text: commentText };
+  //   setComments((prev) => ({
+  //     ...prev,
+  //     [index]: [...(prev[index] || []), newEntry],
+  //   }));
+  //   setNewComments((prev) => ({
+  //     ...prev,
+  //     [index]: "",
+  //   }));
+  //   setShowAddCommentBox((prev) => ({
+  //     ...prev,
+  //     [index]: false,
+  //   }));
+  //   console.log(`Comment added for post ${index}`);
+  //   setCommentFeedback((prev) => ({
+  //     ...prev,
+  //     [index]: "Comment added!",
+  //   }));
+  //   setTimeout(() => {
+  //     setCommentFeedback((prev) => ({
+  //       ...prev,
+  //       [index]: "",
+  //     }));
+  //   }, 2000);
+  // };
+  const postComment = async (index) => {
     const commentText = newComment[index];
     if (!commentText) return;
+
     const token = localStorage.getItem("token");
     const decoded = jwtDecode(token);
     const username = decoded.username;
-    const newEntry = { username, text: commentText };
-    setComments((prev) => ({
-      ...prev,
-      [index]: [...(prev[index] || []), newEntry],
-    }));
-    setNewComments((prev) => ({
-      ...prev,
-      [index]: "",
-    }));
-    setShowAddCommentBox((prev) => ({
-      ...prev,
-      [index]: false,
-    }));
-    console.log(`Comment added for post ${index}`);
-    setCommentFeedback((prev) => ({
-      ...prev,
-      [index]: "Comment added!",
-    }));
-    setTimeout(() => {
-      setCommentFeedback((prev) => ({
+    const postId = myIdeas[index]._id;
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/post/${postId}/comment`,
+        { text: commentText },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setComments((prev) => ({
+        ...prev,
+        [index]: [...(prev[index] || []), response.data],
+      }));
+
+      setNewComments((prev) => ({
         ...prev,
         [index]: "",
       }));
-    }, 2000);
+
+      setCommentFeedback((prev) => ({
+        ...prev,
+        [index]: "Comment added!",
+      }));
+
+      setTimeout(() => {
+        setCommentFeedback((prev) => ({
+          ...prev,
+          [index]: "",
+        }));
+      }, 2000);
+    } catch (err) {
+      console.error("Comment failed", err);
+    }
   };
   //enable edit and store current
   const enableEdit = (index) => {
@@ -182,28 +283,29 @@ export default function MyPosts() {
     }
   };
   return (
-    <><div className="dashboard-dashboard-container">
-      <h1 className="dashboard-dashboard-title">Welcome Back 👋</h1>
-      <div className="dashboard-dashboard-cards">
-        <div className="dashboard-card dashboard-card-1">
-          <h3>Total Posts</h3>
-          <p>25</p>
-        </div>
-        <div className="dashboard-card dashboard-card-2">
-          <h3>Total Likes</h3>
-          <p>80</p>
-        </div>
-        <div className="dashboard-card dashboard-card-3">
-          <h3>Total Comments</h3>
-          <p>40</p>
-        </div>
-        <div className="dashboard-card dashboard-card-4">
-          <h3>Progress</h3>
-          <p>72%</p>
+    <>
+      <div className="dashboard-dashboard-container">
+        <h1 className="dashboard-dashboard-title">Welcome Back 👋</h1>
+        <div className="dashboard-dashboard-cards">
+          <div className="dashboard-card dashboard-card-1">
+            <h3>Total Posts</h3>
+            <p>25</p>
+          </div>
+          <div className="dashboard-card dashboard-card-2">
+            <h3>Total Likes</h3>
+            <p>80</p>
+          </div>
+          <div className="dashboard-card dashboard-card-3">
+            <h3>Total Comments</h3>
+            <p>40</p>
+          </div>
+          <div className="dashboard-card dashboard-card-4">
+            <h3>Progress</h3>
+            <p>72%</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div className="myposts-page">
+      <div className="myposts-page">
         {myIdeas.map((idea, index) => (
           <div className="post-card" key={index}>
             <div className="post-header">
@@ -211,7 +313,8 @@ export default function MyPosts() {
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                   alt="profile pic"
-                  className="profile-pic" />
+                  className="profile-pic"
+                />
                 <div>
                   <h3 className="username">{idea.fullName}</h3>
                   <p className="role">{idea.role}</p>
@@ -278,12 +381,17 @@ export default function MyPosts() {
                     <textarea
                       className="edit-fields"
                       value={editedContent[index]?.description || ""}
-                      onChange={(e) => handleEditChange(index, "description", e.target.value)} />
+                      onChange={(e) =>
+                        handleEditChange(index, "description", e.target.value)
+                      }
+                    />
                     <div className="edit-actions">
                       <button onClick={() => saveEdit(index)}>Save</button>
                       <button
                         className="cancel-btn"
-                        onClick={() => setEditMode((prev) => ({ ...prev, [index]: false }))}
+                        onClick={() =>
+                          setEditMode((prev) => ({ ...prev, [index]: false }))
+                        }
                       >
                         Cancel
                       </button>
@@ -311,6 +419,55 @@ export default function MyPosts() {
             <div className="post-footer">
               <div className="likes-comments">
                 <button className="icon-btn" onClick={() => toggleLike(index)}>
+                  {likedPosts[index] > 0 ? (
+                    <FaHeart color="red" />
+                  ) : (
+                    <FaRegHeart />
+                  )}
+                </button>
+                <span>{likedPosts[index] || 0} Likes</span>
+                <button
+                  className="icon-btn"
+                  onClick={() => toggleExistingComments(index)}
+                >
+                  <BsChatDots />
+                </button>
+                <span>{comments[index]?.length || 0} Comments</span>
+              </div>
+
+              {showExistingComments[index] && (
+                <div className="comment-section">
+                  {(comments[index] || []).map((comment, cIndex) => (
+                    <div key={cIndex} className="single-comment">
+                      <strong>{comment.username}:</strong> {comment.text}
+                    </div>
+                  ))}
+                  <div className="comment-box">
+                    <textarea
+                      placeholder="Write a comment..."
+                      value={newComment[index] || ""}
+                      onChange={(e) =>
+                        handleCommentChange(index, e.target.value)
+                      }
+                    />
+                    <button
+                      className="send-btn"
+                      onClick={() => postComment(index)}
+                    >
+                      <FiSend />
+                    </button>
+                  </div>
+                  {commentFeedback[index] && (
+                    <div className="comment-feedback">
+                      {commentFeedback[index]}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+            {/* <div className="post-footer">
+              <div className="likes-comments">
+                <button className="icon-btn" onClick={() => toggleLike(index)}>
                   {likedPosts[index] ? <FaHeart color="red" /> : <FaRegHeart />}
                 </button>
                 <span>{likedPosts[index] ? 1 : 0} Likes</span>
@@ -322,7 +479,8 @@ export default function MyPosts() {
                 <textarea
                   placeholder="Write a comment..."
                   value={newComment[index] || ""}
-                  onChange={(e) => handleCommentChange(index, e.target.value)} />
+                  onChange={(e) => handleCommentChange(index, e.target.value)}
+                />
                 <button className="send-btn" onClick={() => postComment(index)}>
                   <FiSend />
                 </button>
@@ -330,9 +488,10 @@ export default function MyPosts() {
               {commentFeedback[index] && (
                 <div className="comment-feedback">{commentFeedback[index]}</div>
               )}
-            </div>
+            </div> */}
           </div>
         ))}
-      </div></>
+      </div>
+    </>
   );
 }
