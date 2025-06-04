@@ -172,7 +172,7 @@ function Login() {
               />
             </div>
             <input type="submit" className="btn" value="Sign up" />
-            {/* <p className="social-text">Or Sign up with social platforms</p>
+            <p className="social-text">Or Sign up with social platforms</p>
             <div className="social-media">
               <a href="#" className="social-icon">
                 <i className="fab fa-facebook-f"></i>
@@ -186,7 +186,7 @@ function Login() {
               <a href="#" className="social-icon">
                 <i className="fab fa-linkedin-in"></i>
               </a>
-            </div> */}
+            </div>
           </form>
         </div>
       </div>
