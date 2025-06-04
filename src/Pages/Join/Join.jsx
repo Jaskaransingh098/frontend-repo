@@ -23,29 +23,7 @@ function Join() {
     }
   };
   return (
-    // <motion.div
-    //   className="join-page"
-    //   ref={ref1}
-    //   initial={{ opacity: 0, y: 50 }}
-    //   animate={intView1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-    //   transition={{ duration: 0.8 }}
-    // >
-
-    //   <nav className="join-navbar">
-    //     <div className="navbar">
-    //       <button onClick={() => setActiveSection("myposts")}>My Posts</button>
-    //       <button onClick={() => setActiveSection("explore")}>Explore</button>
-    //       <button onClick={() => setActiveSection("message")}>Messages</button>
-    //     </div>
-    //   </nav>
-
-    //   <div className="join-body">
-
-    //     <div className="join-container">
-    //       {renderSection()}</div>
-    //   </div>
-
-    // </motion.div>
+    
     <motion.div
       className="join-page"
       ref={ref1}
@@ -63,7 +41,7 @@ function Join() {
               className={activeSection === "myposts" ? "active" : ""}
               onClick={() => setActiveSection("myposts")}
             >
-              My Posts
+              Dashboard
             </button>
             <button
               className={activeSection === "explore" ? "active" : ""}
