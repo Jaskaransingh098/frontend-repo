@@ -186,16 +186,30 @@ export default function MyPosts() {
     const username = decoded.username;
     const postId = myIdeas[index]._id;
 
+    // try {
+    //   const response = await axios.post(
+    //     `${import.meta.env.VITE_API_URL}/post/${postId}/comment`,
+    //     { text: commentText },
+    //     { headers: { Authorization: `Bearer ${token}` } }
+    //   );
     try {
-      const response = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_API_URL}/post/${postId}/comment`,
         { text: commentText },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
+      // Refetch comments for the specific post
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/post/${postId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const updatedComments = response.data.comments;
+
       setComments((prev) => ({
         ...prev,
-        [index]: [...(prev[index] || []), response.data],
+        [index]: updatedComments,
       }));
 
       setNewComments((prev) => ({
