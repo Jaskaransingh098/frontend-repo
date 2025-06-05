@@ -258,10 +258,7 @@ export default function MyPosts() {
           Welcome Back 👋 {currentUsername && <span>{currentUsername}</span>}
         </h1>
         <div className="dashboard-dashboard-cards">
-          {/* <div className="dashboard-card dashboard-card-1">
-            <h3>Latest Posts</h3>
-            <p>25</p>
-          </div> */}
+          
           <div className="dashboard-card dashboard-card-1">
             <h3>Latest Posts</h3>
             {myIdeas.slice(0, 3).map((idea, i) => (
