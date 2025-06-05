@@ -254,11 +254,36 @@ export default function MyPosts() {
   return (
     <>
       <div className="dashboard-dashboard-container">
-        <h1 className="dashboard-dashboard-title">Welcome Back 👋</h1>
+        <h1 className="dashboard-dashboard-title">
+          Welcome Back 👋 {currentUsername && <span>{currentUsername}</span>}
+        </h1>
         <div className="dashboard-dashboard-cards">
-          <div className="dashboard-card dashboard-card-1">
-            <h3>Total Posts</h3>
+          {/* <div className="dashboard-card dashboard-card-1">
+            <h3>Latest Posts</h3>
             <p>25</p>
+          </div> */}
+          <div className="dashboard-card dashboard-card-1">
+            <h3>Latest Posts</h3>
+            {myIdeas.slice(0, 3).map((idea, i) => (
+              <div key={i} className="dashboard-post-preview">
+                <p className="post-title">{idea.topic}</p>
+                <p className="post-date">
+                  {new Date(idea.createdAt).toLocaleDateString()}
+                </p>
+              </div>
+            ))}
+            {myIdeas.length > 3 && (
+              <button
+                className="show-all-btn"
+                onClick={() =>
+                  document
+                    .querySelector(".myposts-page")
+                    .scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                Show All →
+              </button>
+            )}
           </div>
           <div className="dashboard-card dashboard-card-2">
             <h3>Total Likes</h3>
