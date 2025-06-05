@@ -146,36 +146,55 @@ export default function MyPosts() {
       [index]: value,
     }));
   };
-  // const postComment = (index) => {
+
+  // const postComment = async (index) => {
   //   const commentText = newComment[index];
   //   if (!commentText) return;
+
   //   const token = localStorage.getItem("token");
   //   const decoded = jwtDecode(token);
   //   const username = decoded.username;
-  //   const newEntry = { username, text: commentText };
-  //   setComments((prev) => ({
-  //     ...prev,
-  //     [index]: [...(prev[index] || []), newEntry],
-  //   }));
-  //   setNewComments((prev) => ({
-  //     ...prev,
-  //     [index]: "",
-  //   }));
-  //   setShowAddCommentBox((prev) => ({
-  //     ...prev,
-  //     [index]: false,
-  //   }));
-  //   console.log(`Comment added for post ${index}`);
-  //   setCommentFeedback((prev) => ({
-  //     ...prev,
-  //     [index]: "Comment added!",
-  //   }));
-  //   setTimeout(() => {
-  //     setCommentFeedback((prev) => ({
+  //   const postId = myIdeas[index]._id;
+
+  //   try {
+  //     await axios.post(
+  //       `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
+  //       { text: commentText },
+  //       { headers: { Authorization: `Bearer ${token}` } }
+  //     );
+
+  //     // Refetch comments for the specific post
+  //     const response = await axios.get(
+  //       `${import.meta.env.VITE_API_URL}/post/${postId}`,
+  //       { headers: { Authorization: `Bearer ${token}` } }
+  //     );
+
+  //     const updatedComments = response.data.comments;
+
+  //     setComments((prev) => ({
+  //       ...prev,
+  //       [index]: updatedComments,
+  //     }));
+
+  //     setNewComments((prev) => ({
   //       ...prev,
   //       [index]: "",
   //     }));
-  //   }, 2000);
+
+  //     setCommentFeedback((prev) => ({
+  //       ...prev,
+  //       [index]: "Comment added!",
+  //     }));
+
+  //     setTimeout(() => {
+  //       setCommentFeedback((prev) => ({
+  //         ...prev,
+  //         [index]: "",
+  //       }));
+  //     }, 2000);
+  //   } catch (err) {
+  //     console.error("Comment failed", err);
+  //   }
   // };
   const postComment = async (index) => {
     const commentText = newComment[index];
@@ -186,12 +205,6 @@ export default function MyPosts() {
     const username = decoded.username;
     const postId = myIdeas[index]._id;
 
-    // try {
-    //   const response = await axios.post(
-    //     `${import.meta.env.VITE_API_URL}/post/${postId}/comment`,
-    //     { text: commentText },
-    //     { headers: { Authorization: `Bearer ${token}` } }
-    //   );
     try {
       await axios.post(
         `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
@@ -199,29 +212,27 @@ export default function MyPosts() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Refetch comments for the specific post
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/post/${postId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      const updatedComments = response.data.comments;
-
+      // Add new comment directly to local state (immediate UI update) ← Added
+      const newEntry = { username, text: commentText }; // ← Added
       setComments((prev) => ({
+        // ← Added
         ...prev,
-        [index]: updatedComments,
+        [index]: [...(prev[index] || []), newEntry],
       }));
 
+      // Clear input box after submission ← Added
       setNewComments((prev) => ({
         ...prev,
         [index]: "",
       }));
 
+      // Show feedback message ← Added
       setCommentFeedback((prev) => ({
         ...prev,
         [index]: "Comment added!",
       }));
 
+      // Hide feedback after 2s ← Added
       setTimeout(() => {
         setCommentFeedback((prev) => ({
           ...prev,
@@ -232,6 +243,7 @@ export default function MyPosts() {
       console.error("Comment failed", err);
     }
   };
+
   //enable edit and store current
   const enableEdit = (index) => {
     setEditMode((prev) => ({
