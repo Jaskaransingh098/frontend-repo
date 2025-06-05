@@ -194,7 +194,7 @@ export default function MyPosts() {
     //   );
     try {
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/post/${postId}/comment`,
+        `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
         { text: commentText },
         { headers: { Authorization: `Bearer ${token}` } }
       );
