@@ -255,7 +255,7 @@ export default function MyPosts() {
     <>
       <div className="dashboard-dashboard-container">
         <h1 className="dashboard-dashboard-title">
-          Welcome Back 👋 {currentUsername && <span>{currentUsername}</span>}
+          Welcome Back {currentUsername && <span>{currentUsername}</span>} 👋
         </h1>
         <div className="dashboard-dashboard-cards">
           
