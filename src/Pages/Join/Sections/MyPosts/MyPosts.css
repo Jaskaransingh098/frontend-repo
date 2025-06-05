@@ -390,3 +390,19 @@
 .send-btn:hover {
     background: #0066d6;
 }
+
+.comment-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-top: 2px solid #333;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

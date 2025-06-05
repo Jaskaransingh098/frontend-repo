@@ -26,6 +26,7 @@ export default function MyPosts() {
   const [commentFeedback, setCommentFeedback] = useState({});
   const [editMode, setEditMode] = useState({});
   const [editedContent, setEditedContent] = useState({});
+  const [loadingComment, setLoadingComment] = useState({});
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -123,24 +124,12 @@ export default function MyPosts() {
     const postId = myIdeas[index]._id;
 
     try {
+      setLoadingComment((prev) => ({ ...prev, [index]: true }));
       await axios.post(
         `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
         { text: commentText },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
-      // Refetch comments for the specific post
-      // const response = await axios.get(
-      //   `${import.meta.env.VITE_API_URL}/post/${postId}`,
-      //   { headers: { Authorization: `Bearer ${token}` } }
-      // );
-
-      // const updatedComments = response.data.comments;
-
-      // setComments((prev) => ({
-      //   ...prev,
-      //   [index]: updatedComments,
-      // }));
 
       setComments((prev) => ({
         ...prev,
@@ -156,6 +145,7 @@ export default function MyPosts() {
         [index]: "Comment added!",
       }));
 
+      setLoadingComment((prev) => ({ ...prev, [index]: false }));
       setTimeout(() => {
         setCommentFeedback((prev) => ({
           ...prev,
@@ -164,6 +154,7 @@ export default function MyPosts() {
       }, 2000);
     } catch (err) {
       console.error("Comment failed", err);
+      setLoadingComment((prev) => ({ ...prev, [index]: false }));
     }
   };
   //enable edit and store current
@@ -398,11 +389,22 @@ export default function MyPosts() {
                         handleCommentChange(index, e.target.value)
                       }
                     />
-                    <button
+                    {/* <button
                       className="send-btn"
                       onClick={() => postComment(index)}
                     >
                       <FiSend />
+                    </button> */}
+                    <button
+                      className="send-btn"
+                      onClick={() => postComment(index)}
+                      disabled={loadingComment[index]}
+                    >
+                      {loadingComment[index] ? (
+                        <div className="comment-spinner"></div>
+                      ) : (
+                        <FiSend />
+                      )}
                     </button>
                   </div>
                   {commentFeedback[index] && (
