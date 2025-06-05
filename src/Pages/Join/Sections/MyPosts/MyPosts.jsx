@@ -146,56 +146,7 @@ export default function MyPosts() {
       [index]: value,
     }));
   };
-
-  // const postComment = async (index) => {
-  //   const commentText = newComment[index];
-  //   if (!commentText) return;
-
-  //   const token = localStorage.getItem("token");
-  //   const decoded = jwtDecode(token);
-  //   const username = decoded.username;
-  //   const postId = myIdeas[index]._id;
-
-  //   try {
-  //     await axios.post(
-  //       `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
-  //       { text: commentText },
-  //       { headers: { Authorization: `Bearer ${token}` } }
-  //     );
-
-  //     // Refetch comments for the specific post
-  //     const response = await axios.get(
-  //       `${import.meta.env.VITE_API_URL}/post/${postId}`,
-  //       { headers: { Authorization: `Bearer ${token}` } }
-  //     );
-
-  //     const updatedComments = response.data.comments;
-
-  //     setComments((prev) => ({
-  //       ...prev,
-  //       [index]: updatedComments,
-  //     }));
-
-  //     setNewComments((prev) => ({
-  //       ...prev,
-  //       [index]: "",
-  //     }));
-
-  //     setCommentFeedback((prev) => ({
-  //       ...prev,
-  //       [index]: "Comment added!",
-  //     }));
-
-  //     setTimeout(() => {
-  //       setCommentFeedback((prev) => ({
-  //         ...prev,
-  //         [index]: "",
-  //       }));
-  //     }, 2000);
-  //   } catch (err) {
-  //     console.error("Comment failed", err);
-  //   }
-  // };
+ 
   const postComment = async (index) => {
     const commentText = newComment[index];
     if (!commentText) return;
@@ -205,6 +156,7 @@ export default function MyPosts() {
     const username = decoded.username;
     const postId = myIdeas[index]._id;
 
+    
     try {
       await axios.post(
         `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
@@ -212,27 +164,29 @@ export default function MyPosts() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Add new comment directly to local state (immediate UI update) ← Added
-      const newEntry = { username, text: commentText }; // ← Added
+      // Refetch comments for the specific post
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/post/${postId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const updatedComments = response.data.comments;
+
       setComments((prev) => ({
-        // ← Added
         ...prev,
-        [index]: [...(prev[index] || []), newEntry],
+        [index]: updatedComments,
       }));
 
-      // Clear input box after submission ← Added
       setNewComments((prev) => ({
         ...prev,
         [index]: "",
       }));
 
-      // Show feedback message ← Added
       setCommentFeedback((prev) => ({
         ...prev,
         [index]: "Comment added!",
       }));
 
-      // Hide feedback after 2s ← Added
       setTimeout(() => {
         setCommentFeedback((prev) => ({
           ...prev,
@@ -243,7 +197,6 @@ export default function MyPosts() {
       console.error("Comment failed", err);
     }
   };
-
   //enable edit and store current
   const enableEdit = (index) => {
     setEditMode((prev) => ({
