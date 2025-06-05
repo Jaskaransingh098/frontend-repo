@@ -26,36 +26,7 @@ export default function MyPosts() {
   const [commentFeedback, setCommentFeedback] = useState({});
   const [editMode, setEditMode] = useState({});
   const [editedContent, setEditedContent] = useState({});
-  //current user idea fetching
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (!token) {
-  //     alert("Please log in to see your posts.");
-  //     return;
-  //   }
-  //   try {
-  //     const decoded = jwtDecode(token);
-  //     const currentUsername = decoded.username;
-  //     console.log("Decoded username:", currentUsername); // ← For debugging
-  //     const fetchIdeas = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `${import.meta.env.VITE_API_URL}/post`
-  //         );
-  //         const ideas = response.data.ideas;
-  //         const filteredIdeas = ideas.filter(
-  //           (idea) => idea.username === currentUsername
-  //         );
-  //         setMyIdeas(filteredIdeas);
-  //       } catch (error) {
-  //         console.error("Failed to fetch ideas", error);
-  //       }
-  //     };
-  //     fetchIdeas();
-  //   } catch (err) {
-  //     console.error("Error decoding token", err);
-  //   }
-  // }, []);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -101,12 +72,7 @@ export default function MyPosts() {
       [index]: !prev[index],
     }));
   };
-  // const toggleLike = (index) => {
-  //   setLikedPosts((prev) => ({
-  //     ...prev,
-  //     [index]: !prev[index],
-  //   }));
-  // };
+
   const toggleLike = async (index) => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -146,7 +112,7 @@ export default function MyPosts() {
       [index]: value,
     }));
   };
- 
+
   const postComment = async (index) => {
     const commentText = newComment[index];
     if (!commentText) return;
@@ -156,7 +122,6 @@ export default function MyPosts() {
     const username = decoded.username;
     const postId = myIdeas[index]._id;
 
-    
     try {
       await axios.post(
         `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
@@ -165,18 +130,22 @@ export default function MyPosts() {
       );
 
       // Refetch comments for the specific post
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/post/${postId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      // const response = await axios.get(
+      //   `${import.meta.env.VITE_API_URL}/post/${postId}`,
+      //   { headers: { Authorization: `Bearer ${token}` } }
+      // );
 
-      const updatedComments = response.data.comments;
+      // const updatedComments = response.data.comments;
+
+      // setComments((prev) => ({
+      //   ...prev,
+      //   [index]: updatedComments,
+      // }));
 
       setComments((prev) => ({
         ...prev,
-        [index]: updatedComments,
+        [index]: [...(prev[index] || []), { username, text: commentText }],
       }));
-
       setNewComments((prev) => ({
         ...prev,
         [index]: "",
@@ -444,30 +413,6 @@ export default function MyPosts() {
                 </div>
               )}
             </div>
-            {/* <div className="post-footer">
-              <div className="likes-comments">
-                <button className="icon-btn" onClick={() => toggleLike(index)}>
-                  {likedPosts[index] ? <FaHeart color="red" /> : <FaRegHeart />}
-                </button>
-                <span>{likedPosts[index] ? 1 : 0} Likes</span>
-                <button className="icon-btn">
-                  <BsChatDots />
-                </button>
-              </div>
-              <div className="comment-box">
-                <textarea
-                  placeholder="Write a comment..."
-                  value={newComment[index] || ""}
-                  onChange={(e) => handleCommentChange(index, e.target.value)}
-                />
-                <button className="send-btn" onClick={() => postComment(index)}>
-                  <FiSend />
-                </button>
-              </div>
-              {commentFeedback[index] && (
-                <div className="comment-feedback">{commentFeedback[index]}</div>
-              )}
-            </div> */}
           </div>
         ))}
       </div>
