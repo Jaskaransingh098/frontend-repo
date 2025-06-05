@@ -26,6 +26,7 @@ export default function MyPosts() {
   const [commentFeedback, setCommentFeedback] = useState({});
   const [editMode, setEditMode] = useState({});
   const [editedContent, setEditedContent] = useState({});
+  const [currentUsername, setCurrentUsername] = useState("");
   const [loadingComment, setLoadingComment] = useState({});
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function MyPosts() {
       try {
         const decoded = jwtDecode(token);
         const currentUsername = decoded.username;
+        setCurrentUsername(currentUsername);
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/post`,
           {
@@ -155,6 +157,34 @@ export default function MyPosts() {
     } catch (err) {
       console.error("Comment failed", err);
       setLoadingComment((prev) => ({ ...prev, [index]: false }));
+    }
+  };
+  const deleteComment = async (postIndex, commentIndex) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const postId = myIdeas[postIndex]._id;
+    const commentToDelete = comments[postIndex][commentIndex];
+
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          data: { text: commentToDelete.text }, // send text to identify comment
+        }
+      );
+
+      setComments((prev) => {
+        const updated = [...prev[postIndex]];
+        updated.splice(commentIndex, 1);
+        return { ...prev, [postIndex]: updated };
+      });
+
+      toast.success("Comment deleted.");
+    } catch (err) {
+      console.error("Failed to delete comment", err);
+      toast.error("Failed to delete comment.");
     }
   };
   //enable edit and store current
@@ -376,9 +406,31 @@ export default function MyPosts() {
 
               {showExistingComments[index] && (
                 <div className="comment-section">
-                  {(comments[index] || []).map((comment, cIndex) => (
+                  {/* {(comments[index] || []).map((comment, cIndex) => (
                     <div key={cIndex} className="single-comment">
                       <strong>{comment.username}:</strong> {comment.text}
+                    </div>
+                  ))} */}
+                  {(comments[index] || []).map((comment, cIndex) => (
+                    <div key={cIndex} className="comment-item">
+                      <div className="comment-left">
+                        <FaUserCircle className="comment-avatar" />
+                        <div className="comment-content">
+                          <span className="comment-username">
+                            {comment.username}
+                          </span>
+                          <p className="comment-text">{comment.text}</p>
+                        </div>
+                      </div>
+                      {comment.username === currentUsername && (
+                        <button
+                          className="delete-comment-btn"
+                          onClick={() => deleteComment(index, cIndex)}
+                          title="Delete Comment"
+                        >
+                          <FaTrash />
+                        </button>
+                      )}
                     </div>
                   ))}
                   <div className="comment-box">
