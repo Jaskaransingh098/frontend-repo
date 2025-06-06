@@ -63,6 +63,19 @@ export default function MyPosts() {
           (idea) => idea.username === currentUsername
         );
         setMyIdeas(filteredIdeas);
+        await Promise.all(
+          filteredIdeas.map(async (idea) => {
+            try {
+              await axios.post(
+                `${import.meta.env.VITE_API_URL}/post/${idea._id}/view`,
+                {},
+                { headers: { Authorization: `Bearer ${token}` } }
+              );
+            } catch (err) {
+              console.error("Failed to track view", err);
+            }
+          })
+        );
 
         const mostEngaged = filteredIdeas.reduce((top, idea) => {
           const engagement =
