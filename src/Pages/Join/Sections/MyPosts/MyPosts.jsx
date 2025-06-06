@@ -63,22 +63,6 @@ export default function MyPosts() {
           (idea) => idea.username === currentUsername
         );
         setMyIdeas(filteredIdeas);
-        const handleView = async (postId) => {
-          const token = localStorage.getItem("token");
-          try {
-            await axios.post(
-              `${import.meta.env.VITE_API_URL}/post/${postId}/view`,
-              {},
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
-          } catch (err) {
-            console.error("Failed to track view", err);
-          }
-        };
 
         const mostEngaged = filteredIdeas.reduce((top, idea) => {
           const engagement =
@@ -110,6 +94,23 @@ export default function MyPosts() {
 
     fetchPostDetails();
   }, []);
+
+  const handleView = async (postId) => {
+    const token = localStorage.getItem("token");
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/post/${postId}/view`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (err) {
+      console.error("Failed to track view", err);
+    }
+  };
   const toggleReadMore = (index) => {
     setExpandedIndexes((prev) => ({
       ...prev,
@@ -362,7 +363,11 @@ export default function MyPosts() {
       </div>
       <div className="myposts-page">
         {myIdeas.map((idea, index) => (
-          <div className="post-card" key={index} onClick={() => handleView(idea._id)}>
+          <div
+            className="post-card"
+            key={index}
+            onClick={() => handleView(idea._id)}
+          >
             <div className="post-header">
               <div className="user-profile">
                 <img
