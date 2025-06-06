@@ -1,12 +1,3 @@
-.interaction-feed {
-    max-height: 250px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    /* Firefox */
-    scrollbar-color: #4a90e2 #1b1e2b;
-}
-
-/* Chrome/Safari */
 .interaction-feed::-webkit-scrollbar {
     width: 12px;
     /* Increased width */
