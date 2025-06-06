@@ -40,6 +40,7 @@ export default function MyPosts() {
   const [mostEngagedPost, setMostEngagedPost] = useState(null);
   const [loadingComment, setLoadingComment] = useState({});
   const [currentTier, setCurrentTier] = useState(0);
+  const [notificationLevel, setNotificationLevel] = useState(5);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -573,7 +574,7 @@ export default function MyPosts() {
                     .sort(
                       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                     )
-                    .slice(0, 30) // ✅ Limit to latest 30 notifications
+                    .slice(0, Math.min(notificationLevel * 6, 30)) // ✅ Limit to latest 30 notifications
                     .map((interaction, i) => (
                       <li key={i} className="interaction-item">
                         {interaction.type === "like" ? (
