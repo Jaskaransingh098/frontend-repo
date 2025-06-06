@@ -527,6 +527,19 @@ export default function MyPosts() {
           <div className="dashboard-card dashboard-card-4">
             <h3>🔗 Recent Interactions</h3>
 
+            <div className="notification-slider-container">
+              <label htmlFor="notification-slider">Notification Level</label>
+              <input
+                id="notification-slider"
+                type="range"
+                min={1}
+                max={5}
+                value={notificationLevel}
+                onChange={(e) => setNotificationLevel(Number(e.target.value))}
+                className="notification-slider"
+              />
+            </div>
+
             <div className="network-content">
               {/* Interactions Feed */}
               <div
@@ -560,6 +573,7 @@ export default function MyPosts() {
                     .sort(
                       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                     )
+                    .slice(0, 30) // ✅ Limit to latest 30 notifications
                     .map((interaction, i) => (
                       <li key={i} className="interaction-item">
                         {interaction.type === "like" ? (

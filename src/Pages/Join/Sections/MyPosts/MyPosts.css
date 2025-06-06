@@ -455,6 +455,58 @@
     color: #ffffff;
 }
 
+.notification-slider-container {
+    margin-bottom: 1rem;
+    color: #ccc;
+    font-size: 0.85rem;
+}
+
+.notification-slider {
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to right, #00bfff, #007bff);
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.notification-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+    transition: transform 0.2s ease;
+}
+
+.notification-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.notification-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+    transition: transform 0.2s ease;
+}
+
+.notification-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+.notification-slider-container {
+    margin-bottom: 1rem;
+    color: #ccc;
+    font-size: 0.85rem;
+}
+
 
 .myposts-page {
     max-width: 900px;
