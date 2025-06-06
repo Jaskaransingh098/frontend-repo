@@ -400,24 +400,27 @@
     gap: 6px;
 }
 
-.interaction-feed {
+.dashboard-card-4 .interaction-feed {
     max-height: 250px;
     overflow-y: scroll;
     padding-right: 6px;
     scrollbar-width: thin;
 }
 
-.interaction-feed::-webkit-scrollbar {
+
+.dashboard-card-4 .interaction-feed::-webkit-scrollbar {
     width: 10px;
 }
 
-.interaction-feed::-webkit-scrollbar-track {
+
+.dashboard-card-4 .interaction-feed::-webkit-scrollbar-track {
     background: #1b1e2b;
     /* dark background to match card */
     border-radius: 10px;
 }
 
-.interaction-feed::-webkit-scrollbar-thumb {
+
+.dashboard-card-4 .interaction-feed::-webkit-scrollbar-thumb {
     background: linear-gradient(to bottom, #4a90e2, #0066ff);
     /* blue-ish gradient */
     border-radius: 10px ;
@@ -425,13 +428,15 @@
     /* same as track for gap illusion */
 }
 
-.interaction-feed::-webkit-scrollbar-thumb:hover {
+
+.dashboard-card-4 .interaction-feed::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(to bottom, #5aaeff, #004aad);
     /* brighter on hover */
 }
 
 /* Remove scrollbar arrows (some browsers still render them) */
-.interaction-feed::-webkit-scrollbar-button {
+
+.dashboard-card-4 .interaction-feed::-webkit-scrollbar-button {
     display: none ;
 }
 
