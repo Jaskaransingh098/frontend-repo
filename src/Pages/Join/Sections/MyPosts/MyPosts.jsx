@@ -326,7 +326,28 @@ export default function MyPosts() {
           <div className="dashboard-card dashboard-card-2">
             <h3>Top Post Engagement</h3>
             {mostEngagedPost ? (
-              <ResponsiveContainer width="100%" height={200}>
+              // <ResponsiveContainer width="100%" height={200}>
+              //   <BarChart
+              //     data={[
+              //       {
+              //         name: mostEngagedPost.topic || "Top Post",
+              //         Likes: mostEngagedPost.likes?.length || 0,
+              //         Comments: mostEngagedPost.comments?.length || 0,
+              //         Views: mostEngagedPost.views || 0,
+              //       },
+              //     ]}
+              //   >
+              //     <CartesianGrid strokeDasharray="3 3" />
+              //     <XAxis dataKey="name" />
+              //     <YAxis allowDecimals={false} />
+              //     <Tooltip />
+              //     <Legend />
+              //     <Bar dataKey="Likes" fill="#ff6b6b" />
+              //     <Bar dataKey="Comments" fill="#1e90ff" />
+              //     <Bar dataKey="Views" fill="#6bcf63" />
+              //   </BarChart>
+              // </ResponsiveContainer>
+              <ResponsiveContainer width="100%" height={250}>
                 <BarChart
                   data={[
                     {
@@ -336,15 +357,40 @@ export default function MyPosts() {
                       Views: mostEngagedPost.views || 0,
                     },
                   ]}
+                  margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+                  barCategoryGap="20%"
                 >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis allowDecimals={false} />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="Likes" fill="#ff6b6b" />
-                  <Bar dataKey="Comments" fill="#1e90ff" />
-                  <Bar dataKey="Views" fill="#6bcf63" />
+                  <CartesianGrid
+                    strokeDasharray="4 4"
+                    stroke="rgba(255,255,255,0.1)"
+                  />
+                  <XAxis
+                    dataKey="name"
+                    stroke="#ffffff"
+                    tick={{ fontSize: 12 }}
+                  />
+                  <YAxis
+                    allowDecimals={false}
+                    stroke="#ffffff"
+                    tick={{ fontSize: 12 }}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#1e1e1e",
+                      border: "none",
+                      borderRadius: 10,
+                      color: "#fff",
+                    }}
+                    labelStyle={{ color: "#ccc" }}
+                  />
+                  <Legend wrapperStyle={{ color: "#fff", fontSize: 12 }} />
+                  <Bar dataKey="Likes" fill="#ff6b6b" radius={[8, 8, 0, 0]} />
+                  <Bar
+                    dataKey="Comments"
+                    fill="#1e90ff"
+                    radius={[8, 8, 0, 0]}
+                  />
+                  <Bar dataKey="Views" fill="#6bcf63" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             ) : (
