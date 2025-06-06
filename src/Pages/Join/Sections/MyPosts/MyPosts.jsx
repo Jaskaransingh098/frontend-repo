@@ -39,6 +39,7 @@ export default function MyPosts() {
   const [currentUsername, setCurrentUsername] = useState("");
   const [mostEngagedPost, setMostEngagedPost] = useState(null);
   const [loadingComment, setLoadingComment] = useState({});
+  const [currentTier, setCurrentTier] = useState(0);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -94,6 +95,66 @@ export default function MyPosts() {
 
     fetchPostDetails();
   }, []);
+
+  const totalComments = Object.values(comments).reduce(
+    (sum, arr) => sum + arr.length,
+    0
+  );
+
+  const totalLikes = Object.values(likedPosts).reduce(
+    (sum, count) => sum + count,
+    0
+  );
+
+  const totalPosts = myIdeas.length;
+
+  const tiers = [
+    [
+      { label: "Post 1 idea", goal: 1, type: "posts" },
+      { label: "Receive 3 likes", goal: 3, type: "likes" },
+      { label: "Get 5 comments", goal: 5, type: "comments" },
+    ],
+    [
+      { label: "Post 5 ideas", goal: 5, type: "posts" },
+      { label: "Receive 15 likes", goal: 15, type: "likes" },
+      { label: "Get 20 comments", goal: 20, type: "comments" },
+    ],
+    [
+      { label: "Post 10 ideas", goal: 10, type: "posts" },
+      { label: "Receive 40 likes", goal: 40, type: "likes" },
+      { label: "Get 50 comments", goal: 50, type: "comments" },
+    ],
+    [
+      { label: "Post 20 ideas", goal: 20, type: "posts" },
+      { label: "Receive 100 likes", goal: 100, type: "likes" },
+      { label: "Get 100 comments", goal: 100, type: "comments" },
+    ],
+  ];
+
+  const tierTitles = ["Beginner", "Contributor", "Chatterbox", "Legend"];
+
+  const tierMilestones = tiers[currentTier].map((m) => {
+    let count = 0;
+    if (m.type === "comments") count = totalComments;
+    else if (m.type === "likes") count = totalLikes;
+    else if (m.type === "posts") count = totalPosts;
+    return { ...m, completed: count >= m.goal };
+  });
+
+  const completedMilestones = tierMilestones.filter((m) => m.completed).length;
+  const allMilestonesCompleted = completedMilestones === tierMilestones.length;
+
+  const handleNextTier = () => {
+    if (currentTier < tiers.length - 1) {
+      setCurrentTier((prev) => prev + 1);
+    }
+  };
+
+  const handlePrevTier = () => {
+    if (currentTier > 0) {
+      setCurrentTier((prev) => prev - 1);
+    }
+  };
 
   const handleView = async (postId) => {
     const token = localStorage.getItem("token");
@@ -378,8 +439,58 @@ export default function MyPosts() {
             )}
           </div>
           <div className="dashboard-card dashboard-card-3">
-            <h3>Total Comments</h3>
-            <p>40</p>
+            <h3>🏆 Achievements</h3>
+
+            <div className="tier-slider">
+              <button className="nav-arrow" onClick={handlePrevTier}>
+                ‹
+              </button>
+              <div className="tier-content">
+                <h4 className="tier-title">
+                  Tier {currentTier} - {tierTitles[currentTier]}
+                </h4>
+
+                <div className="progress-container">
+                  <div className="progress-label">
+                    {completedMilestones}/{tierMilestones.length} Completed
+                  </div>
+                  <div className="progress-bar">
+                    <div
+                      className="progress-fill"
+                      style={{
+                        width: `${
+                          (completedMilestones / tierMilestones.length) * 100
+                        }%`,
+                      }}
+                    ></div>
+                  </div>
+                </div>
+
+                <ul className="milestone-list">
+                  {tierMilestones.map((milestone, i) => (
+                    <li
+                      key={i}
+                      className={milestone.completed ? "completed" : "locked"}
+                    >
+                      <span className="badge-icon">
+                        {milestone.completed ? "✅" : "🔒"}
+                      </span>
+                      {milestone.label}
+                    </li>
+                  ))}
+                </ul>
+
+                {allMilestonesCompleted && currentTier < 3 && (
+                  <div className="tier-upgrade-message">
+                    🎉 All milestones complete! You’ve unlocked Tier{" "}
+                    {currentTier + 1}!
+                  </div>
+                )}
+              </div>
+              <button className="nav-arrow" onClick={handleNextTier}>
+                ›
+              </button>
+            </div>
           </div>
           <div className="dashboard-card dashboard-card-4">
             <h3>Progress</h3>

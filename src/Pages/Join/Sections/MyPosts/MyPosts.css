@@ -110,51 +110,6 @@
     transform: scale(1.05);
 }
 
-/* .dashboard-card-1 {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    width: 33vw;
-}
-
-.dashboard-card-1 h3 {
-    text-align: left;
-}
-
-.dashboard-post-preview {
-    margin-bottom: 8px;
-    margin-top: 20px;
-    padding: 6px 8px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-}
-
-.post-title {
-    font-weight: 500;
-    color: #fff;
-}
-
-.post-date {
-    font-size: 12px;
-    color: #ccc;
-}
-
-.show-all-btn {
-    margin-top: 15px;
-    padding: 6px 12px;
-    background: #004aad;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.show-all-btn:hover {
-    background: #003399;
-} */
-
 
 
 .dashboard-card-2 {
@@ -192,12 +147,146 @@
     text-align: center;
 }
 
-
 .dashboard-card-3 {
-    background: linear-gradient(90deg, hsla(123, 100%, 55%, 1) 0%, hsla(102, 27%, 80%, 1) 100%);
-    color: black;
-    width: 43vw;
+    background: linear-gradient(145deg, #1e1e2f, #2a2a40);
+    color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
 }
+
+.dashboard-card-3 h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #ffd700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tier-slider {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.nav-arrow {
+    background: #2f2f48;
+    color: #ffffff;
+    border: none;
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.nav-arrow:hover {
+    background: #444464;
+}
+
+.tier-content {
+    flex: 1;
+    background: #282842;
+    padding: 1rem;
+    border-radius: 16px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.tier-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #00d8ff;
+    text-align: center;
+}
+
+.progress-container {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 14px;
+    background: #3a3a50;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ffcc, #00bfff);
+    width: 0%;
+    transition: width 0.4s ease-in-out;
+}
+
+.milestone-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.milestone-list li {
+    background: #1f1f33;
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.95rem;
+    color: #aaa;
+    transition: background 0.3s ease;
+}
+
+.milestone-list li.completed {
+    background: #293b2f;
+    color: #a8e6a1;
+}
+
+.milestone-list li.locked {
+    opacity: 0.6;
+}
+
+.badge-icon {
+    font-size: 1.2rem;
+}
+
+.tier-upgrade-message {
+    margin-top: 1rem;
+    text-align: center;
+    color: #ffd700;
+    background: rgba(255, 255, 0, 0.1);
+    padding: 0.8rem;
+    border-radius: 12px;
+    font-weight: bold;
+    animation: pulseGlow 1.5s infinite;
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    }
+
+    100% {
+        box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
+    }
+}
+
+
 
 .dashboard-card-4 {
     color: black;
