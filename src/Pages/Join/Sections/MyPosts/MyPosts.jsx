@@ -94,6 +94,10 @@ export default function MyPosts() {
     };
 
     fetchPostDetails();
+
+    const interval = setInterval(fetchPostDetails, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const totalComments = Object.values(comments).reduce(
