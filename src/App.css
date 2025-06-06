@@ -1,7 +1,3 @@
-:global(.interaction-feed::-webkit-scrollbar) {
-    width: 8px;
-}
-
 .interaction-feed {
     max-height: 250px;
     overflow-y: auto;
