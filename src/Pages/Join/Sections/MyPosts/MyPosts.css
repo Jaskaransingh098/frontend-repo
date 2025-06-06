@@ -148,10 +148,13 @@
 }
 
 .dashboard-card-3 {
+    width: 43vw;
     background: linear-gradient(145deg, #1e1e2f, #2a2a40);
     color: #ffffff;
     padding: 1.5rem;
     border-radius: 20px;
+    overflow: hidden;
+    position: relative;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s ease;
 }
@@ -170,6 +173,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    flex-wrap: nowrap;
+    overflow: hidden;
 }
 
 .nav-arrow {
