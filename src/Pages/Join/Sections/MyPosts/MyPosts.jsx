@@ -492,9 +492,61 @@ export default function MyPosts() {
               </button>
             </div>
           </div>
+          
           <div className="dashboard-card dashboard-card-4">
-            <h3>Progress</h3>
-            <p>72%</p>
+            <h3>🔗 Recent Interactions</h3>
+
+            <div className="network-content">
+              {/* Interactions Feed */}
+              <div
+                className="interaction-feed"
+                style={{
+                  maxHeight: "250px",
+                  overflowY: "auto",
+                  paddingRight: "8px",
+                }}
+              >
+                <ul className="interaction-list">
+                  {[...myIdeas]
+                    .flatMap((idea) => {
+                      const likes = (idea.likes || []).map((user) => ({
+                        type: "like",
+                        user,
+                        topic: idea.topic,
+                        createdAt: idea.createdAt,
+                      }));
+
+                      const comments = (idea.comments || []).map((comment) => ({
+                        type: "comment",
+                        user: comment.username,
+                        text: comment.text,
+                        topic: idea.topic,
+                        createdAt: comment.createdAt || idea.createdAt,
+                      }));
+
+                      return [...likes, ...comments];
+                    })
+                    .sort(
+                      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                    )
+                    .map((interaction, i) => (
+                      <li key={i} className="interaction-item">
+                        {interaction.type === "like" ? (
+                          <p className="interaction-event">
+                            ❤️ <strong>{interaction.user}</strong> liked your
+                            post "<em>{interaction.topic}</em>"
+                          </p>
+                        ) : (
+                          <p className="interaction-event">
+                            💬 <strong>{interaction.user}</strong> commented on
+                            "<em>{interaction.topic}</em>": "{interaction.text}"
+                          </p>
+                        )}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
