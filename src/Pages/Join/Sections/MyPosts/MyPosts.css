@@ -412,19 +412,27 @@
 }
 
 .interaction-feed::-webkit-scrollbar-track {
-    background: #1f1f2e;
-    /* dark track */
+    background: #1b1e2b;
+    /* dark background to match card */
     border-radius: 10px;
 }
 
 .interaction-feed::-webkit-scrollbar-thumb {
-    background: #555;
+    background: linear-gradient(to bottom, #4a90e2, #0066ff);
+    /* blue-ish gradient */
     border-radius: 10px;
-    border: 2px solid #1f1f2e;
+    border: 2px solid #1b1e2b;
+    /* same as track for gap illusion */
 }
 
 .interaction-feed::-webkit-scrollbar-thumb:hover {
-    background: #777;
+    background: linear-gradient(to bottom, #5aaeff, #004aad);
+    /* brighter on hover */
+}
+
+/* Remove scrollbar arrows (some browsers still render them) */
+.interaction-feed::-webkit-scrollbar-button {
+    display: none;
 }
 
 .interaction-list {
