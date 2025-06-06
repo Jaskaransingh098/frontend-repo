@@ -9,6 +9,16 @@ import {
   FaEdit,
   FaTrash,
 } from "react-icons/fa";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+  CartesianGrid,
+} from "recharts";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FiSend } from "react-icons/fi";
@@ -27,6 +37,7 @@ export default function MyPosts() {
   const [editMode, setEditMode] = useState({});
   const [editedContent, setEditedContent] = useState({});
   const [currentUsername, setCurrentUsername] = useState("");
+  const [mostEngagedPost, setMostEngagedPost] = useState(null);
   const [loadingComment, setLoadingComment] = useState({});
 
   useEffect(() => {
@@ -52,6 +63,20 @@ export default function MyPosts() {
           (idea) => idea.username === currentUsername
         );
         setMyIdeas(filteredIdeas);
+
+        const mostEngaged = filteredIdeas.reduce((top, idea) => {
+          const engagement =
+            (idea.likes?.length || 0) +
+            (idea.comments?.length || 0) +
+            (idea.views || 0);
+          const topEngagement =
+            (top.likes?.length || 0) +
+            (top.comments?.length || 0) +
+            (top.views || 0);
+          return engagement > topEngagement ? idea : top;
+        }, filteredIdeas[0]);
+
+        setMostEngagedPost(mostEngaged);
 
         // comment: store backend likes/comments in local state
         const likesMap = {};
@@ -258,7 +283,6 @@ export default function MyPosts() {
           Welcome Back {currentUsername && <span>{currentUsername}</span>} 👋
         </h1>
         <div className="dashboard-dashboard-cards">
-          
           <div className="dashboard-card dashboard-card-1">
             <h3>Latest Posts</h3>
             {myIdeas.slice(0, 3).map((idea, i) => (
@@ -283,8 +307,32 @@ export default function MyPosts() {
             )}
           </div>
           <div className="dashboard-card dashboard-card-2">
-            <h3>Total Likes</h3>
-            <p>80</p>
+            <h3>Top Post Engagement</h3>
+            {mostEngagedPost ? (
+              <ResponsiveContainer width="100%" height={200}>
+                <BarChart
+                  data={[
+                    {
+                      name: mostEngagedPost.topic || "Top Post",
+                      Likes: mostEngagedPost.likes?.length || 0,
+                      Comments: mostEngagedPost.comments?.length || 0,
+                      Views: mostEngagedPost.views || 0,
+                    },
+                  ]}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis allowDecimals={false} />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="Likes" fill="#ff6b6b" />
+                  <Bar dataKey="Comments" fill="#1e90ff" />
+                  <Bar dataKey="Views" fill="#6bcf63" />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <p>No data yet</p>
+            )}
           </div>
           <div className="dashboard-card dashboard-card-3">
             <h3>Total Comments</h3>

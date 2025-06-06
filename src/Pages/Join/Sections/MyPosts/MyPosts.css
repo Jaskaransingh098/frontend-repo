@@ -47,7 +47,8 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     width: 33vw;
 }
-.dashboard-card-1 h3{
+
+.dashboard-card-1 h3 {
     text-align: left;
 }
 
@@ -70,7 +71,7 @@
 }
 
 .show-all-btn {
-    margin-top: 10px;
+    margin-top: 15px;
     padding: 6px 12px;
     background: #004aad;
     color: white;
@@ -84,10 +85,46 @@
     background: #003399;
 }
 
-.dashboard-card-2 {
+/* .dashboard-card-2 {
     background: whitesmoke;
     width: 43vw;
     color: #0f2027;
+} */
+.dashboard-card-2 {
+    width: 43vw;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    color: white;
+    padding: 1.5rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card-2 h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.dashboard-card-2:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.top-post-title {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: #ccc;
+    text-align: center;
 }
 
 .dashboard-card-3 {
