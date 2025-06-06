@@ -326,27 +326,6 @@ export default function MyPosts() {
           <div className="dashboard-card dashboard-card-2">
             <h3>Top Post Engagement</h3>
             {mostEngagedPost ? (
-              // <ResponsiveContainer width="100%" height={200}>
-              //   <BarChart
-              //     data={[
-              //       {
-              //         name: mostEngagedPost.topic || "Top Post",
-              //         Likes: mostEngagedPost.likes?.length || 0,
-              //         Comments: mostEngagedPost.comments?.length || 0,
-              //         Views: mostEngagedPost.views || 0,
-              //       },
-              //     ]}
-              //   >
-              //     <CartesianGrid strokeDasharray="3 3" />
-              //     <XAxis dataKey="name" />
-              //     <YAxis allowDecimals={false} />
-              //     <Tooltip />
-              //     <Legend />
-              //     <Bar dataKey="Likes" fill="#ff6b6b" />
-              //     <Bar dataKey="Comments" fill="#1e90ff" />
-              //     <Bar dataKey="Views" fill="#6bcf63" />
-              //   </BarChart>
-              // </ResponsiveContainer>
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart
                   data={[
@@ -358,7 +337,8 @@ export default function MyPosts() {
                     },
                   ]}
                   margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
-                  barCategoryGap="20%"
+                  barCategoryGap="40%"
+                  barGap={8}
                 >
                   <CartesianGrid
                     strokeDasharray="4 4"
