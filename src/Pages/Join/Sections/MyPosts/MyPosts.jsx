@@ -506,14 +506,7 @@ export default function MyPosts() {
 
             <div className="network-content">
               {/* Interactions Feed */}
-              <div
-                className="interaction-feed"
-                style={{
-                  maxHeight: "250px",
-                  overflowY: "auto",
-                  paddingRight: "8px",
-                }}
-              >
+              <div className="interaction-feed">
                 <ul className="interaction-list">
                   {[...myIdeas]
                     .flatMap((idea) => {
@@ -537,7 +530,7 @@ export default function MyPosts() {
                     .sort(
                       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                     )
-                    .slice(0 , 30) // ✅ Limit to latest 30 notifications
+                    .slice(0, 30) // ✅ Limit to latest 30 notifications
                     .map((interaction, i) => (
                       <li key={i} className="interaction-item">
                         {interaction.type === "like" ? (
