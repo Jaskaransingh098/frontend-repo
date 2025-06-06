@@ -41,6 +41,76 @@
 }
 
 .dashboard-card-1 {
+    background: linear-gradient(135deg, #232526, #414345);
+    /* dark steel gradient */
+    border: 1px solid #2c2f36;
+    border-radius: 16px;
+    color: white;
+    padding: 1.5rem;
+    width: 33vw;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card-1:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.dashboard-card-1 h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.dashboard-post-preview {
+    background-color: #2d2f36;
+    border-left: 4px solid #004aad;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-post-preview:hover {
+    background-color: #383b42;
+}
+
+.post-title {
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+    font-size: 0.95rem;
+}
+
+.post-date {
+    font-size: 0.75rem;
+    color: #aaa;
+}
+
+.show-all-btn {
+    align-self: flex-start;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #0066ff;
+    color: white;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.show-all-btn:hover {
+    background: #004aad;
+    transform: scale(1.05);
+}
+
+/* .dashboard-card-1 {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -83,45 +153,9 @@
 
 .show-all-btn:hover {
     background: #003399;
-}
-
-/* 
-.dashboard-card-2 {
-    width: 43vw;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 16px;
-    color: white;
-    padding: 1.5rem;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.dashboard-card-2 h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: white;
-}
-
-.dashboard-card-2:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
-}
-
-.top-post-title {
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    font-style: italic;
-    color: #ccc;
-    text-align: center;
 } */
+
+
 
 .dashboard-card-2 {
     width: 43vw;
