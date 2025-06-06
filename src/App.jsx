@@ -16,6 +16,7 @@ import Prices from "./Pages/Prices/Prices";
 import Success from "./Pages/Success/Success";
 import Government from "./Pages/Government/Government";
 import AnimatedBackground from "./Components/AnimateBackground/AnimateBackground";
+import "./App.css"
 
 
 function AppContent() {
