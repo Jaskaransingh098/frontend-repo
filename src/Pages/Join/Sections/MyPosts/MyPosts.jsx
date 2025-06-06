@@ -337,8 +337,8 @@ export default function MyPosts() {
                     },
                   ]}
                   margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
-                  barCategoryGap="40%"
-                  barGap={8}
+                  barCategoryGap="90%"
+                  barGap={25}
                 >
                   <CartesianGrid
                     strokeDasharray="4 4"
