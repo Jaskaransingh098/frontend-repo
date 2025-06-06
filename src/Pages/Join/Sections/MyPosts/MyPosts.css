@@ -40,9 +40,9 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
+/* 
 .dashboard-card-1 {
     background: linear-gradient(135deg, #232526, #414345);
-    /* dark steel gradient */
     border: 1px solid #2c2f36;
     border-radius: 16px;
     color: white;
@@ -90,6 +90,82 @@
 .post-date {
     font-size: 0.75rem;
     color: #aaa;
+}
+
+.show-all-btn {
+    align-self: flex-start;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #0066ff;
+    color: white;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.show-all-btn:hover {
+    background: #004aad;
+    transform: scale(1.05);
+} */
+.dashboard-card-1 {
+    background: linear-gradient(135deg, #1b1c1e, #2e3033);
+    /* dark luxe */
+    border: 1px solid #3c3f45;
+    border-radius: 16px;
+    padding: 1.5rem;
+    width: 33vw;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card-1:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.dashboard-card-1 h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #ffffff;
+}
+
+.card-icon {
+    font-size: 1.4rem;
+}
+
+.dashboard-post-preview {
+    background-color: #2a2c31;
+    border-left: 4px solid #007bff;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dashboard-post-preview:hover {
+    background-color: #34363c;
+    transform: translateX(4px);
+}
+
+.post-title {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 0.97rem;
+    margin-bottom: 4px;
+}
+
+.post-date {
+    font-size: 0.75rem;
+    color: #bbb;
 }
 
 .show-all-btn {
@@ -299,7 +375,7 @@
     background: #1f2937;
     /* solid charcoal/indigo dark background */
     border-radius: 16px;
-    width: 30vw;
+    width: 33vw;
     border: 1px solid #374151;
     /* subtle border */
     padding: 20px;

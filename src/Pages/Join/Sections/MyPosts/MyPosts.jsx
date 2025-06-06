@@ -365,7 +365,7 @@ export default function MyPosts() {
           Welcome Back {currentUsername && <span>{currentUsername}</span>} 👋
         </h1>
         <div className="dashboard-dashboard-cards">
-          <div className="dashboard-card dashboard-card-1">
+          {/* <div className="dashboard-card dashboard-card-1">
             <h3>Latest Posts</h3>
             {myIdeas.slice(0, 3).map((idea, i) => (
               <div key={i} className="dashboard-post-preview">
@@ -387,9 +387,36 @@ export default function MyPosts() {
                 Show All →
               </button>
             )}
+          </div> */}
+          <div className="dashboard-card dashboard-card-1">
+            <h3>
+              <span className="card-icon">📝</span> Latest Posts
+            </h3>
+            <div className="post-list">
+              {myIdeas.slice(0, 3).map((idea, i) => (
+                <div key={i} className="dashboard-post-preview">
+                  <p className="post-title">{idea.topic}</p>
+                  <p className="post-date">
+                    {new Date(idea.createdAt).toLocaleDateString()}
+                  </p>
+                </div>
+              ))}
+            </div>
+            {myIdeas.length > 3 && (
+              <button
+                className="show-all-btn"
+                onClick={() =>
+                  document
+                    .querySelector(".myposts-page")
+                    .scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                Show All →
+              </button>
+            )}
           </div>
           <div className="dashboard-card dashboard-card-2">
-            <h3>Top Post Engagement</h3>
+            <h3> 📊 Top Post Engagement</h3>
             {mostEngagedPost ? (
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart
@@ -496,7 +523,7 @@ export default function MyPosts() {
               </button>
             </div>
           </div>
-          
+
           <div className="dashboard-card dashboard-card-4">
             <h3>🔗 Recent Interactions</h3>
 
