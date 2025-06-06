@@ -400,7 +400,7 @@
     gap: 6px;
 }
 
-.dashboard-card-4 .interaction-feed {
+.interaction-feed {
     max-height: 250px;
     overflow-y: scroll;
     padding-right: 6px;
@@ -409,19 +409,19 @@
 }
 
 
-.dashboard-card-4 .interaction-feed::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 10px;
 }
 
 
-.dashboard-card-4 .interaction-feed::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: #1b1e2b;
     /* dark background to match card */
     border-radius: 10px;
 }
 
 
-.dashboard-card-4 .interaction-feed::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: linear-gradient(to bottom, #4a90e2, #0066ff);
     /* blue-ish gradient */
     border-radius: 10px;
@@ -430,14 +430,14 @@
 }
 
 
-.dashboard-card-4 .interaction-feed::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(to bottom, #5aaeff, #004aad);
     /* brighter on hover */
 }
 
 /* Remove scrollbar arrows (some browsers still render them) */
 
-.dashboard-card-4 .interaction-feed::-webkit-scrollbar-button {
+::-webkit-scrollbar-button {
     display: none;
 }
 
