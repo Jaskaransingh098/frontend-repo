@@ -406,39 +406,24 @@
     padding-right: 6px;
     scrollbar-width: thin;
     scrollbar-color: #4a90e2 #1b1e2b;
-}
 
+    &::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8 !important;
+    }
 
-::-webkit-scrollbar {
-    width: 10px;
-}
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(83, 83, 83, 0.07);
+        background-color: #f1f1f1;
+    }
 
+    &::-webkit-scrollbar {
+        width: 7px;
+        background-color: #f1f1f1;
+    }
 
-::-webkit-scrollbar-track {
-    background: #1b1e2b;
-    /* dark background to match card */
-    border-radius: 10px;
-}
-
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #4a90e2, #0066ff);
-    /* blue-ish gradient */
-    border-radius: 10px;
-    border: 2px solid #1b1e2b;
-    /* same as track for gap illusion */
-}
-
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, #5aaeff, #004aad);
-    /* brighter on hover */
-}
-
-/* Remove scrollbar arrows (some browsers still render them) */
-
-::-webkit-scrollbar-button {
-    display: none;
+    &::-webkit-scrollbar-thumb {
+        background-color: #c1c1c1;
+    }
 }
 
 .interaction-list {
