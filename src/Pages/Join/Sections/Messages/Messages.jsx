@@ -71,6 +71,8 @@ function Messages() {
 
     fetchMessages();
   }, [selectedUser, currentUser]);
+  
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -116,16 +118,37 @@ function Messages() {
         );
 
         socket.emit("newMessage", res.data); // ✅ real-time emit
+        socket.emit("startConversation", {
+          sender: currentUser,
+          recipient: selectedUser,
+        });
         setNewMessage("");
 
-        if (!conversationUsers.includes(selectedUser)) {
-          setConversationUsers((prev) => [...prev, selectedUser]);
-        }
+        setConversationUsers((prev) => {
+          if (!prev.includes(selectedUser)) {
+            return [...prev, selectedUser];
+          }
+          return prev;
+        });
       } catch (err) {
         console.log("Error sending message:", err);
       }
     }
   };
+  useEffect(() => {
+    socket.on("startConversation", ({ sender, recipient }) => {
+      if (recipient === currentUser && !conversationUsers.includes(sender)) {
+        setConversationUsers((prev) => {
+          if (!prev.includes(sender)) {
+            return [...prev, sender];
+          }
+          return prev;
+        });
+      }
+    });
+
+    return () => socket.off("startConversation");
+  }, [currentUser, conversationUsers]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
