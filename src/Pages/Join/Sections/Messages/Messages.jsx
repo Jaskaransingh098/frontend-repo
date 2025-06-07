@@ -182,6 +182,29 @@ function Messages() {
             +
           </button>
         </div>
+        {showModal && (
+          <div className="inline-modal">
+            <input
+              type="text"
+              placeholder="Enter username..."
+              value={searchUser}
+              onChange={handleSearchChange}
+              className="modal-input"
+            />
+            {filteredSuggestions.length > 0 && (
+              <ul className="suggestions-list">
+                {filteredSuggestions.map((user, i) => (
+                  <li key={i} onClick={() => setSearchUser(user)}>
+                    {user}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <button onClick={startNewChat} className="modal-start-btn">
+              Start Chat
+            </button>
+          </div>
+        )}
 
         {conversationUsers.map((user) => (
           <div
@@ -232,7 +255,7 @@ function Messages() {
           </div>
         )}
       </div>
-      <ReactModal
+      {/* <ReactModal
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
         className="chat-modal"
@@ -258,7 +281,7 @@ function Messages() {
         <button onClick={startNewChat} className="modal-start-btn">
           Start Chat
         </button>
-      </ReactModal>
+      </ReactModal> */}
     </div>
   );
 }
