@@ -7,7 +7,7 @@ import "./Messages.css";
 
 const socket = io(import.meta.env.VITE_API_URL);
 
-function Messages() {
+function Messages({ pendingMessages, setPendingMessages }) {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentUser, setCurrentUser] = useState(""); // ✅ Will be set from token
@@ -20,7 +20,6 @@ function Messages() {
   const selectedUserRef = useRef(null);
   const messageRef = useRef([]);
   const messagesRef = useRef([]);
-  const [pendingMessages, setPendingMessages] = useState({});
   const [conversationUsers, setConversationUsers] = useState([]); // ✅ Only users you've chatted with
 
   const messagesEndRef = useRef(null);
@@ -114,37 +113,6 @@ function Messages() {
     selectedUserRef.current = selectedUser;
   }, [selectedUser]);
 
-  // const incomingHandler = useCallback((msg) => {
-  //   const isChatOpen =
-  //     selectedUserRef.current === msg.sender ||
-  //     selectedUserRef.current === msg.recipient;
-
-  //   console.log("📩 Incoming message:", msg);
-  //   console.log("👀 Current selectedUserRef:", selectedUserRef.current);
-  //   console.log("✅ Is chat open?", isChatOpen);
-
-  //   if (isChatOpen) {
-  //     setMessages((prev) => [...prev, msg]);
-  //   } else {
-  //     // Store in pending
-  //     setPendingMessages((prev) => {
-  //       const user = msg.sender;
-  //       const updated = { ...prev };
-  //       if (!updated[user]) updated[user] = [];
-  //       updated[user].push(msg);
-  //       return updated;
-  //     });
-  //   }
-
-  //   // Ensure they are in conversation list
-  //   setConversationUsers((prevUsers) => {
-  //     if (!prevUsers.includes(msg.sender)) {
-  //       return [...prevUsers, msg.sender];
-  //     }
-  //     return prevUsers;
-  //   });
-  // }, []);
-
   const incomingHandler = useCallback((msg) => {
     const isChatOpen =
       selectedUserRef.current === msg.sender ||
@@ -159,6 +127,14 @@ function Messages() {
       if (!alreadyExists) {
         setMessages((prev) => [...prev, msg]);
       }
+    } else {
+      // 👇 Add to pendingMessages if chat is not open
+      setPendingMessages((prev) => {
+        const updated = { ...prev };
+        if (!updated[msg.sender]) updated[msg.sender] = [];
+        updated[msg.sender].push(msg);
+        return updated;
+      });
     }
 
     // Always add sender to conversation list if not already there
@@ -180,37 +156,6 @@ function Messages() {
     };
   }, [currentUser, incomingHandler]);
 
-  // useEffect(() => {
-  //   if (!currentUser) return;
-
-  //   const incomingHandler = useCallback((msg) => {
-  //     const isChatOpen =
-  //       selectedUserRef.current === msg.sender ||
-  //       selectedUserRef.current === msg.recipient;
-
-  //     console.log("📩 Incoming message:", msg);
-  //     console.log("👀 Current selectedUserRef:", selectedUserRef.current);
-  //     console.log("✅ Is chat open?", isChatOpen);
-
-  //     if (isChatOpen) {
-  //       setMessages((prev) => [...prev, msg]);
-  //     }
-
-  //     // Ensure they are in conversation list
-  //     setConversationUsers((prevUsers) => {
-  //       if (!prevUsers.includes(msg.sender)) {
-  //         return [...prevUsers, msg.sender];
-  //       }
-  //       return prevUsers;
-  //     });
-  //   });
-
-  //   socket.on(`message:${currentUser}`, incomingHandler);
-
-  //   return () => {
-  //     socket.off(`message:${currentUser}`, incomingHandler);
-  //   };
-  // }, [currentUser]);
   const handleSendMessage = async () => {
     if (newMessage.trim() && selectedUser) {
       const msgData = {
@@ -361,7 +306,7 @@ function Messages() {
           </div>
         )}
 
-        {conversationUsers.map((user) => (
+        {/* {conversationUsers.map((user) => (
           <div
             key={user}
             className={`user-item ${selectedUser === user ? "active" : ""}`}
@@ -370,13 +315,36 @@ function Messages() {
             <img src={getUserAvatar(user)} alt={user} className="user-dp" />
             <div className="user-name">{user}</div>
           </div>
-        ))}
+        ))} */}
+        {conversationUsers.map((user) => {
+          const unreadCount = pendingMessages[user]?.length || 0;
+          return (
+            <div
+              key={user}
+              className={`user-item ${selectedUser === user ? "active" : ""}`}
+              onClick={() => setSelectedUser(user)}
+            >
+              <img src={getUserAvatar(user)} alt={user} className="user-dp" />
+              <div className="user-name">
+                {user}
+                {unreadCount > 0 && (
+                  <span className="user-badge">{unreadCount}</span>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       <div className="chat-window">
         {selectedUser ? (
           <>
             <div className="chat-header">
+              <img
+                src={getUserAvatar(selectedUser)}
+                alt={selectedUser}
+                className="chat-header-avatar"
+              />
               <h4>{selectedUser}</h4>
             </div>
             <div className="chat-messages">
@@ -432,33 +400,6 @@ function Messages() {
           </div>
         )}
       </div>
-      {/* <ReactModal
-        isOpen={showModal}
-        onRequestClose={() => setShowModal(false)}
-        className="chat-modal"
-        overlayClassName="modal-overlay"
-      >
-        <h3>Start New Chat</h3>
-        <input
-          type="text"
-          placeholder="Enter username..."
-          value={searchUser}
-          onChange={handleSearchChange}
-          className="modal-input"
-        />
-        {filteredSuggestions.length > 0 && (
-          <ul className="suggestions-list">
-            {filteredSuggestions.map((user, i) => (
-              <li key={i} onClick={() => setSearchUser(user)}>
-                {user}
-              </li>
-            ))}
-          </ul>
-        )}
-        <button onClick={startNewChat} className="modal-start-btn">
-          Start Chat
-        </button>
-      </ReactModal> */}
     </div>
   );
 }
