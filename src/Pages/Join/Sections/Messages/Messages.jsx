@@ -89,16 +89,32 @@ function Messages() {
   }, [showModal]);
 
   useEffect(() => {
-    if (!selectedUser || !currentUser) return;
+    if (!currentUser) return;
 
-    const channel = `message:${currentUser}:${selectedUser}`;
-    socket.on(channel, (msg) => {
-      setMessages((prev) => [...prev, msg]);
-    });
+    const incomingHandler = (msg) => {
+      const isChatOpen = selectedUser === msg.sender;
 
-    return () => socket.off(channel);
-  }, [selectedUser, currentUser]);
+      // Update message list if currently chatting with this sender
+      if (isChatOpen) {
+        setMessages((prev) => [...prev, msg]);
+      }
 
+      // Add to conversationUsers if it's a new person
+      setConversationUsers((prevUsers) => {
+        if (!prevUsers.includes(msg.sender)) {
+          return [...prevUsers, msg.sender];
+        }
+        return prevUsers;
+      });
+    };
+
+    // Listen to both directions
+    socket.on(`message:${currentUser}`, incomingHandler);
+
+    return () => {
+      socket.off(`message:${currentUser}`, incomingHandler);
+    };
+  }, [currentUser, selectedUser]);
   const handleSendMessage = async () => {
     if (newMessage.trim() && selectedUser) {
       const msgData = {
