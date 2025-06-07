@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import ReactModal from "react-modal";
-import { EmojiPicker } from "emoji-picker-react";
+import  EmojiPicker  from "emoji-picker-react";
 import { jwtDecode } from "jwt-decode"; // ✅ For extracting username from token
 import "./Messages.css";
 
