@@ -415,6 +415,7 @@
 /* Modal */
 .modal-overlay {
     background-color: rgba(0, 0, 0, 0.75);
+    z-index: 999;
 }
 
 .chat-modal {
@@ -425,6 +426,7 @@
     margin: auto;
     border-radius: 14px;
     outline: none;
+    z-index: 1000;
 }
 
 .modal-input {

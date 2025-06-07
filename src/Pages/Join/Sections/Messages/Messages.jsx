@@ -129,7 +129,6 @@ function Messages() {
   };
 
   const startNewChat = () => {
- 
     const user = searchUser.trim();
 
     // 🔒 Check if user exists
@@ -153,7 +152,6 @@ function Messages() {
     setShowModal(false);
     setSearchUser("");
   };
-
 
   useEffect(() => {
     const fetchAllUsers = async () => {
@@ -185,35 +183,6 @@ function Messages() {
           </button>
         </div>
 
-        <ReactModal
-          isOpen={showModal}
-          onRequestClose={() => setShowModal(false)}
-          className="chat-modal"
-          overlayClassName="modal-overlay"
-        >
-          <h3>Start New Chat</h3>
-          <input
-            type="text"
-            placeholder="Enter username..."
-            value={searchUser}
-            onChange={handleSearchChange}
-            className="modal-input"
-          />
-          {filteredSuggestions.length > 0 && (
-            <ul className="suggestions-list">
-              {filteredSuggestions.map((user, i) => (
-                <li key={i} onClick={() => setSearchUser(user)}>
-                  {user}
-                </li>
-              ))}
-            </ul>
-          )}
-          <button onClick={startNewChat} className="modal-start-btn">
-            Start Chat
-          </button>
-        </ReactModal>
-
-        
         {conversationUsers.map((user) => (
           <div
             key={user}
@@ -263,6 +232,33 @@ function Messages() {
           </div>
         )}
       </div>
+      <ReactModal
+        isOpen={showModal}
+        onRequestClose={() => setShowModal(false)}
+        className="chat-modal"
+        overlayClassName="modal-overlay"
+      >
+        <h3>Start New Chat</h3>
+        <input
+          type="text"
+          placeholder="Enter username..."
+          value={searchUser}
+          onChange={handleSearchChange}
+          className="modal-input"
+        />
+        {filteredSuggestions.length > 0 && (
+          <ul className="suggestions-list">
+            {filteredSuggestions.map((user, i) => (
+              <li key={i} onClick={() => setSearchUser(user)}>
+                {user}
+              </li>
+            ))}
+          </ul>
+        )}
+        <button onClick={startNewChat} className="modal-start-btn">
+          Start Chat
+        </button>
+      </ReactModal>
     </div>
   );
 }
