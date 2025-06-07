@@ -196,6 +196,7 @@
 .chat-input {
     display: flex;
     align-items: center;
+    position: relative;
     padding: 0.8rem 1rem;
     border-top: 1px solid #333;
     background-color: rgba(0, 0, 0, 0.2);
@@ -223,6 +224,13 @@
     font-weight: bold;
     cursor: pointer;
     color: #fff;
+}
+
+.emoji-picker-container {
+    position: absolute;
+    bottom: 60px;
+    /* Adjust if needed */
+    z-index: 1000;
 }
 
 .chat-placeholder {

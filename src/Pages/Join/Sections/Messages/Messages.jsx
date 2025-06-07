@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import ReactModal from "react-modal";
+import { EmojiPicker } from "emoji-picker-react";
 import { jwtDecode } from "jwt-decode"; // ✅ For extracting username from token
 import "./Messages.css";
 
@@ -20,6 +21,7 @@ function Messages() {
   const selectedUserRef = useRef(null);
   const messageRef = useRef([]);
   const messagesRef = useRef([]);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [pendingMessages, setPendingMessages] = useState({});
   const [conversationUsers, setConversationUsers] = useState([]); // ✅ Only users you've chatted with
 
@@ -113,7 +115,6 @@ function Messages() {
   useEffect(() => {
     selectedUserRef.current = selectedUser;
   }, [selectedUser]);
-
 
   const incomingHandler = useCallback((msg) => {
     const isChatOpen =
@@ -362,6 +363,22 @@ function Messages() {
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
               />
+              <button
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                className="text-white p-1 rounded hover:bg-gray-800"
+              >
+                😊
+              </button>
+              {showEmojiPicker && (
+                <div className="emoji-picker-container">
+                  <EmojiPicker
+                    onEmojiClick={(emojiData) =>
+                      setNewMessage((prev) => prev + emojiData.emoji)
+                    }
+                    theme="dark" // matches your UI
+                  />
+                </div>
+              )}
               <button onClick={handleSendMessage}>Send</button>
             </div>
           </>
