@@ -244,14 +244,36 @@ function Messages() {
               {messages.map((msg, index) => (
                 <div
                   key={index}
-                  className={`chat-message ${
-                    msg.sender === currentUser ? "sent" : "received"
+                  className={`chat-message-row ${
+                    msg.sender === currentUser ? "sent-row" : "received-row"
                   }`}
                 >
-                  <div className="msg-text">{msg.message}</div>
-                  <div className="msg-time">
-                    {new Date(msg.timestamp).toLocaleTimeString()}
+                  {msg.sender !== currentUser && (
+                    <img
+                      src={getUserAvatar(msg.sender)}
+                      alt={msg.sender}
+                      className="chat-avatar"
+                    />
+                  )}
+
+                  <div
+                    className={`chat-message ${
+                      msg.sender === currentUser ? "sent" : "received"
+                    }`}
+                  >
+                    <div className="msg-text">{msg.message}</div>
+                    <div className="msg-time">
+                      {new Date(msg.timestamp).toLocaleTimeString()}
+                    </div>
                   </div>
+
+                  {msg.sender === currentUser && (
+                    <img
+                      src={getUserAvatar(msg.sender)}
+                      alt={msg.sender}
+                      className="chat-avatar"
+                    />
+                  )}
                 </div>
               ))}
               <div ref={messagesEndRef} />
