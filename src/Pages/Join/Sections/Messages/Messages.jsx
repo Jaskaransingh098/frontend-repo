@@ -129,14 +129,7 @@ function Messages() {
   };
 
   const startNewChat = () => {
-    //   const user = searchUser.trim();
-    //   if (user && user !== currentUser && !conversationUsers.includes(user)) {
-    //     setConversationUsers((prev) => [...prev, user]);
-    //   }
-    //   setSelectedUser(user);
-    //   setShowModal(false);
-    //   setSearchUser("");
-    // };
+ 
     const user = searchUser.trim();
 
     // 🔒 Check if user exists
@@ -161,20 +154,7 @@ function Messages() {
     setSearchUser("");
   };
 
-  // ✅ Fetch full user list only for autocomplete suggestions
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //       const res = await axios.get(`${import.meta.env.VITE_API_URL}/users`, {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-  //       setUsers(res.data.filter((u) => u !== currentUser));
-  //     } catch (err) {
-  //       console.log("Error fetching users:", err);
-  //     }
-  //   };
-  //   if (currentUser) fetchUsers();
-  // }, [currentUser]);
+
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
@@ -233,16 +213,7 @@ function Messages() {
           </button>
         </ReactModal>
 
-        {/* {users.map((user) => (
-          <div
-            key={user}
-            className={`user-item ${selectedUser === user ? "active" : ""}`}
-            onClick={() => setSelectedUser(user)}
-          >
-            <img src={getUserAvatar(user)} alt={user} className="user-dp" />
-            <div className="user-name">{user}</div>
-          </div>
-        ))} */}
+        
         {conversationUsers.map((user) => (
           <div
             key={user}
