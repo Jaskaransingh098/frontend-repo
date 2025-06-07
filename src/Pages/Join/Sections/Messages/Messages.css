@@ -240,7 +240,7 @@
 
 .chat-container {
     display: flex;
-    height: 88vh;
+    height: 87.5vh;
     border-radius: 16px;
     overflow: hidden;
     background: linear-gradient(to bottom,
