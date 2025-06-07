@@ -18,6 +18,7 @@ function Messages() {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef(null);
   const selectedUserRef = useRef(null);
+  const [pendingMessages, setPendingMessages] = useState({});
   const [conversationUsers, setConversationUsers] = useState([]); // ✅ Only users you've chatted with
 
   const messagesEndRef = useRef(null);
@@ -64,7 +65,20 @@ function Messages() {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        setMessages(res.data);
+        // setMessages(res.data);
+        let loadedMessages = res.data;
+        if (pendingMessages[selectedUser]) {
+          loadedMessages = [
+            ...loadedMessages,
+            ...pendingMessages[selectedUser],
+          ];
+          setPendingMessages((prev) => {
+            const updated = { ...prev };
+            delete updated[selectedUser];
+            return updated;
+          });
+        }
+        setMessages(loadedMessages);
       } catch (err) {
         console.log("Error fetching messages:", err);
       }
@@ -103,6 +117,15 @@ function Messages() {
 
     if (isChatOpen) {
       setMessages((prev) => [...prev, msg]);
+    } else {
+      // Store in pending
+      setPendingMessages((prev) => {
+        const user = msg.sender;
+        const updated = { ...prev };
+        if (!updated[user]) updated[user] = [];
+        updated[user].push(msg);
+        return updated;
+      });
     }
 
     // Ensure they are in conversation list
