@@ -233,7 +233,17 @@ function Messages() {
           </button>
         </ReactModal>
 
-        {users.map((user) => (
+        {/* {users.map((user) => (
+          <div
+            key={user}
+            className={`user-item ${selectedUser === user ? "active" : ""}`}
+            onClick={() => setSelectedUser(user)}
+          >
+            <img src={getUserAvatar(user)} alt={user} className="user-dp" />
+            <div className="user-name">{user}</div>
+          </div>
+        ))} */}
+        {conversationUsers.map((user) => (
           <div
             key={user}
             className={`user-item ${selectedUser === user ? "active" : ""}`}
