@@ -18,6 +18,7 @@ function Messages() {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef(null);
   const selectedUserRef = useRef(null);
+  const messageRef = useRef([]);
   const [pendingMessages, setPendingMessages] = useState({});
   const [conversationUsers, setConversationUsers] = useState([]); // ✅ Only users you've chatted with
 
@@ -102,38 +103,68 @@ function Messages() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showModal]);
+
+  useEffect(() => {
+    messageRef.current = messages;
+  }, [messages]);
+
   useEffect(() => {
     selectedUserRef.current = selectedUser;
   }, [selectedUser]);
+
+  // const incomingHandler = useCallback((msg) => {
+  //   const isChatOpen =
+  //     selectedUserRef.current === msg.sender ||
+  //     selectedUserRef.current === msg.recipient;
+
+  //   console.log("📩 Incoming message:", msg);
+  //   console.log("👀 Current selectedUserRef:", selectedUserRef.current);
+  //   console.log("✅ Is chat open?", isChatOpen);
+
+  //   if (isChatOpen) {
+  //     setMessages((prev) => [...prev, msg]);
+  //   } else {
+  //     // Store in pending
+  //     setPendingMessages((prev) => {
+  //       const user = msg.sender;
+  //       const updated = { ...prev };
+  //       if (!updated[user]) updated[user] = [];
+  //       updated[user].push(msg);
+  //       return updated;
+  //     });
+  //   }
+
+  //   // Ensure they are in conversation list
+  //   setConversationUsers((prevUsers) => {
+  //     if (!prevUsers.includes(msg.sender)) {
+  //       return [...prevUsers, msg.sender];
+  //     }
+  //     return prevUsers;
+  //   });
+  // }, []);
 
   const incomingHandler = useCallback((msg) => {
     const isChatOpen =
       selectedUserRef.current === msg.sender ||
       selectedUserRef.current === msg.recipient;
 
-    console.log("📩 Incoming message:", msg);
-    console.log("👀 Current selectedUserRef:", selectedUserRef.current);
-    console.log("✅ Is chat open?", isChatOpen);
-
     if (isChatOpen) {
-      setMessages((prev) => [...prev, msg]);
-    } else {
-      // Store in pending
-      setPendingMessages((prev) => {
-        const user = msg.sender;
-        const updated = { ...prev };
-        if (!updated[user]) updated[user] = [];
-        updated[user].push(msg);
-        return updated;
-      });
+      // Prevent duplicate messages (important if backend also sends existing ones)
+      const alreadyExists = messagesRef.current.some(
+        (m) => m._id === msg._id // adjust based on your message schema
+      );
+
+      if (!alreadyExists) {
+        setMessages((prev) => [...prev, msg]);
+      }
     }
 
-    // Ensure they are in conversation list
-    setConversationUsers((prevUsers) => {
-      if (!prevUsers.includes(msg.sender)) {
-        return [...prevUsers, msg.sender];
+    // Always add sender to conversation list if not already there
+    setConversationUsers((prev) => {
+      if (!prev.includes(msg.sender)) {
+        return [...prev, msg.sender];
       }
-      return prevUsers;
+      return prev;
     });
   }, []);
 
@@ -146,6 +177,7 @@ function Messages() {
       socket.off(`message:${currentUser}`, incomingHandler);
     };
   }, [currentUser, incomingHandler]);
+
   // useEffect(() => {
   //   if (!currentUser) return;
 
