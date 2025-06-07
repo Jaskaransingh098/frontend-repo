@@ -16,6 +16,7 @@ function Messages() {
   const [searchUser, setSearchUser] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const modalRef = useRef(null);
   const [conversationUsers, setConversationUsers] = useState([]); // ✅ Only users you've chatted with
 
   const messagesEndRef = useRef(null);
@@ -70,6 +71,21 @@ function Messages() {
 
     fetchMessages();
   }, [selectedUser, currentUser]);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setShowModal(false);
+      }
+    };
+
+    if (showModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showModal]);
 
   useEffect(() => {
     if (!selectedUser || !currentUser) return;
@@ -183,7 +199,7 @@ function Messages() {
           </button>
         </div>
         {showModal && (
-          <div className="inline-modal">
+          <div className="inline-modal" ref={modalRef}>
             <input
               type="text"
               placeholder="Enter username..."
