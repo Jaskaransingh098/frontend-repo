@@ -71,7 +71,6 @@ function Messages() {
 
     fetchMessages();
   }, [selectedUser, currentUser]);
-  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -106,9 +105,15 @@ function Messages() {
         sender: currentUser,
         recipient: selectedUser,
         message: newMessage,
+        timestamp: new Date().toISOString(), // Add timestamp early for consistency
       };
 
       try {
+        // Optimistically update the UI
+        setMessages((prev) => [...prev, msgData]);
+        setNewMessage("");
+
+        // Send to backend
         const res = await axios.post(
           `${import.meta.env.VITE_API_URL}/messages`,
           msgData,
@@ -117,19 +122,18 @@ function Messages() {
           }
         );
 
-        socket.emit("newMessage", res.data); // ✅ real-time emit
+        // Emit for other user to receive in real-time
+        socket.emit("newMessage", res.data);
+
+        // Start conversation if needed
         socket.emit("startConversation", {
           sender: currentUser,
           recipient: selectedUser,
         });
-        setNewMessage("");
 
-        setConversationUsers((prev) => {
-          if (!prev.includes(selectedUser)) {
-            return [...prev, selectedUser];
-          }
-          return prev;
-        });
+        if (!conversationUsers.includes(selectedUser)) {
+          setConversationUsers((prev) => [...prev, selectedUser]);
+        }
       } catch (err) {
         console.log("Error sending message:", err);
       }
