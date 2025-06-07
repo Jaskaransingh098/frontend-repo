@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import ReactModal from "react-modal";
-import jwtDecode from "jwt-decode"; // ✅ For extracting username from token
+import { jwtDecode } from "jwt-decode"; // ✅ For extracting username from token
 import "./Messages.css";
 
 const socket = io(import.meta.env.VITE_API_URL);
