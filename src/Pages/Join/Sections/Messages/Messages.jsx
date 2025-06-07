@@ -76,7 +76,8 @@ function Messages({ pendingMessages, setPendingMessages }) {
           setPendingMessages((prev) => {
             const updated = { ...prev };
             delete updated[selectedUser];
-            return updated;
+            console.log("✅ Cleared pending messages for:", selectedUser);
+            return { ...updated} ;
           });
         }
         setMessages(loadedMessages);
