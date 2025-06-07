@@ -19,6 +19,7 @@ function Messages() {
   const modalRef = useRef(null);
   const selectedUserRef = useRef(null);
   const messageRef = useRef([]);
+  const messagesRef = useRef([]);
   const [pendingMessages, setPendingMessages] = useState({});
   const [conversationUsers, setConversationUsers] = useState([]); // ✅ Only users you've chatted with
 
@@ -106,6 +107,7 @@ function Messages() {
 
   useEffect(() => {
     messageRef.current = messages;
+    messagesRef.current = messages;
   }, [messages]);
 
   useEffect(() => {
