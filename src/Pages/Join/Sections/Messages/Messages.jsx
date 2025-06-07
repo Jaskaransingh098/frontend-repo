@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import ReactModal from "react-modal";
@@ -95,8 +95,14 @@ function Messages() {
   useEffect(() => {
     if (!currentUser) return;
 
-    const incomingHandler = (msg) => {
-      const isChatOpen = selectedUserRef.current === msg.sender;
+    const incomingHandler = useCallback((msg) => {
+      const isChatOpen =
+        selectedUserRef.current === msg.sender ||
+        selectedUserRef.current === msg.recipient;
+
+      console.log("📩 Incoming message:", msg);
+      console.log("👀 Current selectedUserRef:", selectedUserRef.current);
+      console.log("✅ Is chat open?", isChatOpen);
 
       if (isChatOpen) {
         setMessages((prev) => [...prev, msg]);
@@ -109,14 +115,14 @@ function Messages() {
         }
         return prevUsers;
       });
-    };
+    });
 
     socket.on(`message:${currentUser}`, incomingHandler);
 
     return () => {
       socket.off(`message:${currentUser}`, incomingHandler);
     };
-  }, [currentUser]);
+  }, [currentUser, incomingHandler]);
   const handleSendMessage = async () => {
     if (newMessage.trim() && selectedUser) {
       const msgData = {
