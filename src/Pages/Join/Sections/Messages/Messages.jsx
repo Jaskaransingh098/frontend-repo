@@ -92,30 +92,30 @@ function Messages() {
     selectedUserRef.current = selectedUser;
   }, [selectedUser]);
 
+  const incomingHandler = useCallback((msg) => {
+    const isChatOpen =
+      selectedUserRef.current === msg.sender ||
+      selectedUserRef.current === msg.recipient;
+
+    console.log("📩 Incoming message:", msg);
+    console.log("👀 Current selectedUserRef:", selectedUserRef.current);
+    console.log("✅ Is chat open?", isChatOpen);
+
+    if (isChatOpen) {
+      setMessages((prev) => [...prev, msg]);
+    }
+
+    // Ensure they are in conversation list
+    setConversationUsers((prevUsers) => {
+      if (!prevUsers.includes(msg.sender)) {
+        return [...prevUsers, msg.sender];
+      }
+      return prevUsers;
+    });
+  }, []);
+
   useEffect(() => {
     if (!currentUser) return;
-
-    const incomingHandler = useCallback((msg) => {
-      const isChatOpen =
-        selectedUserRef.current === msg.sender ||
-        selectedUserRef.current === msg.recipient;
-
-      console.log("📩 Incoming message:", msg);
-      console.log("👀 Current selectedUserRef:", selectedUserRef.current);
-      console.log("✅ Is chat open?", isChatOpen);
-
-      if (isChatOpen) {
-        setMessages((prev) => [...prev, msg]);
-      }
-
-      // Ensure they are in conversation list
-      setConversationUsers((prevUsers) => {
-        if (!prevUsers.includes(msg.sender)) {
-          return [...prevUsers, msg.sender];
-        }
-        return prevUsers;
-      });
-    });
 
     socket.on(`message:${currentUser}`, incomingHandler);
 
@@ -123,6 +123,37 @@ function Messages() {
       socket.off(`message:${currentUser}`, incomingHandler);
     };
   }, [currentUser, incomingHandler]);
+  // useEffect(() => {
+  //   if (!currentUser) return;
+
+  //   const incomingHandler = useCallback((msg) => {
+  //     const isChatOpen =
+  //       selectedUserRef.current === msg.sender ||
+  //       selectedUserRef.current === msg.recipient;
+
+  //     console.log("📩 Incoming message:", msg);
+  //     console.log("👀 Current selectedUserRef:", selectedUserRef.current);
+  //     console.log("✅ Is chat open?", isChatOpen);
+
+  //     if (isChatOpen) {
+  //       setMessages((prev) => [...prev, msg]);
+  //     }
+
+  //     // Ensure they are in conversation list
+  //     setConversationUsers((prevUsers) => {
+  //       if (!prevUsers.includes(msg.sender)) {
+  //         return [...prevUsers, msg.sender];
+  //       }
+  //       return prevUsers;
+  //     });
+  //   });
+
+  //   socket.on(`message:${currentUser}`, incomingHandler);
+
+  //   return () => {
+  //     socket.off(`message:${currentUser}`, incomingHandler);
+  //   };
+  // }, [currentUser]);
   const handleSendMessage = async () => {
     if (newMessage.trim() && selectedUser) {
       const msgData = {
