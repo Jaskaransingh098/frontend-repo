@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import ReactModal from "react-modal";
+import jwtDeocode from "jwt-decode";
 import "./Messages.css";
 
 const socket = io(import.meta.env.VITE_API_URL); // adjust if using a different port
@@ -9,7 +10,7 @@ const socket = io(import.meta.env.VITE_API_URL); // adjust if using a different 
 function Messages() {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [currentUser, setCurrentUser] = useState("User1"); // Set logged-in user
+  const [currentUser, setCurrentUser] = useState("null"); // Set logged-in user
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [searchUser, setSearchUser] = useState("");
@@ -19,26 +20,47 @@ function Messages() {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/users`);
+        const decoded = jwtDecode(token);
+        setCurrentUser(decoded.username);
+      } catch (err) {
+        console.error("Invalid token", err);
+      }
+    }
+  }, []);
+
+  // ✅ Fetch user list (excluding currentUser) with token
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/users`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setUsers(res.data.filter((user) => user !== currentUser));
       } catch (err) {
         console.log("Error fetching users:", err);
       }
     };
 
-    fetchUsers();
+    if (currentUser) fetchUsers();
   }, [currentUser]);
 
+  // ✅ Fetch messages securely between users
   useEffect(() => {
     const fetchMessages = async () => {
-      if (selectedUser) {
+      const token = localStorage.getItem("token");
+      if (selectedUser && currentUser) {
         try {
           const res = await axios.get(
             `${
               import.meta.env.VITE_API_URL
-            }/messages/${currentUser}/${selectedUser}`
+            }/messages/${currentUser}/${selectedUser}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
           );
           setMessages(res.data);
         } catch (err) {
@@ -50,10 +72,10 @@ function Messages() {
     fetchMessages();
   }, [selectedUser, currentUser]);
 
+  // ✅ Socket listener for real-time messages
   useEffect(() => {
-    if (selectedUser) {
+    if (selectedUser && currentUser) {
       const channel = `message:${currentUser}:${selectedUser}`;
-
       socket.on(channel, (msg) => {
         setMessages((prev) => [...prev, msg]);
       });
@@ -62,8 +84,10 @@ function Messages() {
     }
   }, [selectedUser, currentUser]);
 
+  // ✅ Send message with JWT in headers
   const handleSendMessage = async () => {
-    if (newMessage.trim() && selectedUser) {
+    if (newMessage.trim() && selectedUser && currentUser) {
+      const token = localStorage.getItem("token");
       const msgData = {
         sender: currentUser,
         recipient: selectedUser,
@@ -71,9 +95,14 @@ function Messages() {
       };
 
       try {
-        const res = await axios.post(`${import.meta.env.VITE_API_URL}/messages`, msgData);
-        // setMessages((prev) => [...prev, res.data]);
-        socket.emit("newMessage", res.data); // Emit real-time
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_URL}/messages`,
+          msgData,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        socket.emit("newMessage", res.data); // Emit real-time message
         setNewMessage("");
       } catch (err) {
         console.log("Error sending message:", err);
@@ -81,14 +110,17 @@ function Messages() {
     }
   };
 
+  // Auto-scroll to latest message
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Generate avatar
   const getUserAvatar = (username) => {
     return `https://ui-avatars.com/api/?name=${username}&background=random`;
   };
 
+  // Handle search box input
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchUser(value);
@@ -97,6 +129,7 @@ function Messages() {
     );
     setFilteredSuggestions(suggestions);
   };
+
   const startNewChat = () => {
     const user = searchUser.trim();
     if (user && user !== currentUser && !users.includes(user)) {
@@ -108,6 +141,7 @@ function Messages() {
   };
 
   ReactModal.setAppElement("#root");
+  
   return (
     <div className="chat-container">
       <div className="user-list">
