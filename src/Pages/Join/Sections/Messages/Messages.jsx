@@ -17,6 +17,7 @@ function Messages() {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef(null);
+  const selectedUserRef = useRef(null);
   const [conversationUsers, setConversationUsers] = useState([]); // ✅ Only users you've chatted with
 
   const messagesEndRef = useRef(null);
@@ -87,19 +88,21 @@ function Messages() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showModal]);
+  useEffect(() => {
+    selectedUserRef.current = selectedUser;
+  }, [selectedUser]);
 
   useEffect(() => {
     if (!currentUser) return;
 
     const incomingHandler = (msg) => {
-      const isChatOpen = selectedUser === msg.sender;
+      const isChatOpen = selectedUserRef.current === msg.sender;
 
-      // Update message list if currently chatting with this sender
       if (isChatOpen) {
         setMessages((prev) => [...prev, msg]);
       }
 
-      // Add to conversationUsers if it's a new person
+      // Ensure they are in conversation list
       setConversationUsers((prevUsers) => {
         if (!prevUsers.includes(msg.sender)) {
           return [...prevUsers, msg.sender];
@@ -108,13 +111,12 @@ function Messages() {
       });
     };
 
-    // Listen to both directions
     socket.on(`message:${currentUser}`, incomingHandler);
 
     return () => {
       socket.off(`message:${currentUser}`, incomingHandler);
     };
-  }, [currentUser, selectedUser]);
+  }, [currentUser]);
   const handleSendMessage = async () => {
     if (newMessage.trim() && selectedUser) {
       const msgData = {
