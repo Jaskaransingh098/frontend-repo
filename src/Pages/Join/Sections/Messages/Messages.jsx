@@ -329,7 +329,7 @@ function Messages({ pendingMessages, setPendingMessages }) {
               <div className="user-name">
                 {user}
                 {unreadCount > 0 && (
-                  <span className="user-badge">{unreadCount}</span>
+                  <span className="user-badge">[{unreadCount}]</span>
                 )}
               </div>
             </div>
