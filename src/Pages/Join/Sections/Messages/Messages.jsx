@@ -129,28 +129,68 @@ function Messages() {
   };
 
   const startNewChat = () => {
+    //   const user = searchUser.trim();
+    //   if (user && user !== currentUser && !conversationUsers.includes(user)) {
+    //     setConversationUsers((prev) => [...prev, user]);
+    //   }
+    //   setSelectedUser(user);
+    //   setShowModal(false);
+    //   setSearchUser("");
+    // };
     const user = searchUser.trim();
-    if (user && user !== currentUser && !conversationUsers.includes(user)) {
+
+    // 🔒 Check if user exists
+    if (!users.includes(user)) {
+      alert("User does not exist");
+      return;
+    }
+
+    // ✅ Prevent chatting with self
+    if (user === currentUser) {
+      alert("You cannot chat with yourself");
+      return;
+    }
+
+    // ✅ If valid and new, add to chat list
+    if (!conversationUsers.includes(user)) {
       setConversationUsers((prev) => [...prev, user]);
     }
+
     setSelectedUser(user);
     setShowModal(false);
     setSearchUser("");
   };
 
   // ✅ Fetch full user list only for autocomplete suggestions
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //       const res = await axios.get(`${import.meta.env.VITE_API_URL}/users`, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+  //       setUsers(res.data.filter((u) => u !== currentUser));
+  //     } catch (err) {
+  //       console.log("Error fetching users:", err);
+  //     }
+  //   };
+  //   if (currentUser) fetchUsers();
+  // }, [currentUser]);
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchAllUsers = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/users`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/all-users`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setUsers(res.data.filter((u) => u !== currentUser));
       } catch (err) {
-        console.log("Error fetching users:", err);
+        console.log("Error fetching all users:", err);
       }
     };
-    if (currentUser) fetchUsers();
+
+    if (currentUser) fetchAllUsers();
   }, [currentUser]);
 
   ReactModal.setAppElement("#root");
