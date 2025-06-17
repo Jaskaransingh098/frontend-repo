@@ -103,6 +103,7 @@ export default function Explore() {
             <source src="/explore-video/search section .mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+          <div className="video-fade-overlay"></div>
           <div className="explore-insider-headers">
             <input
               className={`explore-search ${isAnimating ? "active-border" : ""}`}

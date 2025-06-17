@@ -1,11 +1,9 @@
-
-
 .join-page {
     background: linear-gradient(to bottom,
-    var(--deep-black),
-    var(--charcoal),
-    var(--shadow-blue),
-    var(--midnight));
+            var(--deep-black),
+            var(--charcoal),
+            var(--shadow-blue),
+            var(--midnight));
     /* padding-top: 120px; */
     min-height: 100vh;
     width: 100%;
@@ -22,12 +20,26 @@
 
 
 .join-navbar {
+    position: fixed;
+    /* or relative if you don't want floating */
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 5;
+    /* 👈 MUST be higher than video */
     width: 160px;
     background-color: #12141a;
     border-left: 2px solid #1e1f25;
     display: flex;
     align-items: flex-start;
     padding-top: 2rem;
+
+    /* width: 160px;
+    background-color: #12141a;
+    border-left: 2px solid #1e1f25;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 2rem; */
 }
 
 .navbar-vertical {
@@ -84,4 +96,3 @@
     background-color: transparent;
     /* border: 2px solid; */
 }
-
