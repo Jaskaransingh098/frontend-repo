@@ -23,7 +23,6 @@ function Join() {
     }
   };
   return (
-    
     <motion.div
       className="join-page"
       ref={ref1}
@@ -31,7 +30,11 @@ function Join() {
       animate={intView1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.8 }}
     >
-      <div className="join-body">
+      <div
+        className={`join-body ${
+          activeSection === "explore" ? "float-navbar" : ""
+        }`}
+      >
         <div className="join-container">{renderSection()}</div>
 
         {/* RIGHT-SIDE VERTICAL NAVBAR */}

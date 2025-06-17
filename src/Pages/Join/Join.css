@@ -20,17 +20,28 @@
 
 
 .join-navbar {
-    position: absolute;
-    /* or relative if you don't want floating */
+    width: 160px;
+    background-color: #12141a;
+    border-left: 2px solid #1e1f25;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 2rem;
+    z-index: 10;
+    transition: all 0.3s ease;
+
+
+
+    /* position: sticky;
+
     top: 0;
     right: 0;
     z-index: 5;
-    /* 👈 MUST be higher than video */
+
     width: 160px;
     height: 70vh;
     display: flex;
     align-items: center;
-    padding-top: 2rem;
+    padding-top: 2rem; */
 
     /* width: 160px;
     background-color: #12141a;
@@ -38,6 +49,13 @@
     display: flex;
     align-items: flex-start;
     padding-top: 2rem; */
+}
+
+.float-navbar .join-navbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
 }
 
 .navbar-vertical {
