@@ -11,7 +11,7 @@
     height: 35vh;
     display: flex;
     /* background-color: black; */
-    margin-top: 30px;
+    margin-top: 50px;
     justify-content: center;
     align-items: center;
 }
@@ -28,7 +28,7 @@
 
 .explore-search {
     width: 45vw;
-    height: 18vh;
+    height: 10vh;
     border: 1px solid white;
     border-radius: 20px;
     text-align: left;
