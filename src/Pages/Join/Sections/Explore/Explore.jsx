@@ -99,7 +99,7 @@ export default function Explore() {
     <>
       <div className="explore-page-insider">
         <section className="explore-insider-header">
-          <div className="explore-headers">
+          <div className="explore-insider-headers">
             <input
               className={`explore-search ${isAnimating ? "active-border" : ""}`}
               type="text"

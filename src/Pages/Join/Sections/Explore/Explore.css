@@ -1,5 +1,5 @@
 .explore-page-insider {
-    background-color: black;
+    /* background-color: black; */
     min-height: 100vh;
     width: 100%;
     overflow-x: hidden;
@@ -8,13 +8,14 @@
 
 .explore-insider-header {
     width: 100vw;
-    height: 20vh;
+    height: 25vh;
     display: flex;
+    /* background-color: black; */
     justify-content: center;
     align-items: center;
 }
 
-.explore-headers {
+.explore-insider-headers {
     width: 50vw;
     height: 13vh;
     display: flex;
@@ -26,7 +27,7 @@
 
 .explore-search {
     width: 40vw;
-    height: 8vh;
+    height: 10vh;
     border: 1px solid white;
     border-radius: 20px;
     text-align: left;
