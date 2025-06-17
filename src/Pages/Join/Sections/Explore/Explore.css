@@ -11,7 +11,7 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 35vh;
+    height: 50vh;
     display: flex;
     /* background-color: black; */
     /* margin-top: 100px; */
@@ -39,7 +39,7 @@
     position: relative;
     z-index: 1;
     width: 50vw;
-    height: 25vh;
+    height: 50vh;
     display: flex;
     padding-top: 100px;
     flex-direction: column;
