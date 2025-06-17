@@ -99,6 +99,10 @@ export default function Explore() {
     <>
       <div className="explore-page-insider">
         <div className="explore-insider-header">
+          <video className="explore-bg-video" autoPlay loop muted playsInline>
+            <source src="/public/explore-video/search section .mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
           <div className="explore-insider-headers">
             <input
               className={`explore-search ${isAnimating ? "active-border" : ""}`}
