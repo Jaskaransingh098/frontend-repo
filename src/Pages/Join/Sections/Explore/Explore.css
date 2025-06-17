@@ -1,0 +1,352 @@
+.explore-page-insider {
+    background-color: black;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    padding: 0 1rem;
+}
+
+.explore-insider-header {
+    width: 100vw;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.explore-headers {
+    width: 50vw;
+    height: 13vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+
+}
+
+.explore-search {
+    width: 40vw;
+    height: 8vh;
+    border: 1px solid white;
+    border-radius: 20px;
+    text-align: left;
+    padding: 0 20px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    outline: none;
+    color: rgb(53, 51, 51);
+    font-weight: 540;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
+
+.active-border {
+    border: 4px solid;
+    animation: rainbow-border 6s infinite;
+}
+
+@keyframes rainbow-border {
+    0% {
+        border-color: #ff4b5c;
+    }
+
+    25% {
+        border-color: #f9c80e;
+    }
+
+    50% {
+        border-color: #6a67ce;
+    }
+
+    75% {
+        border-color: #3ddc97;
+    }
+
+    100% {
+        border-color: #ff4b5c;
+    }
+}
+
+.suggestion-tags ul {
+    list-style: none;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+.suggestion-tags li {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.suggestion-tags li:hover {
+    background-color: #3a3a3d;
+    z-index: 2;
+}
+
+.suggestion-tags ul:hover li {
+    filter: blur(2px);
+    opacity: 0.6;
+}
+
+.suggestion-tags li:hover {
+    filter: none !important;
+    opacity: 1 !important;
+}
+
+.trending-title-header {
+    color: #f5f5f5;
+    font-size: 2.5rem;
+    padding-top: 80px;
+    margin-bottom: 40px;
+}
+
+
+.trending-container-expanded {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    color: white;
+    min-height: 65vh;
+    background-color: black;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.trending-container-expanded.expanded {
+    display: flex;
+    gap: 2rem;
+    transition: all 0.4s ease;
+    align-items: flex-start;
+}
+
+.trending-container-expanded.expanded .trending-cards-panel {
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    grid-auto-rows: auto;
+    gap: 1rem;
+    overflow: auto;
+}
+
+.trending-cards-panel::-webkit-scrollbar {
+    height: 4px;
+}
+
+.trending-cards-panel::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+}
+
+.trending-cards-panel {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 1rem;
+    flex: 1;
+    transition: 0.3s ease;
+    width: 100%;
+}
+
+.trending-detail-panel {
+    width: 50%;
+    background-color: #111;
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.detail-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.trending-card {
+    background: #1f1f1f;
+    color: white;
+    border-radius: 12px;
+    padding: 1rem;
+    min-width: 280px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease, border 0.4s ease;
+    border: 2px solid transparent;
+    position: relative;
+    z-index: 0;
+}
+
+.trending-card:hover {
+    transform: scale(1.05);
+}
+
+.trending-cards-panel .trending-card:not(.active) {
+
+    opacity: 1;
+}
+
+
+/* Active card glowing border effect */
+.trending-card.active {
+    animation: glowBorderOutline 2s ease-in-out infinite;
+}
+
+
+
+@keyframes glowBorderOutline {
+    0% {
+        box-shadow: 0 0 0px 2px rgba(0, 255, 200, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 10px 4px rgba(0, 255, 200, 0.6),
+            0 0 20px 6px rgba(63, 125, 244, 0.3);
+    }
+
+    100% {
+        box-shadow: 0 0 0px 2px rgba(0, 255, 200, 0.3);
+    }
+}
+
+.topics-container {
+    margin: 4rem 1rem;
+    position: relative;
+}
+
+.topics-title {
+    color: #f5f5f5;
+    font-size: 2.5rem;
+    margin-bottom: 2.4rem;
+}
+
+.topics-scroll {
+    display: flex;
+    gap: 1.9rem;
+    overflow-x: auto;
+    padding-top: 10px;
+    padding-bottom: 0.5rem;
+}
+
+.topics-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.topics-scroll::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.topic-card {
+    background: linear-gradient(135deg, #222831, #1c1f26);
+    border: 1px solid #3a3f4b;
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 14px;
+    font-size: 1rem;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 255, 255, 0.15);
+    background: linear-gradient(135deg, #2c2f3b, #1e2026);
+}
+
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-track {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-inner {
+    display: flex;
+    width: 100%;
+    /* width: calc(100% * 12); */
+    transition: transform 0.6s ease-in-out;
+    will-change: transform;
+}
+
+.discoveries-title {
+    color: white;
+    margin-bottom: 70px;
+}
+
+.discovery-card-carousel {
+    flex: 0 0 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.discovery-card-carousel>div {
+    width: 60%;
+    background: #1e1e1e;
+    color: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.discovery-img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #333;
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.3s ease;
+}
+
+.carousel-btn.left {
+    left: 10px;
+}
+
+.carousel-btn.right {
+    right: 10px;
+}
+
+.carousel-btn:hover {
+    background: #555;
+}
