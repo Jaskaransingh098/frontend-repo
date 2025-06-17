@@ -20,7 +20,7 @@
 
 
 .join-navbar {
-    position: fixed;
+    position: absolute;
     /* or relative if you don't want floating */
     top: 0;
     right: 0;
