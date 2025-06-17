@@ -32,7 +32,7 @@ function Join() {
     >
       <div
         className={`join-body ${
-          activeSection === "explore" ? "float-navbar" : ""
+          activeSection === "explore" ? "float-navbar" : "align-top"
         }`}
       >
         <div className="join-container">{renderSection()}</div>
