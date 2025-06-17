@@ -20,14 +20,15 @@
 
 
 .join-navbar {
-    position: fixed;
+    position: sticky;
     /* or relative if you don't want floating */
-    top: 50%;
+    top: 0;
     right: 0;
     transform: translateY(-50%);
     z-index: 5;
     /* 👈 MUST be higher than video */
     width: 160px;
+    height: 100vh;
     background-color: #12141a;
     border-left: 2px solid #1e1f25;
     display: flex;
