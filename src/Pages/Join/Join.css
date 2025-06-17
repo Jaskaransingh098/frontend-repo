@@ -22,8 +22,8 @@
 
 .join-navbar {
     width: 160px;
-    background-color: #12141a;
-    border-left: 2px solid #1e1f25;
+    /* background-color: #12141a;
+    border-left: 2px solid #1e1f25; */
     display: flex;
     align-items: center;
     padding-top: 2rem;
