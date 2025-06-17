@@ -22,7 +22,7 @@
 .join-navbar {
     position: fixed;
     /* or relative if you don't want floating */
-    /* top: 50%; */
+    top: 50%;
     right: 0;
     transform: translateY(-50%);
     z-index: 5;
