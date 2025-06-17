@@ -8,16 +8,17 @@
 
 .explore-insider-header {
     width: 100vw;
-    height: 25vh;
+    height: 35vh;
     display: flex;
     /* background-color: black; */
+    margin-top: 30px;
     justify-content: center;
     align-items: center;
 }
 
 .explore-insider-headers {
     width: 50vw;
-    height: 13vh;
+    height: 25vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,8 +27,8 @@
 }
 
 .explore-search {
-    width: 40vw;
-    height: 10vh;
+    width: 45vw;
+    height: 18vh;
     border: 1px solid white;
     border-radius: 20px;
     text-align: left;
