@@ -107,6 +107,8 @@
 
 .align-top {
     align-items: flex-start;
+    height: 100vh;
+    background-color: transparent;
 }
 
 .join-container {
