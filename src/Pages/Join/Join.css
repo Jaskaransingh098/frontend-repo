@@ -7,6 +7,7 @@
     /* padding-top: 120px; */
     min-height: 100vh;
     width: 100%;
+    position: relative;
     /* background: linear-gradient(135deg, #0f1116 0%, #0c0c0c 50%, #101726 100%); */
     background-attachment: fixed;
     background-size: cover;
@@ -52,12 +53,21 @@
     padding-top: 2rem; */
 }
 
-.float-navbar .join-navbar {
+/* .float-navbar .join-navbar {
     position: absolute;
     top: 0;
     right: 0;
     height: 70vh;
     z-index: 4;
+} */
+.join-body.float-navbar .join-navbar {
+    /* preferred selector since this is your actual structure */
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 5;
+    height: 70vh;
+
 }
 
 .navbar-vertical {
