@@ -98,7 +98,7 @@ export default function Explore() {
   return (
     <>
       <div className="explore-page-insider">
-        <section className="explore-insider-header">
+        <div className="explore-insider-header">
           <div className="explore-insider-headers">
             <input
               className={`explore-search ${isAnimating ? "active-border" : ""}`}
@@ -118,7 +118,7 @@ export default function Explore() {
               </ul>
             </div>
           </div>
-        </section>
+        </div>
         <h2 className="trending-title-header">Trending now</h2>
         <div ref={wrapperRef}>
           <div

@@ -118,7 +118,7 @@
     width: 100%;
     color: white;
     min-height: 65vh;
-    background-color: black;
+    /* background-color: black; */
     overflow: hidden;
     transition: all 0.4s ease;
 }
