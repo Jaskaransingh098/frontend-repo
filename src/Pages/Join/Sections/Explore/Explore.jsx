@@ -240,7 +240,7 @@ export default function Explore() {
             </div>
 
             {selectedPost && (
-              <div className="trending-detail-panel">
+              <div className="trending-detail-panel" ref={detailRef}>
                 <h2 className="detail-header">{selectedPost.topic}</h2>
                 <p>
                   <strong>Description:</strong> {selectedPost.description}
