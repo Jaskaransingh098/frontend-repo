@@ -12,14 +12,14 @@ export default function Explore() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trendingPosts, setTrendingPosts] = useState([]);
   const industryImages = {
-    tech: "/explore-video/make a dark graphic of cpu,mouse,monitor for website.jpg",
+    tech: "/explore-video/tech.jpg",
     healthcare:
-      "/explore-video/make a dark graphic of healthcare for website.jpg",
+      "/explore-video/healthcare.jpg",
     ecommerce:
-      "/explore-video/make a dark graphic of e-commerce for website.jpgg",
+      "/explore-video/e-commerce.jpg",
     education:
-      "/explore-video/make a dark graphic of education for website.jpg",
-    food: "/explore-video/make a dark graphic of food for website.jpg",
+      "/explore-video/education.jpg",
+    food: "/explore-video/food.jpg",
   };
 
   useEffect(() => {
