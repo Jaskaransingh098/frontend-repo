@@ -12,14 +12,14 @@ export default function Explore() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trendingPosts, setTrendingPosts] = useState([]);
   const industryImages = {
-    tech: "/public/explore-video/make a dark graphic of cpu,mouse,monitor for website.jpg",
+    tech: "/explore-video/make a dark graphic of cpu,mouse,monitor for website.jpg",
     healthcare:
-      "/public/explore-video/make a dark graphic of healthcare for website.jpg",
+      "/explore-video/make a dark graphic of healthcare for website.jpg",
     ecommerce:
-      "/public/explore-video/make a dark graphic of e-commerce for website.jpg",
+      "/explore-video/make a dark graphic of e-commerce for website.jpgg",
     education:
-      "/public/explore-video/make a dark graphic of education for website.jpg",
-    food: "/public/explore-video/make a dark graphic of food for website.jpg",
+      "/explore-video/make a dark graphic of education for website.jpg",
+    food: "/explore-video/make a dark graphic of food for website.jpg",
   };
 
   useEffect(() => {
@@ -152,7 +152,7 @@ export default function Explore() {
               {trendingPosts.map((post) => {
                 const backgroundImage =
                   industryImages[post.industry?.toLowerCase()] ||
-                  "/explore-video/fallback.jpg";
+                  "/assets/industries/default.jpg";
                 return (
                   <div
                     key={post._id}
