@@ -210,6 +210,26 @@
 
 }
 
+.trending-detail-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.trending-detail-panel::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #555, #888);
+    border-radius: 8px;
+}
+
+.trending-detail-panel::-webkit-scrollbar-track {
+    background: #222;
+    border-radius: 8px;
+}
+
+.trending-detail-panel::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+    width: 0;
+}
+
 
 .trending-detail-panel h2 {
     font-size: 1.6rem;
