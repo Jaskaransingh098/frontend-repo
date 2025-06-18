@@ -11,6 +11,16 @@ export default function Explore() {
   const wrapperRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trendingPosts, setTrendingPosts] = useState([]);
+  const industryImages = {
+    Tech: "/explore-video/make a dark graphic of cpu,mouse,monitor for website.jpg",
+    Healthcare:
+      "/explore-video/make a dark graphic of healthcare for website.jpg",
+    Ecommerce:
+      "/explore-video/make a dark graphic of e-commerce for website.jpgg",
+    Education:
+      "/explore-video/make a dark graphic of education for website.jpg",
+    Food: "/explore-video/make a dark graphic of food for website.jpg",
+  };
 
   useEffect(() => {
     const fetchTrending = async () => {
@@ -27,15 +37,6 @@ export default function Explore() {
     fetchTrending();
   }, []);
 
-  // const trendingPosts = Array.from({ length: 9 }).map((_, i) => ({
-  //   _id: `${i + 1}`,
-  //   title: `🔥 Trending Idea #${i + 1}`,
-  //   content: "This is a brief description of a trending post on InnoLinkk.",
-  //   likes: Array(Math.floor(Math.random() * 100)),
-  //   comments: Array(Math.floor(Math.random() * 20)),
-  //   username: `user${i + 1}`,
-  //   image: `https://source.unsplash.com/random/300x200?sig=${i + 1}&innovation`,
-  // }));
   const topics = [
     "Artificial Intelligence",
     "Web3",
@@ -124,7 +125,7 @@ export default function Explore() {
             <input
               className={`explore-search ${isAnimating ? "active-border" : ""}`}
               type="text"
-              placeholder="Seach tags..."
+              placeholder="Search tags..."
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
@@ -142,6 +143,57 @@ export default function Explore() {
         </div>
         <h2 className="trending-title-header">Trending now</h2>
         <div ref={wrapperRef}>
+          <div
+            className={`trending-container-expanded ${
+              selectedPost ? "expanded" : ""
+            }`}
+          >
+            <div className="trending-cards-panel">
+              {trendingPosts.map((post) => {
+                const backgroundImage =
+                  industryImages[post.industry?.toLowerCase()] ||
+                  "/assets/industries/default.jpg";
+                return (
+                  <div
+                    key={post._id}
+                    className={`trending-card ${
+                      selectedPost?._id === post._id ? "active" : ""
+                    }`}
+                    onClick={() => setSelectedPost(post)}
+                    style={{
+                      backgroundImage: `url(${backgroundImage})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  >
+                    <div className="trending-card-overlay">
+                      <h3 className="trending-title">{post.industry}</h3>
+                      <div className="trending-stats">
+                        ❤️ {post.likesCount ?? post.likes?.length ?? 0} · 👁️{" "}
+                        {post.views ?? 0}
+                      </div>
+                      <div className="trending-user">by @{post.username}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {selectedPost && (
+              <div className="trending-detail-panel" ref={detailRef}>
+                <h2>{selectedPost.topic}</h2>
+                <p>{selectedPost.description}</p>
+                <div className="trending-stats">
+                  ❤️{" "}
+                  {selectedPost.likesCount ?? selectedPost.likes?.length ?? 0} ·
+                  💬 {selectedPost.comments?.length ?? 0}
+                </div>
+                <div className="trending-user">by @{selectedPost.username}</div>
+              </div>
+            )}
+          </div>
+        </div>
+        {/* <div ref={wrapperRef}>
           <div
             className={`trending-container-expanded ${
               selectedPost ? "expanded" : ""
@@ -194,7 +246,7 @@ export default function Explore() {
               </div>
             )}
           </div>
-        </div>
+        </div> */}
         <div className="topics-container">
           <h2 className="topics-title">🧠 Explore by Topics</h2>
           <div className="topics-scroll">
