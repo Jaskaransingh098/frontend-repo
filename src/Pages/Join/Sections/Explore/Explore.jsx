@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import  axios  from "axios";
+import axios from "axios";
 import gsap from "gsap";
 import "./Explore.css";
 
@@ -160,7 +160,8 @@ export default function Explore() {
                   <h3 className="trending-title">{post.topic}</h3>
                   <p>{post.description.slice(0, 80)}...</p>
                   <div className="trending-stats">
-                    ❤️ {post.likes.length} · 💬 {post.comments.length}
+                    ❤️ {post.likesCount ?? post.likes?.length ?? 0} · 💬{" "}
+                    {post.comments?.length ?? 0}
                   </div>
                   <div className="trending-user">by @{post.username}</div>
                 </div>
@@ -172,8 +173,9 @@ export default function Explore() {
                 <h2>{selectedPost.topic}</h2>
                 <p>{selectedPost.description}</p>
                 <div className="trending-stats">
-                  ❤️ {selectedPost.likes.length} · 💬{" "}
-                  {selectedPost.comments.length}
+                  ❤️{" "}
+                  {selectedPost.likesCount ?? selectedPost.likes?.length ?? 0} ·
+                  💬 {selectedPost.comments?.length ?? 0}
                 </div>
                 <div className="trending-user">by @{selectedPost.username}</div>
               </div>
