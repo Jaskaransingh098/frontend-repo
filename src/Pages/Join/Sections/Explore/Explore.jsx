@@ -152,7 +152,7 @@ export default function Explore() {
               {trendingPosts.map((post) => {
                 const backgroundImage =
                   industryImages[post.industry?.toLowerCase()] ||
-                  "/assets/industries/default.jpg";
+                  "/explore-video/fallback.jpg";
                 return (
                   <div
                     key={post._id}
