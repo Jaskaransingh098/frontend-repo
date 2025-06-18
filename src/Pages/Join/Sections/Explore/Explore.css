@@ -275,6 +275,40 @@
     line-height: 1.4;
 }
 
+.interaction-bar button {
+    background: #333;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.trending-comment-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.trending-comment-section input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #555;
+    background-color: #222;
+    color: white;
+}
+
+.trending-comment-section button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background: #555;
+    color: white;
+    cursor: pointer;
+}
+
 .trending-card {
     background: #1f1f1f;
     color: white;

@@ -5,6 +5,9 @@ import "./Explore.css";
 
 export default function Explore() {
   const [query, setQuery] = useState("");
+  const [commentInput, setCommentInput] = useState("");
+  const [liked, setLiked] = useState(false);
+  const [comments, setComments] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
   const detailRef = useRef();
@@ -31,8 +34,66 @@ export default function Explore() {
       }
     };
 
+    const fetchPostDetails = async () => {
+      const token = localStorage.getItem("token");
+      if (!token || !selectedPost) return;
+
+      try {
+        const [likedRes, commentsRes] = await Promise.all([
+          axios.get(
+            `${import.meta.env.VITE_API_URL}/post/${selectedPost._id}/liked`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          ),
+          axios.get(
+            `${import.meta.env.VITE_API_URL}/post/${selectedPost._id}/comments`
+          ),
+        ]);
+
+        setLiked(likedRes.data.liked);
+        setComments(commentsRes.data.comments);
+      } catch (error) {
+        console.error("Error loading post details:", error);
+      }
+    };
+
     fetchTrending();
+    fetchPostDetails();
   }, []);
+
+  const handleLikeToggle = async () => {
+    const token = localStorage.getItem("token");
+    if (!token || !selectedPost) return;
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/post/${selectedPost._id}/like`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setLiked(res.data.likes.includes(/* your current user */));
+    } catch (err) {
+      console.error("Error toggling like:", err);
+    }
+  };
+
+  const handleCommentSubmit = async () => {
+    const token = localStorage.getItem("token");
+    if (!token || !selectedPost || !commentInput.trim()) return;
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/post/${selectedPost._id}/comments`,
+        { text: commentInput },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setComments((prev) => [...prev, res.data]);
+      setCommentInput("");
+    } catch (err) {
+      console.error("Error submitting comment:", err);
+    }
+  };
 
   const topics = [
     "Artificial Intelligence",
@@ -231,6 +292,27 @@ export default function Explore() {
                     ))}
                   </div>
                 )}
+                <div className="interaction-bar">
+                  <button onClick={handleLikeToggle}>
+                    {liked ? "💖 Liked" : "🤍 Like"}
+                  </button>
+                </div>
+
+                <div className="trending-comment-section">
+                  <input
+                    type="text"
+                    placeholder="Add a comment..."
+                    value={commentInput}
+                    onChange={(e) => setCommentInput(e.target.value)}
+                  />
+                  <button onClick={handleCommentSubmit}>Post</button>
+                </div>
+
+                {comments.map((cmt, idx) => (
+                  <div key={idx} className="trending-comment">
+                    <strong>@{cmt.username}</strong>: {cmt.text}
+                  </div>
+                ))}
               </div>
             )}
           </div>
