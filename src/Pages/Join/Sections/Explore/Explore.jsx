@@ -179,15 +179,61 @@ export default function Explore() {
             </div>
 
             {selectedPost && (
-              <div className="trending-detail-panel" ref={detailRef}>
+              <div className="trending-detail-panel">
                 <h2>{selectedPost.topic}</h2>
-                <p>{selectedPost.description}</p>
-                <div className="trending-stats">
-                  ❤️{" "}
-                  {selectedPost.likesCount ?? selectedPost.likes?.length ?? 0} ·
-                  💬 {selectedPost.comments?.length ?? 0}
+                <p>
+                  <strong>Description:</strong> {selectedPost.description}
+                </p>
+                <p>
+                  <strong>Stage:</strong> {selectedPost.stage}
+                </p>
+                <p>
+                  <strong>Market:</strong> {selectedPost.market}
+                </p>
+                <p>
+                  <strong>Goals:</strong> {selectedPost.goals}
+                </p>
+                <p>
+                  <strong>Startup:</strong> {selectedPost.startupName} (
+                  {selectedPost.industry})
+                </p>
+                <p>
+                  <strong>Website:</strong>{" "}
+                  <a
+                    href={selectedPost.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {selectedPost.website}
+                  </a>
+                </p>
+                <p>
+                  <strong>Founder:</strong> {selectedPost.fullName} -{" "}
+                  {selectedPost.role}
+                </p>
+                <p>
+                  <strong>Email:</strong>{" "}
+                  <a href={`mailto:${selectedPost.email}`}>
+                    {selectedPost.email}
+                  </a>
+                </p>
+
+                <div className="detail-stats">
+                  <p>❤️ {selectedPost.likes?.length ?? 0} Likes</p>
+                  <p>👁️ {selectedPost.views ?? 0} Views</p>
+                  <p>💬 {selectedPost.comments?.length ?? 0} Comments</p>
                 </div>
-                <div className="trending-user">by @{selectedPost.username}</div>
+
+                {selectedPost.comments?.length > 0 && (
+                  <div className="trending-comments-section">
+                    <h3>Comments</h3>
+                    {selectedPost.comments.map((comment, idx) => (
+                      <div className="trending-comment" key={idx}>
+                        <strong>@{comment.username}</strong>: {comment.text}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </div>
