@@ -165,13 +165,13 @@ export default function Explore() {
                       backgroundPosition: "center",
                     }}
                   >
-                    <div className="trending-card-overlay">
-                      <h3 className="trending-title">{post.industry}</h3>
-                      <div className="trending-stats">
-                        ❤️ {post.likesCount ?? post.likes?.length ?? 0} · 👁️{" "}
-                        {post.views ?? 0}
+                    <div className="trending-title">{post.industry}</div>
+                    <div className="trending-bottom-bar">
+                      <div className="stat">
+                        ❤️ {post.likesCount ?? post.likes?.length ?? 0}
                       </div>
-                      <div className="trending-user">by @{post.username}</div>
+                      <div className="stat">👁️ {post.views ?? 0}</div>
+                      <div className="user">by @{post.username}</div>
                     </div>
                   </div>
                 );
@@ -192,60 +192,6 @@ export default function Explore() {
             )}
           </div>
         </div>
-        {/* <div ref={wrapperRef}>
-          <div
-            className={`trending-container-expanded ${
-              selectedPost ? "expanded" : ""
-            }`}
-          >
-            <div className="trending-cards-panel">
-              {trendingPosts.map((post) => (
-                <div
-                  key={post._id}
-                  className={`trending-card ${
-                    selectedPost?._id === post._id ? "active" : ""
-                  }`}
-                  onClick={() => setSelectedPost(post)}
-                >
-                  <div
-                    key={post._id}
-                    className={`trending-card ${
-                      selectedPost?._id === post._id ? "active" : ""
-                    }`}
-                    onClick={() => setSelectedPost(post)}
-                    style={{
-                      backgroundImage: `url(${post.image})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  >
-                    <div className="trending-card-overlay">
-                      <h3 className="trending-title">{post.topic}</h3>
-                      <div className="trending-stats">
-                        ❤️ {post.likesCount ?? post.likes?.length ?? 0} · 👁️{" "}
-                        {post.views ?? 0}
-                      </div>
-                      <div className="trending-user">by @{post.username}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {selectedPost && (
-              <div className="trending-detail-panel" ref={detailRef}>
-                <h2>{selectedPost.topic}</h2>
-                <p>{selectedPost.description}</p>
-                <div className="trending-stats">
-                  ❤️{" "}
-                  {selectedPost.likesCount ?? selectedPost.likes?.length ?? 0} ·
-                  💬 {selectedPost.comments?.length ?? 0}
-                </div>
-                <div className="trending-user">by @{selectedPost.username}</div>
-              </div>
-            )}
-          </div>
-        </div> */}
         <div className="topics-container">
           <h2 className="topics-title">🧠 Explore by Topics</h2>
           <div className="topics-scroll">
