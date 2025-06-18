@@ -245,10 +245,14 @@
 }
 
 .trending-comment {
-    background: #222;
-    padding: 0.5rem;
-    border-radius: 6px;
-    margin-bottom: 0.5rem;
+    background: #1f2937;
+    /* slate-800 */
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+    color: #e2e8f0;
+    line-height: 1.4;
 }
 
 .trending-card {
