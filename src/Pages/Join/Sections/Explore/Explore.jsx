@@ -156,14 +156,27 @@ export default function Explore() {
                   }`}
                   onClick={() => setSelectedPost(post)}
                 >
-                  <img src={post.image} alt="post" className="trending-image" />
-                  <h3 className="trending-title">{post.topic}</h3>
-                  <p>{post.description.slice(0, 80)}...</p>
-                  <div className="trending-stats">
-                    ❤️ {post.likesCount ?? post.likes?.length ?? 0} · 💬{" "}
-                    {post.comments?.length ?? 0}
+                  <div
+                    key={post._id}
+                    className={`trending-card ${
+                      selectedPost?._id === post._id ? "active" : ""
+                    }`}
+                    onClick={() => setSelectedPost(post)}
+                    style={{
+                      backgroundImage: `url(${post.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  >
+                    <div className="trending-card-overlay">
+                      <h3 className="trending-title">{post.topic}</h3>
+                      <div className="trending-stats">
+                        ❤️ {post.likesCount ?? post.likes?.length ?? 0} · 👁️{" "}
+                        {post.views ?? 0}
+                      </div>
+                      <div className="trending-user">by @{post.username}</div>
+                    </div>
                   </div>
-                  <div className="trending-user">by @{post.username}</div>
                 </div>
               ))}
             </div>
