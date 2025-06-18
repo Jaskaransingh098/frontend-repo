@@ -138,7 +138,7 @@ export default function Explore() {
             </div>
           </div>
         </div>
-        <h2 className="trending-title-header">Trending now</h2>
+        <h2 className="trending-title-header">🔥 Trending now</h2>
         <div ref={wrapperRef}>
           <div
             className={`trending-container-expanded ${
