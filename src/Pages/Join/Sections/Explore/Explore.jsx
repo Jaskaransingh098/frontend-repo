@@ -180,7 +180,7 @@ export default function Explore() {
 
             {selectedPost && (
               <div className="trending-detail-panel">
-                <h2>{selectedPost.topic}</h2>
+                <h2 className="detail-header">{selectedPost.topic}</h2>
                 <p>
                   <strong>Description:</strong> {selectedPost.description}
                 </p>
@@ -212,10 +212,7 @@ export default function Explore() {
                   {selectedPost.role}
                 </p>
                 <p>
-                  <strong>Email:</strong>{" "}
-                  <a href={`mailto:${selectedPost.email}`}>
-                    {selectedPost.email}
-                  </a>
+                  <strong>Email:</strong> {selectedPost.email}
                 </p>
 
                 <div className="detail-stats">
