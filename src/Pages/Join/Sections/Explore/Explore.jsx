@@ -125,8 +125,8 @@ export default function Explore() {
       if (
         wrapperRef.current &&
         !wrapperRef.current.contains(event.target) &&
-        selectedPost &&
-        detailRef.current
+        detailRef.current &&
+        !detailRef.current.contains(event.target)
       ) {
         gsap.to(detailRef.current, {
           x: 50,
