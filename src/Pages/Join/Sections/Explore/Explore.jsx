@@ -13,7 +13,7 @@ export default function Explore() {
   const [trendingPosts, setTrendingPosts] = useState([]);
   const industryImages = {
     tech: "/explore-video/tech.jpg",
-    healthcare: "/explore-video/healthcare.jpg",
+    health: "/explore-video/healthcare.jpg",
     ecommerce: "/explore-video/e-commerce.jpg",
     education: "/explore-video/education.jpg",
     food: "/explore-video/food.jpg",
@@ -148,7 +148,7 @@ export default function Explore() {
             <div className="trending-cards-panel">
               {trendingPosts.map((post) => {
                 const industryKey =
-                  post.industry?.toLowerCase().replace(/\s+/g, "") || "default";
+                  post.industry?.toLowerCase().replace(/\s-/g, "") || "default";
                 const backgroundImage =
                   industryImages[industryKey] || "/explore-video/default.jpg";
 
