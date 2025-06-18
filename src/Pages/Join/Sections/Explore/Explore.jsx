@@ -169,11 +169,6 @@ export default function Explore() {
 
             {selectedPost && (
               <div className="trending-detail-panel" ref={detailRef}>
-                <img
-                  src={selectedPost.image}
-                  alt="Expanded post"
-                  className="detail-image"
-                />
                 <h2>{selectedPost.topic}</h2>
                 <p>{selectedPost.description}</p>
                 <div className="trending-stats">

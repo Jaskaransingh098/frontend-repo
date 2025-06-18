@@ -24,6 +24,8 @@ import { useInView } from "react-intersection-observer";
 import { FiSend } from "react-icons/fi";
 import { BsChatDots } from "react-icons/bs";
 import "./MyPosts.css";
+
+
 export default function MyPosts() {
   const [ref1, intView1] = useInView({ triggerOnce: false, threshold: 0.2 });
   const [myIdeas, setMyIdeas] = useState([]);
