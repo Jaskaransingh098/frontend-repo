@@ -12,11 +12,11 @@ export default function Explore() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trendingPosts, setTrendingPosts] = useState([]);
   const industryImages = {
-    tech: `${process.env.PUBLIC_URL}/explore-video/tech.jpg`,
-    healthcare: `${process.env.PUBLIC_URL}/explore-video/healthcare.jpg`,
-    ecommerce: `${process.env.PUBLIC_URL}/explore-video/e-commerce.jpg`,
-    education: `${process.env.PUBLIC_URL}/explore-video/education.jpg`,
-    food: `${process.env.PUBLIC_URL}/explore-video/food.jpg`,
+    tech: "/explore-video/tech.jpg",
+    healthcare: "/explore-video/healthcare.jpg",
+    ecommerce: "/explore-video/e-commerce.jpg",
+    education: "/explore-video/education.jpg",
+    food: "/explore-video/food.jpg",
   };
 
   useEffect(() => {
@@ -147,9 +147,11 @@ export default function Explore() {
           >
             <div className="trending-cards-panel">
               {trendingPosts.map((post) => {
+                const industryKey =
+                  post.industry?.toLowerCase().replace(/\s+/g, "") || "default";
                 const backgroundImage =
-                  industryImages[post.industry?.toLowerCase()] ||
-                  `${process.env.PUBLIC_URL}/explore-video/default.jpg`;
+                  industryImages[industryKey] || "/explore-video/default.jpg";
+
                 return (
                   <div
                     key={post._id}
