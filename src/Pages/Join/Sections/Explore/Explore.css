@@ -211,7 +211,7 @@
     border-radius: 12px;
     padding: 1rem;
     min-width: 280px;
-    height: 200px;
+    height: 450px;
     flex-shrink: 0;
     cursor: pointer;
     transition: transform 0.3s ease, border 0.4s ease;
