@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Body.css";
 import Footer from "../Footer/Footer";
 import { motion } from "framer-motion";
@@ -277,9 +278,9 @@ function Body() {
                 </p>
               </div>
             </div>
-            <button className="try-now-btn" onClick="tryNow()">
+            <Link className="try-now-btn" to="/prices" >
               Try Now
-            </button>
+            </Link>
           </div>
           <motion.div
             className="banner-image"

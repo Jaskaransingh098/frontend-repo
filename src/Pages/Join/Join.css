@@ -4,11 +4,9 @@
             var(--charcoal),
             var(--shadow-blue),
             var(--midnight));
-    /* padding-top: 120px; */
     min-height: 100vh;
     width: 100%;
     position: relative;
-    /* background: linear-gradient(135deg, #0f1116 0%, #0c0c0c 50%, #101726 100%); */
     background-attachment: fixed;
     background-size: cover;
     display: flex;
@@ -22,46 +20,14 @@
 
 .join-navbar {
     width: 160px;
-    /* background-color: #12141a;
-    border-left: 2px solid #1e1f25; */
     display: flex;
     align-items: center;
     padding-top: 2rem;
     z-index: 10;
     position: relative;
     transition: all 0.3s ease;
-
-
-
-    /* position: sticky;
-
-    top: 0;
-    right: 0;
-    z-index: 5;
-
-    width: 160px;
-    height: 70vh;
-    display: flex;
-    align-items: center;
-    padding-top: 2rem; */
-
-    /* width: 160px;
-    background-color: #12141a;
-    border-left: 2px solid #1e1f25;
-    display: flex;
-    align-items: flex-start;
-    padding-top: 2rem; */
 }
-
-/* .float-navbar .join-navbar {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 70vh;
-    z-index: 4;
-} */
 .join-body.float-navbar .join-navbar {
-    /* preferred selector since this is your actual structure */
     position: absolute;
     top: 0;
     right: 0;
@@ -100,19 +66,12 @@
 /* body  */
 
 .join-body {
-    /* margin-top: 30px;
-    height: 100dvh;
-    background-color: transparent;
-    width: 100%;
-    display: flex;
-    justify-content: center; */
     flex: 1;
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    /* padding: 0 2rem; */
 
 }
 
@@ -123,11 +82,9 @@
 }
 
 .join-container {
-    /* height: 100vh; */
-    /* height: 100vh; */
     overflow: visible;
     flex: 1;
     width: 80%;
     background-color: transparent;
-    /* border: 2px solid; */
+
 }

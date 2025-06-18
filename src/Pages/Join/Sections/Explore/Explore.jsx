@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { axios } from "axios";
 import gsap from "gsap";
 import "./Explore.css";
 
@@ -9,16 +10,32 @@ export default function Explore() {
   const detailRef = useRef();
   const wrapperRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [trendingPosts, setTrendingPosts] = useState([]);
 
-  const trendingPosts = Array.from({ length: 9 }).map((_, i) => ({
-    _id: `${i + 1}`,
-    title: `🔥 Trending Idea #${i + 1}`,
-    content: "This is a brief description of a trending post on InnoLinkk.",
-    likes: Array(Math.floor(Math.random() * 100)),
-    comments: Array(Math.floor(Math.random() * 20)),
-    username: `user${i + 1}`,
-    image: `https://source.unsplash.com/random/300x200?sig=${i + 1}&innovation`,
-  }));
+  useEffect(() => {
+    const fetchTrending = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/post/trending`
+        );
+        setTrendingPosts(response.data.posts);
+      } catch (error) {
+        console.error("Failed to fetch trending posts:", error);
+      }
+    };
+
+    fetchTrending();
+  }, []);
+
+  // const trendingPosts = Array.from({ length: 9 }).map((_, i) => ({
+  //   _id: `${i + 1}`,
+  //   title: `🔥 Trending Idea #${i + 1}`,
+  //   content: "This is a brief description of a trending post on InnoLinkk.",
+  //   likes: Array(Math.floor(Math.random() * 100)),
+  //   comments: Array(Math.floor(Math.random() * 20)),
+  //   username: `user${i + 1}`,
+  //   image: `https://source.unsplash.com/random/300x200?sig=${i + 1}&innovation`,
+  // }));
   const topics = [
     "Artificial Intelligence",
     "Web3",
@@ -103,7 +120,6 @@ export default function Explore() {
             <source src="/explore-video/search section .mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          {/* <div className="video-fade-overlay"></div> */}
           <div className="explore-insider-headers">
             <input
               className={`explore-search ${isAnimating ? "active-border" : ""}`}
@@ -141,7 +157,8 @@ export default function Explore() {
                   onClick={() => setSelectedPost(post)}
                 >
                   <img src={post.image} alt="post" className="trending-image" />
-                  <h3 className="trending-title">{post.title}</h3>
+                  <h3 className="trending-title">{post.topic}</h3>
+                  <p>{post.description.slice(0, 80)}...</p>
                   <div className="trending-stats">
                     ❤️ {post.likes.length} · 💬 {post.comments.length}
                   </div>
@@ -157,8 +174,8 @@ export default function Explore() {
                   alt="Expanded post"
                   className="detail-image"
                 />
-                <h2>{selectedPost.title}</h2>
-                <p>{selectedPost.content}</p>
+                <h2>{selectedPost.topic}</h2>
+                <p>{selectedPost.description}</p>
                 <div className="trending-stats">
                   ❤️ {selectedPost.likes.length} · 💬{" "}
                   {selectedPost.comments.length}
