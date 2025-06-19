@@ -473,7 +473,7 @@
 
 .carousel-inner {
     display: flex;
-    width: 70%;
+    width: 100%;
     /* width: calc(100% * 12); */
     transition: transform 0.6s ease-in-out;
     will-change: transform;
