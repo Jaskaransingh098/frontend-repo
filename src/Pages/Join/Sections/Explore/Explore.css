@@ -532,6 +532,19 @@
     font-size: 0.9rem;
 }
 
+.discovery-avatar-circle {
+    width: 44px;
+    height: 44px;
+    background-color: #555;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .discovery.user-info .discovery-topic-title {
     font-size: 1.1rem;
     margin: 0;
