@@ -326,13 +326,6 @@ export default function Explore() {
         </div>
         <div className="topics-container">
           <h2 className="topics-title">🧠 Explore by Topics</h2>
-          {/* <div className="topics-scroll">
-            {topics.map((topic, index) => (
-              <div className="topic-card" key={index}>
-                <span>{topic}</span>
-              </div>
-            ))}
-          </div> */}
           <div className="topics-scroll">
             {topics.map((topic, index) => (
               <div
@@ -348,7 +341,6 @@ export default function Explore() {
           </div>
         </div>
         <div className="discoveries-container">
-          {/* <h2 className="discoveries-title">🎯 Random Discoveries</h2> */}
 
           <div className="carousel-wrapper">
             <button className="carousel-btn left" onClick={handlePrev}>
@@ -356,28 +348,6 @@ export default function Explore() {
             </button>
 
             <div className="carousel-track">
-              {/* <div
-                className="carousel-inner"
-                style={{
-                  transform: `translateX(-${currentIndex * 100}%)`,
-                }}
-              >
-                {randomPosts.map((item) => (
-                  <div className="discovery-card-carousel" key={item.id}>
-                    <div>
-                      <div className="discovery-content">
-                        <h3>{item.topic}</h3>
-                        <p>{item.description?.slice(0, 100)}...</p>
-                        <p>by @{item.username}</p>
-                        <p>
-                          ❤️ {item.likes?.length ?? 0} · 💬{" "}
-                          {item.comments?.length ?? 0}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div> */}
               <div
                 className="carousel-inner"
                 style={{
