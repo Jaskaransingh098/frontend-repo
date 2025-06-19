@@ -179,11 +179,11 @@ export default function Explore() {
   }, [selectedPost]);
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % discoveries.length);
+    setCurrentIndex((prev) => (prev + 1) % randomPosts.length);
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? discoveries.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? randomPosts.length - 1 : prev - 1));
   };
 
   return (
