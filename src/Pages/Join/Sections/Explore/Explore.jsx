@@ -356,19 +356,6 @@ export default function Explore() {
               >
                 {randomPosts.length > 0 ? (
                   randomPosts.map((item) => (
-                    // <div className="discovery-card-carousel" key={item._id}>
-                    //   <div>
-                    //     <div className="discovery-content">
-                    //       <h3>{item.topic}</h3>
-                    //       <p>{item.description?.slice(0, 100)}...</p>
-                    //       <p>by @{item.username}</p>
-                    //       <p>
-                    //         ❤️ {item.likes?.length ?? 0} · 💬{" "}
-                    //         {item.comments?.length ?? 0}
-                    //       </p>
-                    //     </div>
-                    //   </div>
-                    // </div>
                     <div className="discovery-card-carousel" key={item._id}>
                       <div className="discovery-content">
                         <div className="discovery-header">
