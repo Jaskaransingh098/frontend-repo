@@ -326,6 +326,7 @@ export default function Explore() {
         </div>
         <div className="topics-container">
           <h2 className="topics-title">🧠 Explore by Topics</h2>
+
           <div className="topics-scroll">
             {topics.map((topic, index) => (
               <div
@@ -351,7 +352,7 @@ export default function Explore() {
               <div
                 className="carousel-inner"
                 style={{
-                  transform: `translateX(-${currentIndex * 600}px)`,
+                  transform: `translateX(-${currentIndex * 100}%)`,
                 }}
               >
                 {randomPosts.length > 0 ? (

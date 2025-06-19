@@ -487,7 +487,6 @@
 .discovery-card-carousel {
     min-width: 70%;
     height: 270px;
-    margin: 0 auto;
     padding: 1.5rem;
     box-sizing: border-box;
     /* text-align: center; */
@@ -500,22 +499,18 @@
     justify-content: center;
     align-items: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    flex-shrink: 0;
 }
 
 .discovery-card-carousel:hover {
-    transform: scale(1.02);
+    transform: scale(1.015);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
 }
 
 .discovery-content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-    height: 100%;
     justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .discovery-content h3 {
