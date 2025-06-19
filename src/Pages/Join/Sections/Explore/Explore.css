@@ -447,6 +447,12 @@
     background: linear-gradient(135deg, #2c2f3b, #1e2026);
 }
 
+.topic-card.active {
+    background-color: #2e2e2e;
+    border: 1px solid var(--primary);
+    /* or your theme color */
+}
+
 .carousel-wrapper {
     position: relative;
     width: 100%;

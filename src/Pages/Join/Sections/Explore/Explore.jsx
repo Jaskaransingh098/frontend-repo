@@ -22,6 +22,7 @@ export default function Explore() {
     food: "/explore-video/food.jpg",
   };
   const [randomPosts, setRandomPosts] = useState([]);
+  const [selectedTopic, setSelectedTopic] = useState(null);
 
   useEffect(() => {
     const fetchTrending = async () => {
@@ -77,6 +78,19 @@ export default function Explore() {
     fetchRandomPosts();
   }, []);
 
+  const fetchPostsByIndustry = async (industry) => {
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/post/random?industry=${industry}`
+      );
+      setRandomPosts(res.data.posts);
+      setCurrentIndex(0); // Reset carousel position
+      setSelectedTopic(industry);
+    } catch (err) {
+      console.error("Error fetching posts by industry:", err);
+    }
+  };
+
   const handleLikeToggle = async () => {
     const token = localStorage.getItem("token");
     if (!token || !selectedPost) return;
@@ -110,29 +124,7 @@ export default function Explore() {
     }
   };
 
-  const topics = [
-    "Artificial Intelligence",
-    "Web3",
-    "Design",
-    "HealthTech",
-    "E-commerce",
-    "SaaS",
-    "Education",
-    "Green Tech",
-    "Gaming",
-    "Productivity",
-  ];
-  // const discoveries = Array.from({ length: 12 }).map((_, i) => ({
-  //   id: i + 1,
-  //   title: `💡 Idea #${i + 1}`,
-  //   content: "Explore something fresh and innovative.",
-  //   user: `user${i + 10}`,
-  //   image: `https://source.unsplash.com/random/300x30${i}?innovation`,
-  // }));
-  // const handleChange = (e) => {
-  //   setQuery(e.target.value);
-  // };
-
+  const topics = ["ecommerce", "health", "education", "tech", "food"];
   const isAnimating = query.length > 0 && isFocused;
 
   useEffect(() => {
@@ -334,16 +326,29 @@ export default function Explore() {
         </div>
         <div className="topics-container">
           <h2 className="topics-title">🧠 Explore by Topics</h2>
-          <div className="topics-scroll">
+          {/* <div className="topics-scroll">
             {topics.map((topic, index) => (
               <div className="topic-card" key={index}>
                 <span>{topic}</span>
               </div>
             ))}
+          </div> */}
+          <div className="topics-scroll">
+            {topics.map((topic, index) => (
+              <div
+                className={`topic-card ${
+                  selectedTopic === topic ? "active" : ""
+                }`}
+                key={index}
+                onClick={() => fetchPostsByIndustry(topic)}
+              >
+                <span>{topic.charAt(0).toUpperCase() + topic.slice(1)}</span>
+              </div>
+            ))}
           </div>
         </div>
         <div className="discoveries-container">
-          <h2 className="discoveries-title">🎯 Random Discoveries</h2>
+          {/* <h2 className="discoveries-title">🎯 Random Discoveries</h2> */}
 
           <div className="carousel-wrapper">
             <button className="carousel-btn left" onClick={handlePrev}>
