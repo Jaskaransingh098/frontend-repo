@@ -351,7 +351,7 @@ export default function Explore() {
               <div
                 className="carousel-inner"
                 style={{
-                  transform: `translateX(-${currentIndex * 100}%)`,
+                  transform: `translateX(-${currentIndex * 600}px)`,
                 }}
               >
                 {randomPosts.length > 0 ? (
