@@ -357,7 +357,7 @@ export default function Explore() {
                   transform: `translateX(-${currentIndex * 100}%)`,
                 }}
               >
-                {discoveries.map((item) => (
+                {randomPosts.map((item) => (
                   <div className="discovery-card-carousel" key={item.id}>
                     <div>
                       <div className="discovery-content">
