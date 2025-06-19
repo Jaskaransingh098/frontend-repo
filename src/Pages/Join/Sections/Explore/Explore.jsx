@@ -122,16 +122,16 @@ export default function Explore() {
     "Gaming",
     "Productivity",
   ];
-  const discoveries = Array.from({ length: 12 }).map((_, i) => ({
-    id: i + 1,
-    title: `💡 Idea #${i + 1}`,
-    content: "Explore something fresh and innovative.",
-    user: `user${i + 10}`,
-    image: `https://source.unsplash.com/random/300x30${i}?innovation`,
-  }));
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-  };
+  // const discoveries = Array.from({ length: 12 }).map((_, i) => ({
+  //   id: i + 1,
+  //   title: `💡 Idea #${i + 1}`,
+  //   content: "Explore something fresh and innovative.",
+  //   user: `user${i + 10}`,
+  //   image: `https://source.unsplash.com/random/300x30${i}?innovation`,
+  // }));
+  // const handleChange = (e) => {
+  //   setQuery(e.target.value);
+  // };
 
   const isAnimating = query.length > 0 && isFocused;
 
