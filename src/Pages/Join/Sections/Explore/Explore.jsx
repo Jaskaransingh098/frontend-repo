@@ -342,7 +342,6 @@ export default function Explore() {
           </div>
         </div>
         <div className="discoveries-container">
-
           <div className="carousel-wrapper">
             <button className="carousel-btn left" onClick={handlePrev}>
               ‹
@@ -357,16 +356,40 @@ export default function Explore() {
               >
                 {randomPosts.length > 0 ? (
                   randomPosts.map((item) => (
+                    // <div className="discovery-card-carousel" key={item._id}>
+                    //   <div>
+                    //     <div className="discovery-content">
+                    //       <h3>{item.topic}</h3>
+                    //       <p>{item.description?.slice(0, 100)}...</p>
+                    //       <p>by @{item.username}</p>
+                    //       <p>
+                    //         ❤️ {item.likes?.length ?? 0} · 💬{" "}
+                    //         {item.comments?.length ?? 0}
+                    //       </p>
+                    //     </div>
+                    //   </div>
+                    // </div>
                     <div className="discovery-card-carousel" key={item._id}>
-                      <div>
-                        <div className="discovery-content">
-                          <h3>{item.topic}</h3>
-                          <p>{item.description?.slice(0, 100)}...</p>
-                          <p>by @{item.username}</p>
-                          <p>
-                            ❤️ {item.likes?.length ?? 0} · 💬{" "}
-                            {item.comments?.length ?? 0}
-                          </p>
+                      <div className="discovery-content">
+                        <div className="discovery-header">
+                          <div className="discovery-avatar-circle">
+                            @{item.username.charAt(0).toUpperCase()}
+                          </div>
+                          <div className="discovery-user-info">
+                            <h3 className="discovery-topic-title">{item.topic}</h3>
+                            <p className="discovery-username">@{item.username}</p>
+                          </div>
+                        </div>
+                        <p className="discovery-description-text">
+                          {item.description?.slice(0, 180)}...
+                        </p>
+                        <div className="discovery-footer">
+                          <span className="stat">
+                            ❤️ {item.likes?.length ?? 0}
+                          </span>
+                          <span className="stat">
+                            💬 {item.comments?.length ?? 0}
+                          </span>
                         </div>
                       </div>
                     </div>
