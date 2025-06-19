@@ -356,7 +356,7 @@ export default function Explore() {
             </button>
 
             <div className="carousel-track">
-              <div
+              {/* <div
                 className="carousel-inner"
                 style={{
                   transform: `translateX(-${currentIndex * 100}%)`,
@@ -377,6 +377,36 @@ export default function Explore() {
                     </div>
                   </div>
                 ))}
+              </div> */}
+              <div
+                className="carousel-inner"
+                style={{
+                  transform: `translateX(-${currentIndex * 100}%)`,
+                }}
+              >
+                {randomPosts.length > 0 ? (
+                  randomPosts.map((item) => (
+                    <div className="discovery-card-carousel" key={item._id}>
+                      <div>
+                        <div className="discovery-content">
+                          <h3>{item.topic}</h3>
+                          <p>{item.description?.slice(0, 100)}...</p>
+                          <p>by @{item.username}</p>
+                          <p>
+                            ❤️ {item.likes?.length ?? 0} · 💬{" "}
+                            {item.comments?.length ?? 0}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="discovery-card-carousel">
+                    <div className="discovery-content">
+                      <h3>No posts found for this topic.</h3>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
