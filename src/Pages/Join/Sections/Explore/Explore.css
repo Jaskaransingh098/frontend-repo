@@ -532,6 +532,13 @@
     font-size: 0.9rem;
 }
 
+.discovery-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
 .discovery-avatar-circle {
     width: 44px;
     height: 44px;
@@ -548,6 +555,7 @@
 .discovery.user-info .discovery-topic-title {
     font-size: 1.1rem;
     margin: 0;
+    color: #fff;
 }
 
 .discovery-user-info .discovery-username {
@@ -556,11 +564,35 @@
     margin-top: 2px;
 }
 
+.discovery-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.discovery-industry {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+}
+
+.discovery-link {
+    font-size: 0.9rem;
+    color: #66bfff;
+    margin-bottom: 0.7rem;
+}
+
+.discovery-link a {
+    color: #66bfff;
+    text-decoration: underline;
+}
+
 .discovery-description-text {
     font-size: 0.95rem;
     color: #ddd;
     line-height: 1.4;
-    flex: 1;
+    margin-bottom: 0.7rem;
 }
 
 .discovery-footer {
