@@ -63,6 +63,20 @@ export default function Explore() {
     fetchPostDetails();
   }, []);
 
+  useEffect(() => {
+    const fetchRandomPosts = async () => {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/post/random`
+        );
+        setRandomPosts(res.data.posts);
+      } catch (err) {
+        console.error("Error loading random posts:", err);
+      }
+    };
+    fetchRandomPosts();
+  }, []);
+
   const handleLikeToggle = async () => {
     const token = localStorage.getItem("token");
     if (!token || !selectedPost) return;
@@ -171,20 +185,6 @@ export default function Explore() {
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? discoveries.length - 1 : prev - 1));
   };
-
-  useEffect(() => {
-    const fetchRandomPosts = async () => {
-      try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/post/random`
-        );
-        setRandomPosts(res.data.posts);
-      } catch (err) {
-        console.error("Error loading random posts:", err);
-      }
-    };
-    fetchRandomPosts();
-  }, []);
 
   return (
     <>
@@ -358,28 +358,16 @@ export default function Explore() {
                 }}
               >
                 {discoveries.map((item) => (
-                  // <div className="discovery-card-carousel" key={item.id}>
-                  //   <div>
-                  //     <img
-                  //       src={item.image}
-                  //       alt="discovery"
-                  //       className="discovery-img"
-                  //     />
-                  //     <div className="discovery-content">
-                  //       <h3>{item.title}</h3>
-                  //       <p>by @{item.user}</p>
-                  //     </div>
-                  //   </div>
-                  // </div>
-                  <div className="discovery-card-carousel" key={item._id}>
-                    <div className="discovery-post-card">
-                      <div className="discovery-post-header">
-                        <strong>@{item.username}</strong> · {item.industry}
-                      </div>
-                      <div className="discovery-post-content">{item.description}</div>
-                      <div className="discovery-post-meta">
-                        ❤️ {item.likes?.length ?? 0} · 💬{" "}
-                        {item.comments?.length ?? 0}
+                  <div className="discovery-card-carousel" key={item.id}>
+                    <div>
+                      <div className="discovery-content">
+                        <h3>{item.topic}</h3>
+                        <p>{item.description?.slice(0, 100)}...</p>
+                        <p>by @{item.username}</p>
+                        <p>
+                          ❤️ {item.likes?.length ?? 0} · 💬{" "}
+                          {item.comments?.length ?? 0}
+                        </p>
                       </div>
                     </div>
                   </div>
