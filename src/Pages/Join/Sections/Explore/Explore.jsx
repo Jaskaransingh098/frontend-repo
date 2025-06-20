@@ -357,7 +357,7 @@ export default function Explore() {
                 {randomPosts.length > 0 ? (
                   randomPosts.map((item) => (
                     <div className="discovery-card-carousel" key={item._id}>
-                      <video className="discovery-video" src="/explore-video/search section 2.mp4"></video>
+                      <video className="discovery-video" src="/explore-video/search section 2.mp4" autoPlay loop muted></video>
                       <div className="discovery-content">
                         <div className="discovery-header">
                           <div className="discovery-avatar-circle">
