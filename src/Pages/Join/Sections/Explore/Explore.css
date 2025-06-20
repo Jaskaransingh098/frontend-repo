@@ -499,16 +499,16 @@
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
-    background: url("/explore-video/search section 2.mp4");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .discovery-card-carousel:hover {
     transform: scale(1.015);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+.discovery-video{
+    background-size: cover;
+    background-position: center;
 }
 
 .discovery-content {
