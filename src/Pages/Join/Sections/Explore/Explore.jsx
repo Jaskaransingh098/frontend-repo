@@ -368,19 +368,6 @@ export default function Explore() {
                 {randomPosts.length > 0 ? (
                   randomPosts.map((item) => (
                     <div className="discovery-card-carousel" key={item._id}>
-                      {/* <video
-                        className="discovery-bg-video"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                      >
-                        <source
-                          src="/explore-video/search section 2.mp4"
-                          type="video/mp4"
-                        />
-                        Your browser does not support the video tag.
-                      </video> */}
                       <video
                         className="discovery-bg-video left"
                         autoPlay
