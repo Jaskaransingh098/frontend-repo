@@ -429,6 +429,7 @@
     border-radius: 10px;
 }
 
+/* 
 .topic-card {
     background: linear-gradient(135deg, #222831, #1c1f26);
     border: 1px solid #3a3f4b;
@@ -451,7 +452,27 @@
 .topic-card.active {
     background-color: #2e2e2e;
     border: 1px solid var(--primary);
-    /* or your theme color */
+} */
+
+.topic-card {
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.topic-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.topic-card.active {
+    border-color: #66bfff;
+    box-shadow: 0 0 10px #66bfff, 0 0 20px #66bfff66;
 }
 
 .carousel-wrapper {
