@@ -499,6 +499,10 @@
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+    background: url("/explore-video/search section 2.mp4");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -513,8 +517,10 @@
     flex-direction: column;
     gap: 0.5rem;
     height: 230px;
+    padding: 1rem;
     width: 40%;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    box-shadow: 20px 20px 20px 20px white;
 }
 
 .discovery-content h3 {
