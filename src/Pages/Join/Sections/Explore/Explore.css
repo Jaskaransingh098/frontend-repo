@@ -521,8 +521,8 @@
 
 .discovery-content {
     z-index: 2;
-    width: 70%;
-    height: 600px;
+    width: 600px;
+    height: 100%;
     padding: 1rem;
     display: flex;
     flex-direction: column;
