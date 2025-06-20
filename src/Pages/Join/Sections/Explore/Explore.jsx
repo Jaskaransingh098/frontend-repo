@@ -389,7 +389,7 @@ export default function Explore() {
                         playsInline
                       >
                         <source
-                          src="/explore-video/search section 3.mp4"
+                          src="/explore-video/search section 2.mp4"
                           type="video/mp4"
                         />
                       </video>
@@ -402,7 +402,7 @@ export default function Explore() {
                         playsInline
                       >
                         <source
-                          src="/explore-video/search section 3.mp4"
+                          src="/explore-video/search section 2.mp4"
                           type="video/mp4"
                         />
                       </video>
@@ -471,53 +471,6 @@ export default function Explore() {
                             </span>
                           </div>
                         </div>
-                        {/* <div className="discovery-content">
-                          <div className="discovery-header">
-                            <div className="discovery-avatar-circle">
-                              {item.username.charAt(0).toUpperCase()}
-                            </div>
-                            <div className="discovery-user-info">
-                              <div className="discovery-user-top">
-                                <span className="discovery-username">
-                                  @{item.username}
-                                </span>
-                                <span className="dot">•</span>
-                                <span className="timestamp">just now</span>
-                              </div>
-                              <div className="discovery-topic-industry">
-                                <span className="discovery-badge industry">
-                                  {item.industry}
-                                </span>
-                                <span className="discovery-badge topic">
-                                  {item.topic}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="discovery-description-text">
-                            {item.description?.slice(0, 180)}...
-                          </div>
-
-                          {item.website && (
-                            <p className="discovery-link">
-                              🔗{" "}
-                              <a
-                                href={item.website}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {item.website}
-                              </a>
-                            </p>
-                          )}
-
-                          <div className="discovery-footer">
-                            <span className="stat">
-                              ❤️ {item.likes?.length ?? 0}
-                            </span>
-                          </div>
-                        </div> */}
                       </div>
                     </div>
                   ))
