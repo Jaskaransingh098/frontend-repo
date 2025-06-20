@@ -458,8 +458,7 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    margin-top: 2rem;
-    margin-bottom: 4rem;
+    margin: 2rem 0 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -476,11 +475,6 @@
     width: 100%;
     transition: transform 0.6s ease-in-out;
     will-change: transform;
-}
-
-.discoveries-title {
-    color: white;
-    margin-bottom: 70px;
 }
 
 .discovery-card-carousel {
@@ -510,7 +504,6 @@
 .discovery-bg-video {
     position: absolute;
     top: 0;
-    /* left: 0; */
     width: 50%;
     height: 100%;
     object-fit: cover;
@@ -526,54 +519,22 @@
     right: 0;
 }
 
-.discovery-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
 .discovery-content {
-    display: flex;
     z-index: 2;
-    flex-direction: column;
-    gap: 1.8rem;
-    margin: 0 auto;
-    height: 320px;
-    padding: 1rem;
     width: 40%;
-    font-size: 1rem;
-    /* background: rgba(0, 0, 0, 0.35); */
-    /* box-shadow: 0 0 16px rgba(0, 0, 0, 0.5); */
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
     color: #eee;
-    backdrop-filter: blur(8px)
-}
-
-.discovery-content h3 {
-    font-size: 1.25rem;
-    color: #ffffff;
-    margin-bottom: 0.3rem;
-}
-
-.discovery-content p {
-    font-size: 0.95rem;
-    color: #cccccc;
-    line-height: 1.4;
-}
-
-.discovery-content p:last-child {
-    margin-top: 0.5rem;
-    color: #999;
-    font-size: 0.9rem;
+    backdrop-filter: blur(8px);
 }
 
 .discovery-header {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1rem;
 }
 
 .discovery-avatar-circle {
@@ -589,10 +550,9 @@
     justify-content: center;
 }
 
-.discovery.user-info .discovery-topic-title {
-    font-size: 1.1rem;
-    margin: 0;
-    color: #fff;
+.discovery-user-info {
+    display: flex;
+    flex-direction: column;
 }
 
 .discovery-user-top {
@@ -603,28 +563,46 @@
     color: #ccc;
 }
 
+.discovery-topic-title {
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 0;
+}
+
+.discovery-username {
+    font-size: 0.875rem;
+    color: #aaa;
+}
+
 .discovery-description-text {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: #f0f0f0;
+    font-size: 1.1rem;
+    color: #ddd;
+    line-height: 1.5;
 }
 
 .extra-fields p {
     font-size: 0.95rem;
     color: #ccc;
-    margin: 4px 0;
+    margin: 3px 0;
 }
 
-.discovery-footer .stat.big {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #fff;
+.discovery-link {
+    font-size: 0.9rem;
+    color: #66bfff;
 }
 
 .discovery-link a {
-    color: #84b8ff;
-    font-size: 0.92rem;
+    color: #66bfff;
     text-decoration: underline;
+}
+
+.discovery-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.2rem;
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-top: auto;
 }
 
 .dot {
@@ -645,56 +623,10 @@
     color: #9dcfff;
 }
 
-.badge.topic {
+.discovery-badge.topic {
     background-color: #4a344d;
     color: #f7b5f5;
 }
-
-.discovery-user-info .discovery-username {
-    font-size: 0.875rem;
-    color: #aaa;
-    margin-top: 2px;
-}
-
-.discovery-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.discovery-industry {
-    font-size: 0.9rem;
-    color: #aaa;
-    margin-bottom: 0.5rem;
-}
-
-.discovery-link {
-    font-size: 0.9rem;
-    color: #66bfff;
-    margin-bottom: 0.7rem;
-}
-
-.discovery-link a {
-    color: #66bfff;
-    text-decoration: underline;
-}
-
-.discovery-description-text {
-    font-size: 1.1rem;
-    color: #ddd;
-    line-height: 1.2;
-    margin-bottom: 0.7rem;
-}
-
-.discovery-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1.2rem;
-    font-size: 1.2rem;
-    color: #ccc;
-}
-
 
 .carousel-btn {
     position: absolute;
