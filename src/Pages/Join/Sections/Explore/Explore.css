@@ -512,6 +512,9 @@
     justify-content: center;
     flex-direction: column;
     gap: 0.5rem;
+    height: 230px;
+    width: 40%;
+    border: 2px solid black;
 }
 
 .discovery-content h3 {
