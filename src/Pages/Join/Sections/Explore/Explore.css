@@ -537,10 +537,9 @@
 
 .discovery-content {
     display: flex;
-    position: relative;
     z-index: 2;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1.8rem;
     margin: 0 auto;
     height: 320px;
     padding: 1rem;
@@ -603,12 +602,36 @@
     color: #ccc;
 }
 
+.discovery-description-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #f0f0f0;
+}
+
+.extra-fields p {
+    font-size: 0.95rem;
+    color: #ccc;
+    margin: 4px 0;
+}
+
+.discovery-footer .stat.big {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.discovery-link a {
+    color: #84b8ff;
+    font-size: 0.92rem;
+    text-decoration: underline;
+}
+
 .dot {
     font-weight: bold;
     color: #888;
 }
 
-.badge {
+.discovery-badge {
     padding: 0.2rem 0.5rem;
     border-radius: 12px;
     font-size: 0.75rem;
@@ -616,7 +639,7 @@
     text-transform: capitalize;
 }
 
-.badge.industry {
+.discovery-badge.industry {
     background-color: #373f68;
     color: #9dcfff;
 }

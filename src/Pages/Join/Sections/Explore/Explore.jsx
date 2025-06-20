@@ -91,6 +91,17 @@ export default function Explore() {
     }
   };
 
+  function formatTimeAgo(dateString) {
+    const now = new Date();
+    const created = new Date(dateString);
+    const diff = Math.floor((now - created) / 1000); // in seconds
+
+    if (diff < 60) return "just now";
+    if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)} hr ago`;
+    return `${Math.floor(diff / 86400)}d ago`;
+  }
+
   const handleLikeToggle = async () => {
     const token = localStorage.getItem("token");
     if (!token || !selectedPost) return;
@@ -407,13 +418,77 @@ export default function Explore() {
                                   @{item.username}
                                 </span>
                                 <span className="dot">•</span>
-                                <span className="timestamp">just now</span>
+                                <span className="timestamp">
+                                  {formatTimeAgo(item.createdAt)}
+                                </span>
                               </div>
                               <div className="discovery-topic-industry">
                                 <span className="badge industry">
                                   {item.industry}
                                 </span>
                                 <span className="badge topic">
+                                  {item.topic}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="discovery-description-text">
+                            {item.description?.slice(0, 180)}...
+                          </div>
+
+                          <div className="extra-fields">
+                            <p>
+                              <strong>Stage:</strong> {item.stage || "N/A"}
+                            </p>
+                            <p>
+                              <strong>Market:</strong> {item.market || "N/A"}
+                            </p>
+                            <p>
+                              <strong>Goals:</strong> {item.goals || "N/A"}
+                            </p>
+                          </div>
+
+                          {item.website && (
+                            <p className="discovery-link">
+                              🔗{" "}
+                              <a
+                                href={item.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {item.website}
+                              </a>
+                            </p>
+                          )}
+
+                          <div className="discovery-footer">
+                            <span className="stat big">
+                              ❤️ {item.likes?.length ?? 0}
+                            </span>
+                            <span className="stat big">
+                              💬 {item.comments?.length ?? 0}
+                            </span>
+                          </div>
+                        </div>
+                        {/* <div className="discovery-content">
+                          <div className="discovery-header">
+                            <div className="discovery-avatar-circle">
+                              {item.username.charAt(0).toUpperCase()}
+                            </div>
+                            <div className="discovery-user-info">
+                              <div className="discovery-user-top">
+                                <span className="discovery-username">
+                                  @{item.username}
+                                </span>
+                                <span className="dot">•</span>
+                                <span className="timestamp">just now</span>
+                              </div>
+                              <div className="discovery-topic-industry">
+                                <span className="discovery-badge industry">
+                                  {item.industry}
+                                </span>
+                                <span className="discovery-badge topic">
                                   {item.topic}
                                 </span>
                               </div>
@@ -440,54 +515,6 @@ export default function Explore() {
                           <div className="discovery-footer">
                             <span className="stat">
                               ❤️ {item.likes?.length ?? 0}
-                            </span>
-                            <span className="stat">
-                              💬 {item.comments?.length ?? 0}
-                            </span>
-                          </div>
-                        </div>
-                        {/* <div className="discovery-content">
-                          <div className="discovery-header">
-                            <div className="discovery-avatar-circle">
-                              @{item.username.charAt(0).toUpperCase()}
-                            </div>
-                            <div className="discovery-user-info">
-                              <h3 className="discovery-topic-title">
-                                {item.topic}
-                              </h3>
-                              <p className="discovery-username">
-                                @{item.username}
-                              </p>
-                            </div>
-                          </div>
-
-                          <p className="discovery-industry">
-                            Industry: <strong>{item.industry}</strong>
-                          </p>
-
-                          <p className="discovery-description-text">
-                            {item.description?.slice(0, 160)}...
-                          </p>
-
-                          {item.website && (
-                            <p className="discovery-link">
-                              🔗{" "}
-                              <a
-                                href={item.website}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {item.website}
-                              </a>
-                            </p>
-                          )}
-
-                          <div className="discovery-footer">
-                            <span className="stat">
-                              ❤️ {item.likes?.length ?? 0}
-                            </span>
-                            <span className="stat">
-                              💬 {item.comments?.length ?? 0}
                             </span>
                           </div>
                         </div> */}
