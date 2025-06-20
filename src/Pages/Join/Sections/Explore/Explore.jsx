@@ -391,7 +391,7 @@ export default function Explore() {
                         playsInline
                       >
                         <source
-                          src="/explore-video/search section 2.mp4"
+                          src="/explore-video/search section 3.mp4"
                           type="video/mp4"
                         />
                       </video>

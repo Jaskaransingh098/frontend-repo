@@ -522,12 +522,12 @@
 
 .discovery-bg-video.left {
     left: 0;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    /* border-right: 1px solid rgba(255, 255, 255, 0.05); */
 }
 
 .discovery-bg-video.right {
     right: 0;
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    /* border-left: 1px solid rgba(255, 255, 255, 0.05); */
 }
 
 .discovery-overlay {
@@ -551,7 +551,7 @@
     margin: 0 auto;
     height: 230px;
     padding: 1rem;
-    width: 70%;
+    width: 40%;
     /* border: 2px solid black; */
     /* box-shadow: 20px 20px 20px 20px white; */
 }
