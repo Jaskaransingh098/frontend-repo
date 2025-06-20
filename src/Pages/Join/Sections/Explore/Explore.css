@@ -546,9 +546,9 @@
     width: 40%;
     font-size: 1rem;
     /* background: rgba(0, 0, 0, 0.35); */
-    box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 0 16px rgba(0, 0, 0, 0.5); */
     color: #eee;
-    backdrop-filter: blur(8px)
+    /* backdrop-filter: blur(8px) */
 }
 
 .discovery-content h3 {
