@@ -548,7 +548,7 @@
     /* background: rgba(0, 0, 0, 0.35); */
     /* box-shadow: 0 0 16px rgba(0, 0, 0, 0.5); */
     color: #eee;
-    /* backdrop-filter: blur(8px) */
+    backdrop-filter: blur(8px)
 }
 
 .discovery-content h3 {
@@ -681,9 +681,9 @@
 }
 
 .discovery-description-text {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     color: #ddd;
-    line-height: 1.4;
+    line-height: 1.2;
     margin-bottom: 0.7rem;
 }
 
@@ -691,7 +691,7 @@
     display: flex;
     justify-content: flex-end;
     gap: 1.2rem;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: #ccc;
 }
 
