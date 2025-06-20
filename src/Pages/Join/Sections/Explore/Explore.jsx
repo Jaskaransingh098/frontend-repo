@@ -14,6 +14,7 @@ export default function Explore() {
   const wrapperRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trendingPosts, setTrendingPosts] = useState([]);
+  const [selectedTopic, setSelectedTopic] = useState("health");
   const industryImages = {
     tech: "/explore-video/tech.jpg",
     health: "/explore-video/healthcare.jpg",
@@ -22,7 +23,6 @@ export default function Explore() {
     food: "/explore-video/food.jpg",
   };
   const [randomPosts, setRandomPosts] = useState([]);
-  const [selectedTopic, setSelectedTopic] = useState(null);
 
   useEffect(() => {
     const fetchTrending = async () => {
