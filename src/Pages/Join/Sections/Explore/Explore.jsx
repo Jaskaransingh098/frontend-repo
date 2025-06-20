@@ -357,50 +357,64 @@ export default function Explore() {
                 {randomPosts.length > 0 ? (
                   randomPosts.map((item) => (
                     <div className="discovery-card-carousel" key={item._id}>
-                      <video className="discovery-video" src="/explore-video/search section 2.mp4" autoPlay loop muted></video>
-                      <div className="discovery-content">
-                        <div className="discovery-header">
-                          <div className="discovery-avatar-circle">
-                            @{item.username.charAt(0).toUpperCase()}
+                      <video
+                        className="discovery-bg-video"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                      >
+                        <source
+                          src="/explore-video/search section 2.mp4"
+                          type="video/mp4"
+                        />
+                        Your browser does not support the video tag.
+                      </video>
+                      <div className="discovery-overlay">
+                        <div className="discovery-content">
+                          <div className="discovery-header">
+                            <div className="discovery-avatar-circle">
+                              @{item.username.charAt(0).toUpperCase()}
+                            </div>
+                            <div className="discovery-user-info">
+                              <h3 className="discovery-topic-title">
+                                {item.topic}
+                              </h3>
+                              <p className="discovery-username">
+                                @{item.username}
+                              </p>
+                            </div>
                           </div>
-                          <div className="discovery-user-info">
-                            <h3 className="discovery-topic-title">
-                              {item.topic}
-                            </h3>
-                            <p className="discovery-username">
-                              @{item.username}
-                            </p>
-                          </div>
-                        </div>
 
-                        <p className="discovery-industry">
-                          Industry: <strong>{item.industry}</strong>
-                        </p>
-
-                        <p className="discovery-description-text">
-                          {item.description?.slice(0, 160)}...
-                        </p>
-
-                        {item.website && (
-                          <p className="discovery-link">
-                            🔗{" "}
-                            <a
-                              href={item.website}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {item.website}
-                            </a>
+                          <p className="discovery-industry">
+                            Industry: <strong>{item.industry}</strong>
                           </p>
-                        )}
 
-                        <div className="discovery-footer">
-                          <span className="stat">
-                            ❤️ {item.likes?.length ?? 0}
-                          </span>
-                          <span className="stat">
-                            💬 {item.comments?.length ?? 0}
-                          </span>
+                          <p className="discovery-description-text">
+                            {item.description?.slice(0, 160)}...
+                          </p>
+
+                          {item.website && (
+                            <p className="discovery-link">
+                              🔗{" "}
+                              <a
+                                href={item.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {item.website}
+                              </a>
+                            </p>
+                          )}
+
+                          <div className="discovery-footer">
+                            <span className="stat">
+                              ❤️ {item.likes?.length ?? 0}
+                            </span>
+                            <span className="stat">
+                              💬 {item.comments?.length ?? 0}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
