@@ -648,15 +648,6 @@
 }
 
 
-.myposts-page {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
 .post-card {
     background: linear-gradient(145deg, #1a1f2b, #162133);
     border-radius: 20px;

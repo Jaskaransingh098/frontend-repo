@@ -641,8 +641,6 @@ export default function Explore() {
             </button>
           </div>
         </div>
-      </div>
-      <div className="myposts-page">
         {allIdeas.map((idea, index) => (
           <div className="post-card" key={index}>
             <div className="post-header">
