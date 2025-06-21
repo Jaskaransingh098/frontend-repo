@@ -641,153 +641,151 @@ export default function Explore() {
             </button>
           </div>
         </div>
-        {allIdeas.map((idea, index) => (
-          <div className="post-card" key={index}>
-            <div className="post-header">
-              <div className="user-profile">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                  alt="profile pic"
-                  className="profile-pic"
-                />
-                <div>
-                  <h3 className="username">{idea.fullName}</h3>
-                  <p className="role">{idea.role}</p>
-                  <p className="timestamp">
-                    {new Date(idea.createdAt).toLocaleString()}
-                  </p>
+        <div className="all-posts-section">
+          <h2>All Posts</h2>
+          {allIdeas.map((idea, index) => (
+            <div className="post-card" key={index}>
+              <div className="post-header">
+                <div className="user-profile">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                    alt="profile pic"
+                    className="profile-pic"
+                  />
+                  <div>
+                    <h3 className="username">{idea.fullName}</h3>
+                    <p className="role">{idea.role}</p>
+                    <p className="timestamp">
+                      {new Date(idea.createdAt).toLocaleString()}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="post-content">
-              <div className="post-meta-grid">
-                <div>
-                  <strong>Topic:</strong> {idea.topic}
+              <div className="post-content">
+                <div className="post-meta-grid">
+                  <div>
+                    <strong>Topic:</strong> {idea.topic}
+                  </div>
+                  <div>
+                    <strong>Startup:</strong> {idea.startupName}
+                  </div>
+                  <div>
+                    <strong>Industry:</strong> {idea.industry}
+                  </div>
+                  <div>
+                    <strong>Website:</strong> {idea.website}
+                  </div>
                 </div>
-                <div>
-                  <strong>Startup name:</strong> {idea.startupName}
+                <div className="post-meta-grid">
+                  <div>
+                    <strong>Stage:</strong> {idea.stage}
+                  </div>
+                  <div>
+                    <strong>Goals:</strong> {idea.goals}
+                  </div>
+                  <div>
+                    <strong>Market:</strong> {idea.market}
+                  </div>
+                  <div>
+                    <strong>Email:</strong> {idea.email}
+                  </div>
                 </div>
-                <div>
-                  <strong>Industry:</strong> {idea.industry}
-                </div>
-                <div>
-                  <strong>Website:</strong> {idea.website}
+
+                <div className="description-box">
+                  <p className="description-text">
+                    {idea.description.length > 150 && !expandedIndexes[index]
+                      ? idea.description.slice(0, 150) + "..."
+                      : idea.description}
+                  </p>
+                  {idea.description.length > 150 && (
+                    <button
+                      className="readmore-btn"
+                      onClick={() => toggleReadMore(index)}
+                    >
+                      {expandedIndexes[index] ? "Read less" : "Read more"}
+                    </button>
+                  )}
                 </div>
               </div>
-              <div className="post-meta-grid">
-                <div>
-                  <strong>Stage:</strong> {idea.stage}
-                </div>
-                <div>
-                  <strong>Goals:</strong> {idea.goals}
-                </div>
-                <div>
-                  <strong>Market:</strong> {idea.market}
-                </div>
-                <div>
-                  <strong>Email:</strong> {idea.email}
-                </div>
-              </div>
-              <div className="description-box">
-                <div className="description-header">
-                  <span className="desc-icon">
-                    <i className="fa fa-align-left"></i>
-                  </span>
-                  <span className="desc-label">Description:</span>
-                </div>
-                <p className="description-text">
-                  {idea.description.length > 150 && !expandedIndexes[index]
-                    ? idea.description.slice(0, 150) + "..."
-                    : idea.description}
-                </p>
-                {idea.description.length > 150 && (
+
+              <div className="post-footer">
+                <div className="likes-comments">
                   <button
-                    className="readmore-btn"
-                    onClick={() => toggleReadMore(index)}
+                    className="icon-btn"
+                    onClick={() => toggleLike(index)}
                   >
-                    {expandedIndexes[index] ? "Read less" : "Read more"}
+                    {likedPosts[index] > 0 ? (
+                      <FaHeart color="red" />
+                    ) : (
+                      <FaRegHeart />
+                    )}
                   </button>
+                  <span>{likedPosts[index] || 0} Likes</span>
+                  <button
+                    className="icon-btn"
+                    onClick={() => toggleExistingComments(index)}
+                  >
+                    <BsChatDots />
+                  </button>
+                  <span>{allPostComments[index]?.length || 0} Comments</span>
+                </div>
+
+                {showExistingComments[index] && (
+                  <div className="comment-section">
+                    {(allPostComments[index] || []).map((comment, cIndex) => (
+                      <div key={cIndex} className="comment-item">
+                        <div className="comment-left">
+                          <FaUserCircle className="comment-avatar" />
+                          <div className="comment-content">
+                            <span className="comment-username">
+                              {comment.username}
+                            </span>
+                            <p className="comment-text">{comment.text}</p>
+                          </div>
+                        </div>
+                        {comment.username === currentUsername && (
+                          <button
+                            className="delete-comment-btn"
+                            onClick={() => deleteComment(index, cIndex)}
+                            title="Delete Comment"
+                          >
+                            <FaTrash />
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                    <div className="comment-box">
+                      <textarea
+                        placeholder="Write a comment..."
+                        value={newComment[index] || ""}
+                        onChange={(e) =>
+                          handleCommentChange(index, e.target.value)
+                        }
+                      />
+                      <button
+                        className="send-btn"
+                        onClick={() => postComment(index)}
+                        disabled={loadingComment[index]}
+                      >
+                        {loadingComment[index] ? (
+                          <div className="comment-spinner"></div>
+                        ) : (
+                          <FiSend />
+                        )}
+                      </button>
+                    </div>
+                    {commentFeedback[index] && (
+                      <div className="comment-feedback">
+                        {commentFeedback[index]}
+                      </div>
+                    )}
+                  </div>
                 )}
               </div>
             </div>
-
-            <div className="post-footer">
-              <div className="likes-comments">
-                <button className="icon-btn" onClick={() => toggleLike(index)}>
-                  {likedPosts[index] > 0 ? (
-                    <FaHeart color="red" />
-                  ) : (
-                    <FaRegHeart />
-                  )}
-                </button>
-                <span>{likedPosts[index] || 0} Likes</span>
-
-                <button
-                  className="icon-btn"
-                  onClick={() => toggleExistingComments(index)}
-                >
-                  <BsChatDots />
-                </button>
-                <span>{allPostComments[index]?.length || 0} Comments</span>
-              </div>
-
-              {showExistingComments[index] && (
-                <div className="comment-section">
-                  {(allPostComments[index] || []).map((comment, cIndex) => (
-                    <div key={cIndex} className="comment-item">
-                      <div className="comment-left">
-                        <FaUserCircle className="comment-avatar" />
-                        <div className="comment-content">
-                          <span className="comment-username">
-                            {comment.username}
-                          </span>
-                          <p className="comment-text">{comment.text}</p>
-                        </div>
-                      </div>
-                      {comment.username === currentUsername && (
-                        <button
-                          className="delete-comment-btn"
-                          onClick={() => deleteComment(index, cIndex)}
-                          title="Delete Comment"
-                        >
-                          <FaTrash />
-                        </button>
-                      )}
-                    </div>
-                  ))}
-
-                  <div className="comment-box">
-                    <textarea
-                      placeholder="Write a comment..."
-                      value={newComment[index] || ""}
-                      onChange={(e) =>
-                        handleCommentChange(index, e.target.value)
-                      }
-                    />
-                    <button
-                      className="send-btn"
-                      onClick={() => postComment(index)}
-                      disabled={loadingComment[index]}
-                    >
-                      {loadingComment[index] ? (
-                        <div className="comment-spinner"></div>
-                      ) : (
-                        <FiSend />
-                      )}
-                    </button>
-                  </div>
-
-                  {commentFeedback[index] && (
-                    <div className="comment-feedback">
-                      {commentFeedback[index]}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   );
