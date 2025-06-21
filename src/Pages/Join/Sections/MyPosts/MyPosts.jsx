@@ -27,7 +27,6 @@ import "./MyPosts.css";
 
 
 export default function MyPosts() {
-  const [ref1, intView1] = useInView({ triggerOnce: false, threshold: 0.2 });
   const [myIdeas, setMyIdeas] = useState([]);
   const [expandedIndexes, setExpandedIndexes] = useState({});
   const [likedPosts, setLikedPosts] = useState({});
@@ -725,12 +724,6 @@ export default function MyPosts() {
                         handleCommentChange(index, e.target.value)
                       }
                     />
-                    {/* <button
-                      className="send-btn"
-                      onClick={() => postComment(index)}
-                    >
-                      <FiSend />
-                    </button> */}
                     <button
                       className="send-btn"
                       onClick={() => postComment(index)}
