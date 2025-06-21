@@ -12,6 +12,7 @@ import {
 import { BsChatDots } from "react-icons/bs";
 import { FiSend } from "react-icons/fi";
 import "./Explore.css";
+import "./MyPosts.css";
 
 export default function Explore() {
   const [query, setQuery] = useState("");
