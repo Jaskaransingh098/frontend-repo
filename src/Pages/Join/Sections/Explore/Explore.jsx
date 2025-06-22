@@ -26,6 +26,11 @@ export default function Explore() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trendingPosts, setTrendingPosts] = useState([]);
   const [selectedTopic, setSelectedTopic] = useState("health");
+  const [allPosts, setAllPosts] = useState([]);
+  const [allPostLikes, setAllPostLikes] = useState({});
+  const [allPostComments, setAllPostComments] = useState({});
+  const [allNewComments, setAllNewComments] = useState({});
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const industryImages = {
     tech: "/explore-video/tech.jpg",
     health: "/explore-video/healthcare.jpg",
@@ -90,6 +95,40 @@ export default function Explore() {
     fetchRandomPosts();
   }, []);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const fetchAllPosts = async () => {
+      try {
+        const decoded = jwtDecode(token);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/post/allposts`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        const ideas = response.data.ideas;
+        setAllPosts(ideas);
+        setFilteredPosts(ideas);
+
+        const likeMap = {};
+        const commentMap = {};
+        ideas.forEach((idea, idx) => {
+          likeMap[idx] = idea.likes?.length || 0;
+          commentMap[idx] = idea.comments || [];
+        });
+
+        setAllPostLikes(likeMap);
+        setAllPostComments(commentMap);
+      } catch (err) {
+        console.error("Failed to fetch all posts", err);
+      }
+    };
+
+    fetchAllPosts();
+  }, []);
 
   useEffect(() => {
     if (!query.trim()) {
@@ -213,6 +252,57 @@ export default function Explore() {
     setCurrentIndex((prev) => (prev === 0 ? randomPosts.length - 1 : prev - 1));
   };
 
+  const [showCommentsIndex, setShowCommentsIndex] = useState(null);
+
+  const toggleAllPostComments = (index) => {
+    setShowCommentsIndex((prev) => (prev === index ? null : index));
+  };
+
+  const handleAllPostLike = async (index, postId) => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/post/${postId}/like`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setAllPostLikes((prev) => ({
+        ...prev,
+        [index]: res.data.likes.length,
+      }));
+    } catch (err) {
+      console.error("Error liking post:", err);
+    }
+  };
+
+  const submitAllPostComment = async (index, postId) => {
+    const text = allNewComments[index];
+    if (!text?.trim()) return;
+
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
+        { text },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setAllPostComments((prev) => ({
+        ...prev,
+        [index]: [...(prev[index] || []), res.data],
+      }));
+
+      setAllNewComments((prev) => ({ ...prev, [index]: "" }));
+    } catch (err) {
+      console.error("Error posting comment:", err);
+    }
+  };
+
   return (
     <>
       <div className="explore-page-insider">
@@ -226,20 +316,21 @@ export default function Explore() {
               className={`explore-search ${isAnimating ? "active-border" : ""}`}
               type="text"
               id="search-tags"
+              name="searchTags"
               placeholder="Search tags..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              // onKeyDown={(e) => {
-              //   if (e.key === "Enter") {
-              //     const trimmed = query.trim().toLowerCase();
-              //     const filtered = allPosts.filter((post) =>
-              //       post.industry?.toLowerCase().includes(trimmed)
-              //     );
-              //     setFilteredPosts(filtered);
-              //   }
-              // }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  const trimmed = query.trim().toLowerCase();
+                  const filtered = allPosts.filter((post) =>
+                    post.industry?.toLowerCase().includes(trimmed)
+                  );
+                  setFilteredPosts(filtered);
+                }
+              }}
             />
 
             <button
@@ -258,15 +349,15 @@ export default function Explore() {
                     <li
                       key={tag}
                       className={activeTag === tag ? "active-tag" : ""}
-                      // onClick={() => {
-                      //   setQuery(tag);
-                      //   setActiveTag(tag);
-                      //   const filtered = allPosts.filter(
-                      //     (post) =>
-                      //       post.industry?.toLowerCase() === tag.toLowerCase()
-                      //   );
-                      //   setFilteredPosts(filtered);
-                      // }}
+                      onClick={() => {
+                        setQuery(tag);
+                        setActiveTag(tag);
+                        const filtered = allPosts.filter(
+                          (post) =>
+                            post.industry?.toLowerCase() === tag.toLowerCase()
+                        );
+                        setFilteredPosts(filtered);
+                      }}
                     >
                       {tag}
                     </li>
@@ -284,7 +375,7 @@ export default function Explore() {
             }`}
           >
             <div className="trending-cards-panel">
-              {allPosts.map((post) => {
+              {trendingPosts.map((post) => {
                 const industryKey =
                   post.industry?.toLowerCase().replace(/\s-/g, "") || "default";
                 const backgroundImage =
@@ -536,7 +627,98 @@ export default function Explore() {
           </div>
         </div>
         <h2 className="section-heading">All Posts</h2>
-        
+        <div className="all-posts-wrapper">
+          {filteredPosts.map((post, index) => (
+            <div className="all-post-card" key={post._id}>
+              <div className="all-post-header">
+                <h3 className="all-post-topic">{post.topic}</h3>
+                <span className="all-post-meta">
+                  by {post.username} • {formatTimeAgo(post.createdAt)}
+                </span>
+              </div>
+
+              <div className="all-post-meta-grid">
+                <div>
+                  <strong>Startup:</strong> {post.startupName}
+                </div>
+                <div>
+                  <strong>Industry:</strong> {post.industry}
+                </div>
+                <div>
+                  <strong>Stage:</strong> {post.stage}
+                </div>
+                <div>
+                  <strong>Goals:</strong> {post.goals}
+                </div>
+                <div>
+                  <strong>Market:</strong> {post.market}
+                </div>
+                <div>
+                  <strong>Role:</strong> {post.role}
+                </div>
+                <div>
+                  <strong>Website:</strong> {post.website}
+                </div>
+                <div>
+                  <strong>Email:</strong> {post.email}
+                </div>
+              </div>
+
+              <div className="all-post-description">
+                <strong>Description:</strong>
+                <p>
+                  {post.description.length > 150
+                    ? post.description.slice(0, 150) + "..."
+                    : post.description}
+                </p>
+              </div>
+
+              <div className="all-post-footer">
+                <div className="all-likes-comments">
+                  <button onClick={() => handleAllPostLike(index, post._id)}>
+                    {allPostLikes[index] > 0 ? <FaHeart /> : <FaRegHeart />}
+                    <span>{allPostLikes[index]}</span>
+                  </button>
+                  <button onClick={() => toggleAllPostComments(index)}>
+                    <BsChatDots />
+                    <span>{allPostComments[index]?.length || 0}</span>
+                  </button>
+                </div>
+              </div>
+
+              {showCommentsIndex === index && (
+                <div className="all-comments-section">
+                  {(allPostComments[index] || []).map((comment, cIdx) => (
+                    <div key={cIdx} className="comment">
+                      <FaUserCircle className="user-icon" />
+                      <span className="comment-text">
+                        <strong>{comment.username}:</strong> {comment.text}
+                      </span>
+                    </div>
+                  ))}
+
+                  <div className="comment-input-box">
+                    <input
+                      type="text"
+                      placeholder="Write a comment..."
+                      value={allNewComments[index] || ""}
+                      onChange={(e) =>
+                        setAllNewComments((prev) => ({
+                          ...prev,
+                          [index]: e.target.value,
+                        }))
+                      }
+                    />
+                    <FiSend
+                      className="send-icon"
+                      onClick={() => submitAllPostComment(index, post._id)}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
