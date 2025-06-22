@@ -141,6 +141,15 @@ export default function Explore() {
 
     fetchAllPosts();
   }, []);
+  useEffect(() => {
+    allPosts.forEach((post, i) => {
+      console.log(`Post ${i}:`, {
+        topic: post.topic,
+        desc: post.description,
+        comments: post.comments,
+      });
+    });
+  }, [allPosts]);
 
   function formatTimeAgo(dateString) {
     const now = new Date();
@@ -647,9 +656,10 @@ export default function Explore() {
                         <span className="desc-label">Description:</span>
                       </div>
                       <p className="all-description-text">
-                        {post.description.length > 150
+                        {typeof post.description === "string" &&
+                        post.description.length > 150
                           ? post.description.slice(0, 150) + "..."
-                          : post.description}
+                          : post.description ?? "No description available"}
                       </p>
                     </div>
                   </div>
@@ -689,10 +699,10 @@ export default function Explore() {
                                 <FaUserCircle className="comment-avatar" />
                                 <div className="comment-content">
                                   <span className="comment-username">
-                                    {comment?.username || "Anonymous"}
+                                    {comment?.username ?? "Anonymous"}
                                   </span>
                                   <p className="comment-text">
-                                    {comment?.text || "No comment"}
+                                    {comment?.text ?? "No comment"}
                                   </p>
                                 </div>
                               </div>
@@ -702,8 +712,7 @@ export default function Explore() {
 
                         <div className="comment-box">
                           <textarea
-                            placeholder="Write a comment..."
-                            value={allNewComments?.[index] || ""}
+                            value={allNewComments?.[index] ?? ""}
                             onChange={(e) =>
                               setAllNewComments((prev) => ({
                                 ...prev,
