@@ -275,6 +275,9 @@ export default function Explore() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
+      const newComment = res.data;
+      if (!newComment || typeof newComment !== "object") return;
+
       setAllPostComments((prev) => ({
         ...prev,
         [index]: [...(prev[index] || []), res.data],
