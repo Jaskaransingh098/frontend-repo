@@ -333,10 +333,13 @@ export default function Explore() {
               }}
             />
 
-            <button className="clear-filter-btn" onClick={() => {
-              setQuery("");
-              setActiveTag("");
-            }}>
+            <button
+              className="clear-filter-btn"
+              onClick={() => {
+                setQuery("");
+                setActiveTag("");
+              }}
+            >
               Clear Filter
             </button>
             <div className="suggestion-tags">
@@ -345,6 +348,7 @@ export default function Explore() {
                   (tag) => (
                     <li
                       key={tag}
+                      className={activeTag === tag ? "active-tag" : ""}
                       onClick={() => {
                         setQuery(tag);
                         setActiveTag(tag);
