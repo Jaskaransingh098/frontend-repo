@@ -689,15 +689,15 @@ export default function Explore() {
               {showCommentsIndex === index && (
                 <div className="all-comments-section">
                   {(allPostComments[index] || []).map((comment, cIdx) => (
-                    <div key={cIdx} className="comment">
-                      <FaUserCircle className="user-icon" />
-                      <span className="comment-text">
+                    <div key={cIdx} className="all-comment">
+                      <FaUserCircle className="all-user-icon" />
+                      <span className="all-comment-text">
                         <strong>{comment.username}:</strong> {comment.text}
                       </span>
                     </div>
                   ))}
 
-                  <div className="comment-input-box">
+                  <div className="all-comment-input-box">
                     <input
                       type="text"
                       placeholder="Write a comment..."
@@ -710,7 +710,7 @@ export default function Explore() {
                       }
                     />
                     <FiSend
-                      className="send-icon"
+                      className="all-send-icon"
                       onClick={() => submitAllPostComment(index, post._id)}
                     />
                   </div>
