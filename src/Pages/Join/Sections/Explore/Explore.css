@@ -675,7 +675,7 @@
 .carousel-btn:hover {
     background: #555;
 }
-/* 
+
 .all-posts-wrapper {
     display: flex;
     flex-direction: column;
@@ -817,4 +817,4 @@
     color: #3a86ff;
     font-size: 1.3rem;
     cursor: pointer;
-} */
+}
