@@ -682,25 +682,28 @@ export default function Explore() {
 
                     {showCommentsIndex === index && (
                       <div className="all-comment-section">
-                        {Array.isArray(allPostComments[index]) &&
-                          allPostComments[index].map((comment, cIndex) => (
+                        {(allPostComments?.[index] || []).map(
+                          (comment, cIndex) => (
                             <div key={cIndex} className="comment-item">
                               <div className="comment-left">
                                 <FaUserCircle className="comment-avatar" />
                                 <div className="comment-content">
                                   <span className="comment-username">
-                                    {comment.username}
+                                    {comment?.username || "Anonymous"}
                                   </span>
-                                  <p className="comment-text">{comment.text}</p>
+                                  <p className="comment-text">
+                                    {comment?.text || "No comment"}
+                                  </p>
                                 </div>
                               </div>
                             </div>
-                          ))}
+                          )
+                        )}
 
                         <div className="comment-box">
                           <textarea
                             placeholder="Write a comment..."
-                            value={allNewComments[index] || ""}
+                            value={allNewComments?.[index] || ""}
                             onChange={(e) =>
                               setAllNewComments((prev) => ({
                                 ...prev,
@@ -709,7 +712,6 @@ export default function Explore() {
                             }
                           />
                           <button
-                            type="button"
                             className="send-btn"
                             onClick={() =>
                               submitAllPostComment(index, post._id)
