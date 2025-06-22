@@ -692,8 +692,9 @@
     padding: 1.8rem;
     box-shadow: 0 15px 35px rgba(10, 20, 40, 0.7);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 100%;
+    width: 70%;
     min-height: 320px;
+    margin-bottom: 30px;
 }
 
 .all-post-card:hover {
