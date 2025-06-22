@@ -94,19 +94,19 @@
 }
 
 .clear-filter-btn {
-    background-color: transparent;
-    color: #3a86ff;
+    background-color: #3a3a3d;
+    color: white;
     border: 1px solid #3a86ff;
     padding: 8px 16px;
     border-radius: 20px;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     margin-top: 5px;
 }
 
 .clear-filter-btn:hover {
-    background-color: #3a86ff;
+    background-color: #68009c;
     color: white;
 }
 
