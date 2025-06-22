@@ -316,7 +316,6 @@ export default function Explore() {
               className={`explore-search ${isAnimating ? "active-border" : ""}`}
               type="text"
               id="search-tags"
-              name="searchTags"
               placeholder="Search tags..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
