@@ -26,6 +26,10 @@ export default function Explore() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trendingPosts, setTrendingPosts] = useState([]);
   const [selectedTopic, setSelectedTopic] = useState("health");
+  const [allPosts, setAllPosts] = useState([]);
+  const [allPostLikes, setAllPostLikes] = useState({});
+  const [allPostComments, setAllPostComments] = useState({});
+  const [allNewComments, setAllNewComments] = useState({});
   const industryImages = {
     tech: "/explore-video/tech.jpg",
     health: "/explore-video/healthcare.jpg",
@@ -87,6 +91,40 @@ export default function Explore() {
       }
     };
     fetchRandomPosts();
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const fetchAllPosts = async () => {
+      try {
+        const decoded = jwtDecode(token);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/post/allposts`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        const ideas = response.data.ideas;
+        setAllPosts(ideas);
+
+        const likeMap = {};
+        const commentMap = {};
+        ideas.forEach((idea, idx) => {
+          likeMap[idx] = idea.likes?.length || 0;
+          commentMap[idx] = idea.comments || [];
+        });
+
+        setAllPostLikes(likeMap);
+        setAllPostComments(commentMap);
+      } catch (err) {
+        console.error("Failed to fetch all posts", err);
+      }
+    };
+
+    fetchAllPosts();
   }, []);
 
   const fetchPostsByIndustry = async (industry) => {
@@ -200,44 +238,11 @@ export default function Explore() {
     setCurrentIndex((prev) => (prev === 0 ? randomPosts.length - 1 : prev - 1));
   };
 
-  const [allPosts, setAllPosts] = useState([]);
-  const [allPostLikes, setAllPostLikes] = useState({});
-  const [allPostComments, setAllPostComments] = useState({});
-  const [allNewComments, setAllNewComments] = useState({});
   const [showCommentsIndex, setShowCommentsIndex] = useState(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    const fetchAllPosts = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/post/allposts`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        const posts = response.data.ideas;
-        setAllPosts(posts);
-
-        const likesMap = {};
-        const commentsMap = {};
-        posts.forEach((post, idx) => {
-          likesMap[idx] = post.likes?.length || 0;
-          commentsMap[idx] = post.comments || [];
-        });
-
-        setAllPostLikes(likesMap);
-        setAllPostComments(commentsMap);
-      } catch (err) {
-        console.error("Error fetching all posts:", err);
-      }
-    };
-
-    fetchAllPosts();
-  }, []);
+  const toggleAllPostComments = (index) => {
+    setShowCommentsIndex((prev) => (prev === index ? null : index));
+  };
 
   const handleAllPostLike = async (index, postId) => {
     const token = localStorage.getItem("token");
@@ -247,7 +252,9 @@ export default function Explore() {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/post/${postId}/like`,
         {},
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       setAllPostLikes((prev) => ({
@@ -257,10 +264,6 @@ export default function Explore() {
     } catch (err) {
       console.error("Error liking post:", err);
     }
-  };
-
-  const toggleAllPostComments = (index) => {
-    setShowCommentsIndex((prev) => (prev === index ? null : index));
   };
 
   const submitAllPostComment = async (index, postId) => {
@@ -275,13 +278,11 @@ export default function Explore() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      const newComment = res.data;
-      if (!newComment || typeof newComment !== "object") return;
-
       setAllPostComments((prev) => ({
         ...prev,
         [index]: [...(prev[index] || []), res.data],
       }));
+
       setAllNewComments((prev) => ({ ...prev, [index]: "" }));
     } catch (err) {
       console.error("Error posting comment:", err);
@@ -578,129 +579,62 @@ export default function Explore() {
           </div>
         </div>
         <h2 className="section-heading">All Posts</h2>
-        <div className="allposts-page">
+        <div className="all-posts-container">
           {allPosts.map((post, index) => (
-            <div className="all-post-card" key={post._id}>
-              <div className="all-post-header">
-                <div className="all-user-profile">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                    alt="profile"
-                    className="all-profile-pic"
-                  />
-                  <div>
-                    <h3 className="all-username">{post.fullName}</h3>
-                    <p className="all-role">{post.role}</p>
-                    <p className="all-timestamp">
-                      {new Date(post.createdAt).toLocaleString()}
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <div className="post-card" key={post._id}>
+              <h3 className="post-topic">{post.topic}</h3>
+              <p className="post-description">
+                {post.description.length > 150
+                  ? post.description.slice(0, 150) + "..."
+                  : post.description}
+              </p>
 
-              <div className="all-post-content">
-                <div className="all-post-meta-grid">
-                  <div>
-                    <strong>Topic:</strong> {post.topic}
-                  </div>
-                  <div>
-                    <strong>Startup:</strong> {post.startupName}
-                  </div>
-                  <div>
-                    <strong>Industry:</strong> {post.industry}
-                  </div>
-                  <div>
-                    <strong>Stage:</strong> {post.stage}
-                  </div>
-                  <div>
-                    <strong>Goals:</strong> {post.goals}
-                  </div>
-                  <div>
-                    <strong>Market:</strong> {post.market}
-                  </div>
-                  <div>
-                    <strong>Website:</strong> {post.website}
-                  </div>
-                  <div>
-                    <strong>Email:</strong> {post.email}
-                  </div>
-                </div>
-
-                <div className="all-description-box">
-                  <div className="all-description-header">
-                    <span className="desc-icon">
-                      <i className="fa fa-align-left"></i>
-                    </span>
-                    <span className="desc-label">Description:</span>
-                  </div>
-                  <p className="all-description-text">
-                    {post.description.length > 150
-                      ? post.description.slice(0, 150) + "..."
-                      : post.description}
-                  </p>
-                </div>
-              </div>
-
-              <div className="all-post-footer">
-                <div className="all-likes-comments">
-                  <button
-                    className="icon-btn"
-                    onClick={() => handleAllPostLike(index, post._id)}
-                  >
-                    {allPostLikes[index] > 0 ? (
-                      <FaHeart color="red" />
-                    ) : (
-                      <FaRegHeart />
-                    )}
+              <div className="post-footer">
+                <div className="likes-comments">
+                  <button onClick={() => handleAllPostLike(index, post._id)}>
+                    {allPostLikes[index] > 0 ? <FaHeart /> : <FaRegHeart />}
+                    <span>{allPostLikes[index]}</span>
                   </button>
-                  <span>{allPostLikes[index] || 0} Likes</span>
-
-                  <button
-                    className="icon-btn"
-                    onClick={() => toggleAllPostComments(index)}
-                  >
+                  <button onClick={() => toggleAllPostComments(index)}>
                     <BsChatDots />
+                    <span>{allPostComments[index]?.length || 0}</span>
                   </button>
-                  <span>{(allPostComments[index] || []).length} Comments</span>
                 </div>
-
-                {showCommentsIndex === index && (
-                  <div className="all-comment-section">
-                    {(allPostComments[index] || []).map((comment, cIndex) => (
-                      <div key={cIndex} className="comment-item">
-                        <div className="comment-left">
-                          <FaUserCircle className="comment-avatar" />
-                          <div className="comment-content">
-                            <span className="comment-username">
-                              {comment.username}
-                            </span>
-                            <p className="comment-text">{comment.text}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-
-                    <div className="comment-box">
-                      <textarea
-                        placeholder="Write a comment..."
-                        value={allNewComments[index] || ""}
-                        onChange={(e) =>
-                          setAllNewComments((prev) => ({
-                            ...prev,
-                            [index]: e.target.value,
-                          }))
-                        }
-                      />
-                      <button
-                        className="send-btn"
-                        onClick={() => submitAllPostComment(index, post._id)}
-                      >
-                        <FiSend />
-                      </button>
-                    </div>
-                  </div>
-                )}
+                <span className="post-meta">
+                  by {post.username} • {formatTimeAgo(post.createdAt)}
+                </span>
               </div>
+
+              {showCommentsIndex === index && (
+                <div className="comments-section">
+                  {allPostComments[index]?.map((comment, cIdx) => (
+                    <div key={cIdx} className="comment">
+                      <FaUserCircle className="user-icon" />
+                      <span className="comment-text">
+                        <strong>{comment.username}:</strong> {comment.text}
+                      </span>
+                    </div>
+                  ))}
+
+                  <div className="comment-input-box">
+                    <input
+                      type="text"
+                      placeholder="Write a comment..."
+                      value={allNewComments[index] || ""}
+                      onChange={(e) =>
+                        setAllNewComments((prev) => ({
+                          ...prev,
+                          [index]: e.target.value,
+                        }))
+                      }
+                    />
+                    <FiSend
+                      className="send-icon"
+                      onClick={() => submitAllPostComment(index, post._id)}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
