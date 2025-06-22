@@ -626,7 +626,7 @@ export default function Explore() {
           </div>
         </div>
         <h2 className="section-heading">All Posts</h2>
-        {/* <div className="all-posts-wrapper">
+        <div className="all-posts-wrapper">
           {filteredPosts.map((post, index) => (
             <div className="all-post-card" key={post._id}>
               <div className="all-post-header">
@@ -717,7 +717,7 @@ export default function Explore() {
               )}
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
     </>
   );
