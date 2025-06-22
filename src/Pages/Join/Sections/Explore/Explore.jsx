@@ -277,6 +277,8 @@ export default function Explore() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
+      console.log("New comment response:", res.data);
+
       setAllPostComments((prev) => ({
         ...prev,
         [index]: [...(prev[index] || []), res.data],
@@ -654,6 +656,7 @@ export default function Explore() {
                   <span>{allPostLikes[index] || 0} Likes</span>
 
                   <button
+                    type="button"
                     className="icon-btn"
                     onClick={() => toggleAllPostComments(index)}
                   >
@@ -690,6 +693,7 @@ export default function Explore() {
                         }
                       />
                       <button
+                        type="button"
                         className="send-btn"
                         onClick={() => submitAllPostComment(index, post._id)}
                       >
