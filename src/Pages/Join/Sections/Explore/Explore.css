@@ -687,7 +687,7 @@
 .all-posts-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 44px;
     padding: 2rem;
 }
 
