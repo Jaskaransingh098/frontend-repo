@@ -600,8 +600,8 @@ export default function Explore() {
         <h2 className="section-heading">All Posts</h2>
         <div className="allposts-page">
           {Array.isArray(allPosts) && allPosts.length > 0 ? (
-            <div className="allposts-page">
-              {allPosts.map((post, index) => (
+            allPosts.map((post, index) => (
+              <div className="all-post-card" key={index}>
                 <div className="all-post-card" key={index}>
                   <div className="all-post-header">
                     <div className="all-user-profile">
@@ -735,10 +735,10 @@ export default function Explore() {
                     )}
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))
           ) : (
-            <div className="allposts-page">No posts found.</div>
+            <div>No posts found.</div>
           )}
         </div>
       </div>
