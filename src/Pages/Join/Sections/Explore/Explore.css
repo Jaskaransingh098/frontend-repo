@@ -675,43 +675,7 @@
 .carousel-btn:hover {
     background: #555;
 }
-
-/* .all-posts-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 20px;
-}
-
-.post-card {
-    background: #111;
-    color: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    width: 300px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-}
-
-.post-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.likes-comments {
-    display: flex;
-    gap: 10px;
-}
-
-.comment-input-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-} */
-
-
+/* 
 .all-posts-wrapper {
     display: flex;
     flex-direction: column;
@@ -853,4 +817,4 @@
     color: #3a86ff;
     font-size: 1.3rem;
     cursor: pointer;
-}
+} */
