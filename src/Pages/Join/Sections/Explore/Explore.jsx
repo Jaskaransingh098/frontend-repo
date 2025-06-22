@@ -374,7 +374,7 @@ export default function Explore() {
             }`}
           >
             <div className="trending-cards-panel">
-              {trendingPosts.map((post) => {
+              {allPosts.map((post) => {
                 const industryKey =
                   post.industry?.toLowerCase().replace(/\s-/g, "") || "default";
                 const backgroundImage =
