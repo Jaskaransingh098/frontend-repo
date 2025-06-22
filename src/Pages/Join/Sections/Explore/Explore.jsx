@@ -40,6 +40,13 @@ export default function Explore() {
   const [randomPosts, setRandomPosts] = useState([]);
 
   useEffect(() => {
+    const canvas = document.querySelector("canvas");
+    if (canvas && canvas.style.zIndex === "1000000000") {
+      console.warn("⚠️ Suspicious canvas overlay found", canvas);
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchTrending = async () => {
       try {
         const response = await axios.get(
