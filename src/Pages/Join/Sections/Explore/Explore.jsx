@@ -579,18 +579,54 @@ export default function Explore() {
           </div>
         </div>
         <h2 className="section-heading">All Posts</h2>
-        <div className="all-posts-container">
+        <div className="all-posts-wrapper">
           {allPosts.map((post, index) => (
-            <div className="post-card" key={post._id}>
-              <h3 className="post-topic">{post.topic}</h3>
-              <p className="post-description">
-                {post.description.length > 150
-                  ? post.description.slice(0, 150) + "..."
-                  : post.description}
-              </p>
+            <div className="all-post-card" key={post._id}>
+              <div className="all-post-header">
+                <h3 className="all-post-topic">{post.topic}</h3>
+                <span className="all-post-meta">
+                  by {post.username} • {formatTimeAgo(post.createdAt)}
+                </span>
+              </div>
 
-              <div className="post-footer">
-                <div className="likes-comments">
+              <div className="all-post-meta-grid">
+                <div>
+                  <strong>Startup:</strong> {post.startupName}
+                </div>
+                <div>
+                  <strong>Industry:</strong> {post.industry}
+                </div>
+                <div>
+                  <strong>Stage:</strong> {post.stage}
+                </div>
+                <div>
+                  <strong>Goals:</strong> {post.goals}
+                </div>
+                <div>
+                  <strong>Market:</strong> {post.market}
+                </div>
+                <div>
+                  <strong>Role:</strong> {post.role}
+                </div>
+                <div>
+                  <strong>Website:</strong> {post.website}
+                </div>
+                <div>
+                  <strong>Email:</strong> {post.email}
+                </div>
+              </div>
+
+              <div className="all-post-description">
+                <strong>Description:</strong>
+                <p>
+                  {post.description.length > 150
+                    ? post.description.slice(0, 150) + "..."
+                    : post.description}
+                </p>
+              </div>
+
+              <div className="all-post-footer">
+                <div className="all-likes-comments">
                   <button onClick={() => handleAllPostLike(index, post._id)}>
                     {allPostLikes[index] > 0 ? <FaHeart /> : <FaRegHeart />}
                     <span>{allPostLikes[index]}</span>
@@ -600,14 +636,11 @@ export default function Explore() {
                     <span>{allPostComments[index]?.length || 0}</span>
                   </button>
                 </div>
-                <span className="post-meta">
-                  by {post.username} • {formatTimeAgo(post.createdAt)}
-                </span>
               </div>
 
               {showCommentsIndex === index && (
-                <div className="comments-section">
-                  {allPostComments[index]?.map((comment, cIdx) => (
+                <div className="all-comments-section">
+                  {(allPostComments[index] || []).map((comment, cIdx) => (
                     <div key={cIdx} className="comment">
                       <FaUserCircle className="user-icon" />
                       <span className="comment-text">

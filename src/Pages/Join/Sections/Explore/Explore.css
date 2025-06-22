@@ -648,7 +648,7 @@
     background: #555;
 }
 
-.all-posts-container {
+/* .all-posts-container {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
@@ -681,4 +681,139 @@
     align-items: center;
     gap: 10px;
     margin-top: 10px;
+} */
+
+
+.all-posts-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 2rem;
+}
+
+.all-post-card {
+    background: linear-gradient(145deg, #1a1f2b, #162133);
+    border-radius: 16px;
+    padding: 1.8rem;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    color: #fff;
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+}
+
+.all-post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.all-post-topic {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.all-post-meta {
+    font-size: 0.85rem;
+    color: #7a8ba6;
+    font-style: italic;
+}
+
+.all-post-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.7rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+.all-post-meta-grid div strong {
+    color: #3a86ff;
+}
+
+.all-post-description {
+    margin-bottom: 1rem;
+}
+
+.all-post-description p {
+    margin-top: 6px;
+    line-height: 1.5;
+    color: #ddd;
+}
+
+.all-post-footer {
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+
+.all-likes-comments {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.all-likes-comments button {
+    background: none;
+    border: none;
+    color: #9ab5d1;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.all-likes-comments button:hover {
+    color: #3a86ff;
+}
+
+.all-comments-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #444;
+}
+
+.comment {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+    color: #eee;
+}
+
+.comment .user-icon {
+    font-size: 1.2rem;
+    color: #3a86ff;
+}
+
+.comment-text {
+    font-size: 0.9rem;
+}
+
+.comment-input-box {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 10px;
+}
+
+.comment-input-box input {
+    flex: 1;
+    background: #222;
+    border: 1px solid #3a86ff44;
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    color: #fff;
+}
+
+.send-icon {
+    color: #3a86ff;
+    font-size: 1.3rem;
+    cursor: pointer;
 }
