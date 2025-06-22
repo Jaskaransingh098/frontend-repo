@@ -231,15 +231,15 @@ export default function Explore() {
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  const trimmed = query.trim().toLowerCase();
-                  const filtered = allPosts.filter((post) =>
-                    post.industry?.toLowerCase().includes(trimmed)
-                  );
-                  setFilteredPosts(filtered);
-                }
-              }}
+              // onKeyDown={(e) => {
+              //   if (e.key === "Enter") {
+              //     const trimmed = query.trim().toLowerCase();
+              //     const filtered = allPosts.filter((post) =>
+              //       post.industry?.toLowerCase().includes(trimmed)
+              //     );
+              //     setFilteredPosts(filtered);
+              //   }
+              // }}
             />
 
             <button
@@ -258,15 +258,15 @@ export default function Explore() {
                     <li
                       key={tag}
                       className={activeTag === tag ? "active-tag" : ""}
-                      onClick={() => {
-                        setQuery(tag);
-                        setActiveTag(tag);
-                        const filtered = allPosts.filter(
-                          (post) =>
-                            post.industry?.toLowerCase() === tag.toLowerCase()
-                        );
-                        setFilteredPosts(filtered);
-                      }}
+                      // onClick={() => {
+                      //   setQuery(tag);
+                      //   setActiveTag(tag);
+                      //   const filtered = allPosts.filter(
+                      //     (post) =>
+                      //       post.industry?.toLowerCase() === tag.toLowerCase()
+                      //   );
+                      //   setFilteredPosts(filtered);
+                      // }}
                     >
                       {tag}
                     </li>
