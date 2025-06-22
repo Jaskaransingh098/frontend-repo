@@ -297,6 +297,8 @@ export default function Explore() {
             <input
               className={`explore-search ${isAnimating ? "active-border" : ""}`}
               type="text"
+              id="search-tags"
+              name="searchTags"
               placeholder="Search tags..."
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => setIsFocused(true)}
