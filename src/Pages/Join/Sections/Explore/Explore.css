@@ -676,7 +676,7 @@
 }
 
 
-.all-posts-wrapper {
+/* .all-posts-wrapper {
     width: 100%;
     max-width: 900px;
     margin-inline: auto;
@@ -686,7 +686,7 @@
     gap: 2rem;
     position: relative;
     z-index: 1;
-}
+} */
 
 .all-post-card {
     background: linear-gradient(145deg, #1a1f2b, #162133);
