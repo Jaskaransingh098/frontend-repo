@@ -712,7 +712,9 @@ export default function Explore() {
 
                         <div className="comment-box">
                           <textarea
-                            value={allNewComments?.[index] ?? ""}
+                            name={`comment-${index}`}
+                            placeholder="Write a comment..."
+                            value={allNewComments?.[index] || ""}
                             onChange={(e) =>
                               setAllNewComments((prev) => ({
                                 ...prev,
