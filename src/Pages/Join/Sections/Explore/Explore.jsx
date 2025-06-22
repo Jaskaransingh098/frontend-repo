@@ -107,7 +107,10 @@ export default function Explore() {
   };
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) return;
+    if (!token) {
+      console.warn("No token found. Skipping fetch.");
+      return;
+    }
 
     const fetchAllPosts = async () => {
       try {
@@ -286,12 +289,17 @@ export default function Explore() {
         ...prev,
         [index]: [...(prev[index] || []), newComment],
       }));
-      
+
       setAllNewComments((prev) => ({ ...prev, [index]: "" }));
     } catch (err) {
       console.error("Error posting comment:", err);
     }
   };
+
+  useEffect(() => {
+    console.log("Token:", localStorage.getItem("token"));
+    console.log("Posts:", allPosts);
+  }, [allPosts]);
 
   return (
     <>
