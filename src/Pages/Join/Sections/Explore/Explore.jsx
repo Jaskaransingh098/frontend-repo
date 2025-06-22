@@ -30,6 +30,7 @@ export default function Explore() {
   const [allPostLikes, setAllPostLikes] = useState({});
   const [allPostComments, setAllPostComments] = useState({});
   const [allNewComments, setAllNewComments] = useState({});
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const industryImages = {
     tech: "/explore-video/tech.jpg",
     health: "/explore-video/healthcare.jpg",
@@ -38,6 +39,7 @@ export default function Explore() {
     food: "/explore-video/food.jpg",
   };
   const [randomPosts, setRandomPosts] = useState([]);
+  const [activeTag, setActiveTag] = useState("");
 
   useEffect(() => {
     const fetchTrending = async () => {
@@ -109,6 +111,7 @@ export default function Explore() {
 
         const ideas = response.data.ideas;
         setAllPosts(ideas);
+        setFilteredPosts(ideas);
 
         const likeMap = {};
         const commentMap = {};
@@ -126,6 +129,17 @@ export default function Explore() {
 
     fetchAllPosts();
   }, []);
+
+  useEffect(() => {
+    if (!query.trim()) {
+      setFilteredPosts(allPosts); // Show all posts if nothing is searched
+    } else {
+      const filtered = allPosts.filter((post) =>
+        post.industry.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredPosts(filtered);
+    }
+  }, [query, allPosts]);
 
   const fetchPostsByIndustry = async (industry) => {
     try {
@@ -304,17 +318,47 @@ export default function Explore() {
               id="search-tags"
               name="searchTags"
               placeholder="Search tags..."
+              value={query}
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  const trimmed = query.trim().toLowerCase();
+                  const filtered = allPosts.filter((post) =>
+                    post.industry?.toLowerCase().includes(trimmed)
+                  );
+                  setFilteredPosts(filtered);
+                }
+              }}
             />
+
+            <button className="clear-filter-btn" onClick={() => {
+              setQuery("");
+              setActiveTag("");
+            }}>
+              Clear Filter
+            </button>
             <div className="suggestion-tags">
               <ul>
-                <li>E-commerce</li>
-                <li>AI</li>
-                <li>Design</li>
-                <li>Marketing</li>
-                <li>Portfolio</li>
+                {["ecommerce", "health", "education", "tech", "food"].map(
+                  (tag) => (
+                    <li
+                      key={tag}
+                      onClick={() => {
+                        setQuery(tag);
+                        setActiveTag(tag);
+                        const filtered = allPosts.filter(
+                          (post) =>
+                            post.industry?.toLowerCase() === tag.toLowerCase()
+                        );
+                        setFilteredPosts(filtered);
+                      }}
+                    >
+                      {tag}
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           </div>
@@ -580,7 +624,7 @@ export default function Explore() {
         </div>
         <h2 className="section-heading">All Posts</h2>
         <div className="all-posts-wrapper">
-          {allPosts.map((post, index) => (
+          {filteredPosts.map((post, index) => (
             <div className="all-post-card" key={post._id}>
               <div className="all-post-header">
                 <h3 className="all-post-topic">{post.topic}</h3>

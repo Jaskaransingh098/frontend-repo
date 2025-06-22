@@ -93,6 +93,25 @@
     }
 }
 
+.clear-filter-btn {
+    margin-top: 10px;
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.clear-filter-btn:hover {
+    background-color: #cc0000;
+}
+
+
+
 .suggestion-tags ul {
     list-style: none;
     display: flex;
@@ -126,6 +145,13 @@
 .suggestion-tags li:hover {
     filter: none !important;
     opacity: 1 !important;
+}
+
+.suggestion-tags li.active-tag {
+    background: #3a86ff;
+    color: white;
+    font-weight: 600;
+    border: 1px solid #3a86ff;
 }
 
 .trending-title-header {
