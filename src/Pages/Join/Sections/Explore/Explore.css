@@ -693,7 +693,6 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
     min-height: 320px;
-    margin-top: 50px;
 }
 
 .all-post-card:hover {
