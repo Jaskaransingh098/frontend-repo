@@ -123,10 +123,6 @@ function Messages() {
     selectedUserRef.current = selectedUser;
   }, [selectedUser]);
 
-  useEffect(() => {
-    messagesRef.current = messages;
-  }, [messages]);
-
   const incomingHandler = useCallback((msg) => {
     const isChatOpen =
       selectedUserRef.current === msg.sender ||
@@ -159,27 +155,12 @@ function Messages() {
   useEffect(() => {
     if (!currentUser) return;
 
-    // Remove any previous listener first
-    socket.off(`message:${currentUser}`);
-
-    // Add fresh listener
     socket.on(`message:${currentUser}`, incomingHandler);
 
-    // Optional cleanup on unmount (still good practice)
     return () => {
-      socket.off(`message:${currentUser}`);
+      socket.off(`message:${currentUser}`, incomingHandler);
     };
   }, [currentUser, incomingHandler]);
-
-  // useEffect(() => {
-  //   if (!currentUser) return;
-
-  //   socket.on(`message:${currentUser}`, incomingHandler);
-
-  //   return () => {
-  //     socket.off(`message:${currentUser}`, incomingHandler);
-  //   };
-  // }, [currentUser, incomingHandler]);
 
   const handleSendMessage = async () => {
     if (newMessage.trim() && selectedUser) {
@@ -192,8 +173,7 @@ function Messages() {
 
       try {
         // Optimistically update the UI
-        // setMessages((prev) => [...prev, msgData]);
-        socket.emit("newMessage", res.data);
+        setMessages((prev) => [...prev, msgData]);
         setNewMessage("");
 
         // Send to backend
