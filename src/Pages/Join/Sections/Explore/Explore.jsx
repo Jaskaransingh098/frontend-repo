@@ -1,18 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import gsap from "gsap";
-import { jwtDecode } from "jwt-decode";
-import {
-  FaEdit,
-  FaTrash,
-  FaHeart,
-  FaRegHeart,
-  FaUserCircle,
-} from "react-icons/fa";
-import { BsChatDots } from "react-icons/bs";
-import { FiSend } from "react-icons/fi";
+import AllPosts from "../../../../Components/AllPosts/AllPosts";
 import "./Explore.css";
-// import "./MyPosts.css";
+
 
 export default function Explore() {
   const [query, setQuery] = useState("");
@@ -27,10 +18,10 @@ export default function Explore() {
   const [trendingPosts, setTrendingPosts] = useState([]);
   const [selectedTopic, setSelectedTopic] = useState("health");
   const [allPosts, setAllPosts] = useState([]);
-  const [allPostLikes, setAllPostLikes] = useState({});
-  const [allPostComments, setAllPostComments] = useState({});
-  const [allNewComments, setAllNewComments] = useState({});
-  const [filteredPosts, setFilteredPosts] = useState([]);
+  // const [allPostLikes, setAllPostLikes] = useState({});
+  // const [allPostComments, setAllPostComments] = useState({});
+  // const [allNewComments, setAllNewComments] = useState({});
+  // const [filteredPosts, setFilteredPosts] = useState([]);
   const industryImages = {
     tech: "/explore-video/tech.jpg",
     health: "/explore-video/healthcare.jpg",
@@ -95,51 +86,51 @@ export default function Explore() {
     fetchRandomPosts();
   }, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) return;
 
-    const fetchAllPosts = async () => {
-      try {
-        const decoded = jwtDecode(token);
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/post/allposts`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+  //   const fetchAllPosts = async () => {
+  //     try {
+  //       const decoded = jwtDecode(token);
+  //       const response = await axios.get(
+  //         `${import.meta.env.VITE_API_URL}/post/allposts`,
+  //         {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }
+  //       );
 
-        const ideas = response.data.ideas;
-        setAllPosts(ideas);
-        setFilteredPosts(ideas);
+  //       const ideas = response.data.ideas;
+  //       setAllPosts(ideas);
+  //       setFilteredPosts(ideas);
 
-        const likeMap = {};
-        const commentMap = {};
-        ideas.forEach((idea, idx) => {
-          likeMap[idx] = idea.likes?.length || 0;
-          commentMap[idx] = idea.comments || [];
-        });
+  //       const likeMap = {};
+  //       const commentMap = {};
+  //       ideas.forEach((idea, idx) => {
+  //         likeMap[idx] = idea.likes?.length || 0;
+  //         commentMap[idx] = idea.comments || [];
+  //       });
 
-        setAllPostLikes(likeMap);
-        setAllPostComments(commentMap);
-      } catch (err) {
-        console.error("Failed to fetch all posts", err);
-      }
-    };
+  //       setAllPostLikes(likeMap);
+  //       setAllPostComments(commentMap);
+  //     } catch (err) {
+  //       console.error("Failed to fetch all posts", err);
+  //     }
+  //   };
 
-    fetchAllPosts();
-  }, []);
+  //   fetchAllPosts();
+  // }, []);
 
-  useEffect(() => {
-    if (!query.trim()) {
-      setFilteredPosts(allPosts); // Show all posts if nothing is searched
-    } else {
-      const filtered = allPosts.filter((post) =>
-        post.industry.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredPosts(filtered);
-    }
-  }, [query, allPosts]);
+  // useEffect(() => {
+  //   if (!query.trim()) {
+  //     setFilteredPosts(allPosts); // Show all posts if nothing is searched
+  //   } else {
+  //     const filtered = allPosts.filter((post) =>
+  //       post.industry.toLowerCase().includes(query.toLowerCase())
+  //     );
+  //     setFilteredPosts(filtered);
+  //   }
+  // }, [query, allPosts]);
 
   const fetchPostsByIndustry = async (industry) => {
     try {
@@ -252,56 +243,56 @@ export default function Explore() {
     setCurrentIndex((prev) => (prev === 0 ? randomPosts.length - 1 : prev - 1));
   };
 
-  const [showCommentsIndex, setShowCommentsIndex] = useState(null);
+  // const [showCommentsIndex, setShowCommentsIndex] = useState(null);
 
-  const toggleAllPostComments = (index) => {
-    setShowCommentsIndex((prev) => (prev === index ? null : index));
-  };
+  // const toggleAllPostComments = (index) => {
+  //   setShowCommentsIndex((prev) => (prev === index ? null : index));
+  // };
 
-  const handleAllPostLike = async (index, postId) => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
+  // const handleAllPostLike = async (index, postId) => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) return;
 
-    try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/post/${postId}/like`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+  //   try {
+  //     const res = await axios.post(
+  //       `${import.meta.env.VITE_API_URL}/post/${postId}/like`,
+  //       {},
+  //       {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       }
+  //     );
 
-      setAllPostLikes((prev) => ({
-        ...prev,
-        [index]: res.data.likes.length,
-      }));
-    } catch (err) {
-      console.error("Error liking post:", err);
-    }
-  };
+  //     setAllPostLikes((prev) => ({
+  //       ...prev,
+  //       [index]: res.data.likes.length,
+  //     }));
+  //   } catch (err) {
+  //     console.error("Error liking post:", err);
+  //   }
+  // };
 
-  const submitAllPostComment = async (index, postId) => {
-    const text = allNewComments[index];
-    if (!text?.trim()) return;
+  // const submitAllPostComment = async (index, postId) => {
+  //   const text = allNewComments[index];
+  //   if (!text?.trim()) return;
 
-    const token = localStorage.getItem("token");
-    try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
-        { text },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+  //   const token = localStorage.getItem("token");
+  //   try {
+  //     const res = await axios.post(
+  //       `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
+  //       { text },
+  //       { headers: { Authorization: `Bearer ${token}` } }
+  //     );
 
-      setAllPostComments((prev) => ({
-        ...prev,
-        [index]: [...(prev[index] || []), res.data],
-      }));
+  //     setAllPostComments((prev) => ({
+  //       ...prev,
+  //       [index]: [...(prev[index] || []), res.data],
+  //     }));
 
-      setAllNewComments((prev) => ({ ...prev, [index]: "" }));
-    } catch (err) {
-      console.error("Error posting comment:", err);
-    }
-  };
+  //     setAllNewComments((prev) => ({ ...prev, [index]: "" }));
+  //   } catch (err) {
+  //     console.error("Error posting comment:", err);
+  //   }
+  // };
 
   return (
     <>
@@ -627,7 +618,8 @@ export default function Explore() {
           </div>
         </div>
         <h2 className="section-heading">All Posts</h2>
-        <section className="all-posts-wrapper">
+        <AllPosts/>
+        {/* <section className="all-posts-wrapper">
           {filteredPosts.map((post, index) => (
             <div className="all-post-card" key={post._id}>
               <div className="all-post-header">
@@ -718,7 +710,7 @@ export default function Explore() {
               )}
             </div>
           ))}
-        </section>
+        </section> */}
       </div>
     </>
   );
