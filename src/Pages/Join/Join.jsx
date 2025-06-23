@@ -8,7 +8,6 @@ import MyPosts from "./Sections/MyPosts/MyPosts";
 
 function Join() {
   const [activeSection, setActiveSection] = useState("explore");
-  // const [ref1, intView1] = useInView({ triggerOnce: true, threshold: 0.2 });
 
   const renderSection = () => {
     switch (activeSection) {

@@ -241,11 +241,6 @@ export default function Explore() {
     setCurrentIndex((prev) => (prev === 0 ? randomPosts.length - 1 : prev - 1));
   };
 
-  // const [showCommentsIndex, setShowCommentsIndex] = useState(null);
-
-  // const toggleAllPostComments = (index) => {
-  //   setShowCommentsIndex((prev) => (prev === index ? null : index));
-  // };
 
   const handleAllPostLike = async (index, postId) => {
     const token = localStorage.getItem("token");
@@ -296,28 +291,6 @@ export default function Explore() {
     }
   };
 
-  // const submitAllPostComment = async (index, postId) => {
-  //   const text = allNewComments[index];
-  //   if (!text?.trim()) return;
-
-  //   const token = localStorage.getItem("token");
-  //   try {
-  //     const res = await axios.post(
-  //       `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
-  //       { text },
-  //       { headers: { Authorization: `Bearer ${token}` } }
-  //     );
-
-  //     setAllPostComments((prev) => ({
-  //       ...prev,
-  //       [index]: [...(prev[index] || []), res.data],
-  //     }));
-
-  //     setAllNewComments((prev) => ({ ...prev, [index]: "" }));
-  //   } catch (err) {
-  //     console.error("Error posting comment:", err);
-  //   }
-  // };
 
   return (
     <>
@@ -651,98 +624,6 @@ export default function Explore() {
           onLike={handleAllPostLike}
           onCommentSubmit={handleCommentUpdate}
         />
-        {/* <section className="all-posts-wrapper">
-          {filteredPosts.map((post, index) => (
-            <div className="all-post-card" key={post._id}>
-              <div className="all-post-header">
-                <h3 className="all-post-topic">{post.topic}</h3>
-                <span className="all-post-meta">
-                  by {post.username} • {formatTimeAgo(post.createdAt)}
-                </span>
-              </div>
-
-              <div className="all-post-meta-grid">
-                <div>
-                  <strong>Startup:</strong> {post.startupName}
-                </div>
-                <div>
-                  <strong>Industry:</strong> {post.industry}
-                </div>
-                <div>
-                  <strong>Stage:</strong> {post.stage}
-                </div>
-                <div>
-                  <strong>Goals:</strong> {post.goals}
-                </div>
-                <div>
-                  <strong>Market:</strong> {post.market}
-                </div>
-                <div>
-                  <strong>Role:</strong> {post.role}
-                </div>
-                <div>
-                  <strong>Website:</strong> {post.website}
-                </div>
-                <div>
-                  <strong>Email:</strong> {post.email}
-                </div>
-              </div>
-
-              <div className="all-post-description">
-                <strong>Description:</strong>
-                <p>
-                  {post.description.length > 150
-                    ? post.description.slice(0, 150) + "..."
-                    : post.description}
-                </p>
-              </div>
-
-              <div className="all-post-footer">
-                <div className="all-likes-comments">
-                  <button onClick={() => handleAllPostLike(index, post._id)}>
-                    {allPostLikes[index] > 0 ? <FaHeart /> : <FaRegHeart />}
-                    <span>{allPostLikes[index]}</span>
-                  </button>
-                  <button onClick={() => toggleAllPostComments(index)}>
-                    <BsChatDots />
-                    <span>{allPostComments[index]?.length || 0}</span>
-                  </button>
-                </div>
-              </div>
-
-              {showCommentsIndex === index && (
-                <div className="all-comments-section">
-                  {(allPostComments[index] || []).map((comment, cIdx) => (
-                    <div key={cIdx} className="all-comment">
-                      <FaUserCircle className="all-user-icon" />
-                      <span className="all-comment-text">
-                        <strong>{comment.username}:</strong> {comment.text}
-                      </span>
-                    </div>
-                  ))}
-
-                  <div className="all-comment-input-box">
-                    <input
-                      type="text"
-                      placeholder="Write a comment..."
-                      value={allNewComments[index] || ""}
-                      onChange={(e) =>
-                        setAllNewComments((prev) => ({
-                          ...prev,
-                          [index]: e.target.value,
-                        }))
-                      }
-                    />
-                    <FiSend
-                      className="all-send-icon"
-                      onClick={() => submitAllPostComment(index, post._id)}
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </section> */}
       </div>
     </>
   );
