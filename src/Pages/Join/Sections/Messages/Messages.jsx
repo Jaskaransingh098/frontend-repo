@@ -6,10 +6,17 @@ import EmojiPicker from "emoji-picker-react";
 import { jwtDecode } from "jwt-decode"; // ✅ For extracting username from token
 import "./Messages.css";
 
+const socket = io(import.meta.env.VITE_API_URL, {
+  transports: ["websocket", "polling"], // fallback if websocket isn't available
+});
+
+socket.on("disconnect", () => {
+  console.warn("Socket disconnected. Attempting to reconnect...");
+  if (socket.disconnected) socket.connect();
+});
+
+
 function Messages() {
-  const socket = io(import.meta.env.VITE_API_URL, {
-    transports: ["websocket", "polling"], // fallback if websocket isn't available
-  });
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentUser, setCurrentUser] = useState(""); // ✅ Will be set from token
@@ -125,7 +132,11 @@ function Messages() {
     if (isChatOpen) {
       // Prevent duplicate messages (important if backend also sends existing ones)
       const alreadyExists = messagesRef.current.some(
-        (m) => m._id === msg._id // adjust based on your message schema
+        (m) =>
+          m._id === msg._id ||
+          (m.message === msg.message &&
+            m.sender === msg.sender &&
+            m.recipient === msg.recipient)
       );
 
       if (!alreadyExists) {
