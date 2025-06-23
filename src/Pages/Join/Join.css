@@ -4,7 +4,7 @@
             var(--charcoal),
             var(--shadow-blue),
             var(--midnight));
-    min-height: 100vh;
+    height: 100%;
     width: 100%;
     position: relative;
     background-attachment: fixed;
