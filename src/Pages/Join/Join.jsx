@@ -8,7 +8,7 @@ import MyPosts from "./Sections/MyPosts/MyPosts";
 
 function Join() {
   const [activeSection, setActiveSection] = useState("explore");
-  const [ref1, intView1] = useInView({ triggerOnce: false, threshold: 0.2 });
+  // const [ref1, intView1] = useInView({ triggerOnce: true, threshold: 0.2 });
 
   const renderSection = () => {
     switch (activeSection) {
@@ -25,9 +25,8 @@ function Join() {
   return (
     <motion.div
       className="join-page"
-      ref={ref1}
       initial={{ opacity: 0, y: 50 }}
-      animate={intView1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
       <div
