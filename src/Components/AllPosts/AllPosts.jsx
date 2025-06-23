@@ -1,105 +1,136 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+// import { jwtDecode } from "jwt-decode";
+// import { FaHeart, FaRegHeart, FaUserCircle } from "react-icons/fa";
+// import { BsChatDots } from "react-icons/bs";
+// import { FiSend } from "react-icons/fi";
+// import "./AllPosts.css"; // Don't forget to create and import this
+
+// const AllPosts = () => {
+//   const [allPosts, setAllPosts] = useState([]);
+//   const [allPostLikes, setAllPostLikes] = useState({});
+//   const [allPostComments, setAllPostComments] = useState({});
+//   const [allNewComments, setAllNewComments] = useState({});
+//   const [showCommentsIndex, setShowCommentsIndex] = useState(null);
+
+//   useEffect(() => {
+//     const token = localStorage.getItem("token");
+//     if (!token) {
+//       console.warn("No token found.");
+//       return;
+//     }
+
+//     const fetchAllPosts = async () => {
+//       try {
+//         const decoded = jwtDecode(token);
+//         const response = await axios.get(
+//           `${import.meta.env.VITE_API_URL}/post/allposts`,
+//           {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }
+//         );
+
+//         const ideas = response.data.ideas;
+//         setAllPosts(ideas);
+
+//         const likeMap = {};
+//         const commentMap = {};
+//         ideas.forEach((idea, idx) => {
+//           likeMap[idx] = idea.likes?.length || 0;
+//           commentMap[idx] = idea.comments || [];
+//         });
+
+//         setAllPostLikes(likeMap);
+//         setAllPostComments(commentMap);
+//       } catch (err) {
+//         console.error("Failed to fetch all posts", err);
+//       }
+//     };
+
+//     fetchAllPosts();
+//   }, []);
+
+//   const toggleAllPostComments = (index) => {
+//     setShowCommentsIndex((prev) => (prev === index ? null : index));
+//   };
+
+//   const handleAllPostLike = async (index, postId) => {
+//     const token = localStorage.getItem("token");
+//     if (!token) return;
+
+//     try {
+//       const res = await axios.post(
+//         `${import.meta.env.VITE_API_URL}/post/${postId}/like`,
+//         {},
+//         {
+//           headers: { Authorization: `Bearer ${token}` },
+//         }
+//       );
+
+//       setAllPostLikes((prev) => ({
+//         ...prev,
+//         [index]: res.data.likes.length,
+//       }));
+//     } catch (err) {
+//       console.error("Error liking post:", err);
+//     }
+//   };
+
+//   const submitAllPostComment = async (index, postId) => {
+//     const text = allNewComments[index];
+//     if (!text?.trim()) return;
+
+//     const token = localStorage.getItem("token");
+//     try {
+//       const res = await axios.post(
+//         `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
+//         { text },
+//         { headers: { Authorization: `Bearer ${token}` } }
+//       );
+
+//       const newComment = res.data;
+//       if (!newComment || typeof newComment !== "object") return;
+
+//       setAllPostComments((prev) => ({
+//         ...prev,
+//         [index]: [...(prev[index] || []), newComment],
+//       }));
+
+//       setAllNewComments((prev) => ({ ...prev, [index]: "" }));
+//     } catch (err) {
+//       console.error("Error posting comment:", err);
+//     }
+//   };
+
+//   const formatTimeAgo = (dateString) => {
+//     const now = new Date();
+//     const created = new Date(dateString);
+//     const diff = Math.floor((now - created) / 1000);
+
+//     if (diff < 60) return "just now";
+//     if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
+//     if (diff < 86400) return `${Math.floor(diff / 3600)} hr ago`;
+//     return `${Math.floor(diff / 86400)}d ago`;
+//   };
+
+import React, { useState } from "react";
 import { FaHeart, FaRegHeart, FaUserCircle } from "react-icons/fa";
 import { BsChatDots } from "react-icons/bs";
 import { FiSend } from "react-icons/fi";
-import "./AllPosts.css"; // Don't forget to create and import this
+import "./AllPosts.css";
 
-const AllPosts = () => {
-  const [allPosts, setAllPosts] = useState([]);
-  const [allPostLikes, setAllPostLikes] = useState({});
-  const [allPostComments, setAllPostComments] = useState({});
-  const [allNewComments, setAllNewComments] = useState({});
+const AllPosts = ({
+  posts,
+  likes,
+  comments,
+  newComments,
+  onLike,
+  onCommentSubmit,
+}) => {
   const [showCommentsIndex, setShowCommentsIndex] = useState(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      console.warn("No token found.");
-      return;
-    }
-
-    const fetchAllPosts = async () => {
-      try {
-        const decoded = jwtDecode(token);
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/post/allposts`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        const ideas = response.data.ideas;
-        setAllPosts(ideas);
-
-        const likeMap = {};
-        const commentMap = {};
-        ideas.forEach((idea, idx) => {
-          likeMap[idx] = idea.likes?.length || 0;
-          commentMap[idx] = idea.comments || [];
-        });
-
-        setAllPostLikes(likeMap);
-        setAllPostComments(commentMap);
-      } catch (err) {
-        console.error("Failed to fetch all posts", err);
-      }
-    };
-
-    fetchAllPosts();
-  }, []);
-
-  const toggleAllPostComments = (index) => {
+  const toggleComments = (index) => {
     setShowCommentsIndex((prev) => (prev === index ? null : index));
-  };
-
-  const handleAllPostLike = async (index, postId) => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/post/${postId}/like`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      setAllPostLikes((prev) => ({
-        ...prev,
-        [index]: res.data.likes.length,
-      }));
-    } catch (err) {
-      console.error("Error liking post:", err);
-    }
-  };
-
-  const submitAllPostComment = async (index, postId) => {
-    const text = allNewComments[index];
-    if (!text?.trim()) return;
-
-    const token = localStorage.getItem("token");
-    try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
-        { text },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      const newComment = res.data;
-      if (!newComment || typeof newComment !== "object") return;
-
-      setAllPostComments((prev) => ({
-        ...prev,
-        [index]: [...(prev[index] || []), newComment],
-      }));
-
-      setAllNewComments((prev) => ({ ...prev, [index]: "" }));
-    } catch (err) {
-      console.error("Error posting comment:", err);
-    }
   };
 
   const formatTimeAgo = (dateString) => {
@@ -115,7 +146,7 @@ const AllPosts = () => {
 
   return (
     <div className="all-posts-wrapper">
-      {allPosts.map((post, index) => (
+      {posts.map((post, index) => (
         <div className="all-post-card" key={post._id}>
           <div className="all-post-header">
             <div className="all-user-profile">
@@ -174,28 +205,24 @@ const AllPosts = () => {
             <div className="all-likes-comments">
               <button
                 className="all-icon-btn"
-                onClick={() => handleAllPostLike(index, post._id)}
+                onClick={() => onLike(index, post._id)}
               >
-                {allPostLikes[index] > 0 ? (
-                  <FaHeart color="red" />
-                ) : (
-                  <FaRegHeart />
-                )}
+                {likes[index] > 0 ? <FaHeart color="red" /> : <FaRegHeart />}
               </button>
-              <span>{allPostLikes[index] || 0} Likes</span>
+              <span>{likes[index] || 0} Likes</span>
 
               <button
                 className="all-icon-btn"
-                onClick={() => toggleAllPostComments(index)}
+                onClick={() => toggleComments(index)}
               >
                 <BsChatDots />
               </button>
-              <span>{(allPostComments[index] || []).length} Comments</span>
+              <span>{comments[index]?.length || 0} Comments</span>
             </div>
 
             {showCommentsIndex === index && (
               <div className="all-comment-section">
-                {(allPostComments[index] || []).map((comment, cIdx) => (
+                {(comments[index] || []).map((comment, cIdx) => (
                   <div key={cIdx} className="all-comment-item">
                     <div className="all-comment-left">
                       <FaUserCircle className="all-comment-avatar" />
@@ -208,20 +235,20 @@ const AllPosts = () => {
                     </div>
                   </div>
                 ))}
+
                 <div className="all-comment-box">
                   <textarea
                     placeholder="Write a comment..."
-                    value={allNewComments[index] || ""}
+                    value={newComments[index] || ""}
                     onChange={(e) =>
-                      setAllNewComments((prev) => ({
-                        ...prev,
-                        [index]: e.target.value,
-                      }))
+                      onCommentSubmit(index, post._id, e.target.value, false)
                     }
                   />
                   <button
                     className="all-send-btn"
-                    onClick={() => submitAllPostComment(index, post._id)}
+                    onClick={() =>
+                      onCommentSubmit(index, post._id, newComments[index], true)
+                    }
                   >
                     <FiSend />
                   </button>
