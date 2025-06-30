@@ -178,8 +178,11 @@ function Post() {
                   <option value="ecommerce">E-Commerce</option>
                   <option value="health">Health</option>
                   <option value="education">Education</option>
-                  <option value="tech">Tech</option>
+                  <option value="tech">Technology</option>
                   <option value="food">Food</option>
+                  <option value="finance">Finance</option>
+                  <option value="manufacturing">Manufacturing</option>
+                  <option value="fashion">Fashion</option>
                 </select>
                 <select
                   name="stage"

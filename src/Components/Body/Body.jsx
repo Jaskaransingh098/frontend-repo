@@ -149,7 +149,7 @@ function Body() {
               <span className="subtitle" />
             </h1>
             <h3 className="card-title subsubtitle">
-              <a href="/">Toys</a>
+              <a href="/">Finance</a>
             </h3>
           </motion.label>
           <input className="radio" type="radio" name="card" id="cardCuatroo" />
@@ -183,7 +183,7 @@ function Body() {
               <span className="subtitle" />
             </h1>
             <h3 className="card-title subsubtitle">
-              <a href="/">Freelancing</a>
+              <a href="/">Manufacturing</a>
             </h3>
           </motion.label>
           <input className="radio" type="radio" name="card" id="cardDoss" />
@@ -217,7 +217,7 @@ function Body() {
               <span className="subtitle" />
             </h1>
             <h3 className="card-title subsubtitle">
-              <a href="/">Fragrances</a>
+              <a href="/">Technology</a>
             </h3>
           </motion.label>
         </motion.div>
@@ -230,7 +230,7 @@ function Body() {
           transition={{ duration: 0.8 }}
         >
           <div className="banner-content">
-            <h1 className="logo">InnoLink pro.</h1>
+            <h1 className="logo">InnoLinkk pro</h1>
             <h2>The premium startup solutions and help for businesses</h2>
             <div className="features">
               <div className="feature-item">
@@ -302,7 +302,7 @@ function Body() {
           transition={{ duration: 1 }}
         >
           <video nocontrols autoPlay loop muted className="body-video">
-            <source src="/Body-pics/Video1.mp4" type="video/mp4" />
+            <source src="/Body-pics/Video2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </motion.div>
