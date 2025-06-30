@@ -7,7 +7,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import { HelmetProvider } from "react-helmet";
+import { Helmet } from "react-helmet";
 import Navbar from "./Components/Navbar/Navbar";
 import Body from "./Components/Body/Body";
 import Login from "./Components/Login/Login";
@@ -70,12 +70,10 @@ function AppContent() {
 
 function App() {
   return (
-    <HelmetProvider>
-      <Router>
-        <AnimatedBackground />
-        <AppContent />
-      </Router>
-    </HelmetProvider>
+    <Router>
+      <AnimatedBackground />
+      <AppContent />
+    </Router>
   );
 }
 
