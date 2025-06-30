@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import ReactModal from "react-modal";
 import EmojiPicker from "emoji-picker-react";
 import { jwtDecode } from "jwt-decode"; // ✅ For extracting username from token
-import {Helmet} from "react-helmet-async";
+import {Helmet} from "react-helmet";
 import "./Messages.css";
 
 const socket = io(import.meta.env.VITE_API_URL, {

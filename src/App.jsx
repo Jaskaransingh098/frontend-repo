@@ -7,7 +7,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
+import { HelmetProvider } from "react-helmet";
 import Navbar from "./Components/Navbar/Navbar";
 import Body from "./Components/Body/Body";
 import Login from "./Components/Login/Login";

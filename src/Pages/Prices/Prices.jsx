@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CheckCircle, ArrowRightCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import {Helmet} from "react-helmet-async";
+import {Helmet} from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import "./Prices.css";
 

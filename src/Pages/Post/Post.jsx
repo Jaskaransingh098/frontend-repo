@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import {Helmet} from "react-helmet-async";
+import {Helmet} from "react-helmet";
 import { toast } from "react-toastify";
 import "./Post.css";
 

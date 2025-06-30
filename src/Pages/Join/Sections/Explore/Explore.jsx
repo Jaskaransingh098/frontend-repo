@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import gsap from "gsap";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import AllPosts from "../../../../Components/AllPosts/AllPosts";
 import "./Explore.css";
 

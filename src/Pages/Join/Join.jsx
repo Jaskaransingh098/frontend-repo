@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Join.css";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import Explore from "./Sections/Explore/Explore";
 import Messages from "./Sections/Messages/Messages";
 import MyPosts from "./Sections/MyPosts/MyPosts";

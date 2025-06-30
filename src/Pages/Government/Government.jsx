@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import "./Government.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
