@@ -195,6 +195,7 @@ section {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    color: white;
 }
 
 .content:nth-of-type(7) {
@@ -211,6 +212,7 @@ section {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    color: white;
 }
 
 .card-title {
