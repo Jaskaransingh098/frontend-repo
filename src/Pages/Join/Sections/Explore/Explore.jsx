@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import gsap from "gsap";
+import { Helmet } from "react-helmet-async";
 import AllPosts from "../../../../Components/AllPosts/AllPosts";
 import "./Explore.css";
 
@@ -241,7 +242,6 @@ export default function Explore() {
     setCurrentIndex((prev) => (prev === 0 ? randomPosts.length - 1 : prev - 1));
   };
 
-
   const handleAllPostLike = async (index, postId) => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -291,9 +291,20 @@ export default function Explore() {
     }
   };
 
-
   return (
     <>
+      <Helmet>
+        <title>Explore Innovative Startups – InnoLinkk</title>
+        <meta
+          name="description"
+          content="Discover trending, random, and topic-based startup ideas across industries like healthcare, tech, education, food, and e-commerce on InnoLinkk."
+        />
+        <meta
+          name="keywords"
+          content="startup ideas, trending startups, explore startups, tech innovations, healthcare ideas, e-commerce startup, InnoLinkk"
+        />
+        <link rel="canonical" href="https://innolinkk.netlify.app/explore" />
+      </Helmet>
       <div className="explore-page-insider">
         <div className="explore-insider-header">
           <video className="explore-bg-video" autoPlay loop muted playsInline>

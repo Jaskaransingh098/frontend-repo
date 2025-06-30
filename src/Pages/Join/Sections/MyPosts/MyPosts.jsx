@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import {Helmet} from "react-helmet-async";
 import { ToastContainer, toast } from "react-toastify";
 import {
   FaHeart,
@@ -24,7 +25,6 @@ import { useInView } from "react-intersection-observer";
 import { FiSend } from "react-icons/fi";
 import { BsChatDots } from "react-icons/bs";
 import "./MyPosts.css";
-
 
 export default function MyPosts() {
   const [myIdeas, setMyIdeas] = useState([]);
@@ -361,6 +361,18 @@ export default function MyPosts() {
   };
   return (
     <>
+      <Helmet>
+        <title>My Posts – Track Your Startup Ideas | InnoLinkk</title>
+        <meta
+          name="description"
+          content="View and manage all the startup ideas you've shared on InnoLinkk. Track engagement, edit descriptions, and see your progress through tiers."
+        />
+        <meta
+          name="keywords"
+          content="My Posts, startup tracking, idea engagement, post likes, comments, InnoLinkk"
+        />
+        <link rel="canonical" href="https://innolinkk.netlify.app/myposts" />
+      </Helmet>
       <div className="dashboard-dashboard-container">
         <h1 className="dashboard-dashboard-title">
           Welcome Back {currentUsername && <span>{currentUsername}</span>} 👋

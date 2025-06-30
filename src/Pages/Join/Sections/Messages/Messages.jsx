@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import ReactModal from "react-modal";
 import EmojiPicker from "emoji-picker-react";
 import { jwtDecode } from "jwt-decode"; // ✅ For extracting username from token
+import {Helmet} from "react-helmet-async";
 import "./Messages.css";
 
 const socket = io(import.meta.env.VITE_API_URL, {
@@ -280,126 +281,140 @@ function Messages() {
   ReactModal.setAppElement("#root");
 
   return (
-    <div className="chat-container">
-      <div className="user-list">
-        <div className="user-header">
-          <h3>Chats</h3>
-          <button className="add-btn" onClick={() => setShowModal(true)}>
-            +
-          </button>
-        </div>
-        {showModal && (
-          <div className="inline-modal" ref={modalRef}>
-            <input
-              type="text"
-              placeholder="Enter username..."
-              value={searchUser}
-              onChange={handleSearchChange}
-              className="modal-input"
-            />
-            {filteredSuggestions.length > 0 && (
-              <ul className="suggestions-list">
-                {filteredSuggestions.map((user, i) => (
-                  <li key={i} onClick={() => setSearchUser(user)}>
-                    {user}
-                  </li>
-                ))}
-              </ul>
-            )}
-            <button onClick={startNewChat} className="modal-start-btn">
-              Start Chat
+    <>
+      <Helmet>
+        <title>Messages – Chat with Innovators | InnoLinkk</title>
+        <meta
+          name="description"
+          content="Connect and collaborate with other innovators through real-time messaging on InnoLinkk. Start conversations and share startup ideas instantly."
+        />
+        <meta
+          name="keywords"
+          content="startup chat, InnoLinkk messaging, real-time chat, entrepreneur communication, startup collaboration"
+        />
+        <link rel="canonical" href="https://innolinkk.netlify.app/messages" />
+      </Helmet>
+      <div className="chat-container">
+        <div className="user-list">
+          <div className="user-header">
+            <h3>Chats</h3>
+            <button className="add-btn" onClick={() => setShowModal(true)}>
+              +
             </button>
           </div>
-        )}
-
-        {conversationUsers.map((user) => (
-          <div
-            key={user}
-            className={`user-item ${selectedUser === user ? "active" : ""}`}
-            onClick={() => setSelectedUser(user)}
-          >
-            <img src={getUserAvatar(user)} alt={user} className="user-dp" />
-            <div className="user-name">{user}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className="chat-window">
-        {selectedUser ? (
-          <>
-            <div className="chat-header">
-              <h4>{selectedUser}</h4>
+          {showModal && (
+            <div className="inline-modal" ref={modalRef}>
+              <input
+                type="text"
+                placeholder="Enter username..."
+                value={searchUser}
+                onChange={handleSearchChange}
+                className="modal-input"
+              />
+              {filteredSuggestions.length > 0 && (
+                <ul className="suggestions-list">
+                  {filteredSuggestions.map((user, i) => (
+                    <li key={i} onClick={() => setSearchUser(user)}>
+                      {user}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <button onClick={startNewChat} className="modal-start-btn">
+                Start Chat
+              </button>
             </div>
-            <div className="chat-messages">
-              {messages.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`chat-message-row ${
-                    msg.sender === currentUser ? "sent-row" : "received-row"
-                  }`}
-                >
-                  {msg.sender !== currentUser && (
-                    <img
-                      src={getUserAvatar(msg.sender)}
-                      alt={msg.sender}
-                      className="chat-avatar"
-                    />
-                  )}
+          )}
 
+          {conversationUsers.map((user) => (
+            <div
+              key={user}
+              className={`user-item ${selectedUser === user ? "active" : ""}`}
+              onClick={() => setSelectedUser(user)}
+            >
+              <img src={getUserAvatar(user)} alt={user} className="user-dp" />
+              <div className="user-name">{user}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="chat-window">
+          {selectedUser ? (
+            <>
+              <div className="chat-header">
+                <h4>{selectedUser}</h4>
+              </div>
+              <div className="chat-messages">
+                {messages.map((msg, index) => (
                   <div
-                    className={`chat-message ${
-                      msg.sender === currentUser ? "sent" : "received"
+                    key={index}
+                    className={`chat-message-row ${
+                      msg.sender === currentUser ? "sent-row" : "received-row"
                     }`}
                   >
-                    <div className="msg-text">{msg.message}</div>
-                    <div className="msg-time">
-                      {new Date(msg.timestamp).toLocaleTimeString()}
-                    </div>
-                  </div>
+                    {msg.sender !== currentUser && (
+                      <img
+                        src={getUserAvatar(msg.sender)}
+                        alt={msg.sender}
+                        className="chat-avatar"
+                      />
+                    )}
 
-                  {msg.sender === currentUser && (
-                    <img
-                      src={getUserAvatar(msg.sender)}
-                      alt={msg.sender}
-                      className="chat-avatar"
+                    <div
+                      className={`chat-message ${
+                        msg.sender === currentUser ? "sent" : "received"
+                      }`}
+                    >
+                      <div className="msg-text">{msg.message}</div>
+                      <div className="msg-time">
+                        {new Date(msg.timestamp).toLocaleTimeString()}
+                      </div>
+                    </div>
+
+                    {msg.sender === currentUser && (
+                      <img
+                        src={getUserAvatar(msg.sender)}
+                        alt={msg.sender}
+                        className="chat-avatar"
+                      />
+                    )}
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
+              <div className="chat-input">
+                <textarea
+                  placeholder="Type a message..."
+                  value={newMessage}
+                  onChange={(e) => setNewMessage(e.target.value)}
+                />
+                <button
+                  onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                  className="text-white p-1 rounded hover:bg-gray-800"
+                >
+                  😊
+                </button>
+                {showEmojiPicker && (
+                  <div className="emoji-picker-container">
+                    <EmojiPicker
+                      onEmojiClick={(emojiData) =>
+                        setNewMessage((prev) => prev + emojiData.emoji)
+                      }
+                      theme="dark" // matches your UI
                     />
-                  )}
-                </div>
-              ))}
-              <div ref={messagesEndRef} />
+                  </div>
+                )}
+                <button onClick={handleSendMessage}>Send</button>
+              </div>
+            </>
+          ) : (
+            <div className="chat-placeholder">
+              Select a user to start chatting
             </div>
-            <div className="chat-input">
-              <textarea
-                placeholder="Type a message..."
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-              />
-              <button
-                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                className="text-white p-1 rounded hover:bg-gray-800"
-              >
-                😊
-              </button>
-              {showEmojiPicker && (
-                <div className="emoji-picker-container">
-                  <EmojiPicker
-                    onEmojiClick={(emojiData) =>
-                      setNewMessage((prev) => prev + emojiData.emoji)
-                    }
-                    theme="dark" // matches your UI
-                  />
-                </div>
-              )}
-              <button onClick={handleSendMessage}>Send</button>
-            </div>
-          </>
-        ) : (
-          <div className="chat-placeholder">
-            Select a user to start chatting
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

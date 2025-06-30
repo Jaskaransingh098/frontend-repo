@@ -7,6 +7,7 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import Navbar from "./Components/Navbar/Navbar";
 import Body from "./Components/Body/Body";
 import Login from "./Components/Login/Login";
@@ -16,7 +17,6 @@ import Prices from "./Pages/Prices/Prices";
 import Success from "./Pages/Success/Success";
 import Government from "./Pages/Government/Government";
 import AnimatedBackground from "./Components/AnimateBackground/AnimateBackground";
-
 
 function AppContent() {
   const location = useLocation();
@@ -70,10 +70,12 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
-      <AnimatedBackground/>
-      <AppContent />
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <AnimatedBackground />
+        <AppContent />
+      </Router>
+    </HelmetProvider>
   );
 }
 
