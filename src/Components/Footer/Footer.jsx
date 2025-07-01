@@ -1,5 +1,13 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import {
+  FaRegCopy,
+  FaFacebookF,
+  FaLinkedinIn,
+  FaInstagram,
+  FaTwitter,
+} from "react-icons/fa";
+// import {Link} from "react-router-dom"
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import "./Footer.css";
@@ -31,77 +39,107 @@ function Footer() {
     };
   }, []);
 
+  const [copied, setCopied] = useState(false);
+  const email = "Innolinkk@gmail.com";
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(email).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500); // Reset after 1.5s
+    });
+  };
+
   return (
     <motion.footer
-      ref={ref}
       className="footer"
+      ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 1 }}
     >
       <div className="footer-content">
-        {/* Left: Links */}
-        <div className="footer-links">
-          <ul>
-            <li>
-              <a href="#">Terms Of Service</a>
-            </li>
-            <li>
-              <a href="#">Privacy Policy</a>
-            </li>
-            <li>
-              <a href="#">Contact Us</a>
-            </li>
-            <li>
-              <a href="#">About Us</a>
-            </li>
-            <li>
-              <a href="#">Distributors</a>
-            </li>
-            <li>
-              <a href="#">Careers</a>
-            </li>
-          </ul>
-          <p className="copyright">© 2025 Jassss</p>
+        {/* Left: Contact Us */}
+        <div className="contact-us">
+          <p>CONTACT US</p>
+          <h1>LET'S DISCUSS YOUR VISION. WITH US</h1>
+          <button>
+            <a href="#">Contact us</a>
+          </button>
+          <br />
+          <p>OR EMAIL US AT</p>
+          <button className="mail-button" onClick={handleCopy}>
+            {email}
+            <span className="copy-feedback">
+              {copied ? "Copied" : <FaRegCopy className="copy-icon" />}
+            </span>
+          </button>
         </div>
-        {/* Center: Newsletter */}
-        <div className="footer-newsletter">
-          <h3>Reach Out To Us</h3>
-          <form className="newsletter-form">
-            <input
-              type="email"
-              className="newsletter-input"
-              placeholder="ENTER YOUR EMAIL TO SIGNUP"
-              required=""
-            />
-            <button type="submit" className="newsletter-button">
-              SUBMIT
-            </button>
-          </form>
-        </div>
-        {/* Right: Social Media and Scroll to Top */}
-        <div className="footer-right">
-          <button className="scroll-to-top">↑</button>
-          <div className="social-icons">
-            <a href="#">
-              <span className="icon">📘</span>
-            </a>
-            <a href="#">
-              <span className="icon">🐦</span>
-            </a>
-            <a href="#">
-              <span className="icon">📷</span>
-            </a>
-            <a href="#">
-              <span className="icon">🌐</span>
-            </a>
-            <a href="#">
-              <span className="icon">⋯</span>
-            </a>
-            <a href="#">
-              <span className="icon">📺</span>
-            </a>
+
+        {/* Center: Quick Links as row */}
+        <div className="footer-center">
+          <div className="quick-links-2-row">
+            <p>QUICK LINKS</p>
+            <ul>
+              <li>
+                <a href="#about">About Us</a>
+              </li>
+              <li>
+                <a href="#industries">Industries</a>
+              </li>
+              <li>
+                <a href="#projects">Projects</a>
+              </li>
+              <li>
+                <a href="#careers">Careers</a>
+              </li>
+              <li>
+                <a href="#contact">Contact</a>
+              </li>
+            </ul>
           </div>
+        </div>
+
+        {/* Right: Logo and Arrow in row */}
+        <div className="footer-right">
+          <img
+            src="/innolinkk logo.png"
+            alt="InnoLinkk Logo"
+            className="footer-logo"
+          />
+          <button className="scroll-to-top">↑</button>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <div className="social-icons">
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaFacebookF />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedinIn />
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaInstagram />
+          </a>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaTwitter />
+          </a>
         </div>
       </div>
     </motion.footer>
