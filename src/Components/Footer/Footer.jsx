@@ -102,7 +102,7 @@ function Footer() {
         {/* Right: Logo and Arrow in row */}
         <div className="footer-right">
           <img
-            src="/innolinkk logo.png"
+            src="/Body-pics/innolinkk logo.png"
             alt="InnoLinkk Logo"
             className="footer-logo"
           />
