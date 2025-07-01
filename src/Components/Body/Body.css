@@ -376,6 +376,7 @@ html {
 
 .try-now-btn {
     background-color: #1a1a1a;
+    text-decoration: none;
     /* Dark button background */
     color: #fff;
     border: none;

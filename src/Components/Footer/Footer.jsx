@@ -84,16 +84,16 @@ function Footer() {
                 <a href="#about">About Us</a>
               </li>
               <li>
-                <a href="#industries">Industries</a>
+                <a href="<government/>">Government</a>
               </li>
               <li>
-                <a href="#projects">Projects</a>
+                <a href="<explore/>">Explore</a>
               </li>
               <li>
-                <a href="#careers">Careers</a>
+                <a href="<post/>">New Post</a>
               </li>
               <li>
-                <a href="#contact">Contact</a>
+                <a href="<prices/>">Prices</a>
               </li>
             </ul>
           </div>
