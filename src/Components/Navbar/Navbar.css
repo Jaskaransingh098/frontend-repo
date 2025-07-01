@@ -28,7 +28,7 @@ body,
     position: fixed;
     top: 0;
     left: 0;
-    height: 80px; 
+    height: 80px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -126,7 +126,10 @@ body,
     text-decoration: none;
 }
 
-.navbar-logo{
-    height: auto;
-    /* width: 100px; */
+.nav-logo {
+    height: 40px;
+    width: auto;
+    margin-left: 15px;
+    object-fit: contain;
+    border-radius: 6px;
 }

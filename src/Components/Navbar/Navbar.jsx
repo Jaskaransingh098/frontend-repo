@@ -13,10 +13,10 @@ function Navbar({ username, currentPath }) {
       setIsPro(localStorage.getItem("isPro") === "true");
     };
     checkIsPro();
-    window.addEventListener('storage', checkIsPro);
+    window.addEventListener("storage", checkIsPro);
 
     return () => {
-      window.removeEventListener('storage', checkIsPro);
+      window.removeEventListener("storage", checkIsPro);
     };
   }, []);
 
@@ -24,8 +24,8 @@ function Navbar({ username, currentPath }) {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     localStorage.removeItem("isPro");
-    localStorage.removeItem('activePlan')
-    localStorage.removeItem('pendingPlan')
+    localStorage.removeItem("activePlan");
+    localStorage.removeItem("pendingPlan");
     navigate("/", { replace: true });
     window.location.reload();
   };
@@ -33,7 +33,7 @@ function Navbar({ username, currentPath }) {
   return (
     <motion.nav
       className="navbar-nav"
-      initial={{ opacity: 0, y:-50 }}
+      initial={{ opacity: 0, y: -50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
@@ -70,10 +70,12 @@ function Navbar({ username, currentPath }) {
             <button className="login-button">Sign In / Up</button>
           </Link>
         )}
-      </div>
 
-      <div className="navbar-logo">
-        <img src="/Body-pics/innolinkk logo.png" alt="" />
+        <img
+          src="/Body-pics/innolinkk logo.png" // Adjust if it's in a different folder
+          alt="Logo"
+          className="nav-logo"
+        />
       </div>
     </motion.nav>
   );
