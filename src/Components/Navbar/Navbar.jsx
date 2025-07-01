@@ -71,6 +71,10 @@ function Navbar({ username, currentPath }) {
           </Link>
         )}
       </div>
+
+      <div className="navbar-logo">
+        <img src="/Body-pics/innolinkk logo.png" alt="" />
+      </div>
     </motion.nav>
   );
 }
