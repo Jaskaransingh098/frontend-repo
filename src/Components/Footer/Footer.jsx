@@ -87,7 +87,7 @@ function Footer() {
                 <Link to="/government">Government</Link>
               </li>
               <li>
-                <Link to="/explore">Explore</Link>
+                <Link to="/join">Explore</Link>
               </li>
               <li>
                 <Link to="/post">New Post</Link>
