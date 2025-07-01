@@ -7,7 +7,7 @@ import {
   FaInstagram,
   FaTwitter,
 } from "react-icons/fa";
-// import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import "./Footer.css";
@@ -81,19 +81,19 @@ function Footer() {
             <p>QUICK LINKS</p>
             <ul>
               <li>
-                <a href="#about">About Us</a>
+                <Link to="#">About Us</Link>
               </li>
               <li>
-                <a href="<government/>">Government</a>
+                <Link to="/government">Government</Link>
               </li>
               <li>
-                <a href="<explore/>">Explore</a>
+                <Link to="/explore">Explore</Link>
               </li>
               <li>
-                <a href="<post/>">New Post</a>
+                <Link to="/post">New Post</Link>
               </li>
               <li>
-                <a href="<prices/>">Prices</a>
+                <Link to="/prices">Prices</Link>
               </li>
             </ul>
           </div>

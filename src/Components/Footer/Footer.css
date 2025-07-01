@@ -96,14 +96,14 @@
     margin: 0;
 }
 
-.quick-links-2 a {
+.quick-links-2 Link {
     text-decoration: none;
     color: white;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
-.quick-links-2 a:hover {
+.quick-links-2 Link:hover {
     color: #ccc;
 }
 
