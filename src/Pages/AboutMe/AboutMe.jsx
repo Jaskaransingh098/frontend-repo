@@ -106,7 +106,7 @@ const AboutMe = () => {
         <div className="aboutme-overlay" />
       </div>
       <div className="about-me-gallery">
-        <div className="gallery-scroll" ref={scrollRef}>
+        <div className="gallery-scroll">
           {sections.map((section, index) => (
             <section className="gallery-card" key={index}>
               <div
