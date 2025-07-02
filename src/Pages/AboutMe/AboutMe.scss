@@ -44,13 +44,39 @@
     z-index: 1;
   }
 }
+.gallery-scroll-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 
-.gallery-scroll {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  width: max-content;
+  .gallery-scroll {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: max-content;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+  }
 }
+
+// .gallery-scroll {
+//   display: flex;
+//   flex-direction: row;
+//   height: 100%;
+//   width: max-content;
+// }
 
 .gallery-card {
   flex: 0 0 100vw;
