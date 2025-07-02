@@ -1,4 +1,4 @@
-import React,{useState, useRef, useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
 import "./AboutMe.scss";
@@ -65,31 +65,32 @@ Let’s rethink how ideas are shared, who gets heard, and what *could* happen wh
   },
 ];
 
-const [showArrow, setShowArrow] = useState(true);
-const scrollRef = useRef(null);
-
-useEffect(() => {
-  const handleScroll = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const scrolledToEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 5;
-    setShowArrow(!scrolledToEnd);
-  };
-
-  const scrollEl = scrollRef.current;
-  if (scrollEl) {
-    scrollEl.addEventListener("scroll", handleScroll);
-    // Trigger on mount
-    handleScroll();
-  }
-
-  return () => {
-    if (scrollEl) scrollEl.removeEventListener("scroll", handleScroll);
-  };
-}, []);
-
 const AboutMe = () => {
+  const [showArrow, setShowArrow] = useState(true);
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = scrollRef.current;
+      if (!el) return;
+
+      const scrolledToEnd =
+        el.scrollLeft + el.clientWidth >= el.scrollWidth - 5;
+      setShowArrow(!scrolledToEnd);
+    };
+
+    const scrollEl = scrollRef.current;
+    if (scrollEl) {
+      scrollEl.addEventListener("scroll", handleScroll);
+      // Trigger on mount
+      handleScroll();
+    }
+
+    return () => {
+      if (scrollEl) scrollEl.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  
   return (
     <>
       <div className="aboutme-background-wrapper">
