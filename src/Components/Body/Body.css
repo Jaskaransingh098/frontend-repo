@@ -259,7 +259,7 @@ section {
 
 }
 .subsubtitle a{
-    color: rgb(130, 255, 144);
+    color: linear-gradient(to bottom, #006699 0%, #ff99cc 100%);
     text-decoration: none;
     writing-mode: vertical-lr;
     transform: rotate(180deg);

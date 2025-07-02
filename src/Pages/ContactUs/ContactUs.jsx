@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { FaUser, FaEnvelope, FaPhone, FaCommentDots } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaCommentDots } from "react-icons/fa";
 import "./ContactUs.css";
 
 function ContactUs() {
