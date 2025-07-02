@@ -51,13 +51,14 @@ function ContactUs() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    const rect = e.target.getBoundingClientRect();
+    const button = e.nativeEvent.submitter; // Get the button that triggered submit
+    const rect = button.getBoundingClientRect(); // Correct bounding box
     const circleX = e.clientX - rect.left;
     const circleY = e.clientY - rect.top;
     setCircleStyle({ left: circleX, top: circleY });
     setShowCircle(true);
+
+    setIsSubmitting(true);
 
     const payload = {
       fullName: form.fullName,
@@ -105,7 +106,7 @@ function ContactUs() {
             <h3>Full name</h3>
             <div className="input-with-icon">
               <FaUser className="input-icon" />
-              <input type="text" placeholder="Enter your full name" required />
+              <input type="text" name="fullName" value={form.fullName} onChange={handleChange} placeholder="Enter your full name" required />
             </div>
           </div>
 
@@ -115,6 +116,9 @@ function ContactUs() {
               <FaEnvelope className="input-icon" />
               <input
                 type="text"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
                 placeholder="Enter your email address"
                 required
               />
@@ -140,7 +144,7 @@ function ContactUs() {
             <h3>Your Vision</h3>
             <div className="input-with-icon">
               <FaCommentDots className="input-icon" />
-              <textarea placeholder="Type your vision" rows="5" required />
+              <textarea name="message" value={form.message} onChange={handleChange} placeholder="Type your vision" rows="5" required />
             </div>
           </div>
           <div className="contact-submit-wrapper">
