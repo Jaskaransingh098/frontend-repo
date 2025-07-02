@@ -143,3 +143,37 @@
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
+.scroll-arrow {
+  position: absolute;
+  right: 20px;
+  bottom: 50%;
+  transform: translateY(50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+
+  &:hover {
+    transform: translateY(50%) scale(1.1);
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .arrow-icon {
+    font-size: 20px;
+    color: #fff;
+    animation: bounceRight 1.2s infinite;
+  }
+}
+
+@keyframes bounceRight {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+}

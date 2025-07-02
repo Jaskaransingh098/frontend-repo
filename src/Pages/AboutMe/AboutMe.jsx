@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
 import "./AboutMe.scss";
 
 const sections = [
@@ -64,6 +65,30 @@ Let’s rethink how ideas are shared, who gets heard, and what *could* happen wh
   },
 ];
 
+const [showArrow, setShowArrow] = useState(true);
+const scrollRef = useRef(null);
+
+useEffect(() => {
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const scrolledToEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 5;
+    setShowArrow(!scrolledToEnd);
+  };
+
+  const scrollEl = scrollRef.current;
+  if (scrollEl) {
+    scrollEl.addEventListener("scroll", handleScroll);
+    // Trigger on mount
+    handleScroll();
+  }
+
+  return () => {
+    if (scrollEl) scrollEl.removeEventListener("scroll", handleScroll);
+  };
+}, []);
+
 const AboutMe = () => {
   return (
     <>
@@ -75,12 +100,12 @@ const AboutMe = () => {
           playsInline
           className="aboutme-background-video"
         >
-          <source src="/contactus-pics/baclground-video.mp4" type="video/mp4" />
+          <source src="/contactus-pics/video2.mp4" type="video/mp4" />
         </video>
         <div className="aboutme-overlay" />
       </div>
       <div className="about-me-gallery">
-        <div className="gallery-scroll">
+        <div className="gallery-scroll" ref={scrollRef}>
           {sections.map((section, index) => (
             <section className="gallery-card" key={index}>
               <div
@@ -111,6 +136,16 @@ const AboutMe = () => {
             </section>
           ))}
         </div>
+        {showArrow && (
+          <div
+            className="scroll-arrow"
+            onClick={() =>
+              scrollRef.current.scrollBy({ left: 300, behavior: "smooth" })
+            }
+          >
+            <FaArrowRight className="arrow-icon" />
+          </div>
+        )}
       </div>
     </>
   );
