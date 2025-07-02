@@ -66,31 +66,31 @@ Let’s rethink how ideas are shared, who gets heard, and what *could* happen wh
 ];
 
 const AboutMe = () => {
-  const [showArrow, setShowArrow] = useState(true);
-  const scrollRef = useRef(null);
+  // const [showArrow, setShowArrow] = useState(true);
+  // const scrollRef = useRef(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const el = scrollRef.current;
-      if (!el) return;
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const el = scrollRef.current;
+  //     if (!el) return;
 
-      const scrolledToEnd =
-        el.scrollLeft + el.clientWidth >= el.scrollWidth - 5;
-      setShowArrow(!scrolledToEnd);
-    };
+  //     const scrolledToEnd =
+  //       el.scrollLeft + el.clientWidth >= el.scrollWidth - 5;
+  //     setShowArrow(!scrolledToEnd);
+  //   };
 
-    const scrollEl = scrollRef.current;
-    if (scrollEl) {
-      scrollEl.addEventListener("scroll", handleScroll);
-      // Trigger on mount
-      handleScroll();
-    }
+  //   const scrollEl = scrollRef.current;
+  //   if (scrollEl) {
+  //     scrollEl.addEventListener("scroll", handleScroll);
+  //     // Trigger on mount
+  //     handleScroll();
+  //   }
 
-    return () => {
-      if (scrollEl) scrollEl.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
+  //   return () => {
+  //     if (scrollEl) scrollEl.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+  
   return (
     <>
       <div className="aboutme-background-wrapper">
@@ -106,52 +106,6 @@ const AboutMe = () => {
         <div className="aboutme-overlay" />
       </div>
       <div className="about-me-gallery">
-        <div className="gallery-scroll-wrapper">
-          <div className="gallery-scroll" ref={scrollRef}>
-            {sections.map((section, index) => (
-              <section className="gallery-card" key={index}>
-                <div
-                  className="gallery-inner"
-                  style={{
-                    flexDirection: index % 2 === 0 ? "row" : "row-reverse",
-                  }}
-                >
-                  <motion.div
-                    className="gallery-content"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                  >
-                    <h2 className="section-title">{section.title}</h2>
-                    <p className="section-text">{section.content}</p>
-                  </motion.div>
-
-                  <motion.img
-                    src={section.image}
-                    alt="section visual"
-                    className="section-image-3d"
-                    initial={{ rotateY: -20, opacity: 0 }}
-                    whileInView={{ rotateY: 0, opacity: 1 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                  />
-                </div>
-              </section>
-            ))}
-          </div>
-
-          {showArrow && (
-            <div
-              className="scroll-arrow"
-              onClick={() =>
-                scrollRef.current.scrollBy({ left: 300, behavior: "smooth" })
-              }
-            >
-              <FaArrowRight className="arrow-icon" />
-            </div>
-          )}
-        </div>
-      </div>
-      {/* <div className="about-me-gallery">
         <div className="gallery-scroll" ref={scrollRef}>
           {sections.map((section, index) => (
             <section className="gallery-card" key={index}>
@@ -183,17 +137,7 @@ const AboutMe = () => {
             </section>
           ))}
         </div>
-        {showArrow && (
-          <div
-            className="scroll-arrow"
-            onClick={() =>
-              scrollRef.current.scrollBy({ left: 300, behavior: "smooth" })
-            }
-          >
-            <FaArrowRight className="arrow-icon" />
-          </div>
-        )}
-      </div> */}
+      </div>
     </>
   );
 };
