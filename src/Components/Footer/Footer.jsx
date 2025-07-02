@@ -63,7 +63,7 @@ function Footer() {
           <p>CONTACT US</p>
           <h1>LET'S DISCUSS YOUR VISION. WITH US</h1>
           <button>
-            <a href="#">Contact us</a>
+            <a href="/contactus">Contact us</a>
           </button>
           <br />
           <p>OR EMAIL US AT</p>
@@ -81,7 +81,7 @@ function Footer() {
             <p>QUICK LINKS</p>
             <ul>
               <li>
-                <Link to="#">About Us</Link>
+                <Link to="/aboutme">About Me</Link>
               </li>
               <li>
                 <Link to="/government">Government</Link>

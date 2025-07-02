@@ -16,6 +16,8 @@ import Join from "./Pages/Join/Join";
 import Prices from "./Pages/Prices/Prices";
 import Success from "./Pages/Success/Success";
 import Government from "./Pages/Government/Government";
+import AboutMe from "./Pages/AboutMe/AboutMe";
+import ContactUs from "./Pages/ContactUs/ContactUs";
 import AnimatedBackground from "./Components/AnimateBackground/AnimateBackground";
 
 function AppContent() {
@@ -62,6 +64,8 @@ function AppContent() {
           <Route path="/prices" element={<Prices />} />
           <Route path="/success" element={<Success />} />
           <Route path="/government" element={<Government />} />
+          <Route path="/aboutme" element={<AboutMe/>}/>
+          <Route path="/contactus" element={<ContactUs/>}/>
         </Routes>
       </main>
     </>
