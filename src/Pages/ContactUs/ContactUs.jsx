@@ -101,7 +101,7 @@ function ContactUs() {
           <h1>Share Your Vision With Us.</h1>
           <p>or just reach out manually by innolinkk@gmail.com</p>
         </div>
-        <form className="contact-us-right">
+        <form className="contact-us-right" onSubmit={handleSubmit}>
           <div className="input-group">
             <h3>Full name</h3>
             <div className="input-with-icon">
