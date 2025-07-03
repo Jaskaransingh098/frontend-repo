@@ -40,7 +40,7 @@ function Footer() {
   }, []);
 
   const [copied, setCopied] = useState(false);
-  const email = "Innolinkk@gmail.com";
+  const email = "innolinkk@gmail.com";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email).then(() => {
