@@ -113,28 +113,28 @@ function Footer() {
       <div className="footer-bottom">
         <div className="social-icons">
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/profile.php?id=61578122455342"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaFacebookF />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/company/innolinkk"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaLinkedinIn />
           </a>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/innolinkk/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaInstagram />
           </a>
           <a
-            href="https://twitter.com"
+            href="https://x.com/innolinkk"
             target="_blank"
             rel="noopener noreferrer"
           >
