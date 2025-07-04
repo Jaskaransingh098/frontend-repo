@@ -446,7 +446,7 @@
 
 .topics-scroll {
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
     gap: 1.9rem;
     overflow-x: auto;
     padding-top: 10px;
@@ -748,6 +748,7 @@
     }
 
     .topics-scroll {
+        justify-content: end;
         gap: 0.8rem;
         padding: 1rem 0.5rem;
     }
