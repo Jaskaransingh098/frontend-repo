@@ -308,7 +308,7 @@
 
     .user-list {
         position: sticky;
-        top: 56px;
+        top: 1px;
         z-index: 10;
         width: 100%;
         flex-direction: row;
