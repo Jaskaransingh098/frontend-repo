@@ -302,9 +302,12 @@
     .chat-container {
         flex-direction: column;
         height: 100vh;
+        padding-top: 4rem;
     }
 
     .user-list {
+        position: relative;
+        z-index: 2;
         width: 100%;
         flex-direction: row;
         flex-wrap: nowrap;
