@@ -38,9 +38,11 @@ function Navbar({ username, currentPath }) {
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className="nav">
-        <a href="/" className="home-link">
-          <p>Home</p>
-        </a>
+        {currentPath !== "/" && (
+          <a href="/" className="home-link">
+            <p>Home</p>
+          </a>
+        )}
         {currentPath !== "/post" && <a href="/post">Post</a>}
         {currentPath !== "/join" && <a href="/join">Join</a>}
         {currentPath !== "/prices" && <a href="/prices">Prices</a>}

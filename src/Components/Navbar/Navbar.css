@@ -134,66 +134,7 @@ body,
     border-radius: 6px;
 }
 
-@media (max-width: 480px) {
-    .navbar-nav {
-        position: static;
-        /* make it scrollable, not fixed */
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.5rem 1rem;
-        height: auto;
-        gap: 0;
-        /* remove big gaps */
-        overflow-x: auto;
-        scrollbar-width: none;
-    }
 
-    .navbar-nav::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        gap: 0.5rem;
-        /* smaller spacing between nav links */
-        padding-top: 0;
-    }
-
-    .nav a {
-        font-size: 14px;
-        padding: 6px 8px;
-        margin: 0;
-        white-space: nowrap;
-    }
-
-    .loginup {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: flex-end;
-        gap: 0.5rem;
-        margin: 0;
-    }
-
-    .loginup Button {
-        padding: 6px 10px;
-        font-size: 0.85rem;
-        white-space: nowrap;
-    }
-
-    .login-button {
-        font-size: 0.85rem;
-        padding: 6px 10px;
-    }
-
-    .nav-logo {
-        height: 50px;
-        margin-left: 0;
-    }
-}
 @media (max-width: 480px) {
   .navbar-nav {
     position: absolute;
@@ -201,7 +142,7 @@ body,
     left: 0;
     right: 0;
     z-index: 20;
-    background: rgba(0, 0, 0, 0.6);
+    /* background: rgba(0, 0, 0, 0.6); */
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
