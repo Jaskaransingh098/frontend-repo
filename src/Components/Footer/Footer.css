@@ -202,3 +202,63 @@
     color: #ccc;
     transform: scale(1.1);
 }
+
+@media (max-width: 480px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .contact-us {
+        width: 100%;
+        padding: 20px 10px;
+    }
+
+    .footer-center {
+        padding: 30px 10px;
+    }
+
+    .quick-links-2-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .quick-links-2 ul,
+    .quick-links-2-row ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-right {
+        flex-direction: column;
+        padding: 20px 10px;
+        gap: 20px;
+    }
+
+    .footer-logo {
+        width: 150px;
+    }
+
+    .scroll-to-top {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    .footer-bottom {
+        height: auto;
+        padding: 20px 0;
+        flex-direction: column;
+    }
+
+    .social-icons {
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .social-icons a {
+        font-size: 1.3rem;
+    }
+}

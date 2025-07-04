@@ -223,3 +223,64 @@
         opacity: 0.4;
     }
 }
+
+@media (max-width: 480px) {
+    .contact-us-page {
+        flex-direction: column;
+        padding: 20px 16px;
+        gap: 30px;
+        height: auto;
+    }
+
+    .contact-us-left {
+        width: 100%;
+        text-align: center;
+        line-height: 2rem;
+    }
+
+    .contact-us-left h1 {
+        font-size: 2rem;
+    }
+
+    .contact-us-left p {
+        font-size: 1rem;
+    }
+
+    .contact-us-left button {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .contact-us-right {
+        width: 100%;
+        padding-top: 0;
+        font-size: 0.95rem;
+    }
+
+    .input-group,
+    .phone-container-custom {
+        width: 100vw !important;
+        max-width: 100%;
+    }
+
+    .input-with-icon input,
+    .input-with-icon textarea,
+    .phone-input-custom {
+        font-size: 0.95rem;
+        padding: 14px 14px 14px 42px;
+    }
+
+    .phone-input-custom {
+        height: 44px !important;
+    }
+
+    .contact-submit-button {
+        width: 100%;
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .contact-submit-wrapper {
+        width: 100%;
+    }
+}

@@ -36,13 +36,6 @@ section {
     height: 66vh;
     width: 100%;
     background: transparent;
-    /* margin-top: ; */
-    /* background: linear-gradient(to bottom,
-            var(--deep-black),
-            var(--charcoal),
-            var(--shadow-blue),
-            var(--midnight));
-    color: white; */
 }
 
 .services-text {
@@ -85,22 +78,27 @@ section {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
 }
-.boxes:hover{
+
+.boxes:hover {
     transform: translateY(-10px);
 }
-.icon-style{
+
+.icon-style {
     font-size: 3rem;
     margin-bottom: 15px;
     color: rgb(6, 95, 189);
 }
-.boxes h3{
+
+.boxes h3 {
     font-size: 1.3rem;
     margin-bottom: 35px;
 }
-.boxes p{
+
+.boxes p {
     font-size: 0.95rem;
     color: #ccc;
 }
+
 .general-container {
     display: flex;
     height: 35rem;
@@ -162,7 +160,7 @@ section {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    
+
 }
 
 .content:nth-of-type(3) {
@@ -258,7 +256,8 @@ section {
 
 
 }
-.subsubtitle a{
+
+.subsubtitle a {
     color: linear-gradient(to bottom, #006699 0%, #ff99cc 100%);
     text-decoration: none;
     writing-mode: vertical-lr;
@@ -563,4 +562,142 @@ h1 {
 .arrow {
     font-size: 1.5rem;
     color: #666;
+}
+
+@media (max-width: 480px) {
+    .image-container {
+        height: 60vh;
+        background-position: center;
+    }
+
+    .services-container {
+        height: auto;
+        padding: 20px 10px;
+    }
+
+    .services-text {
+        font-size: 1.5rem;
+        padding-left: 20px;
+        padding-top: 20px;
+    }
+
+    .services-boxes {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: auto;
+        margin-left: 0;
+        padding: 30px 10px;
+        gap: 20px;
+    }
+
+    .boxes {
+        width: 90%;
+        height: auto;
+        padding: 20px 15px;
+    }
+
+    .general-container {
+        flex-direction: column;
+        height: auto;
+        padding: 20px 10px;
+    }
+
+    .general-container h1 {
+        padding-top: 20px;
+        padding-right: 0;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .content {
+        min-height: 250px;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .card-title,
+    .title-card {
+        font-size: 1rem;
+        left: 1rem;
+        margin-top: 30%;
+        white-space: normal;
+    }
+
+    .subsubtitle a {
+        font-size: 1.8rem;
+        right: 10px;
+        top: 40px;
+    }
+
+    .body-video {
+        height: auto;
+        padding: 10px;
+        border-radius: 20px;
+    }
+
+    .banner-container {
+        flex-direction: column;
+        padding: 20px;
+        margin-top: 50px;
+        gap: 30px;
+    }
+
+    .banner-content {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .banner-content h2 {
+        font-size: 2rem;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .banner-image {
+        width: 100%;
+        height: 300px;
+        background-size: cover;
+    }
+
+    .infographic-header h1 {
+        font-size: 2rem;
+        padding-left: 10px;
+        text-align: center;
+    }
+
+    .infographic-cards {
+        flex-direction: column;
+        padding: 0 10px;
+        gap: 20px;
+    }
+
+    .info-box {
+        width: 100%;
+    }
+
+    .government-section {
+        flex-direction: column;
+    }
+
+    .government-container {
+        padding: 0 10px;
+    }
+
+    .government-steps {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .government-step {
+        width: 100%;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
 }

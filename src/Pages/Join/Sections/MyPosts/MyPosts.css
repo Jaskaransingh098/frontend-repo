@@ -795,3 +795,161 @@
         transform: rotate(360deg);
     }
 }
+
+@media (max-width: 480px) {
+    .dashboard-dashboard-container {
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .dashboard-dashboard-title {
+        font-size: 1.8rem;
+        padding-right: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .dashboard-dashboard-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+    }
+
+    .dashboard-card,
+    .dashboard-card-1,
+    .dashboard-card-2,
+    .dashboard-card-3,
+    .dashboard-card-4 {
+        width: 100% !important;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .dashboard-card-3 h3 {
+        font-size: 1.4rem;
+    }
+
+    .tier-title {
+        font-size: 1.2rem;
+    }
+
+    .tier-content {
+        padding: 0.8rem;
+    }
+
+    .nav-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 1.5rem;
+    }
+
+    .milestone-list li {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .show-all-btn {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .myposts-page {
+        padding: 1rem 0.5rem;
+        gap: 1.5rem;
+    }
+
+    .post-card {
+        padding: 1.2rem;
+    }
+
+    .profile-pic {
+        width: 45px;
+        height: 45px;
+    }
+
+    .username {
+        font-size: 1.1rem;
+    }
+
+    .role {
+        font-size: 0.75rem;
+    }
+
+    .post-meta-grid {
+        grid-template-columns: 1fr;
+        font-size: 0.85rem;
+        padding: 0.8rem;
+    }
+
+    .description-box {
+        padding: 1rem;
+    }
+
+    .desc-label {
+        font-size: 0.95rem;
+    }
+
+    .description-text,
+    .description-box p {
+        font-size: 0.9rem;
+    }
+
+    .edit-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .edit-actions button {
+        font-size: 0.85rem;
+        padding: 0.5rem;
+    }
+
+    .likes-comments {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+
+    .comment-box {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .comment-box textarea {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .send-btn {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 0.6rem;
+    }
+
+    .comment-item {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 0.85rem;
+    }
+
+    .comment-content {
+        max-width: 100%;
+    }
+
+    .comment-username {
+        font-size: 13px;
+    }
+
+    .comment-text {
+        font-size: 13px;
+    }
+
+    .delete-comment-btn {
+        font-size: 12px;
+        padding: 2px;
+    }
+
+    .tier-upgrade-message {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+}

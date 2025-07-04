@@ -1,4 +1,4 @@
-.pricing-container{
+.pricing-container {
     background: linear-gradient(to bottom,
             var(--deep-black),
             var(--charcoal),
@@ -9,24 +9,27 @@
     padding: 4rem 2rem;
 }
 
-.pricing-title{
+.pricing-title {
     margin-top: 4.5rem;
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
 }
-.pricing-subtitle{
+
+.pricing-subtitle {
     font-size: 1.2rem;
     color: #ccc;
     margin-bottom: 3rem;
 }
-.pricing-cards{
+
+.pricing-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
 }
-.pricing-card{
+
+.pricing-card {
     background-color: #1b2437;
     padding: 2rem;
     border-radius: 1.5rem;
@@ -38,42 +41,49 @@
     /* overflow: hidden; */
     border: 2px solid transparent;
 }
-.price{
+
+.price {
     font-size: 2rem;
     margin: 1rem 0;
 }
-.price span{
+
+.price span {
     font-size: 1rem;
     color: #a1a1aa;
 }
 
-.pricing-card h2{
+.pricing-card h2 {
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
 }
-.pricing-card h3{
+
+.pricing-card h3 {
     font-size: 1.5rem;
     color: #8b5cf6;
     margin-bottom: 1.5rem;
 }
-.card-features{
+
+.card-features {
     list-style: none;
     padding: 0;
     text-align: left;
     margin-bottom: 2rem 0;
 }
-.card-features li{
+
+.card-features li {
     margin-bottom: 0.8rem;
     font-size: 0.95rem;
     display: flex;
     align-items: center;
     gap: 0.4rem;
 }
-.icon{
+
+.icon {
     font-size: 0.5rem;
     background: transparent;
 }
-.cta-button{
+
+.cta-button {
     background: linear-gradient(to right, #4f46e5, #8b5cf6);
     color: white;
     border: none;
@@ -88,42 +98,119 @@
     transition: background 0.3s, transform 0.15s ease;
     overflow: hidden;
 }
-.essential{
+
+.essential {
     margin-top: 225px;
 }
-.enterprise{
+
+.enterprise {
     margin-top: 175px;
 }
-.button-text{
+
+.button-text {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     transition: transform 0.3s ease;
 }
-.cta-button:hover .button-text{
+
+.cta-button:hover .button-text {
     transform: scale(1.1);
 }
-.cta-button:hover{
+
+.cta-button:hover {
     background: linear-gradient(to right, #6366f1, #a78bfa);
 }
-.cta-button:active{
+
+.cta-button:active {
     transform: scale(0.9);
 }
-.essential-card:hover{
+
+.essential-card:hover {
     transform: translateY(-12px);
     background: linear-gradient(135deg, #1c1c2d, #263f2d);
     box-shadow: 0 12px 30px rgba(74, 222, 128, 0.4);
     border: 2px solid #4ade80;
 }
-.growth-card:hover{
+
+.growth-card:hover {
     transform: translateY(-12px);
     background: linear-gradient(135deg, #1c1c2d, #3c2f74);
     box-shadow: 0 12px 30px rgba(139, 92, 246, 0.5);
     border: 2px solid #8b5cf6;
 }
-.enterprise-card:hover{
+
+.enterprise-card:hover {
     transform: translateY(-12px);
     background: linear-gradient(135deg, #1c1c2d, #263f2d);
     box-shadow: 0 12px 30px rgba(96, 165, 250, 0.5);
     border: 2px solid #60a5fa;
+}
+
+@media (max-width: 480px) {
+    .pricing-container {
+        padding: 2rem 1rem;
+    }
+
+    .pricing-title {
+        font-size: 2rem;
+        margin-top: 3rem;
+    }
+
+    .pricing-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .pricing-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .pricing-card {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .pricing-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .pricing-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    .price {
+        font-size: 1.8rem;
+    }
+
+    .price span {
+        font-size: 0.9rem;
+    }
+
+    .card-features li {
+        font-size: 0.9rem;
+        gap: 0.3rem;
+    }
+
+    .cta-button {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+        margin-top: 100px;
+        border-radius: 1.5rem;
+    }
+
+    .essential {
+        margin-top: 140px;
+    }
+
+    .enterprise {
+        margin-top: 120px;
+    }
+
+    .button-text {
+        gap: 0.4rem;
+    }
 }

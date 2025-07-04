@@ -675,3 +675,122 @@
     background: #555;
 }
 
+
+@media (max-width: 480px) {
+    .explore-insider-header {
+        height: 50vh;
+    }
+
+    .explore-insider-headers {
+        width: 90vw;
+        height: auto;
+        padding-top: 150px;
+        gap: 12px;
+    }
+
+    .explore-search {
+        width: 90vw;
+        font-size: 16px;
+        height: 50px;
+        border-radius: 14px;
+    }
+
+    .trending-title-header,
+    .topics-title {
+        font-size: 1.6rem;
+        padding: 2rem 1rem 1rem;
+        text-align: center;
+    }
+
+    .trending-container-expanded,
+    .trending-container-expanded.expanded {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .trending-cards-panel {
+        width: 100% !important;
+        grid-template-columns: repeat(auto-fill, minmax(80%, 1fr)) !important;
+        overflow-x: auto;
+        padding: 1rem 0.5rem;
+    }
+
+    .trending-card {
+        min-width: 85vw;
+        height: auto;
+    }
+
+    .trending-detail-panel {
+        width: 100%;
+        padding: 1.2rem;
+        max-height: unset;
+    }
+
+    .topics-scroll {
+        gap: 0.8rem;
+        padding: 1rem 0.5rem;
+    }
+
+    .topic-card {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .suggestion-tags ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .suggestion-tags li {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    .carousel-wrapper {
+        margin: 2rem 0;
+    }
+
+    .discovery-card-carousel {
+        height: auto;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .discovery-content {
+        width: 100%;
+        padding: 0.8rem;
+    }
+
+    .discovery-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .discovery-description-text {
+        font-size: 1rem;
+    }
+
+    .discovery-footer {
+        justify-content: flex-start;
+        gap: 0.8rem;
+        font-size: 1rem;
+    }
+
+    .carousel-btn {
+        font-size: 1.5rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .topics-container {
+        margin: 2rem 1rem;
+    }
+
+    .clear-filter-btn {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 0.95rem;
+    }
+}

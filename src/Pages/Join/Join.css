@@ -27,6 +27,7 @@
     position: relative;
     transition: all 0.3s ease;
 }
+
 .join-body.float-navbar .join-navbar {
     position: absolute;
     top: 0;
@@ -87,4 +88,55 @@
     width: 80%;
     background-color: transparent;
 
+}
+
+@media (max-width: 480px) {
+    .join-page {
+        padding-top: 4rem;
+    }
+
+    .join-navbar {
+        width: 100%;
+        padding-top: 1rem;
+        position: static;
+        height: auto;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-bottom: 1px solid #333;
+    }
+
+    .join-body.float-navbar .join-navbar {
+        position: static;
+        height: auto;
+    }
+
+    .navbar-vertical {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+        width: 100%;
+    }
+
+    .navbar-vertical button {
+        flex: 1 1 45%;
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .join-body {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+    }
+
+    .join-container {
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    .align-top {
+        align-items: flex-start;
+        height: auto;
+    }
 }

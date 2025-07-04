@@ -1,4 +1,4 @@
-.post-wrapper{
+.post-wrapper {
     position: relative;
     min-height: 100vh;
     width: 100%;
@@ -10,7 +10,8 @@
     flex-direction: column;
     align-items: center;
 }
-.post-wrapper video{
+
+.post-wrapper video {
     height: 100vh;
     width: 100vw;
     top: 0;
@@ -18,10 +19,11 @@
     border: none;
     border-radius: none;
 }
-.background-video{
+
+.background-video {
     position: fixed;
     top: 0;
-    left: 0; 
+    left: 0;
     margin-top: 0;
     min-width: 100vw;
     min-height: 100vh;
@@ -30,6 +32,7 @@
     object-fit: cover;
     z-index: 1;
 }
+
 .video-overlay {
     position: fixed;
     margin-top: 0;
@@ -37,11 +40,11 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.4); 
+    background: rgba(0, 0, 0, 0.4);
     z-index: -1;
 }
 
-.form-container{
+.form-container {
     position: relative;
     z-index: 1;
     width: 90%;
@@ -56,10 +59,14 @@
     transition: border 0.3s ease;
     border: 1px solid transparent;
 }
-.form-container:hover{
+
+.form-container:hover {
     border: 4px solid white;
 }
-input, select, textarea{
+
+input,
+select,
+textarea {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
@@ -67,18 +74,21 @@ input, select, textarea{
     border-radius: 8px;
     border: 1px solid #ccc;
 }
-.form-container h2{
+
+.form-container h2 {
     margin-bottom: 20px;
     color: white;
 }
-.progress-bar{
+
+.progress-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
     position: relative;
 }
-.step-circle{
+
+.step-circle {
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -89,10 +99,12 @@ input, select, textarea{
     font-weight: bold;
     z-index: 1;
 }
-.step-circle:active{
+
+.step-circle:active {
     background: #9b59b6;
 }
-.bar{
+
+.bar {
     position: absolute;
     top: 17px;
     left: 17px;
@@ -102,18 +114,21 @@ input, select, textarea{
     z-index: 0;
     border-radius: 3px;
 }
-.bar .fill{
+
+.bar .fill {
     height: 100%;
     background: #9b59b6;
     border-radius: 3px;
     transition: width 0.3s ease;
 }
-.btn-group{
+
+.btn-group {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
 }
-.btn-group button{
+
+.btn-group button {
     padding: 10px 20px;
     border: none;
     background: #9b59b6;
@@ -121,10 +136,12 @@ input, select, textarea{
     border-radius: 8px;
     cursor: pointer;
 }
-.btn-group button:hover{
+
+.btn-group button:hover {
     background: #8e44ad;
 }
-.submit-button{
+
+.submit-button {
     width: 100%;
     background: #2ecc71;
     margin-top: 20px;
@@ -135,11 +152,86 @@ input, select, textarea{
     border-radius: 8px;
     cursor: pointer;
 }
-.submit-button:hover{
+
+.submit-button:hover {
     background: #8e44ad;
 }
 
-.form-container li{
+.form-container li {
     color: white;
     line-height: 1.2;
+}
+
+
+@media (max-width: 480px) {
+    .post-wrapper {
+        padding: 0 1rem;
+        overflow: hidden;
+    }
+
+    .form-container {
+        width: 100%;
+        margin: 20vh auto 0 auto;
+        margin-left: 0 !important;
+        padding: 1.5rem;
+        max-width: 95%;
+        box-shadow: none;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .form-container:hover {
+        border: 2px solid white;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 0.9rem;
+        padding: 0.7rem;
+    }
+
+    .form-container h2 {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    .progress-bar {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .step-circle {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 0.9rem;
+    }
+
+    .bar {
+        top: auto;
+        bottom: -10px;
+        height: 4px;
+        left: 0;
+        right: 0;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-group button {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .submit-button {
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+    }
+
+    .form-container li {
+        font-size: 0.9rem;
+    }
 }

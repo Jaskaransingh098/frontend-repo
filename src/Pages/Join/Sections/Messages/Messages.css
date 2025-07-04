@@ -297,3 +297,121 @@
 .modal-start-btn:hover {
     background: #347ab0;
 }
+
+@media (max-width: 480px) {
+    .chat-container {
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .user-list {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        border-right: none;
+        border-bottom: 1px solid #333;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .user-item {
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem;
+        font-size: 0.85rem;
+        min-width: 80px;
+    }
+
+    .user-dp {
+        width: 30px;
+        height: 30px;
+    }
+
+    .user-name {
+        font-size: 0.75rem;
+        text-align: center;
+    }
+
+    .user-header h3 {
+        font-size: 1.2rem;
+    }
+
+    .chat-window {
+        flex: 1;
+        width: 100%;
+    }
+
+    .chat-header {
+        padding: 0.6rem 1rem;
+    }
+
+    .chat-header-avatar {
+        width: 28px;
+        height: 28px;
+    }
+
+    .chat-messages {
+        padding: 0.8rem 0.5rem;
+        gap: 0.6rem;
+    }
+
+    .chat-message.sent,
+    .chat-message.received {
+        max-width: 85%;
+        font-size: 0.85rem;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .msg-text {
+        font-size: 13px;
+    }
+
+    .msg-time {
+        font-size: 10px;
+    }
+
+    .chat-input {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.6rem;
+    }
+
+    .chat-input textarea {
+        width: 100%;
+        margin-right: 0;
+        font-size: 0.9rem;
+        height: 40px;
+    }
+
+    .chat-input button {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 0.6rem 0;
+    }
+
+    .emoji-picker-container {
+        bottom: 100px;
+    }
+
+    .inline-modal {
+        padding: 0.8rem;
+    }
+
+    .modal-input {
+        font-size: 13px;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .modal-start-btn {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+
+    .suggestions-list li {
+        font-size: 13px;
+        padding: 0.4rem 0.6rem;
+    }
+}
