@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import ReactModal from "react-modal";
 import EmojiPicker from "emoji-picker-react";
 import { jwtDecode } from "jwt-decode"; // ✅ For extracting username from token
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import "./Messages.css";
 
 const socket = io(import.meta.env.VITE_API_URL, {
@@ -219,7 +219,16 @@ function Messages() {
   }, [currentUser, conversationUsers]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const container = document.querySelector(".chat-messages");
+    if (!container) return;
+
+    const isAtBottom =
+      container.scrollHeight - container.scrollTop <=
+      container.clientHeight + 50;
+
+    if (isAtBottom) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
 
   const getUserAvatar = (username) => {
