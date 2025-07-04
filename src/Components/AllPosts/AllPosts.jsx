@@ -32,7 +32,7 @@ const AllPosts = ({
 
   return (
     <div className="all-posts-wrapper">
-      {!username || !localStorage.getItem("token") ? (
+      {!localStorage.getItem("token") ? (
         <p className="all-posts-message">
           🔒 Please <a href="/login">log in</a> or <a href="/signup">sign up</a>{" "}
           to view community ideas.
