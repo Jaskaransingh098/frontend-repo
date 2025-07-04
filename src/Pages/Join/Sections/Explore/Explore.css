@@ -687,20 +687,19 @@
 @media (max-width: 480px) {
     .explore-insider-header {
         height: 86vh;
-        /* margin-bottom: 2rem; */
-        /* margin-top: 5rem; */
+
     }
 
     .explore-insider-headers {
         width: 90vw;
         height: auto;
         padding-top: 150px;
-        /* padding-bottom: 40px; */
+
         gap: 12px;
     }
 
     .explore-search {
-        /* margin-top: 80px; */
+
         width: 90vw;
         font-size: 16px;
         height: 50px;
@@ -722,17 +721,23 @@
         align-items: center;
         padding: 1rem;
         margin-top: 1rem;
+        min-height: 100vh;
     }
 
     .trending-cards-panel {
         width: 100% !important;
+        display: grid;
         grid-template-columns: repeat(auto-fill, minmax(80%, 1fr)) !important;
         overflow-x: auto;
         padding: 1rem 0.5rem;
+        gap: 1rem;
+        min-height: 200px;
     }
 
     .trending-card {
         min-width: 85vw;
+        min-height: 200px;
+        transition: all 0.3s ease;
         height: auto;
     }
 
@@ -748,7 +753,7 @@
     }
 
     .topics-scroll {
-        justify-content: end;
+        justify-content: flex-start;
         gap: 0.8rem;
         padding: 1rem 0.5rem;
     }
