@@ -194,69 +194,65 @@ body,
         margin-left: 0;
     }
 }
-
 @media (max-width: 480px) {
-    .navbar-nav {
-        position: absolute;
-        /* instead of static */
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 20;
-        /* stays above video/image */
-        background: rgba(0, 0, 0, 0.6);
-        /* slight dark bg for readability */
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.5rem 1rem;
-        height: auto;
-        gap: 0;
-        overflow-x: auto;
-        scrollbar-width: none;
-    }
+  .navbar-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.6);
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3rem 0.5rem;
+    height: auto;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
 
-    .navbar-nav::-webkit-scrollbar {
-        display: none;
-    }
+  .navbar-nav::-webkit-scrollbar {
+    display: none;
+  }
 
-    .nav {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        gap: 0.5rem;
-        padding-top: 0;
-    }
+  .nav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.3rem;
+    padding-top: 0;
+  }
 
-    .nav a {
-        font-size: 14px;
-        padding: 6px 8px;
-        margin: 0;
-        white-space: nowrap;
-    }
+  .nav a {
+    font-size: 13px; /* smaller text */
+    padding: 4px 6px; /* tighter spacing */
+    margin: 0;
+    white-space: nowrap;
+  }
 
-    .loginup {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: flex-end;
-        gap: 0.5rem;
-        margin: 0;
-    }
+  .loginup {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    gap: 0.4rem;
+    margin: 0;
+  }
 
-    .loginup Button {
-        padding: 6px 10px;
-        font-size: 0.85rem;
-        white-space: nowrap;
-    }
+  .loginup Button {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
 
-    .login-button {
-        font-size: 0.85rem;
-        padding: 6px 10px;
-    }
+  .login-button {
+    font-size: 0.75rem;
+    padding: 5px 8px;
+  }
 
-    .nav-logo {
-        height: 50px;
-        margin-left: 0;
-    }
+  .nav-logo {
+    height: 45px;
+    margin-left: 0;
+  }
 }
