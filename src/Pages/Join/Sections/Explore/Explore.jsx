@@ -631,7 +631,7 @@ export default function Explore() {
             </button>
           </div>
         </div>
-        <h2 className="section-heading">All Posts</h2>
+        <h2 className="section-heading">🚀✨ All Posts & Startup Ideas 💭💬</h2>
         <AllPosts
           posts={filteredPosts}
           likes={allPostLikes}
