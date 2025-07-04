@@ -746,13 +746,7 @@
         padding: 1.2rem;
         max-height: unset;
     }
-
-    .trending-detail-panel.mobile-inline {
-        margin-top: 1rem;
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 1rem;
-        border-radius: 12px;
-    }
+    
 
     .topics-title-explore {
         padding-top: 0;

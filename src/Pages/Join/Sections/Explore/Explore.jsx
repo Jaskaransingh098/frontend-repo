@@ -290,14 +290,8 @@ export default function Explore() {
       setAllNewComments((prev) => ({ ...prev, [index]: text }));
     }
   };
-
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 480);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  
+  
 
   return (
     <>
@@ -415,8 +409,8 @@ export default function Explore() {
               })}
             </div>
 
-            {isMobile && selectedPost?._id === post._id && (
-              <div className="trending-detail-panel mobile-inline" ref={detailRef}>
+            {selectedPost && (
+              <div className="trending-detail-panel" ref={detailRef}>
                 <h2 className="detail-header">{selectedPost.topic}</h2>
                 <p>
                   <strong>Description:</strong> {selectedPost.description}
