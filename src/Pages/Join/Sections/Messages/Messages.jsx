@@ -219,6 +219,12 @@ function Messages() {
   }, [currentUser, conversationUsers]);
 
   useEffect(() => {
+    if (selectedUser && messages.length > 0) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
+    }
+  }, [selectedUser, messages.length]);
+
+  useEffect(() => {
     const container = document.querySelector(".chat-messages");
     if (!container) return;
 
