@@ -425,6 +425,14 @@
     }
 }
 
+.no-posts-message {
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 2rem 0;
+    width: 100%;
+}
+
 .topics-container {
     margin: 4rem 1rem;
     position: relative;
@@ -746,7 +754,7 @@
         padding: 1.2rem;
         max-height: unset;
     }
-    
+
 
     .topics-title-explore {
         padding-top: 0;

@@ -290,8 +290,6 @@ export default function Explore() {
       setAllNewComments((prev) => ({ ...prev, [index]: text }));
     }
   };
-  
-  
 
   return (
     <>
@@ -377,36 +375,41 @@ export default function Explore() {
             }`}
           >
             <div className="trending-cards-panel">
-              {trendingPosts.map((post) => {
-                const industryKey =
-                  post.industry?.toLowerCase().replace(/\s-/g, "") || "default";
-                const backgroundImage =
-                  industryImages[industryKey] || "/explore-video/default.jpg";
+              {trendingPosts.length === 0 ? (
+                <p className="no-posts-message">No posts yet.</p>
+              ) : (
+                trendingPosts.map((post) => {
+                  const industryKey =
+                    post.industry?.toLowerCase().replace(/\s-/g, "") ||
+                    "default";
+                  const backgroundImage =
+                    industryImages[industryKey] || "/explore-video/default.jpg";
 
-                return (
-                  <div
-                    key={post._id}
-                    className={`trending-card ${
-                      selectedPost?._id === post._id ? "active" : ""
-                    }`}
-                    onClick={() => setSelectedPost(post)}
-                    style={{
-                      backgroundImage: `url(${backgroundImage})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  >
-                    <div className="trending-title">{post.industry}</div>
-                    <div className="trending-bottom-bar">
-                      <div className="stat">
-                        ❤️ {post.likesCount ?? post.likes?.length ?? 0}
+                  return (
+                    <div
+                      key={post._id}
+                      className={`trending-card ${
+                        selectedPost?._id === post._id ? "active" : ""
+                      }`}
+                      onClick={() => setSelectedPost(post)}
+                      style={{
+                        backgroundImage: `url(${backgroundImage})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    >
+                      <div className="trending-title">{post.industry}</div>
+                      <div className="trending-bottom-bar">
+                        <div className="stat">
+                          ❤️ {post.likesCount ?? post.likes?.length ?? 0}
+                        </div>
+                        <div className="stat">👁️ {post.views ?? 0}</div>
+                        <div className="user">by @{post.username}</div>
                       </div>
-                      <div className="stat">👁️ {post.views ?? 0}</div>
-                      <div className="user">by @{post.username}</div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </div>
 
             {selectedPost && (
