@@ -291,6 +291,14 @@ export default function Explore() {
     }
   };
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 480);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -407,8 +415,8 @@ export default function Explore() {
               })}
             </div>
 
-            {selectedPost && (
-              <div className="trending-detail-panel" ref={detailRef}>
+            {isMobile && selectedPost?._id === post._id && (
+              <div className="trending-detail-panel mobile-inline" ref={detailRef}>
                 <h2 className="detail-header">{selectedPost.topic}</h2>
                 <p>
                   <strong>Description:</strong> {selectedPost.description}
