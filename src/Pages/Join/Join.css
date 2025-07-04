@@ -91,23 +91,24 @@
 }
 
 @media (max-width: 480px) {
-    .join-page {
-        padding-top: 4rem;
-    }
-
     .join-navbar {
         width: 100%;
         padding-top: 1rem;
-        position: static;
+        position: relative;
+        /* changed from static */
         height: auto;
         justify-content: center;
-        background-color: rgba(0, 0, 0, 0.2);
+        /* background-color: rgba(0, 0, 0, 0.2); */
         border-bottom: 1px solid #333;
+        order: -1;
+        /* ensures it's at the top in flex */
     }
 
     .join-body.float-navbar .join-navbar {
-        position: static;
+        position: relative;
+        /* match above */
         height: auto;
+        order: -1;
     }
 
     .navbar-vertical {
@@ -120,8 +121,8 @@
 
     .navbar-vertical button {
         flex: 1 1 45%;
-        font-size: 0.9rem;
-        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+        padding: 0.5rem 0.7rem;
     }
 
     .join-body {

@@ -679,6 +679,7 @@
 @media (max-width: 480px) {
     .explore-insider-header {
         height: 50vh;
+        margin-bottom: 2rem;
     }
 
     .explore-insider-headers {
@@ -698,6 +699,7 @@
     .trending-title-header,
     .topics-title {
         font-size: 1.6rem;
+        margin-top: 2rem;
         padding: 2rem 1rem 1rem;
         text-align: center;
     }
@@ -707,6 +709,7 @@
         flex-direction: column;
         align-items: center;
         padding: 1rem;
+        margin-top: 1rem;
     }
 
     .trending-cards-panel {
