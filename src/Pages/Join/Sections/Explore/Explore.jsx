@@ -486,7 +486,7 @@ export default function Explore() {
           </div>
         </div>
         <div className="topics-container">
-          <h2 className="topics-title">🧠 Explore by Topics</h2>
+          <h2 className="topics-title-explore">🧠 Explore by Topics</h2>
 
           <div className="topics-scroll">
             {topics.map((topic, index) => (

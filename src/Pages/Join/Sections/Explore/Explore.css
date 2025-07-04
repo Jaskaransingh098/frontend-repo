@@ -733,6 +733,10 @@
         padding: 1.2rem;
         max-height: unset;
     }
+    .topics-title-explore{
+        padding-top: 0;
+        margin-top: 0;
+    }
 
     .topics-scroll {
         gap: 0.8rem;
