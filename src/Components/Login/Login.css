@@ -127,6 +127,48 @@ form.sign-in-form {
     font-weight: 500;
 }
 
+/* OTP Action Buttons */
+.send-otp,
+.verify-otp {
+    background-color: #444;
+    border: none;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 6px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.send-otp:hover,
+.verify-otp:hover {
+    background-color: #F86F03;
+    color: white;
+}
+
+/* Align OTP input + button */
+.otp-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.otp-verified-msg {
+    color: #4caf50;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.send-otp:disabled,
+.verify-otp:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
+
 .social-text {
     padding: 0.7rem 0;
     font-size: 1rem;
@@ -435,6 +477,17 @@ form.sign-in-form {
     .container.sign-up-mode:before {
         bottom: 28%;
         left: 50%;
+    }
+
+    .otp-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .send-otp,
+    .verify-otp {
+        width: 100%;
+        margin: 6px 0 0 0;
     }
 }
 

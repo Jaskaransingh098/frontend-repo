@@ -12,6 +12,9 @@ function Login() {
   const [signupUsername, setSignupUsername] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
+  const [otp, setOtp] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
+  const [isOtpVerified, setIsOtpVerified] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,6 +24,47 @@ function Login() {
 
   const handleSignInClick = () => {
     setIsSignUpMode(false);
+  };
+
+  const sendOtp = async () => {
+    if (!signupEmail) {
+      toast.error("Please enter your email first.");
+      return;
+    }
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/send-otp`,
+        {
+          email: signupEmail,
+        }
+      );
+      toast.success("OTP sent to your email 📩");
+      setOtpSent(true);
+    } catch (err) {
+      toast.error(err.response?.data?.msg || "Failed to send OTP");
+    }
+  };
+
+  const verifyOtp = async () => {
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/verify-otp`,
+        {
+          email: signupEmail,
+          otp,
+        }
+      );
+
+      if (res.data.verified) {
+        toast.success("✅ Email verified!");
+        setIsOtpVerified(true);
+      } else {
+        toast.error("❌ Invalid OTP");
+      }
+    } catch (err) {
+      toast.error("OTP verification failed");
+    }
   };
 
   const handleLogin = async (e) => {
@@ -64,6 +108,11 @@ function Login() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    if (!isOtpVerified) {
+      toast.error("Please verify OTP before signing up.");
+      return;
+    }
 
     const usernameRegex = /^[a-zA-Z0-9]{1,8}$/;
 
@@ -209,9 +258,42 @@ function Login() {
                 type="email"
                 placeholder="Email"
                 value={signupEmail}
-                onChange={(e) => setSignupEmail(e.target.value)}
+                onChange={(e) => {
+                  setSignupEmail(e.target.value);
+                  setOtpSent(false);
+                  setIsOtpVerified(false);
+                }}
               />
+              {!otpSent && (
+                <button
+                  type="button"
+                  className="btn send-otp"
+                  onClick={sendOtp}
+                  disabled={!signupEmail || loading}
+                >
+                  Send OTP
+                </button>
+              )}
             </div>
+            {otpSent && (
+              <div className="input-field">
+                <i className="fas fa-key"></i>
+                <input
+                  type="text"
+                  placeholder="Enter OTP"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className="btn verify-otp"
+                  onClick={verifyOtp}
+                  disabled={!otp || loading}
+                >
+                  Verify OTP
+                </button>
+              </div>
+            )}
             <div className="input-field">
               <i className="fas fa-lock"></i>
               <input
