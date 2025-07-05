@@ -227,7 +227,7 @@
 @media (max-width: 480px) {
     .contact-us-page {
         flex-direction: column;
-        padding: 20px 16px;
+        padding: 60px 16px;
         gap: 30px;
         height: auto;
     }
@@ -253,7 +253,7 @@
 
     .contact-us-right {
         width: 100%;
-        padding-top: 60px;
+        padding-top: 0;
         font-size: 0.95rem;
     }
 
