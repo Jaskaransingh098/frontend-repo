@@ -92,9 +92,6 @@ function Footer() {
               <li>
                 <Link to="/post">New Post</Link>
               </li>
-              <li>
-                <Link to="/prices">Prices</Link>
-              </li>
             </ul>
           </div>
         </div>
