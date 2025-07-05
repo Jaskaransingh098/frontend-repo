@@ -143,72 +143,45 @@
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
+
 @media (max-width: 480px) {
-  .about-me-gallery {
-    height: auto;
-    width: 100%;
-    overflow: auto;
-    scroll-snap-type: none;
-    display: block;
-    padding: 0;
-  }
-
-  .gallery-scroll {
-    display: block;
-    width: 100%;
-  }
-
-  .gallery-card {
-    width: 100%;
-    padding: 24px 16px;
-    box-shadow: none;
-    border: none;
-    border-radius: 0;
-    background: transparent;
-    min-height: auto;
+  .about-me-mobile {
+    margin-top: 100px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 40px;
+    gap: 40px;
+    z-index: 2;
   }
 
-  .gallery-inner {
-    flex-direction: column;
-    padding: 0;
-    width: 100%;
-    gap: 20px;
+  .about-mobile-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.1);
+    backdrop-filter: blur(4px);
+    color: white;
   }
 
-  .gallery-content {
-    max-width: 100%;
-    align-items: center;
+  .about-mobile-card .section-title {
+    font-size: 1.5rem;
+    color: #00bfff;
+    margin-bottom: 10px;
     text-align: center;
-
-    .section-title {
-      font-size: 1.6rem;
-      text-align: center;
-      color: #00bfff;
-      text-shadow: 0 0 5px rgba(0, 191, 255, 0.4);
-      margin-bottom: 16px;
-    }
-
-    .section-text {
-      font-size: 1rem;
-      padding: 18px;
-      background: rgba(0, 0, 0, 0.6);
-      color: #f0f0f0;
-      line-height: 1.5;
-      border-radius: 10px;
-      text-align: justify;
-      box-shadow: 0 0 10px rgba(0, 191, 255, 0.15);
-      word-break: break-word;
-    }
   }
 
-  .section-image-3d {
-    max-width: 90vw;
-    max-height: 40vh;
+  .about-mobile-card .section-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: justify;
+    white-space: pre-line;
+    margin-top: 10px;
+  }
+
+  .about-mobile-card .section-image-3d {
+    width: 100%;
+    max-height: 220px;
     object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.3));
+    margin-top: 10px;
   }
 }
