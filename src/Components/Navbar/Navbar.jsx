@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { inView, motion } from "framer-motion";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Navbar.css";
 
 function Navbar({ username, currentPath }) {
@@ -30,6 +32,14 @@ function Navbar({ username, currentPath }) {
     window.location.reload();
   };
 
+  const handlePricesClick = (e) => {
+    e.preventDefault();
+    toast.info("🚧 Prices page is coming soon!", {
+      position: "top-center",
+      autoClose: 3000,
+    });
+  };
+
   return (
     <motion.nav
       className="navbar-nav"
@@ -45,7 +55,9 @@ function Navbar({ username, currentPath }) {
         )}
         {currentPath !== "/post" && <a href="/post">Post</a>}
         {currentPath !== "/join" && <a href="/join">Join</a>}
-        {currentPath !== "/prices" && <a href="/prices">Prices</a>}
+        <a href="#" onClick={handlePricesClick}>
+          Prices
+        </a>
         {currentPath !== "/government" && <a href="/government">Government</a>}
       </div>
       <div className="animation start-home"></div>
@@ -55,9 +67,9 @@ function Navbar({ username, currentPath }) {
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <p style={{ fontWeight: "bold", paddingTop: "10px" }}>
               Hello, {username}{" "}
-              {isPro && (
+              {/* {isPro && (
                 <span style={{ color: "gold", fontWeight: "bold" }}>PRO</span>
-              )}
+              )} */}
             </p>
             <button
               className="login-button"

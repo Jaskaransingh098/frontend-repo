@@ -221,7 +221,7 @@ function Body() {
             </h3>
           </motion.label>
         </motion.div>
-
+{/* 
         <motion.div
           className="banner-container"
           ref={ref3}
@@ -291,10 +291,8 @@ function Body() {
             }
             transition={{ duration: 0.8 }}
           >
-            {/* Placeholder for the image; replace with your actual image */}
-            {/* <img src="" alt="Freelancers working" /> */}
           </motion.div>
-        </motion.div>
+        </motion.div> */}
         <motion.div
           ref={videoRef}
           initial={{ opacity: 0, y: 50 }}

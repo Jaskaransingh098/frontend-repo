@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import "./Post.css";
 
@@ -141,6 +141,7 @@ function Post() {
                   required
                 />
                 <input
+                  type="email"
                   name="email"
                   placeholder="Email"
                   value={formData.email}
@@ -198,6 +199,7 @@ function Post() {
                   <option value="launched">Launched</option>
                 </select>
                 <input
+                  type="url"
                   name="website"
                   placeholder="Website (optional)"
                   value={formData.website}
@@ -246,17 +248,50 @@ function Post() {
             )}
             {step == 4 && (
               <>
-                <h2>Step: 4 Review & submit</h2>
-                <ul>
-                  {Object.entries(formData).map(([key, val]) => (
-                    <li key={key}>
-                      <strong>{key}:</strong>
-                      {val || "N/A"}
-                    </li>
-                  ))}
-                </ul>
+                <h2>Step 4: Review & Submit</h2>
+                <div className="review-section">
+                  <h3>👤 Founder Details</h3>
+                  <p>
+                    <strong>Full Name:</strong> {formData.fullName}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {formData.email}
+                  </p>
+                  <p>
+                    <strong>Role:</strong> {formData.role}
+                  </p>
+
+                  <h3>🏢 Startup Info</h3>
+                  <p>
+                    <strong>Startup Name:</strong> {formData.startupName}
+                  </p>
+                  <p>
+                    <strong>Industry:</strong> {formData.industry}
+                  </p>
+                  <p>
+                    <strong>Stage:</strong> {formData.stage}
+                  </p>
+                  <p>
+                    <strong>Website:</strong> {formData.website || "N/A"}
+                  </p>
+
+                  <h3>💡 Idea Details</h3>
+                  <p>
+                    <strong>Problem Statement:</strong> {formData.description}
+                  </p>
+                  <p>
+                    <strong>Proposed Solution:</strong> {formData.topic}
+                  </p>
+                  <p>
+                    <strong>Technology Stack:</strong> {formData.market}
+                  </p>
+                  <p>
+                    <strong>Goal:</strong> {formData.goals}
+                  </p>
+                </div>
+
                 <button type="submit" className="submit-button">
-                  Submit Idea{" "}
+                  Submit Idea
                 </button>
               </>
             )}

@@ -80,6 +80,21 @@ textarea {
     color: white;
 }
 
+.review-section h3 {
+    margin-top: 1.5rem;
+    color: #f1f1f1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 5px;
+}
+
+.review-section p {
+    color: white;
+    margin: 8px 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+
 .progress-bar {
     display: flex;
     justify-content: space-between;
@@ -89,37 +104,39 @@ textarea {
 }
 
 .step-circle {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background-color: #ccc;
-    color: black;
+    background-color: #333;
+    color: #fff;
     text-align: center;
-    line-height: 35px;
+    line-height: 40px;
     font-weight: bold;
-    z-index: 1;
+    border: 2px solid #999;
+    transition: background 0.3s, border 0.3s;
+    z-index: 2;
 }
 
-.step-circle:active {
-    background: #9b59b6;
+.step-circle.active {
+    background-color: #9b59b6;
+    border-color: #fff;
 }
 
 .bar {
     position: absolute;
-    top: 17px;
-    left: 17px;
-    right: 17px;
-    height: 6px;
-    background: #e0e0e0;
-    z-index: 0;
-    border-radius: 3px;
+    top: 50%;
+    left: 20px;
+    right: 20px;
+    height: 4px;
+    background: #444;
+    transform: translateY(-50%);
+    z-index: 1;
 }
 
 .bar .fill {
     height: 100%;
     background: #9b59b6;
-    border-radius: 3px;
-    transition: width 0.3s ease;
+    transition: width 0.4s ease;
 }
 
 .btn-group {
@@ -197,24 +214,32 @@ textarea {
 
     .progress-bar {
         flex-direction: column;
-        gap: 10px;
-        margin-bottom: 20px;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 30px;
     }
 
     .step-circle {
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-        font-size: 0.9rem;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        font-size: 0.85rem;
     }
 
     .bar {
-        top: auto;
-        bottom: -10px;
+        position: relative;
+        width: 80%;
         height: 4px;
-        left: 0;
-        right: 0;
+        background: #444;
+        margin-top: -5px;
+        border-radius: 3px;
     }
+
+    .bar .fill {
+        height: 100%;
+        background: #9b59b6;
+    }
+
 
     .btn-group {
         flex-direction: column;
@@ -224,6 +249,16 @@ textarea {
     .btn-group button {
         width: 100%;
         font-size: 1rem;
+    }
+
+    .review-section {
+        font-size: 0.9rem;
+        padding: 15px;
+    }
+
+    .review-section p {
+        font-size: 0.9rem;
+        line-height: 1.4;
     }
 
     .submit-button {
