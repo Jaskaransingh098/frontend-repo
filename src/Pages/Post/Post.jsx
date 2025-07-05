@@ -92,9 +92,10 @@ function Post() {
   const renderProgress = () => (
     <div className="progress-bar">
       {[1, 2, 3, 4].map((num) => (
-        <div key={num} className={`step-circle ${step >= num ? "active" : ""}`}>
-          {num}
-        </div>
+        <div
+          key={num}
+          className={`step-dot ${step >= num ? "active" : ""}`}
+        ></div>
       ))}
       <div className="bar">
         <div
