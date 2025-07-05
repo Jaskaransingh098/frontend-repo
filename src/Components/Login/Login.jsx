@@ -223,7 +223,7 @@ function Login() {
             <button type="submit" className="btn solid" disabled={loading}>
               {loading ? <div className="spinner"></div> : "Login"}
             </button>
-            <p className="social-text">Or Sign in with social platforms</p>
+            {/* <p className="social-text">Or Sign in with social platforms</p>
             <div className="social-media">
               <a href="#" className="social-icon">
                 <i className="fab fa-facebook-f"></i>
@@ -237,7 +237,7 @@ function Login() {
               <a href="#" className="social-icon">
                 <i className="fab fa-linkedin-in"></i>
               </a>
-            </div>
+            </div> */}
           </form>
 
           {/* Sign Up Form */}
@@ -264,36 +264,64 @@ function Login() {
                   setIsOtpVerified(false);
                 }}
               />
-              {!otpSent && (
-                <button
-                  type="button"
-                  className="btn send-otp"
-                  onClick={sendOtp}
-                  disabled={!signupEmail || loading}
-                >
-                  Send OTP
-                </button>
-              )}
             </div>
-            {otpSent && (
-              <div className="input-field">
-                <i className="fas fa-key"></i>
+
+            {!isOtpVerified && (
+              <div
+                style={{
+                  display: "flex",
+                  gap: "8px",
+                  marginBottom: "10px",
+                  marginTop: "5px",
+                }}
+              >
                 <input
                   type="text"
                   placeholder="Enter OTP"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
+                  style={{
+                    height: "45px",
+                    borderRadius: "5px",
+                    padding: "0 10px",
+                    fontSize: "1rem",
+                    flex: "1",
+                    border: "1px solid #ccc",
+                    outline: "none",
+                  }}
                 />
+                {isOtpVerified && (
+                  <p
+                    style={{
+                      color: "#22cc88",
+                      fontSize: "0.8rem",
+                      marginTop: "-6px",
+                    }}
+                  >
+                    ✅ Email verified
+                  </p>
+                )}
                 <button
                   type="button"
-                  className="btn verify-otp"
+                  className="btn"
+                  style={{ backgroundColor: "#8884ff", fontSize: "0.75rem" }}
+                  onClick={sendOtp}
+                  disabled={!signupEmail || loading}
+                >
+                  Send OTP
+                </button>
+                <button
+                  type="button"
+                  className="btn"
+                  style={{ backgroundColor: "#22aa88", fontSize: "0.75rem" }}
                   onClick={verifyOtp}
                   disabled={!otp || loading}
                 >
-                  Verify OTP
+                  Verify
                 </button>
               </div>
             )}
+
             <div className="input-field">
               <i className="fas fa-lock"></i>
               <input
