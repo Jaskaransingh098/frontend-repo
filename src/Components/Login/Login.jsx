@@ -64,8 +64,48 @@ function Login() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    const usernameRegex = /^[a-zA-Z0-9]{1,8}$/;
+
+    // Validate username format first
+    if (!usernameRegex.test(signupUsername)) {
+      toast.error(
+        "Username must be max 8 characters with no special characters!",
+        {
+          icon: "❌",
+          style: {
+            backgroundColor: "#331111",
+            color: "#ffcccc",
+            fontWeight: "500",
+            borderRadius: "10px",
+          },
+        }
+      );
+      return;
+    }
+
     setLoading(true);
+
     try {
+      // 🔍 Pre-check username availability
+      const checkRes = await axios.get(
+        `${import.meta.env.VITE_API_URL}/auth/check-username/${signupUsername}`
+      );
+
+      if (checkRes.data.exists) {
+        toast.error("🚫 That username is already taken. Try another!", {
+          style: {
+            backgroundColor: "#331111",
+            color: "#ffcccc",
+            fontWeight: "500",
+            borderRadius: "10px",
+          },
+        });
+        setLoading(false);
+        return;
+      }
+
+      // Proceed to signup if username is available
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/signup`,
         {
@@ -75,11 +115,13 @@ function Login() {
           isPro: false,
         }
       );
+
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("username", signupUsername);
       navigate("/", {
         state: { justLoggedIn: true, username: signupUsername },
       });
+
       toast.success("Signup successful! 🎊 Welcome!", {
         icon: "👤",
         style: {
@@ -90,7 +132,7 @@ function Login() {
         },
       });
     } catch (err) {
-      toast.error(err.response?.data?.msg || "Signup failed", {
+      toast.error("Signup failed. Please try again.", {
         icon: "⚠️",
         style: {
           backgroundColor: "#331111",
@@ -182,7 +224,7 @@ function Login() {
             <button type="submit" className="btn" disabled={loading}>
               {loading ? <div className="spinner"></div> : "Sign up"}
             </button>
-            <p className="social-text">Or Sign up with social platforms</p>
+            {/* <p className="social-text">Or Sign up with social platforms</p>
             <div className="social-media">
               <a href="#" className="social-icon">
                 <i className="fab fa-facebook-f"></i>
@@ -196,7 +238,7 @@ function Login() {
               <a href="#" className="social-icon">
                 <i className="fab fa-linkedin-in"></i>
               </a>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
