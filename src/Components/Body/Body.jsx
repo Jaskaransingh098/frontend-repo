@@ -50,7 +50,7 @@ function Body() {
           transition={{ duration: 0.8 }}
         >
           <div className="services-text">
-            <h1 className="Service-text">Why innolinkk? </h1>
+            <h1 className="Service-text">Why Innolinkk? </h1>
           </div>
           <div className="services-boxes">
             <div className="boxes">
