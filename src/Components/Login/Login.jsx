@@ -15,6 +15,8 @@ function Login() {
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [isOtpVerified, setIsOtpVerified] = useState(false);
+  const [sendingOtp, setSendingOtp] = useState(false);
+  const [verifyingOtp, setVerifyingOtp] = useState(false);
 
   const navigate = useNavigate();
 
@@ -32,6 +34,8 @@ function Login() {
       return;
     }
 
+    setSendingOtp(true);
+
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/send-otp`,
@@ -43,10 +47,13 @@ function Login() {
       setOtpSent(true);
     } catch (err) {
       toast.error(err.response?.data?.msg || "Failed to send OTP");
+    } finally {
+      setSendingOtp(false);
     }
   };
 
   const verifyOtp = async () => {
+    setVerifyingOtp(true);
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/verify-otp`,
@@ -64,6 +71,8 @@ function Login() {
       }
     } catch (err) {
       toast.error("OTP verification failed");
+    } finally {
+      setVerifyingOtp(false);
     }
   };
 
@@ -306,18 +315,18 @@ function Login() {
                   className="btn"
                   style={{ backgroundColor: "#8884ff", fontSize: "0.75rem" }}
                   onClick={sendOtp}
-                  disabled={!signupEmail || loading}
+                  disabled={!signupEmail || loading || sendingOtp}
                 >
-                  Send OTP
+                  {sendingOtp ? <div className="spinner"></div> : "Send OTP"}
                 </button>
                 <button
                   type="button"
                   className="btn"
                   style={{ backgroundColor: "#22aa88", fontSize: "0.75rem" }}
                   onClick={verifyOtp}
-                  disabled={!otp || loading}
+                  disabled={!otp || loading || verifyingOtp}
                 >
-                  Verify
+                  {verifyingOtp ? <div className="spinner"></div> : "Verify"}
                 </button>
               </div>
             )}
