@@ -123,7 +123,7 @@ function Login() {
       return;
     }
 
-    const usernameRegex = /^[a-zA-Z0-9]{1,8}$/;
+    const usernameRegex = /^[a-zA-Z]{5,12}$/;
 
     // Validate username format first
     if (!usernameRegex.test(signupUsername)) {
