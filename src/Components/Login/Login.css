@@ -102,6 +102,7 @@ form.sign-in-form {
     grid-template-columns: 15% 85%;
     padding: 0 0.4rem;
     position: relative;
+    z-index: 1;
 }
 
 .input-field i {
@@ -179,6 +180,15 @@ form.sign-in-form {
 
 .password-errors li {
     margin-bottom: 4px;
+}
+
+.username-error {
+    color: #ffcccc;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    margin-left: 5px;
+    position: relative;
+    z-index: 10;
 }
 
 .social-text {

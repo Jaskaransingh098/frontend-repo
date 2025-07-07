@@ -315,18 +315,28 @@ function Login() {
                   }
                 }}
               />
-              {!usernameValidation.isValid && (
-                <p className="error-msg">❌ {usernameValidation.message}</p>
-              )}
-              {usernameValidation.isValid && signupUsername && (
-                <p className="info-msg">
-                  {usernameAvailable === null
-                    ? "Checking availability..."
-                    : usernameAvailable
-                    ? "✅ Username is available"
-                    : "🚫 Username is taken"}
+              {signupUsername && !usernameValidation.isValid && (
+                <p className="username-error">
+                  ❌ Username must be 5–12 characters (letters, numbers,
+                  underscores only)
                 </p>
               )}
+
+              {signupUsername &&
+                usernameValidation.isValid &&
+                !usernameAvailable && (
+                  <p className="username-error">
+                    🚫 That username is already taken
+                  </p>
+                )}
+
+              {signupUsername &&
+                usernameValidation.isValid &&
+                usernameAvailable && (
+                  <p className="username-error" style={{ color: "#ccffcc" }}>
+                    ✅ Username is available
+                  </p>
+                )}
             </div>
             <div className="input-field">
               <i className="fas fa-envelope"></i>
