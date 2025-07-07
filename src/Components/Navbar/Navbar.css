@@ -161,7 +161,7 @@
   }
 
   .nav a {
-    font-size: 13px; /* smaller text */
+    font-size: 8px; /* smaller text */
     padding: 4px 6px; /* tighter spacing */
     margin: 0;
     white-space: nowrap;
@@ -173,6 +173,9 @@
     justify-content: flex-end;
     gap: 0.4rem;
     margin: 0;
+  }
+  .username-login-text{
+    font-size: 10px;
   }
 
   .loginup Button {
