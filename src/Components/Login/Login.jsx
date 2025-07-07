@@ -288,35 +288,46 @@ function Login() {
                   type="text"
                   placeholder="Username"
                   value={signupUsername}
-                  onChange={(e) => {
+                  onChange={async (e) => {
                     const val = e.target.value;
                     setSignupUsername(val);
-                    setUsernameValidation({
-                      isValid: validateUsername(val),
-                      message: "",
-                    });
+
+                    const isValid = validateUsername(val);
+                    setUsernameValidation({ isValid, message: "" });
+
+                    if (isValid) {
+                      try {
+                        const res = await axios.get(
+                          `${
+                            import.meta.env.VITE_API_URL
+                          }/auth/check-username/${val}`
+                        );
+                        setUsernameAvailable(!res.data.exists); // true if available
+                      } catch (err) {
+                        setUsernameAvailable(false); // fallback to false on error
+                      }
+                    } else {
+                      setUsernameAvailable(null); // don't check availability if invalid
+                    }
                   }}
                 />
               </div>
 
-              {/* Format error always takes priority */}
-              {!usernameValidation.isValid && signupUsername && (
+              {signupUsername && !usernameValidation.isValid && (
                 <p className="username-error">
-                  ❌ 5–12 letters, numbers, or underscores only
+                  ❌ 5–12 letters/numbers/underscores only
                 </p>
               )}
 
-              {/* Only show availability if format is valid */}
-              {usernameValidation.isValid &&
-                signupUsername &&
-                !usernameAvailable && (
+              {signupUsername &&
+                usernameValidation.isValid &&
+                usernameAvailable === false && (
                   <p className="username-error">🚫 Username is already taken</p>
                 )}
 
-              {/* Show success only if valid and available */}
-              {usernameValidation.isValid &&
-                signupUsername &&
-                usernameAvailable && (
+              {signupUsername &&
+                usernameValidation.isValid &&
+                usernameAvailable === true && (
                   <p className="username-success">✅ Username is available</p>
                 )}
             </div>
