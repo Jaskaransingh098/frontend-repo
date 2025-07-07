@@ -47,7 +47,7 @@ function Login() {
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
     const hasDigit = /\d/.test(password);
-    const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
+    const hasSpecialChar = /_/.test(password);
 
     return {
       isValid:
@@ -281,63 +281,36 @@ function Login() {
           {/* Sign Up Form */}
           <form onSubmit={handleSignup} className="sign-up-form">
             <h2 className="title">Sign up</h2>
-            <div className="input-field">
-              <i className="fas fa-user"></i>
-              <input
-                type="text"
-                placeholder="Username"
-                value={signupUsername}
-                onChange={async (e) => {
-                  const val = e.target.value;
-                  setSignupUsername(val);
+            <div className="input-field-wrapper">
+              <div className="input-field">
+                <i className="fas fa-user"></i>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={signupUsername}
+                  onChange={(e) => setSignupUsername(e.target.value)}
+                />
+              </div>
 
-                  if (!validateUsername(val)) {
-                    setUsernameValidation({
-                      isValid: false,
-                      message:
-                        "Username must be 5–12 characters, letters/numbers/underscores only",
-                    });
-                    setUsernameAvailable(null); // reset check
-                    return;
-                  } else {
-                    setUsernameValidation({ isValid: true, message: "" });
-
-                    try {
-                      const checkRes = await axios.get(
-                        `${
-                          import.meta.env.VITE_API_URL
-                        }/auth/check-username/${val}`
-                      );
-                      setUsernameAvailable(!checkRes.data.exists);
-                    } catch (err) {
-                      setUsernameAvailable(null); // error state
-                    }
-                  }
-                }}
-              />
               {signupUsername && !usernameValidation.isValid && (
                 <p className="username-error">
-                  ❌ Username must be 5–12 characters (letters, numbers,
-                  underscores only)
+                  ❌ 5–12 letters/numbers/underscores only
                 </p>
               )}
 
               {signupUsername &&
                 usernameValidation.isValid &&
                 !usernameAvailable && (
-                  <p className="username-error">
-                    🚫 That username is already taken
-                  </p>
+                  <p className="username-error">🚫 Already taken</p>
                 )}
 
               {signupUsername &&
                 usernameValidation.isValid &&
                 usernameAvailable && (
-                  <p className="username-error" style={{ color: "#ccffcc" }}>
-                    ✅ Username is available
-                  </p>
+                  <p className="username-success">✅ Available</p>
                 )}
             </div>
+
             <div className="input-field">
               <i className="fas fa-envelope"></i>
               <input
@@ -407,36 +380,30 @@ function Login() {
                 </button>
               </div>
             )}
+            <div className="input-field-wrapper">
+              <div className="input-field">
+                <i className="fas fa-lock"></i>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={signupPassword}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setSignupPassword(val);
+                    setPasswordValidation(validatePassword(val));
+                  }}
+                />
+              </div>
 
-            <div className="input-field">
-              <i className="fas fa-lock"></i>
-              <input
-                type="password"
-                placeholder="Password"
-                value={signupPassword}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setSignupPassword(val);
-                  setPasswordValidation(validatePassword(val));
-                }}
-              />
               {signupPassword && !passwordValidation.isValid && (
-                <ul className="password-errors">
+                <ul className="password-errors-right">
                   {passwordValidation.errors.length && (
                     <li>❌ At least 8 characters</li>
                   )}
-                  {passwordValidation.errors.upper && (
-                    <li>❌ At least one uppercase letter</li>
-                  )}
-                  {passwordValidation.errors.lower && (
-                    <li>❌ At least one lowercase letter</li>
-                  )}
-                  {passwordValidation.errors.digit && (
-                    <li>❌ At least one number</li>
-                  )}
-                  {passwordValidation.errors.special && (
-                    <li>❌ At least one special character (!@#$...)</li>
-                  )}
+                  {passwordValidation.errors.upper && <li>❌ One uppercase</li>}
+                  {passwordValidation.errors.lower && <li>❌ One lowercase</li>}
+                  {passwordValidation.errors.digit && <li>❌ One number</li>}
+                  {passwordValidation.errors.special && <li>❌ One underscore (_) allowed</li>}
                 </ul>
               )}
             </div>

@@ -91,6 +91,17 @@ form.sign-in-form {
     margin-bottom: 10px;
 }
 
+.input-field-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    /* spacing between input and alert */
+    width: 100%;
+    max-width: 500px;
+    margin: 10px 0;
+}
+
 .input-field {
     max-width: 380px;
     width: 100%;
@@ -172,24 +183,29 @@ form.sign-in-form {
     cursor: not-allowed;
 }
 
-.password-errors {
-    color: #ffcccc;
-    font-size: 0.8rem;
-    margin-top: 6px;
+.password-errors-right {
     list-style: none;
     padding-left: 0;
+    font-size: 0.8rem;
+    color: #ffcccc;
+    white-space: nowrap;
+    line-height: 1.4;
 }
 
-.password-errors li {
-    margin-bottom: 4px;
+.password-errors-right li {
+    margin-bottom: 2px;
 }
 
 .username-error {
-    color: #ffcccc;
     font-size: 0.8rem;
-    margin-left: 10px;
+    color: #ffcccc;
     white-space: nowrap;
-    z-index: 10;
+}
+
+.username-success {
+    font-size: 0.8rem;
+    color: #ccffcc;
+    white-space: nowrap;
 }
 
 .social-text {
