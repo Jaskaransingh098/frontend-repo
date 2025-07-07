@@ -288,7 +288,14 @@ function Login() {
                   type="text"
                   placeholder="Username"
                   value={signupUsername}
-                  onChange={(e) => setSignupUsername(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setSignupUsername(val);
+                    setUsernameValidation({
+                      isValid: validateUsername(val),
+                      message: "",
+                    });
+                  }}
                 />
               </div>
 
