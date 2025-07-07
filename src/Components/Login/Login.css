@@ -94,12 +94,13 @@ form.sign-in-form {
 .input-field-wrapper {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: 10px;
     /* spacing between input and alert */
     width: 100%;
     max-width: 500px;
     margin: 10px 0;
+    position: relative;
 }
 
 .input-field {
