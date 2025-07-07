@@ -179,14 +179,14 @@
   }
 
   .loginup Button {
-    /* padding: 5px 8px; */
+    padding: 5px 8px;
     font-size: 0.75rem;
     white-space: nowrap;
   }
 
   .login-button {
     font-size: 0.75rem;
-    padding: 2px;
+    padding: 5px 8px;
   }
 
   .nav-logo {

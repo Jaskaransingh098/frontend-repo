@@ -123,12 +123,12 @@ function Login() {
       return;
     }
 
-    const usernameRegex = /^[a-zA-Z]{5,12}$/;
+    const usernameRegex = /^[a-zA-Z0-9_]{5,12}$/;
 
     // Validate username format first
     if (!usernameRegex.test(signupUsername)) {
       toast.error(
-        "Username must be max 8 characters with no special characters!",
+        "Username must be between 5 - 12 characters without any special characters",
         {
           icon: "❌",
           style: {

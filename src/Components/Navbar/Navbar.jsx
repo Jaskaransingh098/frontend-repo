@@ -64,8 +64,8 @@ function Navbar({ username, currentPath }) {
       <span></span>
       <div className="loginup">
         {username ? (
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <p style={{ fontWeight: "bold", paddingTop: "10px" }} className="username-login-text">
+          <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+            <p style={{ fontWeight: "bold", paddingTop: "5px" }} className="username-login-text">
               Hello, {username}{" "}
               {/* {isPro && (
                 <span style={{ color: "gold", fontWeight: "bold" }}>PRO</span>
