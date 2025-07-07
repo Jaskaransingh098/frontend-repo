@@ -47,7 +47,7 @@ function Login() {
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
     const hasDigit = /\d/.test(password);
-    const hasSpecialChar = /_/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
 
     return {
       isValid:
@@ -292,22 +292,25 @@ function Login() {
                 />
               </div>
 
-              {signupUsername && !usernameValidation.isValid && (
+              {/* Format error always takes priority */}
+              {!usernameValidation.isValid && signupUsername && (
                 <p className="username-error">
-                  ❌ 5–12 letters/numbers/underscores only
+                  ❌ 5–12 letters, numbers, or underscores only
                 </p>
               )}
 
-              {signupUsername &&
-                usernameValidation.isValid &&
+              {/* Only show availability if format is valid */}
+              {usernameValidation.isValid &&
+                signupUsername &&
                 !usernameAvailable && (
-                  <p className="username-error">🚫 Already taken</p>
+                  <p className="username-error">🚫 Username is already taken</p>
                 )}
 
-              {signupUsername &&
-                usernameValidation.isValid &&
+              {/* Show success only if valid and available */}
+              {usernameValidation.isValid &&
+                signupUsername &&
                 usernameAvailable && (
-                  <p className="username-success">✅ Available</p>
+                  <p className="username-success">✅ Username is available</p>
                 )}
             </div>
 
@@ -403,7 +406,9 @@ function Login() {
                   {passwordValidation.errors.upper && <li>❌ One uppercase</li>}
                   {passwordValidation.errors.lower && <li>❌ One lowercase</li>}
                   {passwordValidation.errors.digit && <li>❌ One number</li>}
-                  {passwordValidation.errors.special && <li>❌ One underscore (_) allowed</li>}
+                  {passwordValidation.errors.special && (
+                    <li>❌ One special (!@#)</li>
+                  )}
                 </ul>
               )}
             </div>

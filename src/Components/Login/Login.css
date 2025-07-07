@@ -93,7 +93,7 @@ form.sign-in-form {
 
 .input-field-wrapper {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     gap: 10px;
     /* spacing between input and alert */
