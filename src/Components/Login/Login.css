@@ -169,6 +169,18 @@ form.sign-in-form {
     cursor: not-allowed;
 }
 
+.password-errors {
+    color: #ffcccc;
+    font-size: 0.8rem;
+    margin-top: 6px;
+    list-style: none;
+    padding-left: 0;
+}
+
+.password-errors li {
+    margin-bottom: 4px;
+}
+
 .social-text {
     padding: 0.7rem 0;
     font-size: 1rem;

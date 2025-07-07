@@ -17,6 +17,15 @@ function Login() {
   const [isOtpVerified, setIsOtpVerified] = useState(false);
   const [sendingOtp, setSendingOtp] = useState(false);
   const [verifyingOtp, setVerifyingOtp] = useState(false);
+  const [usernameValidation, setUsernameValidation] = useState({
+    isValid: true,
+    message: "",
+  });
+  const [usernameAvailable, setUsernameAvailable] = useState(null);
+  const [passwordValidation, setPasswordValidation] = useState({
+    isValid: false,
+    errors: {},
+  });
 
   const navigate = useNavigate();
 
@@ -26,6 +35,35 @@ function Login() {
 
   const handleSignInClick = () => {
     setIsSignUpMode(false);
+  };
+
+  const validateUsername = (username) => {
+    const usernameRegex = /^[a-zA-Z0-9_]{5,12}$/;
+    return usernameRegex.test(username);
+  };
+
+  const validatePassword = (password) => {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
+
+    return {
+      isValid:
+        password.length >= minLength &&
+        hasUpperCase &&
+        hasLowerCase &&
+        hasDigit &&
+        hasSpecialChar,
+      errors: {
+        length: password.length < minLength,
+        upper: !hasUpperCase,
+        lower: !hasLowerCase,
+        digit: !hasDigit,
+        special: !hasSpecialChar,
+      },
+    };
   };
 
   const sendOtp = async () => {
@@ -123,22 +161,8 @@ function Login() {
       return;
     }
 
-    const usernameRegex = /^[a-zA-Z0-9_]{5,12}$/;
-
-    // Validate username format first
-    if (!usernameRegex.test(signupUsername)) {
-      toast.error(
-        "Username must be between 5 - 12 characters without any special characters",
-        {
-          icon: "❌",
-          style: {
-            backgroundColor: "#331111",
-            color: "#ffcccc",
-            fontWeight: "500",
-            borderRadius: "10px",
-          },
-        }
-      );
+    if (!usernameValidation.isValid || !usernameAvailable) {
+      toast.error("Please fix your username before signing up.");
       return;
     }
 
@@ -160,6 +184,11 @@ function Login() {
           },
         });
         setLoading(false);
+        return;
+      }
+
+      if (!passwordValidation.isValid) {
+        toast.error("Please enter a stronger password before signing up.");
         return;
       }
 
@@ -258,8 +287,46 @@ function Login() {
                 type="text"
                 placeholder="Username"
                 value={signupUsername}
-                onChange={(e) => setSignupUsername(e.target.value)}
+                onChange={async (e) => {
+                  const val = e.target.value;
+                  setSignupUsername(val);
+
+                  if (!validateUsername(val)) {
+                    setUsernameValidation({
+                      isValid: false,
+                      message:
+                        "Username must be 5–12 characters, letters/numbers/underscores only",
+                    });
+                    setUsernameAvailable(null); // reset check
+                    return;
+                  } else {
+                    setUsernameValidation({ isValid: true, message: "" });
+
+                    try {
+                      const checkRes = await axios.get(
+                        `${
+                          import.meta.env.VITE_API_URL
+                        }/auth/check-username/${val}`
+                      );
+                      setUsernameAvailable(!checkRes.data.exists);
+                    } catch (err) {
+                      setUsernameAvailable(null); // error state
+                    }
+                  }
+                }}
               />
+              {!usernameValidation.isValid && (
+                <p className="error-msg">❌ {usernameValidation.message}</p>
+              )}
+              {usernameValidation.isValid && signupUsername && (
+                <p className="info-msg">
+                  {usernameAvailable === null
+                    ? "Checking availability..."
+                    : usernameAvailable
+                    ? "✅ Username is available"
+                    : "🚫 Username is taken"}
+                </p>
+              )}
             </div>
             <div className="input-field">
               <i className="fas fa-envelope"></i>
@@ -337,8 +404,31 @@ function Login() {
                 type="password"
                 placeholder="Password"
                 value={signupPassword}
-                onChange={(e) => setSignupPassword(e.target.value)}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setSignupPassword(val);
+                  setPasswordValidation(validatePassword(val));
+                }}
               />
+              {signupPassword && !passwordValidation.isValid && (
+                <ul className="password-errors">
+                  {passwordValidation.errors.length && (
+                    <li>❌ At least 8 characters</li>
+                  )}
+                  {passwordValidation.errors.upper && (
+                    <li>❌ At least one uppercase letter</li>
+                  )}
+                  {passwordValidation.errors.lower && (
+                    <li>❌ At least one lowercase letter</li>
+                  )}
+                  {passwordValidation.errors.digit && (
+                    <li>❌ At least one number</li>
+                  )}
+                  {passwordValidation.errors.special && (
+                    <li>❌ At least one special character (!@#$...)</li>
+                  )}
+                </ul>
+              )}
             </div>
             <button type="submit" className="btn" disabled={loading}>
               {loading ? <div className="spinner"></div> : "Sign up"}
