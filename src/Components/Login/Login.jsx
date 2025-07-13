@@ -245,9 +245,7 @@ function Login() {
     }
   };
 
-  const handleGoogleSignup = async (googleData) => {
-    const { email, name, sub: googleId } = googleData;
-
+  const handleGoogleSignup = async (credential) => {
     if (!signupUsername || !usernameValidation.isValid || !usernameAvailable) {
       toast.error("Please enter a valid and available username to continue.");
       return;
@@ -258,9 +256,8 @@ function Login() {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/google-signup`,
         {
+          credential,
           username: signupUsername,
-          email,
-          googleId,
         }
       );
 
@@ -270,24 +267,9 @@ function Login() {
         state: { justLoggedIn: true, username: signupUsername },
       });
 
-      toast.success("Google signup complete! 🚀", {
-        style: {
-          backgroundColor: "#112233",
-          color: "#ffffff",
-          fontWeight: "500",
-          borderRadius: "10px",
-        },
-      });
+      toast.success("Google signup complete! 🚀");
     } catch (err) {
-      toast.error("Google signup failed. Please try again.", {
-        icon: "⚠️",
-        style: {
-          backgroundColor: "#331111",
-          color: "#ffcccc",
-          fontWeight: "500",
-          borderRadius: "10px",
-        },
-      });
+      toast.error("Google signup failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -341,64 +323,54 @@ function Login() {
           {/* Sign Up Form */}
           {/* <p className="social-text">Or Sign up with</p> */}
           <div className="social-media">
-            <GoogleLogin
-              onSuccess={async (credentialResponse) => {
-                try {
-                  const decoded = jwt_decode(credentialResponse.credential);
-                  const { email, name } = decoded;
-
-                  // 1. Try login (backend will check if email exists)
-                  const res = await axios.post(
-                    `${import.meta.env.VITE_API_URL}/auth/google-signup`,
-                    {
-                      credential: credentialResponse.credential,
-                    }
-                  );
-
-                  // 2. If successful → login user
-                  localStorage.setItem("token", res.data.token);
-                  const payload = JSON.parse(
-                    atob(res.data.token.split(".")[1])
-                  );
-                  localStorage.setItem("username", payload.username);
-                  localStorage.setItem(
-                    "isPro",
-                    payload.isPro ? "true" : "false"
-                  );
-                  navigate("/", {
-                    state: { justLoggedIn: true, username: payload.username },
-                  });
-
-                  toast.success("Welcome back! 🎉", {
-                    style: {
-                      backgroundColor: "#112b11",
-                      color: "#ccffcc",
-                      fontWeight: "500",
-                      borderRadius: "10px",
-                    },
-                  });
-                } catch (err) {
-                  // 3. If email not registered
-                  if (
-                    err.response &&
-                    err.response.status === 401 &&
-                    err.response.data.msg === "Email not registered"
-                  ) {
-                    toast.error(
-                      "Email not registered with us. Please sign up first."
+            {!isSignUpMode && (
+              <GoogleLogin
+                onSuccess={async (credentialResponse) => {
+                  try {
+                    const res = await axios.post(
+                      `${import.meta.env.VITE_API_URL}/auth/google-signin`,
+                      {
+                        credential: credentialResponse.credential,
+                      }
                     );
-                    // Optionally switch to signup mode and pre-fill email
-                    setSignupEmail(decoded.email);
-                    setIsSignUpMode(true);
-                  } else {
-                    toast.error("Google Sign-In failed.");
+                    const payload = JSON.parse(
+                      atob(res.data.token.split(".")[1])
+                    );
+                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("username", payload.username);
+                    localStorage.setItem(
+                      "isPro",
+                      payload.isPro ? "true" : "false"
+                    );
+                    navigate("/", {
+                      state: { justLoggedIn: true, username: payload.username },
+                    });
+                    toast.success("Welcome back! 🎉");
+                  } catch (err) {
+                    toast.error("Google Sign-In failed 😢");
                   }
-                }
-              }}
-              onError={() => {
-                toast.error("Google Sign-In failed 😢");
-              }}
-            />
+                }}
+                onError={() => {
+                  toast.error("Google Sign-In failed 😢");
+                }}
+              />
+            )}
+
+            {/* Google Login Button for Sign-Up */}
+            {isSignUpMode && (
+              <GoogleLogin
+                onSuccess={async (credentialResponse) => {
+                  const decoded = jwt_decode(credentialResponse.credential);
+                  setSignupEmail(decoded.email); // Pre-fill the email
+                  toast.success(
+                    "Google account verified. Please complete username to sign up."
+                  );
+                }}
+                onError={() => {
+                  toast.error("Google Sign-Up failed 😢");
+                }}
+              />
+            )}
           </div>
           <form onSubmit={handleSignup} className="sign-up-form">
             <h2 className="title">Sign up</h2>
