@@ -347,11 +347,11 @@ function Login() {
                     });
                     toast.success("Welcome back! 🎉");
                   } catch (err) {
-                    toast.error("Google Sign-In failed 😢");
+                    toast.error("Mail is not registered yet 😢");
                   }
                 }}
                 onError={() => {
-                  toast.error("Google Sign-In failed 😢");
+                  toast.error("Mail is not registered yet 😢");
                 }}
               />
             )}
