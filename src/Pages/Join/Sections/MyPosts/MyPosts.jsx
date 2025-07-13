@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import  jwtDecode  from "jwt-decode";
 import {Helmet} from "react-helmet";
 import { ToastContainer, toast } from "react-toastify";
 import {

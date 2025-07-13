@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
