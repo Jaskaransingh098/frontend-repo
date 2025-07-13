@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode  from "jwt-decode"
+import jwt_decode from "jwt-decode";
 
 function Login() {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
@@ -187,6 +187,8 @@ function Login() {
         setLoading(false);
         return;
       }
+
+      // 🟡 If Google user (email ends with @gmail.com & password not entered), trigger Google signup
       if (signupEmail.endsWith("@gmail.com") && !signupPassword) {
         handleGoogleSignup({
           email: signupEmail,
@@ -196,8 +198,10 @@ function Login() {
         return;
       }
 
+      // 🟥 For regular users (non-Google), validate password first
       if (!passwordValidation.isValid) {
         toast.error("Please enter a stronger password before signing up.");
+        setLoading(false);
         return;
       }
 
@@ -240,6 +244,7 @@ function Login() {
       setLoading(false);
     }
   };
+
   const handleGoogleSignup = async (googleData) => {
     const { email, name, sub: googleId } = googleData;
 
@@ -338,17 +343,60 @@ function Login() {
           <div className="social-media">
             <GoogleLogin
               onSuccess={async (credentialResponse) => {
-                const decoded = jwt_decode(credentialResponse.credential);
-                const { email, name, sub } = decoded;
+                try {
+                  const decoded = jwt_decode(credentialResponse.credential);
+                  const { email, name } = decoded;
 
-                setSignupEmail(email);
-                toast.info(
-                  `Welcome ${name}! Now choose a username to continue.`
-                );
-                setIsSignUpMode(true);
+                  // 1. Try login (backend will check if email exists)
+                  const res = await axios.post(
+                    `${import.meta.env.VITE_API_URL}/auth/google-signup`,
+                    {
+                      credential: credentialResponse.credential,
+                    }
+                  );
+
+                  // 2. If successful → login user
+                  localStorage.setItem("token", res.data.token);
+                  const payload = JSON.parse(
+                    atob(res.data.token.split(".")[1])
+                  );
+                  localStorage.setItem("username", payload.username);
+                  localStorage.setItem(
+                    "isPro",
+                    payload.isPro ? "true" : "false"
+                  );
+                  navigate("/", {
+                    state: { justLoggedIn: true, username: payload.username },
+                  });
+
+                  toast.success("Welcome back! 🎉", {
+                    style: {
+                      backgroundColor: "#112b11",
+                      color: "#ccffcc",
+                      fontWeight: "500",
+                      borderRadius: "10px",
+                    },
+                  });
+                } catch (err) {
+                  // 3. If email not registered
+                  if (
+                    err.response &&
+                    err.response.status === 401 &&
+                    err.response.data.msg === "Email not registered"
+                  ) {
+                    toast.error(
+                      "Email not registered with us. Please sign up first."
+                    );
+                    // Optionally switch to signup mode and pre-fill email
+                    setSignupEmail(decoded.email);
+                    setIsSignUpMode(true);
+                  } else {
+                    toast.error("Google Sign-In failed.");
+                  }
+                }
               }}
               onError={() => {
-                toast.error("Google Sign-in failed 😢");
+                toast.error("Google Sign-In failed 😢");
               }}
             />
           </div>
