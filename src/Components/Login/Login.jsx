@@ -3,6 +3,7 @@ import "./Login.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
 
 function Login() {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
@@ -156,7 +157,7 @@ function Login() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    if (!isOtpVerified) {
+    if (!isOtpVerified && !signupEmail.endsWith("@gmail.com")) {
       toast.error("Please verify OTP before signing up.");
       return;
     }
@@ -169,7 +170,6 @@ function Login() {
     setLoading(true);
 
     try {
-      // 🔍 Pre-check username availability
       const checkRes = await axios.get(
         `${import.meta.env.VITE_API_URL}/auth/check-username/${signupUsername}`
       );
@@ -186,13 +186,20 @@ function Login() {
         setLoading(false);
         return;
       }
+      if (signupEmail.endsWith("@gmail.com") && !signupPassword) {
+        handleGoogleSignup({
+          email: signupEmail,
+          name: signupUsername,
+          sub: "google",
+        });
+        return;
+      }
 
       if (!passwordValidation.isValid) {
         toast.error("Please enter a stronger password before signing up.");
         return;
       }
 
-      // Proceed to signup if username is available
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/signup`,
         {
@@ -220,6 +227,53 @@ function Login() {
       });
     } catch (err) {
       toast.error("Signup failed. Please try again.", {
+        icon: "⚠️",
+        style: {
+          backgroundColor: "#331111",
+          color: "#ffcccc",
+          fontWeight: "500",
+          borderRadius: "10px",
+        },
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleGoogleSignup = async (googleData) => {
+    const { email, name, sub: googleId } = googleData;
+
+    if (!signupUsername || !usernameValidation.isValid || !usernameAvailable) {
+      toast.error("Please enter a valid and available username to continue.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/google-signup`,
+        {
+          username: signupUsername,
+          email,
+          googleId,
+        }
+      );
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("username", signupUsername);
+      navigate("/", {
+        state: { justLoggedIn: true, username: signupUsername },
+      });
+
+      toast.success("Google signup complete! 🚀", {
+        style: {
+          backgroundColor: "#112233",
+          color: "#ffffff",
+          fontWeight: "500",
+          borderRadius: "10px",
+        },
+      });
+    } catch (err) {
+      toast.error("Google signup failed. Please try again.", {
         icon: "⚠️",
         style: {
           backgroundColor: "#331111",
@@ -279,6 +333,24 @@ function Login() {
           </form>
 
           {/* Sign Up Form */}
+          <p className="social-text">Or Sign up with</p>
+          <div className="social-media">
+            <GoogleLogin
+              onSuccess={async (credentialResponse) => {
+                const decoded = jwt_decode(credentialResponse.credential);
+                const { email, name, sub } = decoded;
+
+                setSignupEmail(email);
+                toast.info(
+                  `Welcome ${name}! Now choose a username to continue.`
+                );
+                setIsSignUpMode(true);
+              }}
+              onError={() => {
+                toast.error("Google Sign-in failed 😢");
+              }}
+            />
+          </div>
           <form onSubmit={handleSignup} className="sign-up-form">
             <h2 className="title">Sign up</h2>
             <div className="input-field-wrapper">
