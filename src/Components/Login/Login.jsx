@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode  from "jwt-decode"
+// import jwt_decode  from "jwt-decode"
+import jwt_decode from "jwt-decode/build/cjs/index.js";
 
 function Login() {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
@@ -334,7 +335,7 @@ function Login() {
           </form>
 
           {/* Sign Up Form */}
-          <p className="social-text">Or Sign up with</p>
+          {/* <p className="social-text">Or Sign up with</p> */}
           <div className="social-media">
             <GoogleLogin
               onSuccess={async (credentialResponse) => {
