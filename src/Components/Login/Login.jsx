@@ -222,6 +222,7 @@ function Login() {
           password: signupPassword,
           isPro: false,
           isBot: isBot,
+          isVerified: true,
         }
       );
 
