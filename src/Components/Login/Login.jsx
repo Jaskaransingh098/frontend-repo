@@ -158,14 +158,23 @@ function Login() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    if (!isOtpVerified && !signupEmail.endsWith("@gmail.com")) {
-      toast.error("Please verify OTP before signing up.");
-      return;
-    }
+    const isBot = true; 
 
-    if (!usernameValidation.isValid || !usernameAvailable) {
-      toast.error("Please fix your username before signing up.");
-      return;
+    if (!isBot) {
+      if (!isOtpVerified && !signupEmail.endsWith("@gmail.com")) {
+        toast.error("Please verify OTP before signing up.");
+        return;
+      }
+
+      if (!usernameValidation.isValid || !usernameAvailable) {
+        toast.error("Please fix your username before signing up.");
+        return;
+      }
+
+      if (!passwordValidation.isValid) {
+        toast.error("Please enter a stronger password before signing up.");
+        return;
+      }
     }
 
     setLoading(true);
@@ -212,6 +221,7 @@ function Login() {
           email: signupEmail,
           password: signupPassword,
           isPro: false,
+          isBot: isBot,
         }
       );
 
