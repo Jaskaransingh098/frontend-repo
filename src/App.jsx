@@ -19,6 +19,7 @@ import Government from "./Pages/Government/Government";
 import AboutMe from "./Pages/AboutMe/AboutMe";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import AnimatedBackground from "./Components/AnimateBackground/AnimateBackground";
+import Messages from "./Pages/Join/Sections/Messages/Messages";
 
 function AppContent() {
   const location = useLocation();
@@ -66,6 +67,7 @@ function AppContent() {
           <Route path="/government" element={<Government />} />
           <Route path="/aboutme" element={<AboutMe/>}/>
           <Route path="/contactus" element={<ContactUs/>}/>
+          <Route path="/messages/:username?" element={<Messages />} />
         </Routes>
       </main>
     </>
