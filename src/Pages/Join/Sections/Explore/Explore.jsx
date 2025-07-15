@@ -23,7 +23,7 @@ export default function Explore() {
   const [allNewComments, setAllNewComments] = useState({});
   const [filteredPosts, setFilteredPosts] = useState([]);
   const industryImages = {
-    tech: "/explore-video/tech.jpg",
+    technology: "/explore-video/tech.jpg",
     health: "/explore-video/healthcare.jpg",
     ecommerce: "/explore-video/e-commerce.jpg",
     education: "/explore-video/education.jpg",
@@ -344,7 +344,7 @@ export default function Explore() {
             </button>
             <div className="suggestion-tags">
               <ul>
-                {["ecommerce", "health", "education", "tech", "food"].map(
+                {["ecommerce", "health", "education", "technology", "food", "finance", "manufacturing", "fashion"].map(
                   (tag) => (
                     <li
                       key={tag}
@@ -404,7 +404,7 @@ export default function Explore() {
                           ❤️ {post.likesCount ?? post.likes?.length ?? 0}
                         </div>
                         <div className="stat">👁️ {post.views ?? 0}</div>
-                        <div className="user">by @{post.username}</div>
+                        <div className="user">by @{post.fullName}</div>
                       </div>
                     </div>
                   );
@@ -442,7 +442,7 @@ export default function Explore() {
                   </a>
                 </p>
                 <p>
-                  <strong>Founder:</strong> {selectedPost.fullName} -{" "}
+                  <strong>Founder:</strong> {selectedPost.username} -{" "}
                   {selectedPost.role}
                 </p>
                 <p>
@@ -557,7 +557,7 @@ export default function Explore() {
                             <div className="discovery-user-info">
                               <div className="discovery-user-top">
                                 <span className="discovery-username">
-                                  @{item.username}
+                                  @{item.fullName}
                                 </span>
                                 <span className="dot">•</span>
                                 <span className="timestamp">

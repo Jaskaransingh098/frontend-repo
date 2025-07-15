@@ -83,9 +83,9 @@ const AllPosts = ({
               <div>
                 <strong>Website:</strong> {post.website}
               </div>
-              <div>
+              {/* <div>
                 <strong>Email:</strong> {post.email}
-              </div>
+              </div> */}
             </div>
 
             <div className="all-description-box">
