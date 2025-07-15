@@ -188,7 +188,7 @@ export default function Explore() {
     }
   };
 
-  const topics = ["ecommerce", "health", "education", "tech", "food"];
+  const topics = ["ecommerce", "health", "education", "technology", "food", "finance", "manufacturing", "fashion"];
   const isAnimating = query.length > 0 && isFocused;
 
   useEffect(() => {
@@ -344,25 +344,32 @@ export default function Explore() {
             </button>
             <div className="suggestion-tags">
               <ul>
-                {["ecommerce", "health", "education", "technology", "food", "finance", "manufacturing", "fashion"].map(
-                  (tag) => (
-                    <li
-                      key={tag}
-                      className={activeTag === tag ? "active-tag" : ""}
-                      onClick={() => {
-                        setQuery(tag);
-                        setActiveTag(tag);
-                        const filtered = allPosts.filter(
-                          (post) =>
-                            post.industry?.toLowerCase() === tag.toLowerCase()
-                        );
-                        setFilteredPosts(filtered);
-                      }}
-                    >
-                      {tag}
-                    </li>
-                  )
-                )}
+                {[
+                  "ecommerce",
+                  "health",
+                  "education",
+                  "technology",
+                  "food",
+                  "finance",
+                  "manufacturing",
+                  "fashion",
+                ].map((tag) => (
+                  <li
+                    key={tag}
+                    className={activeTag === tag ? "active-tag" : ""}
+                    onClick={() => {
+                      setQuery(tag);
+                      setActiveTag(tag);
+                      const filtered = allPosts.filter(
+                        (post) =>
+                          post.industry?.toLowerCase() === tag.toLowerCase()
+                      );
+                      setFilteredPosts(filtered);
+                    }}
+                  >
+                    {tag}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -442,7 +449,10 @@ export default function Explore() {
                   </a>
                 </p>
                 <p>
-                  <strong>Founder:</strong> {selectedPost.username} -{" "}
+                  <strong>Username:</strong> {selectedPost.username}
+                </p>
+                <p>
+                  <strong>Role:</strong>
                   {selectedPost.role}
                 </p>
                 <p>
@@ -557,7 +567,7 @@ export default function Explore() {
                             <div className="discovery-user-info">
                               <div className="discovery-user-top">
                                 <span className="discovery-username">
-                                  @{item.fullName}
+                                  {/* @{item.fullName} */}
                                 </span>
                                 <span className="dot">•</span>
                                 <span className="timestamp">

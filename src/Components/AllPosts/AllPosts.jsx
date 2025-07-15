@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaHeart, FaRegHeart, FaUserCircle } from "react-icons/fa";
 import { BsChatDots } from "react-icons/bs";
 import { FiSend } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import "./AllPosts.css";
 
 const AllPosts = ({
@@ -14,7 +15,7 @@ const AllPosts = ({
   username,
 }) => {
   const [showCommentsIndex, setShowCommentsIndex] = useState(null);
-
+  const navigate = useNavigate();
   const toggleComments = (index) => {
     setShowCommentsIndex((prev) => (prev === index ? null : index));
   };
@@ -52,11 +53,32 @@ const AllPosts = ({
                   className="all-profile-pic"
                 />
                 <div>
-                  <h3 className="all-username">{post.fullName}</h3>
+                  {/* <h3 className="all-username">{post.fullName}</h3> */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
+                    <h3
+                      className="all-username"
+                      onClick={() => navigate(`/profile/${post.username}`)}
+                    >
+                      {post.fullName}
+                    </h3>
+                    <button
+                      className="all-message-btn"
+                      onClick={() => navigate(`/messages/${post.username}`)}
+                      title={`Message ${post.fullName}`}
+                    >
+                      Message
+                    </button>
+                  </div>
                   <p className="all-role">{post.role}</p>
                   <p className="all-timestamp">
                     {formatTimeAgo(post.createdAt)}
-                  </p>
+                  </p>      
                 </div>
               </div>
             </div>

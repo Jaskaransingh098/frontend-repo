@@ -6,6 +6,7 @@ import EmojiPicker from "emoji-picker-react";
 import  jwtDecode from "jwt-decode"; // ✅ For extracting username from token
 import { Helmet } from "react-helmet";
 import "./Messages.css";
+import { useParams } from "react-router-dom";
 
 const socket = io(import.meta.env.VITE_API_URL, {
   transports: ["websocket", "polling"], // fallback if websocket isn't available
@@ -17,6 +18,7 @@ socket.on("disconnect", () => {
 });
 
 function Messages() {
+  const { username: paramUsername } = useParams();
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentUser, setCurrentUser] = useState(""); // ✅ Will be set from token
@@ -292,6 +294,12 @@ function Messages() {
 
     if (currentUser) fetchAllUsers();
   }, [currentUser]);
+
+  useEffect(() => {
+    if (paramUsername && users.includes(paramUsername)) {
+      setSelectedUser(paramUsername);
+    }
+  }, [paramUsername, users]);
 
   ReactModal.setAppElement("#root");
 
